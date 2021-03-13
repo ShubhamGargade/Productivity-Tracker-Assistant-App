@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <script>window.$ = window.jQuery = require('jquery');</script>
+  <script src="intializeDb.js" charset="utf-8"></script>
+
+  <script>
+  $(function(){
+    $("#add-nav").load("navAfterlogin.html");
+  });
+  $(function(){
+    $("#add-sidenav").load("sideNav.html");
+  });
+  </script>
+  <style media="screen">
+  .main-content-dashboard {
+    display: flex;
+    flex-direction: row;
+  }
+  .card-body {
+    background-color: #2e86de;
+    color: white;
+  }
+  </style>
+</head>
+<body>
+
+  <div id="add-nav">
+
+  </div>
+  <div class="main-content-dashboard">
+
+      <div class="sidenav" id="add-sidenav">
+
+      </div>
+    <div class="container">
+
+      <div class="card" style="width: 18rem;">
+
+        <div class="list-group-item" >
+            <h4>Desktop Time:</h4>
+            <h5 id="show-ttt-dashboard"></h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <div class="card-body">
+            <h5 class="card-title" id="show-prod-percent"></h5>
+            <p class="card-text">Productive</p>
+          </div>
+          <div class="list-group-item">
+            <h6>Website Time:</h6>
+            <h6 id="show-twtt-dashboard" ></h6>
+          </div>
+          <div class="list-group-item">
+            <h6>Software Time:</h6>
+            <h6 id="show-tstt-dashboard" ></h6>
+          </div>
+        </ul>
+        <div class="card-body">
+        </div>
+      </div>
+  </div>
+  <!-- <script type="text/javascript">
+
+    document.getElementById("show-twtt").innerHTML = sessionStorage.getItem("ttw");
+  </script> -->
+</body>
+</html>

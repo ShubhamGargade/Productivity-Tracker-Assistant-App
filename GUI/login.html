@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script src="signInOut.js" charset="utf-8"></script>
+
+  <script> window.$ = window.jQuery = require('jquery');</script>
+  <script>
+  $(function(){
+    $("#add-navbar").load("nav.html")
+  })
+  </script>
+
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #dfe4ea ;
+
+}
+form {
+  border: 3px solid #f1f1f1;
+  width: 30%;
+  border: 1px solid black;
+  background-color: white;
+  margin-left: 35%;
+  margin-top: 40px;
+  height: 520px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #2d98da;
+  color: white;
+  margin: 8px 0;
+  border: none;
+  /* cursor: pointer; */
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 18px;
+  height: 250px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+
+</head>
+
+<body>
+<div id="add-navbar">
+
+</div>
+<form action="homeAfterLogin.html" method="post" id="login-form">
+
+  <h2 style="color: #0652DD; margin: 10px;" > <b> Login</b></h2>
+  <hr>
+  <div class="container">
+    <span id="val-too-many-attempt" style="color: red;" ></span>
+    <!-- <br> -->
+    <br>
+    <label for="uname"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <span id="val-email" style="color: red;" ></span>
+    <br>
+    <br>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <span id="val-psw" style="color: red;"></span>
+    <br>
+    <br>
+    <button type="button"> <p style="font-size: 20px; margin: 5px;" id="login-btn">Login</p>  </button>
+    <br>
+    <br>
+    <span class="psw"><a href="#">Forgot password?</a></span>
+  </div>
+</form>
+
+
+
+
+<!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script> -->
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script> -->
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script> -->
+
+<script type="text/javascript">
+
+    const settings = require('electron-settings');
+    const loginUser = document.getElementById("login-btn");
+    loginUser.addEventListener("click", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.toString().trim();
+      const password = document.getElementById("psw").value.toString().trim();
+      firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
+        settings.setSync('key', {
+          data: 'Yes'
+        });
+          // Signed in
+          var user = userCredential.user;
+          sessionStorage.setItem('email-name', email);
+          document.getElementById("login-form").submit();
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+      if(errorCode == "auth/wrong-password"){
+        document.getElementById("val-psw").innerHTML = "Invalid Password";
+        document.getElementById("val-email").innerHTML = "";
+        document.getElementById("val-too-many-attempt").innerHTML = "";
+      }
+      if(errorCode == "auth/user-not-found"){
+        document.getElementById("val-psw").innerHTML = "";
+        document.getElementById("val-email").innerHTML = "Invalid Email";
+        document.getElementById("val-too-many-attempt").innerHTML = "";
+      }
+      if(errorCode == "auth/invalid-email"){
+        document.getElementById("val-email").innerHTML = "Enter Email";
+        document.getElementById("val-too-many-attempt").innerHTML = "";
+        document.getElementById("val-psw").innerHTML = "";
+      }
+      if(errorCode == "auth/too-many-requests"){
+        document.getElementById("val-too-many-attempt").innerHTML = "Many failed attempts, please try after sometime.";
+        document.getElementById("val-email").innerHTML = "";
+        document.getElementById("val-psw").innerHTML = "";
+      }
+    });
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+1. In main.py - Check Internet Connection and send data to frontend if not connected to Internet

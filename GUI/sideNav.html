@@ -1,0 +1,87 @@
+<head>
+  <style media="screen">
+    .sidenav {
+      width: 15%;
+      height: 100vh;
+      float: left;
+      font-size: 120%;
+      background-color: #747d8c;
+    }
+    .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      /* color: #818181;  */
+      display: block;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+    .dropdown-container {
+      display: none;
+      background-color:#747d8c;
+      padding-left: 8px;
+
+    }
+
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+      background-color: red;
+    }
+
+    .nav-link {
+      color: white;
+
+      padding-top: 5%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="sidenav">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+      </li>
+      <li>
+        <button class="dropdown-btn">Report
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">Website tracking</a>
+          <a href="#">Software tracking</a>
+          <a href="#">Productivity and Unproductivity</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+  var dropdown = document.getElementsByClassName("dropdown-btn");
+  var i;
+
+  for (i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var dropdownContent = this.nextElementSibling;
+      if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+      } else {
+        dropdownContent.style.display = "block";
+      }
+    });
+  }
+  </script>
+
+</body>

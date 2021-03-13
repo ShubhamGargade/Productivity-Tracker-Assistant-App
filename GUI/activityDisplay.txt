@@ -1,0 +1,17 @@
+// To display tracking details
+1. Dashboard:
+  a. User name and total desktop time + Total productive time + Total unproductive time(hh:mm:ss).
+2. Report:
+  a. Website tracking details.(display row wise using progress bar)
+      - Website hostname + total classwise mutual time + class.
+      - Total website tracking time.
+
+  b. Software tracking details.(display row wise using progress bar)
+      - Software name + total mutual time + class.
+      - Total software tracking time.
+  c. Classification time.(display row wise using progress bar)
+      - Productive
+        - class name + total class time.
+      - Unproductive
+        - class name + total class time.
+  d. Productivity and Unproductivity(Display using Bar graph or Pie Chart)

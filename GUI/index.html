@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <title>Productivity_Tracker</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="linker/start.js">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="signInOut.js" charset="utf-8"></script>
+  <script>window.$ = window.jQuery = require('jquery');</script>
+  <script>
+  $(function(){
+    $("#add-nav").load("nav.html");
+  });
+  </script>
+
+  <style media="screen">
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background-color: #dfe4ea;
+    }
+    .main-content {
+      width: 100%;
+      height: 100vh;
+      /* float: right; */
+    }
+    .nav-item {
+      padding-top: 5%;
+    }
+    .sidenav .nav-item:hover {
+      background-color: #dfe4ea;
+    }
+    .jumbotron {
+      margin: 3px;
+      height: 30%;
+    }
+    .cards-for-details {
+      width: 100%;
+      height: 20%;
+    }
+    .card {
+      height: 18vh;
+      /* float: left; */
+      /* margin: 10px; */
+      /* width: 24em; */
+      width: 100%;
+      border: 2px solid red;
+    }
+    .container {
+      border: 1px solid red;
+      margin: 0;
+    }
+    .container .col{
+      margin: 0;
+    }
+
+    .os-img {
+      width: 100%;
+    }
+    .os-img-inside {
+      width: 25%;
+      margin: 5px;
+      float: left;
+    }
+    .os-img-inside1 {
+      width: 25%;
+      margin: 5px;
+      float: right;
+    }
+     .nav-link {
+      color: red;
+    }
+
+  </style>
+  <!-- <script type="module" src="./linker/start.js" ></script> -->
+</head>
+<body>
+
+  <div id="add-nav">
+
+  </div>
+    <div class="main-content" style="">
+      <div class="jumbotron" style="background-color: white">
+          <h1 class="display-5">User Activity Monitoring Software That Enhances Performance & Trust</h1>
+          <h3 class="lead" style="color: #eb4d4b;">Dramatically improve your user’s performance by analyzing productivity by activity monitoring software.</h3>
+      </div>
+
+      <div class="container-fluid atm-features">
+		<div class="row">
+
+			<div class="w-100"></div>
+
+			<div class="col">
+				<div class="card feature" >
+          <div class="card-body">
+            <h2 style="text-align: center;">Productivity Tracking</h2>
+            <h3 class="card-text" style="color: purple; text-align: center; font-size: 1.5em;">Increase Productivity</h3>
+          </div>
+			</div>
+			</div>
+			<div class="col">
+			<div class="card feature" style="">
+          <div class="card-body">
+            <h2 style="text-align: center;">Time Tracking</h2>
+            <h3 class="card-text" style="color: #ff3838; text-align: center; font-size: 1.5em;">Pinpoint proof of work</h3>
+          </div>
+        </div>
+			</div>
+			<div class="col">
+			<div class="card feature" style="">
+			  <div class="card-body">
+            <h2 style="text-align: center;">Activity Monitoring</h2>
+            <h3 class="card-text" style="color: orange; text-align: center; font-size: 1.5em;">Observe every task</h3>
+          </div>
+        </div>
+			</div>
+			</div>
+
+
+
+		</div>
+
+
+      <div class="jumbotron" style="background-color: white;">
+          <h1 class="display-5">Easy to use on both Windows and Linux</h1>
+          <div class="os-img">
+            <img src="https://icons-for-free.com/iconfiles/png/512/microsoft+windows+icon-1320186681671871370.png" alt="" style="width: 5em; height: 5em;" class="os-img-inside">
+            <h3 class="os-img-inside">Windows</h3>
+            <img src="https://image.flaticon.com/icons/png/512/13/13702.png" alt="" style="width: 5em; height: 5em;" class="os-img-inside">
+            <h3 class="os-img-inside">Linux</h3>
+          </div>
+      </div>
+    </div>
+  </section>
+  <!-- You can also require other files to run in this process -->
+  <script src="renderer.js"></script>
+</body>
+</html>
