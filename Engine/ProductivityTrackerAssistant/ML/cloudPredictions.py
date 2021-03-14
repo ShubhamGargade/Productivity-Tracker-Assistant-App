@@ -19,7 +19,6 @@ import Algorithmia
 
 # Local application imports
 from ..Constants.keys import OTHERS_STR
-from ..print_colored_text import *
 
 
 
@@ -41,8 +40,8 @@ class CloudPrediction:
         if CloudPrediction.__instance != None:
             raise Exception("CloudPrediction is a Singleton Class!")
         else:
-            # print("############## RUNNING CLOUD PREDICTIONS ##############")
             CloudPrediction.__instance = self
+
             # Authenticate with your API key
             self.__apiKey = "simq9Ll7v5kyBNOciWBu2d1A/PH1"
 
@@ -57,10 +56,10 @@ class CloudPrediction:
         try:
             # Get the result
             result = algo.pipe(input_text).result
-            print_algorithmia_text("Prediction: {}".format(result))
             
         except Exception as error:
             # Algorithm error if, for example, the input is not correctly formatted
-            print_exception_text(error)
+            # prin(error)
+            pass
 
         return result

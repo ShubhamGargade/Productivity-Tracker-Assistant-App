@@ -13,12 +13,8 @@ import time
 
 
 # Local application imports
-# from ..Database.JsonDatabase.jsonDB import JsonDB
 from ..Database.FirebaseDatabase.save_data import SaveData as FbSaveData
 from ..Database.FirebaseDatabase.retrieve_data import RetrieveUserData as FbRetrieveUserData
-# from .Json import winActivity as jwa
-# from .Json import winAutoTimer as jwat
-from ..print_colored_text import *
 from .Firebase import winActivity as fwa
 from .Firebase import winAutoTimer as fwat
 
@@ -46,44 +42,17 @@ class Backend:
             self.__local_json_db()
 
 
-    def __local_json_db(self):
-        tb = None
-        try:
-            jsondb = JsonDB.getInstance()
-            # print("Inside auto", jsondb)
-            format = jsondb.get_json_format()
-            self.activityList =  jwa.WinAcitivyList([])
-            self.activityList.initialize_me(format)
-            autoTimer = jwat.AutoTimer(jsondb, self.activityList)
-            autoTimer.start_execution()
-        except Exception as e:
-            print("Exception Caught:", e)
-            ex_type, ex, tb = sys.exc_info()
-            print("Exception traceback:")
-            traceback.print_tb(tb)
-        finally:
-            del tb
-
-
     def __cloud_firebase_db(self):
         tb = None
         try:
 
-            print_text("{} {} {}".format("\n\n"+("*")*37, "LOADING AND INITIALIZING DATA", ("*")*36+"\n"), "yellow")
-
             retrieve_user_data = FbRetrieveUserData.getInstance()
             isDBCleared = retrieve_user_data.get_isDBCleared_val()
-
-            if isDBCleared == "f":
-                print_firebase_text("Database not cleared")
-            else:
-                print_firebase_text("Database is Cleared")
 
             # Initialize firebase db - START #
             save_data = FbSaveData.getInstance()
             op_text = save_data.initDB()  # initializes db in firebase if not already initialized and returns corresponding text.
 
-            print_firebase_text(op_text, color="green")
             # Initialize firebase db - END #
 
             if isDBCleared == 'f':
@@ -93,33 +62,22 @@ class Backend:
 
                 if not isLoadedSuccessfully:
 
-                    print_info_text("Initializing activityList object...", "yellow")
-
                     self.activityList = fwa.WinAcitivyList()
-
-                    print_info_text("ActivityList object initialized successfully\n", "green")
 
             else:
 
                 # initialize the activityList object
-                print_info_text("Initializing activityList object...", "yellow")
 
                 self.activityList = fwa.WinAcitivyList()
-
-                print_info_text("ActivityList object initialized successfully", "green")
-
-            print_text("{} {} {}".format("\n\n"+("*")*31, "DATA LOADED AND INITIALIZED SUCCESSFULLY", ("*")*31+"\n\n"), "green")
 
             autoTimer = fwat.AutoTimer(self.activityList)
             autoTimer.start_execution()
 
         except Exception as e:
 
-            print_exception_text(e, "red")
-
             ex_type, ex, tb = sys.exc_info()
-            print_exception_text("Exception traceback: ", "red", end="")
-            traceback.print_tb(tb)
+            # traceback.print_tb(tb)
+            
         finally:
             del tb
 
@@ -137,16 +95,8 @@ class Backend:
 
     def __run_at_exit(self, sig, frame):
 
-        print_text("\n\n"+("**")*52+"\n", "magenta", highlight="on_white")
-
-        print_info_text("Running funtions before exiting...\n")
-
         self.__store_data_to_file()
 
-        print_text()
-
         self.__update_firebase_db()
-
-        print_text("\nExiting...", color="cyan")
 
         sys.exit()

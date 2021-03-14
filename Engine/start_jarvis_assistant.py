@@ -4,6 +4,7 @@ from ProductivityTrackerAssistant.JarvisAssistant import text_based_assistant
 
 from signal import *
 import time
+import sys
 
 
 class StartAssistant:
@@ -17,7 +18,7 @@ class StartAssistant:
 			va = voice_based_assistant.VoiceAssistant()
 			va.start_voice_assistant()
 		except Exception as e:
-			print(e)
+			pass
 
 
 	def start_text_assistant(self):
@@ -25,14 +26,12 @@ class StartAssistant:
 			ta = text_based_assistant.TextAssistant()
 			ta.start_text_assistant()
 		except Exception as e:
-			print(e)
+			pass
 
 
 def main():
 
-	print("\nAssistant Types: 1. Voice Based  2. Text Based")
-
-	choice = input("\nEnter choice: ")
+	choice = input()
 
 	start_assistant = StartAssistant()
 
@@ -41,7 +40,9 @@ def main():
 	elif choice == "2":
 		start_assistant.start_text_assistant()
 	else:
-		print("\nEnter valid option\n")
+		# print("\nEnter valid option\n")
+		pass
 
 
 main()
+sys.stdout.flush()

@@ -19,7 +19,6 @@ from ..Constants.keys import *
 # Any one of the two below classes(DockerPrediction or CloudPrediction) can be used to make predictions.
 from .cloudPredictions import CloudPrediction
 from .dockerPredictions import DockerPrediction
-from ..print_colored_text import *
 
 
 # A list of class into which websites are categorized
@@ -73,13 +72,13 @@ class WebsitePrediction(Prediction):
 			# print("description:",description)
 			pass
 		except Exception as e:
-			print_exception_text(e)
+			# print(e)
+			pass
 
 		input_text = webInfoObject.get_text()
 		input_text = webInfoObject.clean_text(input_text)
 		result = None
 		if input_text == None:
-			print_warning_text("Prediction: Others")
 			result = OTHERS_STR
 		else:  
 			result = self.predictor.predict(input_text)
@@ -90,7 +89,6 @@ class WebsitePrediction(Prediction):
 	def is_productive(self, class_val):
 
 		isProductive = class_val in productive
-		print_info_text("isProductive: {}".format(isProductive))
 
 		return isProductive
 
@@ -105,19 +103,14 @@ class SoftwarePrediction(Prediction):
 	def get_software_prediction(self):
 		result = None
 		if self.text == None or self.text == "":
-			print_warning_text("Prediction: Others")
 			result = OTHERS_STR
 		else:  
-			# print("Text: ", self.text)
 			result = self.predictor.predict(self.text)
-			# print("Result: ", result)
 
 		return result
         
 
 	def is_productive(self,class_val):
 		isProductive = class_val in productive
-		print_info_text("isProductive: {}".format(isProductive))
-		
 		return isProductive
 

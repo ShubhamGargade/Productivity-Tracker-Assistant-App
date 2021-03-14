@@ -14,7 +14,6 @@ from dateutil import parser
 
 # Local application imports
 from ...Constants.keys import *
-from ...print_colored_text import *
 
 
 
@@ -25,8 +24,6 @@ class WinAcitivyList:
 
 
     def store_activity_list_in_file(self):
-
-        print_local_text("Storing activity List in file...", "yellow")
 
         __filename = "ACTIVITY_LIST_JSON"
 
@@ -50,18 +47,13 @@ class WinAcitivyList:
                         output_file.write(bytes(str(data).strip(), encoding='utf-8'))
                         output_file.write(bytes('\n', encoding='utf-8'))
 
-                print_info_text("Software activities stored successfully", "green")
-
                 for web_activity in self.web_activities:
                     attr_vals = web_activity.get_class_attributes_values()
                     for data in attr_vals:
                         output_file.write(bytes(str(data).strip(), encoding='utf-8'))
                         output_file.write(bytes('\n', encoding='utf-8'))
 
-                print_info_text("Website activities stored successfully", "green")
-
         except Exception as e:
-            print_exception_text("Exception occurred while storing activities locally: {}".format(e))
             try:
                 os.remove(__filename)            
                 pass
@@ -78,8 +70,6 @@ class WinAcitivyList:
 
 
     def load_activity_list_from_file(self):
-
-        print_local_text("Loading activities from file...", "yellow")
 
         isLoadedSuccessfully = False
 
@@ -114,11 +104,9 @@ class WinAcitivyList:
 
             isLoadedSuccessfully = True
 
-            print_local_text("Activities loaded successfully", "green")
-
         except FileNotFoundError as e:
-            print_local_text("{} file not found".format(__filename), "red")
-        
+            pass
+                    
         return isLoadedSuccessfully
 
 

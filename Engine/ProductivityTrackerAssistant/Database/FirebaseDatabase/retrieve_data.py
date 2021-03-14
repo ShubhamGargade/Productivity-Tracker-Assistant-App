@@ -185,7 +185,6 @@ class RetrieveSoftwareData:
 		try:
 			val = db.child("sa").child(uid).child(p_up_str).child(category).child(app_name).child("tmt").get().val()
 		except Exception as e:
-			print("Error while retrieving software tmt: ", e)
 			val = None
 
 		return val 
@@ -197,7 +196,6 @@ class RetrieveSoftwareData:
 		try:
 			val = db.child("istt").child(uid).child(app_name).get().val()
 		except Exception as e:
-			print("Error while retrieving software data: ", e)
 			val = None
 
 		return val
@@ -210,7 +208,6 @@ class RetrieveSoftwareData:
 		try:
 			val = db.child("sa").child(uid).childp(p_up_str).child(category).child(app_name).child("data").get().val()
 		except Exception as e:
-			print("Error while retrieving software data: ", e)
 			val = None
 
 		return val
@@ -289,7 +286,6 @@ class RetrieveWebsiteData:
 		try:
 			val = db.child("wa").child(uid).child(p_up_str).child(category).child(hostname).child("tmt").get().val()
 		except Exception as e:
-			print("Error while retrieving website tmt: ", e)
 			val = None
 
 		return val
@@ -301,7 +297,6 @@ class RetrieveWebsiteData:
 		try:
 			val = db.child("iwtt").child(uid).child(hostname).get().val()
 		except Exception as e:
-			print("Error while retrieving website data: ", e)
 			val = None
 
 		return val
@@ -314,7 +309,6 @@ class RetrieveWebsiteData:
 		try:
 			val = db.child("wa").child(uid).child(p_up_str).child(category).child(hostname).child("url+title").get().val()
 		except Exception as e:
-			print("Error while retrieving website data: ", e)
 			val = None
 
 		return val

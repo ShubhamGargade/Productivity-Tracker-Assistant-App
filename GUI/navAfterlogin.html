@@ -64,7 +64,7 @@
         firebase.auth().signOut().then(() => {
           // Sign-out successful.
  
-          // console.log(firebase.auth().currentUser);
+          console.log(firebase.auth().currentUser);
           settings.setSync('key', {
             data: 'No'
           });

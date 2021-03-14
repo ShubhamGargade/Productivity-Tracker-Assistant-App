@@ -13,7 +13,7 @@ import requests
 
 
 # Local application imports
-from ..print_colored_text import *
+
 
 
 class WebsiteInfo:
@@ -35,7 +35,6 @@ class WebsiteInfo:
 			
 			return html_code
 		except Exception as e:
-			print_exception_text("Exception occurred while extracting html code: {}".format(e))
 			return None
 
 	def __parse_html(self):
@@ -57,15 +56,14 @@ class WebsiteInfo:
 				# get title of website
 				self.title = soup_obj.find('title').string
 			except Exception as e:
-				print_exception_text("Exception occurred while finding title: {}".format(e))
+				pass
 
 			try:
 				# get description of website
 				meta_tag = soup_obj.find('meta', attrs={'name': 'description'})
 				self.description = meta_tag['content']
 			except Exception as e:
-				print_exception_text("Exception occurred while finding description: {}".format(e))
-
+				pass
 
 	def get_title_and_desc(self):
 		return (self.title, self.description)

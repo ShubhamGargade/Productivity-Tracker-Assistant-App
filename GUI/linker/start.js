@@ -7,6 +7,9 @@ var python_process;
 //   args: "null"
 // };
 
+var {PythonShell} = require('python-shell');
+var pyshell = new PythonShell('../Engine/main.py');
+
 function startTracking(){
 
   //let path = require('path')
@@ -17,16 +20,29 @@ function startTracking(){
     //   console.log('results: %j', results);
     //   });
 
-    let {PythonShell} = require('python-shell');
+    
+    python_process = pyshell;
 
-      var pyshell = new PythonShell('../Engine/main.py');
+    // sends a message to the Python script via stdin
+    pyshell.send('RUN');
 
-      python_process = pyshell;
-      pyshell.end(function (err) {
-        if (err) {
-            console.log(err);
-        }
-      });
+    pyshell.on('message', function (message) {
+      // received a message sent from the Python script (a simple "print" statement)
+      console.log("FromBAckend: ",message);
+      if(message == "KILL"){
+        // end the input stream and allow the process to exit
+        pyshell.end(function (err,code,signal) {
+          if (err) throw err;
+          console.log('The exit code was: ' + code);
+          console.log('The exit signal was: ' + signal);
+          console.log('finished');
+        });
+      }
+      else{
+        pyshell.send('RUN');
+      }
+    });
+      
       // sleep(1000);
       // console.log('results: %j', results);
       // document.getElementById("toPrint1").innerText=results;
@@ -38,9 +54,8 @@ function startTracking(){
 var lisensT = document.getElementById("sT");
 if(lisensT != null){
   lisensT.addEventListener("click", (e) => {
-    console.log("Listening to stop");
-    console.log(python_process.kill('SIGTERM'));
-    })
+    pyshell.send('KILL');
+  });
 
   }
 
