@@ -27,19 +27,12 @@ class Backend:
     def __init__(self):
         self.activityList = fwa.WinAcitivyList()
 
-        # if the tracking process terminates, then call the __store_data_to_file to store activityList object in a file
-        for sig in (SIGABRT, SIGBREAK, SIGILL, SIGINT, SIGSEGV, SIGTERM):
-            signal(sig, self.__run_at_exit)
-
 
     def main(self):
 
         if os.getenv("db_choice") == "1":
             # Firebase DB selected
             self.__cloud_firebase_db()
-        else:
-            # Json DB selected
-            self.__local_json_db()
 
 
     def __cloud_firebase_db(self):
@@ -80,23 +73,3 @@ class Backend:
             
         finally:
             del tb
-
-
-    def __store_data_to_file(self):
-
-        self.activityList.store_activity_list_in_file()
-
-
-    def __update_firebase_db(self):
-
-        save_data = FbSaveData.getInstance()
-        save_data.update_db_at_user_exit()
-
-
-    def __run_at_exit(self, sig, frame):
-
-        self.__store_data_to_file()
-
-        self.__update_firebase_db()
-
-        sys.exit()

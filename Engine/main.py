@@ -36,6 +36,7 @@ def main():
 		if isDockerRunning:
 			pass
 		else:
+			print("Docker not running")
 			return
 
 	os.environ["db_choice"] = db_choice

@@ -38,7 +38,7 @@ function calTime(tempT){
       sPTM = parseInt(sPTM[0])*60;
       sPTS = tempT[2].split("-");
       sPTS = parseInt(sPTS[0]);
-      tempT = sPTH + sPTM + sPTM;
+      tempT = sPTH + sPTM + sPTS;
       return tempT;
 }
 

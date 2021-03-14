@@ -8,7 +8,7 @@ var python_process;
 // };
 
 var {PythonShell} = require('python-shell');
-var pyshell = new PythonShell('../Engine/main.py');
+var pyshell = null;
 
 function startTracking(){
 
@@ -20,6 +20,7 @@ function startTracking(){
     //   console.log('results: %j', results);
     //   });
 
+    pyshell = new PythonShell('../Engine/main.py');
     
     python_process = pyshell;
 
@@ -54,7 +55,13 @@ function startTracking(){
 var lisensT = document.getElementById("sT");
 if(lisensT != null){
   lisensT.addEventListener("click", (e) => {
-    pyshell.send('KILL');
+    try {
+      pyshell.send('KILL');
+    }
+    catch(e){
+      console.log(e.message);
+      console.log("Please disable stop tracking button Shubham");
+    }
   });
 
   }
