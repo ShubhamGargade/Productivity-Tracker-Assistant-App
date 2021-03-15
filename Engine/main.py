@@ -29,6 +29,7 @@ def main():
 		if isInternetConnected:
 			pass
 		else:
+			print("Not connected to internet")
 			return
 
 	if prediction_mode == "2":

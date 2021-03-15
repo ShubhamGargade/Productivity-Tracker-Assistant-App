@@ -17,13 +17,18 @@ from . import db
 # Local application imports
 from ...Constants.keys import *
 from .retrieve_data import *
+from ...time_arithmetic import TimeArithmetic
 
 
 
 retrieve_user_data = RetrieveUserData.getInstance()
 retrieve_tracking_history = RetrieveTrackingHistory.getInstance()
 
-initial_time = "0-h 0-m 0-s"
+time_arith = TimeArithmetic()
+add_time = time_arith.add_time  # add_time method instance
+sub_time = time_arith.sub_time  # sub_time method instance
+initial_time = time_arith.initial_time
+
 date_format = "%d-%m-%y"
 url_title_separator = "-*-"
 
@@ -36,32 +41,6 @@ class user:
 	uid = 123
 
 uid = user.uid
-
-def add_time(t1, t2):  # time t1 and t2 will be in 'x-h x-m x-s' format
-	t1_h, t1_m, t1_s = [int(t.split('-')[0]) for t in t1.split()]
-	t2_h, t2_m, t2_s = [int(t.split('-')[0]) for t in t2.split()]
-	secs = (t1_s + t2_s)
-	mins = (t1_m + t2_m + secs//60)
-	hrs = (t1_h + t2_h + mins//60)
-	secs %= 60
-	mins %= 60
-	time_added = str(hrs) + "-h " + str(mins) + "-m " + str(secs)+ "-s"
-
-	return time_added 
-
-
-def sub_time(t1, t2):  # returns t1-t2
-	t1_h, t1_m, t1_s = [int(t.split('-')[0]) for t in t1.split()]
-	t2_h, t2_m, t2_s = [int(t.split('-')[0]) for t in t2.split()]
-	secs = (t1_s - t2_s)
-	mins = (t1_m - t2_m + secs//60)
-	hrs = (t1_h - t2_h + mins//60)
-	secs %= 60
-	mins %= 60
-	time_sub = str(hrs) + "-h " + str(mins) + "-m " + str(secs)+ "-s"
-
-	return time_sub 
-
 
 class SaveData:
 	"""Singleton SaveData class"""
@@ -255,16 +234,16 @@ class SaveData:
 			return
 
 		if tmt == None:
-			tmt = self.activity.add_time(self.activity.time_spent, initial_time)
+			tmt = add_time(self.activity.time_spent, initial_time)
 		else:
-			tmt = self.activity.add_time(self.activity.time_spent, tmt)
+			tmt = add_time(self.activity.time_spent, tmt)
 		
 		# update total mutual time
 		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).update({"tmt": tmt})
 
     	# get total category time
 		tct = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child("tct").get().val()
-		tct = self.activity.add_time(self.activity.time_spent, tct)
+		tct = add_time(self.activity.time_spent, tct)
 		
 		# update total category time
 		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).update({"tct": tct})
@@ -321,15 +300,15 @@ class SaveData:
 		tot_tracking_time = db.child("users").child(uid).child(tot_tracking_time_str).get().val()
 
 		db.update({
-		    wa_sa_str+'/'+str(uid)+'/'+tot_app_tracking_time_str: self.activity.add_time(self.activity.time_spent, tot_app_tracking_time)
+		    wa_sa_str+'/'+str(uid)+'/'+tot_app_tracking_time_str: add_time(self.activity.time_spent, tot_app_tracking_time)
 		})
 
 		db.update({
-		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: self.activity.add_time(self.activity.time_spent, tot_app_p_up_time)
+		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: add_time(self.activity.time_spent, tot_app_p_up_time)
 		})
 
 		db.update({
-		    "users/"+str(uid)+'/'+tot_tracking_time_str: self.activity.add_time(self.activity.time_spent, tot_tracking_time)
+		    "users/"+str(uid)+'/'+tot_tracking_time_str: add_time(self.activity.time_spent, tot_tracking_time)
 		})
 
 		self.update_individual_app_tracking_time(web_sw_str)
@@ -348,7 +327,7 @@ class SaveData:
 
 		# update individual app(website or software) tracking time
 		db.update({
-			i_w_s_tt_str+'/'+str(uid)+'/'+self.activity.key: self.activity.add_time(self.activity.time_spent, ind_app_tracking_time)
+			i_w_s_tt_str+'/'+str(uid)+'/'+self.activity.key: add_time(self.activity.time_spent, ind_app_tracking_time)
 		})
 
 

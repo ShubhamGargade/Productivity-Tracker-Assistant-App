@@ -25,10 +25,7 @@ class WinAcitivyList:
 
     def store_activity_list_in_file(self):
 
-        __filename = "ACTIVITY_LIST_JSON"
-
-        if os.getenv("db_choice") == "1":
-            __filename = "ACTIVITY_LIST_FB"
+        __filename = "../Engine/ACTIVITY_LIST_FB"
 
         try:
             with open(__filename, 'wb') as output_file:
@@ -73,10 +70,7 @@ class WinAcitivyList:
 
         isLoadedSuccessfully = False
 
-        __filename = "ACTIVITY_LIST_JSON"
-
-        if os.getenv("db_choice") == "1":
-            __filename = "ACTIVITY_LIST_FB"
+        __filename = "../Engine/ACTIVITY_LIST_FB"
 
         try:
             with open(__filename, 'rb') as input_file:
@@ -135,19 +129,6 @@ class WinActivity:
         self.name = name
         self.title = None
         self.is_software_stored = False
-
-
-    def add_time(self, t1, t2):  # time t1 and t2 will be in 'x-h x-m x-s' format
-        t1_h, t1_m, t1_s = [int(t.split('-')[0]) for t in t1.split()]
-        t2_h, t2_m, t2_s = [int(t.split('-')[0]) for t in t2.split()]
-        secs = (t1_s + t2_s)
-        mins = (t1_m + t2_m + secs//60)
-        hrs = (t1_h + t2_h + mins//60)
-        secs %= 60
-        mins %= 60
-        time_spent = str(hrs) + "-h " + str(mins) + "-m " + str(secs)+ "-s"
-
-        return time_spent
 
 
     def set_time_spent(self, time_entry):

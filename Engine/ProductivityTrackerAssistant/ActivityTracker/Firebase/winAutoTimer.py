@@ -32,7 +32,7 @@ import win32process  # to get foreground window thread process id
 # Local application imports
 from ...Database.FirebaseDatabase.save_data import SaveData
 from ...ML.predictions import *
-from ..webscrapper import *
+from ..webscrapper_fast import *
 from .winActivity import *
 
 
@@ -45,14 +45,33 @@ saveToDb = SaveData.getInstance()
 
 class WebWindow:
 
-    def is_web_search(self, a_w):
-        if '/search' in a_w:
-            return '0'
+    def is_web_search(self, url):
+
+        if '/search' in url:
+            return True
         else:
-            return a_w
+            return False
 
 
-    def get_web_url(self):
+    def is_valid_url(self, url):
+
+        if self.is_web_search(url):
+            return False
+            
+        url = url.split("://")
+
+        if len(url) == 1:
+            return False
+
+        else:
+
+            if url[1].strip() == "":
+                return False
+
+            return True
+
+
+    def get_web_url(self, browser_name):
 
         if sys.platform in PF[0]:
 
@@ -62,7 +81,10 @@ class WebWindow:
 
             try:
 
-                edit = browserControl.EditControl()
+                if browser_name == "chrome":
+                    edit = browserControl.EditControl(Name="Address and search bar")
+                else:
+                    edit = browserControl.EditControl()
 
             except Exception as e:
                 return None
@@ -78,7 +100,10 @@ class WebWindow:
 
                 url = "https://" + url
 
-            return self.is_web_search(url)
+            if self.is_valid_url(url):
+                return url
+            else:
+                return None
 
         elif sys.platform in PF[2]:
             textOfMyScript = """tell app "google chrome " to get the url of the active tab of window 1"""
@@ -131,17 +156,28 @@ class Windows: # About the windows or applications or websites user opens
 
             app_name = self.new_window_name.split()[-1].lower()
 
+            browser_name = None
+
             if 'chrome' in app_name:
+
                 app_name = " - Google Chrome"
+                browser_name = "chrome"
+
             elif 'firefox' in app_name:
+
                 app_name = " - Mozilla Firefox"
+                browser_name = "firefox"
+
             elif 'edge' in app_name:
+
                 app_name = " - Microsoft Edge"
+                browser_name = "edge"
+
             else:
                 self.isBrowser = False
 
             if self.isBrowser:
-                self.url = self.webWindow.get_web_url()
+                self.url = self.webWindow.get_web_url(browser_name)
 
                 if self.url == None:
                     self.new_window_name = None
@@ -253,8 +289,16 @@ class AutoTimer(Windows):
 
             if win_name == None:
                 return (None, -1)
+
+            if self.software_app_detail == None:
+                x=''
+            else:
+                x=self.software_app_detail
+
+            win_name = win_name + x
+
             for activity in self.activityList.sw_activities:
-                if activity.key == win_name:
+                if str(activity.key)+str(activity.name) == win_name:
                     return (activity, 1)
         
         return (None, 1)
@@ -266,7 +310,7 @@ class AutoTimer(Windows):
             self.prediction_results["category"] = self.webPrediction.get_website_prediction(self.webInfo)
             self.prediction_results["isProductive"] = self.webPrediction.is_productive(self.prediction_results["category"])
         else:
-            self.softwarePrediction = SoftwarePrediction(self.new_window_name)
+            self.softwarePrediction = SoftwarePrediction(self.new_window_name + " " + self.software_app_detail)
             self.prediction_results["category"] = self.softwarePrediction.get_software_prediction()
             self.prediction_results["isProductive"] = self.softwarePrediction.is_productive(self.prediction_results["category"])
 
@@ -336,11 +380,7 @@ class AutoTimer(Windows):
 
                 #  for printing purpose only
                 if self.active_window_name == self.new_window_name  and self.is_window():
-                    if not count:
-                        count += 1
-                    else:
-                        count += 1
-
+                    count += 1
                 else:
                     if count:
                         pass
@@ -371,7 +411,7 @@ class AutoTimer(Windows):
                             self.activityList.web_activities += (self.new_activity,)
                         else:
                             self.new_activity = WinActivity(self.new_window_name, self.time_entry.serialize(), self.prediction_results)
-                            self.new_activity.initSoftware(self.new_window_name)
+                            self.new_activity.initSoftware(self.software_app_detail)
                             self.activityList.sw_activities += (self.new_activity,)
                     else:
                         self.new_activity = self.activity
