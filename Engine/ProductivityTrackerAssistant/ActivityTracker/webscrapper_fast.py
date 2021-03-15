@@ -20,7 +20,6 @@ else:
 
 
 # Local application imports
-from ..print_colored_text import *
 
 
 
@@ -53,7 +52,6 @@ class WebsiteInfo:
 						if matcht:
 							is_title_matched = True
 							self.__title = html.unescape(matcht.group(1))
-							# print_info_text("Title: {}".format(self.__title))
 							
 							if is_desc_matched:
 								break
@@ -64,14 +62,14 @@ class WebsiteInfo:
 						if matchd:
 							is_desc_matched = True
 							self.__description = html.unescape(matchd.group(1))
-							# print_info_text("Desc: {}".format(self.__description))
 
 							if is_title_matched:
 								break
 
 		except Exception as e:
 
-			print_exception_text("Exception in __parse_html : {}".format(e))
+			# print("Exception in __parse_html : {}".format(e))
+			pass
 
 
 	# set title,description of website from content of meta tag with name='description'
