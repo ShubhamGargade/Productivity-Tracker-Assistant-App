@@ -16,15 +16,19 @@ from . import db
 
 # Local application imports
 from ...Constants.keys import *
-from ...print_colored_text import *
 from .retrieve_data import *
+from ...time_arithmetic import TimeArithmetic
 
 
 
 retrieve_user_data = RetrieveUserData.getInstance()
 retrieve_tracking_history = RetrieveTrackingHistory.getInstance()
 
-initial_time = "0-h 0-m 0-s"
+time_arith = TimeArithmetic()
+add_time = time_arith.add_time  # add_time method instance
+sub_time = time_arith.sub_time  # sub_time method instance
+initial_time = time_arith.initial_time
+
 date_format = "%d-%m-%y"
 url_title_separator = "-*-"
 
@@ -37,32 +41,6 @@ class user:
 	uid = 123
 
 uid = user.uid
-
-def add_time(t1, t2):  # time t1 and t2 will be in 'x-h x-m x-s' format
-	t1_h, t1_m, t1_s = [int(t.split('-')[0]) for t in t1.split()]
-	t2_h, t2_m, t2_s = [int(t.split('-')[0]) for t in t2.split()]
-	secs = (t1_s + t2_s)
-	mins = (t1_m + t2_m + secs//60)
-	hrs = (t1_h + t2_h + mins//60)
-	secs %= 60
-	mins %= 60
-	time_added = str(hrs) + "-h " + str(mins) + "-m " + str(secs)+ "-s"
-
-	return time_added 
-
-
-def sub_time(t1, t2):  # returns t1-t2
-	t1_h, t1_m, t1_s = [int(t.split('-')[0]) for t in t1.split()]
-	t2_h, t2_m, t2_s = [int(t.split('-')[0]) for t in t2.split()]
-	secs = (t1_s - t2_s)
-	mins = (t1_m - t2_m + secs//60)
-	hrs = (t1_h - t2_h + mins//60)
-	secs %= 60
-	mins %= 60
-	time_sub = str(hrs) + "-h " + str(mins) + "-m " + str(secs)+ "-s"
-
-	return time_sub 
-
 
 class SaveData:
 	"""Singleton SaveData class"""
@@ -92,11 +70,9 @@ class SaveData:
 		time.sleep(1)
 		# gmt stores current gmtime 
 		gmt = time.gmtime() 
-		# print("gmt:-", gmt) 
 
 		# ts stores timestamp 
 		ts = calendar.timegm(gmt) 
-		# print("timestamp:-", ts) 
 
 		return ts
 
@@ -119,7 +95,6 @@ class SaveData:
 		if isDBCleared == "f":
 			return "Database already initialized"
 
-		print_firebase_text("Initializing Database...", color="yellow")
 
 		# Initialize data in database - START #
 
@@ -256,20 +231,19 @@ class SaveData:
 		try:
 			tmt = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("tmt").get().val()
 		except Exception as e:
-			print("Exception while getting tmt value in SaveData: ", e)
 			return
 
 		if tmt == None:
-			tmt = self.activity.add_time(self.activity.time_spent, initial_time)
+			tmt = add_time(self.activity.time_spent, initial_time)
 		else:
-			tmt = self.activity.add_time(self.activity.time_spent, tmt)
+			tmt = add_time(self.activity.time_spent, tmt)
 		
 		# update total mutual time
 		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).update({"tmt": tmt})
 
     	# get total category time
 		tct = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child("tct").get().val()
-		tct = self.activity.add_time(self.activity.time_spent, tct)
+		tct = add_time(self.activity.time_spent, tct)
 		
 		# update total category time
 		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).update({"tct": tct})
@@ -286,7 +260,6 @@ class SaveData:
 			try:
 				db.child("wa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("url+title").child(self.__get_timestamp()).set(url + url_title_separator + self.activity.title)
 			except Exception as e:
-				print("Exception while storing web data: ", e)
 				return 0
 		return 1
 
@@ -299,7 +272,6 @@ class SaveData:
 			try:
 				db.child("sa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("data").set(self.activity.name)
 			except Exception as e:
-				print("Exception while storing software data: ", e)
 				return 0
 		return 1
 
@@ -316,7 +288,6 @@ class SaveData:
 		# total tracking time
 		tot_tracking_time_str = "ttt"
 
-		# print(tot_app_tracking_time_str, tot_app_p_up_time_str, tot_tracking_time_str)
 		# raise Exception
 
 		# get total web or sw p or up time
@@ -327,25 +298,17 @@ class SaveData:
 
 		# get total tracking time
 		tot_tracking_time = db.child("users").child(uid).child(tot_tracking_time_str).get().val()
-		  
-		# print(tot_app_p_up_time, tot_app_tracking_time, tot_tracking_time)
-		# raise Exception
-
-		# print(self.activity.add_time(self.activity.time_spent, tot_app_p_up_time))
-		# print(self.activity.add_time(self.activity.time_spent, tot_app_tracking_time))
-		# print(self.activity.add_time(self.activity.time_spent, tot_tracking_time))
-		# raise Exception
 
 		db.update({
-		    wa_sa_str+'/'+str(uid)+'/'+tot_app_tracking_time_str: self.activity.add_time(self.activity.time_spent, tot_app_tracking_time)
+		    wa_sa_str+'/'+str(uid)+'/'+tot_app_tracking_time_str: add_time(self.activity.time_spent, tot_app_tracking_time)
 		})
 
 		db.update({
-		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: self.activity.add_time(self.activity.time_spent, tot_app_p_up_time)
+		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: add_time(self.activity.time_spent, tot_app_p_up_time)
 		})
 
 		db.update({
-		    "users/"+str(uid)+'/'+tot_tracking_time_str: self.activity.add_time(self.activity.time_spent, tot_tracking_time)
+		    "users/"+str(uid)+'/'+tot_tracking_time_str: add_time(self.activity.time_spent, tot_tracking_time)
 		})
 
 		self.update_individual_app_tracking_time(web_sw_str)
@@ -364,14 +327,12 @@ class SaveData:
 
 		# update individual app(website or software) tracking time
 		db.update({
-			i_w_s_tt_str+'/'+str(uid)+'/'+self.activity.key: self.activity.add_time(self.activity.time_spent, ind_app_tracking_time)
+			i_w_s_tt_str+'/'+str(uid)+'/'+self.activity.key: add_time(self.activity.time_spent, ind_app_tracking_time)
 		})
 
 
 	# update firebase db when user stops tracking
 	def update_db_at_user_exit(self):
-
-		print_firebase_text("Updating Database before exiting...\n", color="yellow")
 
 		#1 
 		self.save_user_tracking_history()
@@ -379,15 +340,9 @@ class SaveData:
 		#2
 		self.clear_db()
 
-		print_text()
-
-		print_firebase_text("Updated Database Successfully", color="green")
-
 
 	def save_user_tracking_history(self):
 		""" Save user tracking history after user stops tracking """
-
-		print_firebase_text("Saving User Tracking History...", color="yellow")
 
 		#1
 		self.remove_older_tracking_times_from_uth()
@@ -514,9 +469,6 @@ class SaveData:
 					db.update(data)
 
 
-		print_firebase_text("Saved User Tracking History Successfully", color="green")
-
-
 	def get_current_day_tracking_times(self):
 		cdtt = dict()
 		cdtt["ttt"] = retrieve_user_data.get_total_tracking_time()
@@ -562,9 +514,6 @@ class SaveData:
 			While removing nodes, simultaneously subtract times value from att and update att.
 		"""
 
-		print_firebase_text("Removing older tracking times from user tracking history if present...", color="yellow")
-
-
 		# getcurrent date
 		c_date = datetime.strptime(date.today().strftime(date_format), date_format)
 
@@ -598,11 +547,6 @@ class SaveData:
 
 		if dttt != initial_time:
 
-			print_firebase_text("Removed older tracking time successfully", color="green")
-
-			print_firebase_text("Updating all_days tracking times in user tracking history...", color="yellow")
-
-
 			# get all days times
 			all_days_times = retrieve_tracking_history.get_all_days_tracking_times()
 
@@ -619,22 +563,10 @@ class SaveData:
 
 			db.update(data)
 
-
-			print_firebase_text("Updated all_days tracking times in user tracking history successfully", color="green")
-
-			print_firebase_text("Updating oldest tracking date in user tracking history...", color="yellow")
-
-
 			self.update_oldest_tracking_date_in_uth()
 
 
-			print_firebase_text("Updated oldest tracking date in user tracking history successfully", color="green")
-
-
 	def clear_db(self):  # to be done when user stops tracking
-
-		print_firebase_text("Running clear_db funtion...", color="yellow")
-
 
 		current_date  = os.getenv("START_DATE")
 		if current_date is None:
@@ -644,10 +576,6 @@ class SaveData:
 
 
 		if last_tracking_date != None and current_date != last_tracking_date:
-
-			print_firebase_text("Last Tracking Date not equal to current tracking date")
-			print_firebase_text("Hence clearing Firebase Database")
-
 
 			# update last_tracking_date to current_date
 			db.child("users").child(uid).update({
@@ -667,9 +595,6 @@ class SaveData:
 				"isDBCleared" : "t"
 			})
 
-			print_firebase_text("Firebase Database Cleared Successfully", color="green")
 
 		else:
-
-			print_firebase_text("Either Last Tracking Date equal to current tracking date or last tracking date is None")
-			print_firebase_text("Hence not clearing Firebase Database")
+			pass
