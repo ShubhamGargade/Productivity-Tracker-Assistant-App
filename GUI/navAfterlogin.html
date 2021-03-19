@@ -1,6 +1,6 @@
 <html>
 <body>
-<script src="linker/start.js" charset="utf-8"></script>
+<!-- <script src="linker/start.js" charset="utf-8"></script> -->
 <!-- <script src="signInOut.js" charset="utf-8"> </script> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Productivity Tracker Assistant</a>
@@ -17,7 +17,7 @@
             <button class="nav-link bg-primary" type="button" name="button" id="sTrac" onclick="startTracking()" >Start Tracking</button>
           </li>
           <li class="nav-item active">
-            <button class="nav-link bg-primary" type="button" name="button" id="sT"  >Stop Tracking</button>
+            <button class="nav-link bg-primary" type="button" name="button" id="sT" onclick="stopTracking()">Stop Tracking</button>
           </li>
           <li class="nav-item active">
             <a href="#" class="nav-link">Welcome, <span id="showUser"></span></a>
@@ -25,6 +25,7 @@
           <li class="nav-item active">
             <button class="nav-link bg-primary" type="button" id="toSignOut" class="navbar-dark bg-primary" >Signout</button>
           </li>
+
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown
@@ -47,6 +48,7 @@
 
        </div>
 </nav>
+            
 <script>
       // const electron = require('electron')
       const settings = require('electron-settings');
@@ -80,6 +82,24 @@
           // An error happened.
         });
     });
+</script>
+
+<script type="text/javascript">
+  // In renderer process (web page).
+  const { ipcRenderer } = require('electron')
+
+  function startTracking(){
+    
+    ipcRenderer.send('async-start-tracking-message', 'ping start')
+
+  }
+
+  function stopTracking(){
+    
+    ipcRenderer.send('async-stop-tracking-message', 'ping stop')
+
+  }
+
 </script>
 
 </body>

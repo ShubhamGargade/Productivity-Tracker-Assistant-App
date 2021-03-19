@@ -101,3 +101,66 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+// In main process.
+const { ipcMain } = require('electron')
+ipcMain.on('async-start-tracking-message', (event, arg) => {
+  console.log(arg) //
+  startTracking();
+})
+
+ipcMain.on('async-stop-tracking-message', (event, arg) => {
+  console.log(arg) //
+  stopTracking();
+})
+
+var python_process;
+var {PythonShell} = require('python-shell');
+var pyshell = null;
+
+function startTracking(){
+
+    pyshell = new PythonShell('../Engine/main.py');
+    
+    python_process = pyshell;
+
+    // sends a message to the Python script via stdin
+    pyshell.send('RUN');
+
+    pyshell.on('message', function (message) {
+      // received a message sent from the Python script (a simple "print" statement)
+      console.log("FromBAckend: ",message);
+      if(message == "KILL"){
+        // end the input stream and allow the process to exit
+        pyshell.end(function (err,code,signal) {
+          if (err) throw err;
+          console.log('The exit code was: ' + code);
+          console.log('The exit signal was: ' + signal);
+          console.log('finished');
+        });
+      }
+      else{
+        pyshell.send('RUN');
+      }
+    });
+}
+
+
+function stopTracking(){
+  try {
+      pyshell.send('KILL');
+    }
+    catch(e){
+      console.log(e.message);
+      console.log("Please disable stop tracking button Shubham");
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
