@@ -1,4 +1,4 @@
-2
+3
 1
 Computers
 False
@@ -16,11 +16,19 @@ electron
 Productivity_Tracker
 0-h 0-m 10-s
 None
+Science
+False
+True
+True
+cmd
+npm
+0-h 0-m 8-s
+None
 Computers
 True
 True
 True
 console-firebase-google
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 24-s
+0-h 0-m 22-s
 Sign in - Google Accounts
