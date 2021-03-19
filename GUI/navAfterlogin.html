@@ -14,7 +14,7 @@
             <a class="nav-link" href="homeAfterLogin.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <button class="nav-link bg-primary" type="button" name="button" onclick="startTracking()" >Start Tracking</button>
+            <button class="nav-link bg-primary" type="button" name="button" id="sTrac" onclick="startTracking()" >Start Tracking</button>
           </li>
           <li class="nav-item active">
             <button class="nav-link bg-primary" type="button" name="button" id="sT" onclick="stopTracking()">Stop Tracking</button>
@@ -52,8 +52,12 @@
 <script>
       // const electron = require('electron')
       const settings = require('electron-settings');
-
+      // if(sessionStorage.getItem("start.jsScript") != null)
+      // {
+      //   document.getElementById('sTrac').click();
+      // }
       document.getElementById("showUser").innerHTML = sessionStorage.getItem("email-name");
+      // console.log(sessionStorage.getItem("email-name"));
       // settings.set('key', {
       //   data: null
       // });
@@ -65,7 +69,7 @@
         // console.log(firebase.auth().currentUser);
         firebase.auth().signOut().then(() => {
           // Sign-out successful.
- 
+
           console.log(firebase.auth().currentUser);
           settings.setSync('key', {
             data: 'No'

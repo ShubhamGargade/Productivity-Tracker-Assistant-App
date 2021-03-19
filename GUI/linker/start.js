@@ -20,8 +20,8 @@ function startTracking(){
     //   console.log('results: %j', results);
     //   });
 
+    // sessionStorage.setItem('start.jsScript', 'Tracking Started');
     pyshell = new PythonShell('../Engine/main.py');
-    
     python_process = pyshell;
 
     // sends a message to the Python script via stdin
@@ -31,6 +31,8 @@ function startTracking(){
       // received a message sent from the Python script (a simple "print" statement)
       console.log("FromBAckend: ",message);
       if(message == "KILL"){
+
+        // sessionStorage.setItem('start.jsScript', null );
         // end the input stream and allow the process to exit
         pyshell.end(function (err,code,signal) {
           if (err) throw err;
@@ -43,7 +45,7 @@ function startTracking(){
         pyshell.send('RUN');
       }
     });
-      
+
       // sleep(1000);
       // console.log('results: %j', results);
       // document.getElementById("toPrint1").innerText=results;
