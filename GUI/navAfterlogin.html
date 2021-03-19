@@ -2,6 +2,25 @@
 <body>
 <!-- <script src="linker/start.js" charset="utf-8"></script> -->
 <!-- <script src="signInOut.js" charset="utf-8"> </script> -->
+<script>window.$ = window.jQuery = require('jquery')</script>
+<script type="text/javascript">
+$('#sTrac').click(function(){
+    $('#sTrac').hide();
+    $('#sT').show();
+});
+$('#sT').click(function(){
+    $('#sT').hide();
+    $('#sTrac').show();
+});
+</script>
+<style media="screen">
+  #sTrac {
+    display: block;
+  }
+  #sT {
+    display: none;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Productivity Tracker Assistant</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +67,7 @@
 
        </div>
 </nav>
-            
+
 <script>
       // const electron = require('electron')
       const settings = require('electron-settings');
@@ -89,13 +108,13 @@
   const { ipcRenderer } = require('electron')
 
   function startTracking(){
-    
+    console.log('I clicked');
     ipcRenderer.send('async-start-tracking-message', 'ping start')
 
   }
 
   function stopTracking(){
-    
+
     ipcRenderer.send('async-stop-tracking-message', 'ping stop')
 
   }

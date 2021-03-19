@@ -110,12 +110,12 @@ app.on('window-all-closed', function () {
 // In main process.
 const { ipcMain } = require('electron')
 ipcMain.on('async-start-tracking-message', (event, arg) => {
-  console.log(arg) //
+  console.log(arg); //
   startTracking();
 })
 
 ipcMain.on('async-stop-tracking-message', (event, arg) => {
-  console.log(arg) //
+  console.log(arg); //
   stopTracking();
 })
 
@@ -124,15 +124,15 @@ var {PythonShell} = require('python-shell');
 var pyshell = null;
 
 function startTracking(){
-
+    console.log('inside startTracking');
     pyshell = new PythonShell('../Engine/main.py');
-    
+    console.log("HI");
     python_process = pyshell;
 
     // sends a message to the Python script via stdin
     pyshell.send('RUN');
 
-    pyshell.on('message', function (message) {
+    pyshell.on('message', function(message) {
       // received a message sent from the Python script (a simple "print" statement)
       console.log("FromBAckend: ",message);
       if(message == "KILL"){
@@ -163,4 +163,3 @@ function stopTracking(){
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-
