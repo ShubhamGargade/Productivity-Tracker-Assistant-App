@@ -7,10 +7,11 @@ DOCSTRINGS
 
 
 # Third party imports
-from . import db
+
 
 
 # Local application imports
+from . import db
 from ...Constants.keys import *
 from ...time_arithmetic import TimeArithmetic
 
