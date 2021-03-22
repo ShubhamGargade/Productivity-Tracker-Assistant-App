@@ -1,12 +1,20 @@
 3
-1
-Computers
+5
+Science
 False
 True
+True
+cmd
+npm
+0-h 0-m 3-s
+None
+Arts
 False
-cmd
-cmd
-0-h 0-m 48-s
+False
+True
+Docker Desktop
+Images list
+0-h 0-m 42-s
 None
 Science
 False
@@ -14,15 +22,7 @@ True
 True
 electron
 Productivity_Tracker
-0-h 0-m 10-s
-None
-Science
-False
-True
-True
-cmd
-npm
-0-h 0-m 8-s
+0-h 0-m 3-s
 None
 Computers
 True
@@ -30,5 +30,37 @@ True
 True
 console-firebase-google
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 22-s
+0-h 0-m 1-s
 Sign in - Google Accounts
+Computers
+True
+True
+True
+mybigguide
+https://mybigguide.com - Google Chrome
+0-h 0-m 12-s
+MyBigGuide - माय बिग गाइड
+Computers
+True
+True
+True
+github
+https://github.com/Rohan-RPJ/Productivity-Tracker-Assistant-App - Google Chrome
+0-h 0-m 5-s
+GitHub - Rohan-RPJ/Productivity-Tracker-Assistant-App
+Computers
+True
+True
+True
+github
+https://github.com/Rohan-RPJ?tab=repositories - Google Chrome
+0-h 0-m 3-s
+Rohan-RPJ / Repositories · GitHub
+Arts
+True
+False
+True
+github
+https://github.com/Rohan-RPJ - Google Chrome
+0-h 0-m 16-s
+Rohan-RPJ · GitHub

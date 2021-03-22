@@ -13,8 +13,13 @@ from . import db
 # Local application imports
 from ...Constants.keys import *
 from ...time_arithmetic import TimeArithmetic
+from .user_info import UserInfo
 
 
+
+user_info=UserInfo.getInstance()
+uid = user_info.getUid()
+email = user_info.getEmail()
 
 time_arith = TimeArithmetic()
 
@@ -25,10 +30,6 @@ url_title_separator = "-*-"
 productive=[c for i,c in PRODUCTIVE_STR.items()]
 unproductive=[c for i,c in UNPRODUCTIVE_STR.items()]
 
-
-class user:
-	uid = 123
-uid = user.uid
 
 
 def get_max_time_indexes(time_list):
@@ -65,6 +66,7 @@ class RetrieveUserData:
 
 	__instance = None
 
+
 	@staticmethod
 	def getInstance():
 		""" Static access method. """
@@ -83,23 +85,43 @@ class RetrieveUserData:
 
 
 	def get_firstname(self):
-		return db.child("users").child(uid).child("fn").get().val()
+		try:
+			return db.child("users").child(uid).child("fn").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_lastname(self):
-		return db.child("users").child(uid).child("ln").get().val()
+		try:
+			return db.child("users").child(uid).child("ln").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_tracking_time(self):
-		return db.child("users").child(uid).child("ttt").get().val()
+		try:
+			return db.child("users").child(uid).child("ttt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_isDBCleared_val(self):
-		return db.child("users").child(uid).child("isDBCleared").get().val()
+		try:
+			return db.child("users").child(uid).child("isDBCleared").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_last_tracking_date(self):
-		return db.child("users").child(uid).child("ltd").get().val()
+		try:
+			return db.child("users").child(uid).child("ltd").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_productive_time(self):
@@ -143,29 +165,54 @@ class RetrieveSoftwareData:
 
 	def get_app_list(self):  # returns sw apps list
 
-		# shallow() returns all keys under given path(here istt/uid/)
-		dict_keys = db.child("istt").child(uid).shallow().get().val()
+		try:
+			# shallow() returns all keys under given path(here istt/uid/)
+			dict_keys = db.child("istt").child(uid).shallow().get(user_info.getIdToken()).val()
 
-		return list(dict_keys)
+			return list(dict_keys)
+
+		except Exception as e:
+			# print("R:",e)
+			
+			return None
 
 
 	def get_total_tracking_time(self):  # returns total software tracking time
-		return db.child("sa").child(uid).child("tstt").get().val()
+
+		try:
+			return db.child("sa").child(uid).child("tstt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_productive_time(self):  # returns total software productive time
-		return db.child("sa").child(uid).child("p").child("tspt").get().val()
+
+		try:
+			return db.child("sa").child(uid).child("p").child("tspt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_unproductive_time(self):  # returns total software unproductive time
-		return db.child("sa").child(uid).child("up").child("tsupt").get().val()
+
+		try:
+			return db.child("sa").child(uid).child("up").child("tsupt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
  	
 
 	def get_total_category_time(self, category, isProductive):  # returns software total category time
 
 		p_up_str = get_p_up_str(isProductive)
 
-		return db.child("sa").child(uid).child(p_up_str).child(category).child("tct").get().val()
+		try:
+			return db.child("sa").child(uid).child(p_up_str).child(category).child("tct").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_mutual_time_in_category(self, app_name, category, isProductive):  # software total mutual time in given category
@@ -173,7 +220,7 @@ class RetrieveSoftwareData:
 		p_up_str = get_p_up_str(isProductive)
 		
 		try:
-			val = db.child("sa").child(uid).child(p_up_str).child(category).child(app_name).child("tmt").get().val()
+			val = db.child("sa").child(uid).child(p_up_str).child(category).child(app_name).child("tmt").get(user_info.getIdToken()).val()
 		except Exception as e:
 			val = None
 
@@ -184,7 +231,7 @@ class RetrieveSoftwareData:
 		# get the sw app data stored under every possible category
 
 		try:
-			val = db.child("istt").child(uid).child(app_name).get().val()
+			val = db.child("istt").child(uid).child(app_name).get(user_info.getIdToken()).val()
 		except Exception as e:
 			val = None
 
@@ -196,7 +243,7 @@ class RetrieveSoftwareData:
 		p_up_str = get_p_up_str(isProductive)
 		
 		try:
-			val = db.child("sa").child(uid).childp(p_up_str).child(category).child(app_name).child("data").get().val()
+			val = db.child("sa").child(uid).childp(p_up_str).child(category).child(app_name).child("data").get(user_info.getIdToken()).val()
 		except Exception as e:
 			val = None
 
@@ -205,7 +252,7 @@ class RetrieveSoftwareData:
 
 	def get_mostly_used_apps(self):  # returns mostly used software app names(can be more then one if having same time spent)
 
-		apps_with_time = db.child("istt").child(uid).get().val()  # Oredered Dict
+		apps_with_time = db.child("istt").child(uid).get(user_info.getIdToken()).val()  # Oredered Dict
 		app_list, time_list = list(apps_with_time.keys()), list(apps_with_time.values())
 		
 		max_indexes = get_max_time_indexes(time_list)
@@ -244,29 +291,53 @@ class RetrieveWebsiteData:
 
 	def get_app_list(self):  # returns web apps list
 
-		# shallow() returns all keys under given path(here iwtt/uid/)
-		dict_keys = db.child("iwtt").child(uid).shallow().get().val()
+		try:
+			# shallow() returns all keys under given path(here iwtt/uid/)
+			dict_keys = db.child("iwtt").child(uid).shallow().get(user_info.getIdToken()).val()
+			
+			return list(dict_keys)
 
-		return list(dict_keys)
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_tracking_time(self):  # returns total website tracking time
-		return db.child("wa").child(uid).child("twtt").get().val()
+
+		try:
+			return db.child("wa").child(uid).child("twtt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_productive_time(self):  # returns total website productive time
-		return db.child("wa").child(uid).child("p").child("twpt").get().val()
+
+		try:
+			return db.child("wa").child(uid).child("p").child("twpt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_unproductive_time(self):  # returns total website unproductive time
-		return db.child("wa").child(uid).child("up").child("twupt").get().val()
+
+		try:
+			return db.child("wa").child(uid).child("up").child("twupt").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
  		
 
 	def get_total_category_time(self, category):  # returns website total category time
 
 		p_up_str = get_p_up_str(isProductive)
-		
-		return db.child("wa").child(uid).child(p_up_str).child(category).child("tct").get().val()
+
+		try:
+			return db.child("wa").child(uid).child(p_up_str).child(category).child("tct").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_total_mutual_time_in_category(self, hostname, category, isProductive):  # returns website total mutual time in given category
@@ -274,7 +345,7 @@ class RetrieveWebsiteData:
 		p_up_str = get_p_up_str(isProductive)
 			
 		try:
-			val = db.child("wa").child(uid).child(p_up_str).child(category).child(hostname).child("tmt").get().val()
+			val = db.child("wa").child(uid).child(p_up_str).child(category).child(hostname).child("tmt").get(user_info.getIdToken()).val()
 		except Exception as e:
 			val = None
 
@@ -285,7 +356,7 @@ class RetrieveWebsiteData:
 		# get the sw app data stored under every possible category
 
 		try:
-			val = db.child("iwtt").child(uid).child(hostname).get().val()
+			val = db.child("iwtt").child(uid).child(hostname).get(user_info.getIdToken()).val()
 		except Exception as e:
 			val = None
 
@@ -297,7 +368,7 @@ class RetrieveWebsiteData:
 		p_up_str = get_p_up_str(isProductive)
 			
 		try:
-			val = db.child("wa").child(uid).child(p_up_str).child(category).child(hostname).child("url+title").get().val()
+			val = db.child("wa").child(uid).child(p_up_str).child(category).child(hostname).child("url+title").get(user_info.getIdToken()).val()
 		except Exception as e:
 			val = None
 
@@ -306,7 +377,7 @@ class RetrieveWebsiteData:
 
 	def get_mostly_used_apps(self):  # returns mostly used software app names(can be more then one if having same time spent)
 
-		apps_with_time = db.child("iwtt").child(uid).get().val()  # Oredered Dict
+		apps_with_time = db.child("iwtt").child(uid).get(user_info.getIdToken()).val()  # Oredered Dict
 		app_list, time_list = list(apps_with_time.keys()), list(apps_with_time.values())
 		
 		max_indexes = get_max_time_indexes(time_list)
@@ -345,19 +416,39 @@ class RetrieveTrackingHistory:
 
 
 	def get_all_ind_day_tracking_dates(self):  # returns all individual day tracking dates
-		return db.child("uth").child(uid).child("id").shallow().get().val()
+
+		try:
+			return db.child("uth").child(uid).child("id").shallow().get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_ind_day_tracking_times(self, date):  # returns particular individual day tracking times
-		return db.child("uth").child(uid).child("id").child(date).get().val()
+
+		try:
+			return db.child("uth").child(uid).child("id").child(date).get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 	
 	def get_all_days_tracking_times(self):  # returns tracking times stored in all_days
-		return db.child("uth").child(uid).child("ads").get().val()
+
+		try:
+			return db.child("uth").child(uid).child("ads").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 	def get_oldest_tracking_date(self):  # returns date of oldest day stored in tracking history
-		return db.child("uth").child(uid).child("otd").get().val()
+
+		try:
+			return db.child("uth").child(uid).child("otd").get(user_info.getIdToken()).val()
+		except Exception as e:
+			# print("R:",e)
+			pass
 
 
 retrieve_sw_data = RetrieveSoftwareData.getInstance()

@@ -49,14 +49,11 @@
        </div>
 </nav>
             
-<script>
+<script defer>
       // const electron = require('electron')
       const settings = require('electron-settings');
 
-      document.getElementById("showUser").innerHTML = sessionStorage.getItem("email-name");
-      // settings.set('key', {
-      //   data: null
-      // });
+      document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
 
       const userSignOut = document.getElementById("toSignOut");
       userSignOut.addEventListener("click", (e) => {
@@ -82,19 +79,38 @@
 
 <script type="text/javascript">
   // In renderer process (web page).
-  const { ipcRenderer } = require('electron')
+  const { ipcRenderer } = require('electron');
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log("Signed in");
+      
+      if(localStorage.getItem("email-name") == null){
+        // store email in local storage
+        localStorage.setItem('email-name', user.email);
+        document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
+      } 
+      ipcRenderer.send('async-set-user-refresh-token', user.refreshToken);
+    }
+    else{
+      console.log("Signed out");
+
+      ipcRenderer.send('async-set-user-refresh-token', null);
+    }
+  });
 
   function startTracking(){
     
-    ipcRenderer.send('async-start-tracking-message', 'ping start')
+    ipcRenderer.send('async-start-tracking-message', 'ping start');
 
   }
 
   function stopTracking(){
     
-    ipcRenderer.send('async-stop-tracking-message', 'ping stop')
+    ipcRenderer.send('async-stop-tracking-message', 'ping stop');
 
   }
+
 
 </script>
 
