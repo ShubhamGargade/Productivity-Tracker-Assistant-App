@@ -337,6 +337,7 @@ class AutoTimer(Windows):
             saveToDb.update_db_at_user_exit()
 
         except Exception as e:
+            print(e)
             pass
 
 
@@ -437,7 +438,7 @@ class AutoTimer(Windows):
 
                 time.sleep(1)
 
-                print("RUN")  # "RUN" msg to be received by pyshell
+                print(ip_from_pyshell)  # "RUN" msg to be received by pyshell
 
         except KeyboardInterrupt:
            pass

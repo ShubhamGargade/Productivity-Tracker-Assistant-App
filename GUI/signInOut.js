@@ -2,7 +2,7 @@ var firebase = require("firebase/app");
 
 // Add the Firebase products that you want to use
 require("firebase/auth");
-// require("firebase/firestore");
+require('firebase/database');
 
 const firebaseConfig = {
   apiKey: "AIzaSyACGUDZccPyev4MarszVJdx34FXf702_Ls",

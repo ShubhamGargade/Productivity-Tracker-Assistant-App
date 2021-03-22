@@ -18,8 +18,12 @@ from . import db
 from ...Constants.keys import *
 from .retrieve_data import *
 from ...time_arithmetic import TimeArithmetic
+from .user_info import UserInfo
 
 
+user_info=UserInfo.getInstance()
+uid = user_info.getUid()
+email = user_info.getEmail()
 
 retrieve_user_data = RetrieveUserData.getInstance()
 retrieve_tracking_history = RetrieveTrackingHistory.getInstance()
@@ -36,11 +40,6 @@ url_title_separator = "-*-"
 productive=[c for i,c in PRODUCTIVE_STR.items()]
 unproductive=[c for i,c in UNPRODUCTIVE_STR.items()]
 
-
-class user:
-	uid = 123
-
-uid = user.uid
 
 class SaveData:
 	"""Singleton SaveData class"""
@@ -79,7 +78,7 @@ class SaveData:
 			
 	def set_isDBCleared(self, val):
 
-		return db.child("users").child(uid).child("isDBCleared").set(val)
+		return db.child("users").child(uid).child("isDBCleared").set(val, user_info.getIdToken())
 
 
 	def initDB(self):
@@ -118,7 +117,10 @@ class SaveData:
 
 		current_date = date.today().strftime(date_format)
 
-		db.child("users").child(uid).child("ltd").set(current_date)
+		try:
+			db.child("users").child(uid).child("ltd").set(current_date, user_info.getIdToken())
+		except Exception as e:
+			print(e)
 
 		os.environ["START_DATE"] = current_date
 
@@ -126,37 +128,38 @@ class SaveData:
 	def __init_tracking_times_in_db(self):
 
 		# initialize total tracking time
-		db.child("users").child(uid).child("ttt").set(initial_time)
+		db.child("users").child(uid).child("ttt").set(initial_time, user_info.getIdToken())
 
 		# initialize total software tracking time
-		db.child("sa").child(uid).child("tstt").set(initial_time)
+		db.child("sa").child(uid).child("tstt").set(initial_time, user_info.getIdToken())
 
 		# initialize total website tracking time
-		db.child("wa").child(uid).child("twtt").set(initial_time)
+		db.child("wa").child(uid).child("twtt").set(initial_time, user_info.getIdToken())
 
 		# initialize total software productive time
-		db.child("sa").child(uid).child("p").child("tspt").set(initial_time)
+		db.child("sa").child(uid).child("p").child("tspt").set(initial_time, user_info.getIdToken())
 
 		# initialize total software unproductive time
-		db.child("sa").child(uid).child("up").child("tsupt").set(initial_time)
+		db.child("sa").child(uid).child("up").child("tsupt").set(initial_time, user_info.getIdToken())
 
 		# initialize total website productive time
-		db.child("wa").child(uid).child("p").child("twpt").set(initial_time)
+		db.child("wa").child(uid).child("p").child("twpt").set(initial_time, user_info.getIdToken())
 
 		# initialize total website unproductive time
-		db.child("wa").child(uid).child("up").child("twupt").set(initial_time)
+		db.child("wa").child(uid).child("up").child("twupt").set(initial_time, user_info.getIdToken())
 
 		# initialize total category time for all productive category
 		for p_cat in productive:
-			db.child("sa").child(uid).child("p").child(p_cat).child("tct").set(initial_time)
-			db.child("wa").child(uid).child("p").child(p_cat).child("tct").set(initial_time)
+			db.child("sa").child(uid).child("p").child(p_cat).child("tct").set(initial_time, user_info.getIdToken())
+			db.child("wa").child(uid).child("p").child(p_cat).child("tct").set(initial_time, user_info.getIdToken())
 
 		# initialize total category time for all unproductive category
 		for up_cat in unproductive:
-			db.child("sa").child(uid).child("up").child(up_cat).child("tct").set(initial_time)
-			db.child("wa").child(uid).child("up").child(up_cat).child("tct").set(initial_time)
+			db.child("sa").child(uid).child("up").child(up_cat).child("tct").set(initial_time, user_info.getIdToken())
+			db.child("wa").child(uid).child("up").child(up_cat).child("tct").set(initial_time, user_info.getIdToken())
 
 		self.__init_ind_day_tt_in_uth()
+		self.__init_all_days_tt_in_uth()
 
 
 	def __init_ind_day_tt_in_uth(self):
@@ -165,9 +168,21 @@ class SaveData:
 		if current_date is None:
 			current_date = date.today().strftime(date_format)
 
-		db.child("uth").child(uid).child("id").child(current_date).child("ttt").set(initial_time)
-		db.child("uth").child(uid).child("id").child(current_date).child("tpt").set(initial_time)
-		db.child("uth").child(uid).child("id").child(current_date).child("tupt").set(initial_time)
+		db.child("uth").child(uid).child("id").child(current_date).child("ttt").set(initial_time, user_info.getIdToken())
+		db.child("uth").child(uid).child("id").child(current_date).child("tpt").set(initial_time, user_info.getIdToken())
+		db.child("uth").child(uid).child("id").child(current_date).child("tupt").set(initial_time, user_info.getIdToken())
+
+
+	def __init_all_days_tt_in_uth(self):
+
+		isAdsSaved = db.child("users").child(uid).child("uths").get(user_info.getIdToken()).val()
+
+		if isAdsSaved is None or isAdsSaved == "0":
+
+			db.child("uth").child(uid).child("ads").child("tpt").set(initial_time, user_info.getIdToken())
+			db.child("uth").child(uid).child("ads").child("tupt").set(initial_time, user_info.getIdToken())
+			db.child("uth").child(uid).child("ads").child("ttt").set(initial_time, user_info.getIdToken())
+			db.child("users").child(uid).child("uths").set("1", user_info.getIdToken())
 
 
 	def __init_oldest_tracking_date(self):
@@ -181,7 +196,7 @@ class SaveData:
 			if current_date is None:
 				current_date = date.today().strftime(date_format)
 
-			db.child("uth").child(uid).child("otd").set(current_date)
+			db.child("uth").child(uid).child("otd").set(current_date, user_info.getIdToken())
 
 
 	def set_activity(self, activity):
@@ -229,7 +244,7 @@ class SaveData:
 
 		# get total mutual time
 		try:
-			tmt = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("tmt").get().val()
+			tmt = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("tmt").get(user_info.getIdToken()).val()
 		except Exception as e:
 			return
 
@@ -239,14 +254,14 @@ class SaveData:
 			tmt = add_time(self.activity.time_spent, tmt)
 		
 		# update total mutual time
-		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).update({"tmt": tmt})
+		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).update({"tmt": tmt}, user_info.getIdToken())
 
     	# get total category time
-		tct = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child("tct").get().val()
+		tct = db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).child("tct").get(user_info.getIdToken()).val()
 		tct = add_time(self.activity.time_spent, tct)
 		
 		# update total category time
-		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).update({"tct": tct})
+		db.child(wa_sa_str).child(uid).child(p_up_str).child(self.activity.category).update({"tct": tct}, user_info.getIdToken())
 
 		# update rest of the tracking times
 		self.update_tracking_times(web_sw_str, p_up_str, wa_sa_str)
@@ -258,7 +273,7 @@ class SaveData:
 
 			# add url + title to db
 			try:
-				db.child("wa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("url+title").child(self.__get_timestamp()).set(url + url_title_separator + self.activity.title)
+				db.child("wa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("url+title").child(self.__get_timestamp()).set(url + url_title_separator + self.activity.title, user_info.getIdToken())
 			except Exception as e:
 				return 0
 		return 1
@@ -270,7 +285,7 @@ class SaveData:
 
 			# add app_data to db
 			try:
-				db.child("sa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("data").set(self.activity.name)
+				db.child("sa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("data").set(self.activity.name, user_info.getIdToken())
 			except Exception as e:
 				return 0
 		return 1
@@ -291,25 +306,25 @@ class SaveData:
 		# raise Exception
 
 		# get total web or sw p or up time
-		tot_app_p_up_time = db.child(wa_sa_str).child(uid).child(p_up_str).child(tot_app_p_up_time_str).get().val()
+		tot_app_p_up_time = db.child(wa_sa_str).child(uid).child(p_up_str).child(tot_app_p_up_time_str).get(user_info.getIdToken()).val()
 
 		# get total web or sw tracking time
-		tot_app_tracking_time = db.child(wa_sa_str).child(uid).child(tot_app_tracking_time_str).get().val()
+		tot_app_tracking_time = db.child(wa_sa_str).child(uid).child(tot_app_tracking_time_str).get(user_info.getIdToken()).val()
 
 		# get total tracking time
-		tot_tracking_time = db.child("users").child(uid).child(tot_tracking_time_str).get().val()
+		tot_tracking_time = db.child("users").child(uid).child(tot_tracking_time_str).get(user_info.getIdToken()).val()
 
 		db.update({
 		    wa_sa_str+'/'+str(uid)+'/'+tot_app_tracking_time_str: add_time(self.activity.time_spent, tot_app_tracking_time)
-		})
+		}, user_info.getIdToken())
 
 		db.update({
 		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: add_time(self.activity.time_spent, tot_app_p_up_time)
-		})
+		}, user_info.getIdToken())
 
 		db.update({
 		    "users/"+str(uid)+'/'+tot_tracking_time_str: add_time(self.activity.time_spent, tot_tracking_time)
-		})
+		}, user_info.getIdToken())
 
 		self.update_individual_app_tracking_time(web_sw_str)
 
@@ -319,7 +334,7 @@ class SaveData:
 		i_w_s_tt_str = "i{}tt".format(web_sw_str)
 
 		# individual website or software tracking time value
-		ind_app_tracking_time = db.child(i_w_s_tt_str).child(uid).child(self.activity.key).get().val()
+		ind_app_tracking_time = db.child(i_w_s_tt_str).child(uid).child(self.activity.key).get(user_info.getIdToken()).val()
 
 		if ind_app_tracking_time is None:
 			ind_app_tracking_time = initial_time
@@ -328,7 +343,7 @@ class SaveData:
 		# update individual app(website or software) tracking time
 		db.update({
 			i_w_s_tt_str+'/'+str(uid)+'/'+self.activity.key: add_time(self.activity.time_spent, ind_app_tracking_time)
-		})
+		}, user_info.getIdToken())
 
 
 	# update firebase db when user stops tracking
@@ -370,7 +385,6 @@ class SaveData:
 
 			# get all current individual day tracking times
 			cidtt = retrieve_tracking_history.get_ind_day_tracking_times(current_date)
-
 			
 			data = {
 
@@ -381,7 +395,7 @@ class SaveData:
 				}
 			}
 
-			db.update(data)
+			db.update(data, user_info.getIdToken())
 
 			#2 update current individual day tracking times with current tracking times
 
@@ -394,7 +408,7 @@ class SaveData:
 				}
 			}
 
-			db.update(data)
+			db.update(data, user_info.getIdToken())
 
 		else:
 
@@ -417,11 +431,11 @@ class SaveData:
 					}
 				}
 
-				db.update(data)
+				db.update(data, user_info.getIdToken())
 
 				#2 add current day times to individual_day tracking times after removing oldest day tracking times
 				
-				db.child("uth").child(uid).child("id").child(oldest_tracking_date).remove()
+				db.child("uth").child(uid).child("id").child(oldest_tracking_date).remove(user_info.getIdToken())
 
 				data = {
 
@@ -432,7 +446,7 @@ class SaveData:
 					}
 				}
 
-				db.update(data)
+				db.update(data, user_info.getIdToken())
 
 				#3 update oldest_tracking_date to oldest date which can be taken from ind_day node
 				
@@ -453,7 +467,7 @@ class SaveData:
 						}
 					}
 
-					db.update(data)
+					db.update(data, user_info.getIdToken())
 
 					#2 add current day times to individual_day tracking times 
 
@@ -466,7 +480,7 @@ class SaveData:
 						}
 					}
 
-					db.update(data)
+					db.update(data, user_info.getIdToken())
 
 
 	def get_current_day_tracking_times(self):
@@ -505,7 +519,7 @@ class SaveData:
 		if oldest_date != None:
 			db.child("uth").child(uid).update({
 				"otd" : oldest_date
-			})
+			}, user_info.getIdToken())
 
 
 	def remove_older_tracking_times_from_uth(self):
@@ -543,7 +557,7 @@ class SaveData:
 				dtpt = add_time(dtpt, old_tracking_times["tpt"])
 				dtupt = add_time(dtupt, old_tracking_times["tupt"])
 
-				db.child("uth").child(uid).child("id").child(old_date).remove()
+				db.child("uth").child(uid).child("id").child(old_date).remove(user_info.getIdToken())
 
 		if dttt != initial_time:
 
@@ -561,7 +575,7 @@ class SaveData:
 				}
 			}
 
-			db.update(data)
+			db.update(data, user_info.getIdToken())
 
 			self.update_oldest_tracking_date_in_uth()
 
@@ -580,20 +594,20 @@ class SaveData:
 			# update last_tracking_date to current_date
 			db.child("users").child(uid).update({
 				"ltd" : current_date
-			})
+			}, user_info.getIdToken())
 
 			# delete last day data(all except user data and tracking history)
 
-			db.child("sa").child(uid).remove()
-			db.child("wa").child(uid).remove()
-			db.child("istt").child(uid).remove()
-			db.child("iwtt").child(uid).remove()
+			db.child("sa").child(uid).remove(user_info.getIdToken())
+			db.child("wa").child(uid).remove(user_info.getIdToken())
+			db.child("istt").child(uid).remove(user_info.getIdToken())
+			db.child("iwtt").child(uid).remove(user_info.getIdToken())
 
 			# change isDBCleared to "t"
 
 			db.child("users").child(uid).update({
 				"isDBCleared" : "t"
-			})
+			}, user_info.getIdToken())
 
 
 		else:

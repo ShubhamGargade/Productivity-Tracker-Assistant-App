@@ -23,6 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
+global.firebase = firebase; //to access the firebase instance from the renderer process
 
 
 function createWindow () {
@@ -35,20 +36,12 @@ function createWindow () {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      nativeWindowOpen: true,
     }
   })
 
-  // // and load the index.html of the app.
-  //   if (user) {
-  // firebase.auth().onAuthStateChanged(function(user) {
-  //     mainWindow.loadFile("homeAfterLogin.html");
-  //   } else {
-  //     mainWindow.loadFile('index.html');
-  //   }
-  // });
-  // mainWindow.loadFile('index.html');
-  // const user = firebase.auth().currentUser;
+  
   try {
         var value = settings.getSync('key.data');
         console.log('Persisted Value - ' + value);
@@ -106,31 +99,53 @@ app.on('window-all-closed', function () {
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
 // In main process.
-const { ipcMain } = require('electron')
+const { ipcMain } = require('electron');
+var userRefreshToken = null;
+
 ipcMain.on('async-start-tracking-message', (event, arg) => {
-  console.log(arg); //
+  console.log(arg);
   startTracking();
-})
+});
 
 ipcMain.on('async-stop-tracking-message', (event, arg) => {
-  console.log(arg); //
+  console.log(arg);
   stopTracking();
-})
+});
+
+ipcMain.on('async-set-user-refresh-token', (event, arg) => {
+  userRefreshToken = arg;  // gets refreshToken if user signed in else null
+  setPyshellOptions();
+});
+
 
 var python_process;
 var {PythonShell} = require('python-shell');
 var pyshell = null;
+var options = {
+    pythonOptions: ['-u'], // get print results in real-time
+    scriptPath: '../Engine/',
+    args: [userRefreshToken]
+  }
+console.log(options);
+function setPyshellOptions(){
+  options.args = [userRefreshToken];
+  console.log(options);
+}
 
 function startTracking(){
-    console.log('inside startTracking');
-    pyshell = new PythonShell('../Engine/main.py');
-    console.log("HI");
+
+    if(userRefreshToken==null){
+      console.log("RefreshToken is null");
+      return;
+    }
+
+    pyshell = new PythonShell('main.py',  options);
+    
     python_process = pyshell;
 
     // sends a message to the Python script via stdin
-    pyshell.send('RUN');
+    pyshell.send("RUN");
 
     pyshell.on('message', function(message) {
       // received a message sent from the Python script (a simple "print" statement)
@@ -145,7 +160,7 @@ function startTracking(){
         });
       }
       else{
-        pyshell.send('RUN');
+          pyshell.send('RUN');
       }
     });
 }
@@ -157,7 +172,6 @@ function stopTracking(){
     }
     catch(e){
       console.log(e.message);
-      console.log("Please disable stop tracking button Shubham");
     }
 }
 

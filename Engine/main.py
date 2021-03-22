@@ -4,7 +4,8 @@
 # Standard library imports
 import os
 import sys
-
+# get user refresh token from pyshell
+os.environ["user_refresh_token"] = sys.argv[1]  # to be done before backend import
 
 # Third party imports
 
@@ -18,7 +19,7 @@ db_choice = "1"
 prediction_mode = "2"
 
 def main():
-
+	
 	choices = ["1", "2"]
 	if not ((db_choice in choices) and (prediction_mode in choices)):
 		return

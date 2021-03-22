@@ -6,9 +6,10 @@ Create configuration for firebase services and intialize the firebase app
 
 
 import pyrebase
+import os
 
 config = {
-  "apiKey": "AIzaSyDSz2nGxspWIhj4GWRzJbB0PG7YFsRqSwg",
+  "apiKey": "AIzaSyACGUDZccPyev4MarszVJdx34FXf702_Ls",
   "authDomain": "productivitytrackerassistant.firebaseapp.com",
   "databaseURL": "https://productivitytrackerassistant-default-rtdb.firebaseio.com",
   "storageBucket": "productivitytrackerassistant.appspot.com"
@@ -16,3 +17,4 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
+auth=firebase.auth()
