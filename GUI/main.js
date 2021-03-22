@@ -147,7 +147,7 @@ function startTracking(){
     // sends a message to the Python script via stdin
     pyshell.send("RUN");
 
-    pyshell.on('message', function (message) {
+    pyshell.on('message', function(message) {
       // received a message sent from the Python script (a simple "print" statement)
       console.log("FromBAckend: ",message);
       if(message == "KILL"){
@@ -177,4 +177,3 @@ function stopTracking(){
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-
