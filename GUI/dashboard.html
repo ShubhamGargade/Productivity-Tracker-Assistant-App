@@ -3,16 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-
       <script>window.$ = window.jQuery = require('jquery')</script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 
-  <script src="intializeDb.js" charset="utf-8"></script>
-
+  <script src="intializeDb.js" charset="utf-8" defer></script>
+  <script src="dashboardReport.js" charset="utf-8" defer></script>
   <script>
+  // $(document).ready(function(){
+  //
+  //   $('#show-bar-graph').click(function(){
+  //     alert("bar");
+  //     $('#myChart-bar1').show();
+  //     $('#myChart-pie1').hide();
+  //     $('#myChart-dough1').hide();
+  //   });
+  //   $('#show-pie-chart').click(function(){
+  //     $('#myChart-bar1').hide();
+  //     $('#myChart-pie1').show();
+  //     $('#myChart-dough1').hide();
+  //   });
+  //   $('#show-doughnut').click(function(){
+  //     $('#myChart-pie1').hide();
+  //     $('#myChart-bar1').hide();
+  //     $('#myChart-dough1').show();
+  //   });
+  // });
   $(function(){
     $("#add-nav").load("navAfterlogin.html");
   });
@@ -29,6 +47,15 @@
     background-color: #2e86de;
     color: white;
   }
+  /* #myChart-bar1 {
+    display: block;
+  }
+  #myChart-pie1 {
+    display: none;
+  }
+  #myChart-dough1 {
+    display: none;
+  } */
   </style>
 </head>
 <body>
@@ -41,35 +68,61 @@
       <div class="sidenav" id="add-sidenav">
 
       </div>
-    <div class="container">
 
-      <div class="card" style="width: 18rem;">
 
-        <div class="list-group-item" >
-            <h4>Desktop Time:</h4>
-            <h5 id="show-ttt-dashboard"></h5>
+  <div class="container">
+      <div class="row" style="padding: 10px; background-color: #f1f2f6;" >
+        <div class="col">
+          <div class="card-body" style="background-color: blue;">
+            <h5>Desktop Time:</h5>
+            <h4 id="show-ttt-dashboard"></h4>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <div class="card-body">
-            <h5 class="card-title" id="show-prod-percent"></h5>
-            <p class="card-text">Productive</p>
+        <div class="col">
+          <div class="card-body" style="background-color: violet;">
+              <h5>Productive</h5>
+              <h4 id="show-prod-percent"></h4>
           </div>
-          <div class="list-group-item">
-            <h6>Website Time:</h6>
-            <h6 id="show-twtt-dashboard" ></h6>
+        </div>
+        <div class="col">
+          <div class="card-body" style="background-color: orange;" >
+              <h5>Website Time:</h5>
+              <h4 id="show-twtt-dashboard" ></h4>
           </div>
-          <div class="list-group-item">
-            <h6>Software Time:</h6>
-            <h6 id="show-tstt-dashboard" ></h6>
+        </div>
+        <div class="col">
+          <div class="card-body" style="background-color: grey;">
+            <h5>Software Time:</h5>
+            <h4 id="show-tstt-dashboard" ></h4>
           </div>
-        </ul>
-        <div class="card-body">
+
         </div>
       </div>
-  </div>
-  <!-- <script type="text/javascript">
 
-    document.getElementById("show-twtt").innerHTML = sessionStorage.getItem("ttw");
-  </script> -->
+      <div class="row" style="padding: 10px; margin-top: 20px; background-color: #f1f2f6;" >
+        <div class="col-md-9 px-0">
+          <h6><b>Show Report</b></h6>
+        </div>
+        <div class="col-md-1 px-0">
+          <button type="button" name="button" id="show-bar-graph" ><b>Bar Graph</b></button>
+        </div>
+        <div class="col-md-1 px-0">
+          <button type="button" name="button" id="show-pie-chart"><b>Pie Chart</b></button>
+        </div>
+        <div class="col-md-1 px-0">
+          <button type="button" name="button" id="show-doughnut"><b>Doughnut</b></button>
+        </div>
+      </div>
+
+      <div class="row" style="margin: 20px">
+          <div>
+             <canvas id="myChartDashboard"  width="420" height="420" ></canvas>
+          </div>
+  </div>
+
+  <script type="text/javascript">
+
+  </script>
+
 </body>
 </html>

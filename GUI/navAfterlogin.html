@@ -12,6 +12,7 @@ $('#sT').click(function(){
     $('#sT').hide();
     $('#sTrac').show();
 });
+
 </script>
 <style media="screen">
   #sTrac {
@@ -67,10 +68,10 @@ $('#sT').click(function(){
 
        </div>
 </nav>
-            
+
 <script defer>
       // const electron = require('electron')
-      const settings = require('electron-settings');
+      // const settings = require('electron-settings');
 
       document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
 
@@ -103,12 +104,12 @@ $('#sT').click(function(){
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       console.log("Signed in");
-      
+      // console.log(user.uid);
       if(localStorage.getItem("email-name") == null){
         // store email in local storage
         localStorage.setItem('email-name', user.email);
         document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
-      } 
+      }
       ipcRenderer.send('async-set-user-refresh-token', user.refreshToken);
     }
     else{
@@ -126,7 +127,7 @@ $('#sT').click(function(){
   }
 
   function stopTracking(){
-    
+
     ipcRenderer.send('async-stop-tracking-message', 'ping stop');
 
   }

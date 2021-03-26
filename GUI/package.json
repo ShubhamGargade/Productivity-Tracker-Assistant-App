@@ -21,12 +21,14 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "chart.js": "^2.9.4",
     "electron-settings": "^4.0.2",
     "firebase": "^8.2.10",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "python-shell": "^2.0.3",
     "requirejs": "^2.3.6",
-    "tree-kill": "^1.2.2"
+    "tree-kill": "^1.2.2",
+    "update-node": "^0.1.0"
   }
 }

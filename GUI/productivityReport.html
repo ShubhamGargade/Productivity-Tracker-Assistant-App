@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+        <script>window.$ = window.jQuery = require('jquery')</script>
+
+        <script src="intializeDb.js" charset="utf-8" defer></script>
+
+        <script src="productivityReport.js" charset="utf-8" defer></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <script type="text/javascript">
+          $(function(){
+            $("#add-nav").load("navAfterlogin.html");
+          });
+          $(function(){
+            $("#add-sidenav").load("sideNav.html");
+          });
+        </script>
+
+        <style media="screen">
+
+         .main-container-productivity {
+           display: flex;
+           flex-direction: column;
+         }
+         .show-productivity-histogram{
+           background-color: lightyellow;
+           margin: 10px;
+         }
+        </style>
+
+  </head>
+  <body>
+    <div  id="add-nav">
+
+    </div>
+    <div  id="add-sidenav">
+
+    </div>
+    <div class="main-container-productivity">
+      <div class="show-productivity-histogram">
+        <h6>Past Productivity</h6>
+        <div class="row" style="margin: 20px">
+            <div>
+              <canvas id="myChartProductivityPast" width="1200" height="500"></canvas>
+            </div>
+        </div>
+
+      </div>
+      </div>
+  </body>
+</html>
