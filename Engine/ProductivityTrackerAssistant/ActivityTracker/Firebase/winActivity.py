@@ -98,7 +98,7 @@ class WinAcitivyList:
 
             isLoadedSuccessfully = True
 
-        except FileNotFoundError as e:
+        except Exception as e:
             pass
                     
         return isLoadedSuccessfully

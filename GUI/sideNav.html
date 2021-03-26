@@ -1,43 +1,75 @@
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style media="screen">
     .sidenav {
       width: 15%;
       height: 100vh;
       float: left;
       font-size: 120%;
-      background-color: #747d8c;
+      background-color: #6a1b9a;
     }
     .dropdown-btn {
-      padding: 6px 8px 6px 16px;
+      padding: 6px 8px 0px 16px;
       text-decoration: none;
-      font-size: 20px;
-      /* color: #818181;  */
+      /*font-size: 20px;*/
+       color: white;  
       display: block;
       border: none;
-      background: none;
+      background: transparent;
       width: 100%;
       text-align: left;
       cursor: pointer;
       outline: none;
+      margin: 0;
     }
+
+    .dropdown-btn:active, 
+    .dropdown-btn:focus 
+    {
+      outline: none;
+    }
+
     .dropdown-container {
       display: none;
       background-color:#747d8c;
-      padding-left: 8px;
+      padding-left: 30px;
+      text-align: justify-all;
+    }
 
+    .dd-item {
+      font-size: 15px;
     }
 
     /* Optional: Style the caret down icon */
-    .fa-caret-down {
+    .fa-angle-down {
       float: right;
-      padding-right: 8px;
-      background-color: red;
+      padding: 6px;
+      /*background-color: red;*/
+    }
+    .fa-angle-up {
+      float: right;
+      padding: 6px;
+      display: none;
+      /*background-color: red;*/
+    }
+
+    .material-icons {
+      font-size: 28px;
+      display: block;
+      width: 18%;
+      float: left;
     }
 
     .nav-link {
       color: white;
+      /*border: 1px solid red;*/
+      /*padding: 5%;*/
+    }
 
-      padding-top: 5%;
+    .sidenav .nav-item {
+      padding-top: 10%;
     }
 
   </style>
@@ -47,28 +79,52 @@
   <div class="sidenav">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+        <a class="nav-link active" href="dashboard.html">
+          <i class="material-icons">dashboard</i>
+          Dashboard
+        </a>
       </li>
-      <li>
-        <button class="dropdown-btn">Report
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-          <a href="#">Website tracking</a>
-          <a href="#">Software tracking</a>
-          <a href="#">Productivity and Unproductivity</a>
+      <li class="nav-item">
+        <a class="nav-link" id="report-btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <i class="material-icons">assessment</i>
+          Live Reports
+          <i class="fa fa-angle-down" id="angle-down"></i>
+          <i class="fa fa-angle-up" id="angle-up"></i>
+        </a>
+        <div class="collapse" id="collapseExample">
+          <a class="nav-link dd-item" href="#">Website tracking</a>
+          <a class="nav-link dd-item" href="#">Software tracking</a>
+          <a class="nav-link dd-item" href="#">Productivity</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
+        <a class="nav-link" href="#">
+          <i class="material-icons">settings</i>
+          Settings
+        </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      </li> -->
     </ul>
   </div>
   <script type="text/javascript">
   var dropdown = document.getElementsByClassName("dropdown-btn");
+  var dropdown_i_down = document.getElementById("angle-down");
+  var dropdown_i_up = document.getElementById("angle-up");
+  var report_btn = document.getElementById("report-btn");
+
+  report_btn.addEventListener("click", function(){
+    if(dropdown_i_down.style.display == "none"){
+      dropdown_i_up.style.display = "none";
+      dropdown_i_down.style.display = "block";
+    }
+    else{
+      dropdown_i_up.style.display = "block";
+      dropdown_i_down.style.display = "none";
+    }
+  });
+
   var i;
 
   for (i = 0; i < dropdown.length; i++) {

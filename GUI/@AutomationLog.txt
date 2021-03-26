@@ -1,0 +1,2 @@
+2021-03-26 00:44:15.947 winAutoTimer.py[94] get_web_url -> Find Control Timeout: {Name: 'Address and search bar', ControlType: EditControl}
+2021-03-26 00:44:28.473 winAutoTimer.py[94] get_web_url -> Find Control Timeout: {Name: 'Address and search bar', ControlType: EditControl}

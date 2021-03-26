@@ -34,7 +34,7 @@ sub_time = time_arith.sub_time  # sub_time method instance
 initial_time = time_arith.initial_time
 
 date_format = "%d-%m-%y"
-url_title_separator = "-*-"
+separator_str = "-*-"
 
 # A list of class into which websites are categorized
 productive=[c for i,c in PRODUCTIVE_STR.items()]
@@ -210,11 +210,6 @@ class SaveData:
 		if self.activity.name == None:
 			return
 
-		self.store_data()
-
-
-	def store_data(self):
-
 		p_up_str = None
 		web_sw_str = None
 
@@ -222,7 +217,7 @@ class SaveData:
 			p_up_str = "p" 
 		else:
 			p_up_str = "up"
-		
+
 		# storing web or software data
 		# here self.activity.key is hostname for website and app_name for software
 		if self.activity.isBrowser:
@@ -238,6 +233,21 @@ class SaveData:
 				return
 
 			web_sw_str = "s"
+
+		# In Sequence
+		# 1
+		self.store_data(p_up_str, web_sw_str)
+
+		# 2
+		self.setNewDataInDB(p_up_str, web_sw_str)
+
+
+	def setNewDataInDB(self, p_up_str, web_sw_str):
+
+		db.child("newD").child(uid).child(web_sw_str).child(p_up_str).set(self.activity.key + separator_str + self.activity.category, user_info.getIdToken())
+
+
+	def store_data(self, p_up_str, web_sw_str):
 
 		# website_or_software_activities("wa" or "sa") string stored in db
 		wa_sa_str = "{}a".format(web_sw_str)
@@ -273,7 +283,7 @@ class SaveData:
 
 			# add url + title to db
 			try:
-				db.child("wa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("url+title").child(self.__get_timestamp()).set(url + url_title_separator + self.activity.title, user_info.getIdToken())
+				db.child("wa").child(uid).child(p_up_str).child(self.activity.category).child(self.activity.key).child("url+title").child(self.__get_timestamp()).set(url + separator_str + self.activity.title, user_info.getIdToken())
 			except Exception as e:
 				return 0
 		return 1

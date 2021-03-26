@@ -11,7 +11,6 @@ os.environ["user_refresh_token"] = sys.argv[1]  # to be done before backend impo
 
 
 # Local application imports
-from ProductivityTrackerAssistant.ActivityTracker.main import Backend
 from ProductivityTrackerAssistant import check_conn
 
 
@@ -44,6 +43,8 @@ def main():
 	os.environ["db_choice"] = db_choice
 	os.environ["prediction_mode"] = prediction_mode
 
+	from ProductivityTrackerAssistant.ActivityTracker.main import Backend
+	
 	backend = Backend()
 	backend.main()
 

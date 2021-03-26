@@ -62,6 +62,8 @@ class Backend:
 
                 self.activityList = fwa.WinAcitivyList()
 
+            print("STARTED")  # "STARTED" msg to be received by pyshell
+            
             autoTimer = fwat.AutoTimer(self.activityList)
             autoTimer.start_execution()
 

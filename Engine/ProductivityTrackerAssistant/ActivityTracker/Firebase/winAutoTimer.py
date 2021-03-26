@@ -438,7 +438,7 @@ class AutoTimer(Windows):
 
                 time.sleep(1)
 
-                print(ip_from_pyshell)  # "RUN" msg to be received by pyshell
+                print("RUN")  # "RUN" msg to be received by pyshell
 
         except KeyboardInterrupt:
            pass
