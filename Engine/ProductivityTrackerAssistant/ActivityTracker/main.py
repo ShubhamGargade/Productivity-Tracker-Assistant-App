@@ -70,7 +70,7 @@ class Backend:
         except Exception as e:
 
             ex_type, ex, tb = sys.exc_info()
-            # traceback.print_tb(tb)
+            traceback.print_tb(tb)
             print("Exception:",e)
             # print("Python version:",sys.version)
 

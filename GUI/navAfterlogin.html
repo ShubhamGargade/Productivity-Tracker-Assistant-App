@@ -14,7 +14,6 @@ $('#sT').click(function(){
     $('#sTrac').show();
 });
 
-
 </script>
 <style media="screen">
   :root {
@@ -165,6 +164,7 @@ $('#sT').click(function(){
 
        </div>
 </nav>
+
 <div class="navbar-devider">
   <div class="nd-1"></div>
   <div class="nd-2"></div>
@@ -252,6 +252,7 @@ $('#sT').click(function(){
       }
     });
 
+
     ipcRenderer.on('tracking', (event, message) => {
       console.log(message) // Prints true(if tracking started) or false(if tracking stopped)
       if(message==false){
@@ -262,7 +263,6 @@ $('#sT').click(function(){
       }
       disableTrackingBtn(false);
     });
-
 
   });
 

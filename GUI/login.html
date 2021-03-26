@@ -137,7 +137,7 @@ span.psw {
 <!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script> -->
 
 <script type="text/javascript">
-
+    
     const settings = require('electron-settings');
     const loginUser = document.getElementById("login-btn");
     loginUser.addEventListener("click", (e) => {
@@ -149,7 +149,7 @@ span.psw {
         settings.setSync('key', {
           data: 'Yes'
         });
-          
+
           var user = userCredential.user;
 
           // store email in local storage
