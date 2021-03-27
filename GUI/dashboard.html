@@ -13,10 +13,10 @@
   <script src="dashboardReport.js" charset="utf-8" defer></script>
   <script>
 
-      $(function(){
-        $("#add-top-nav").load("navAfterlogin.html");
-        $("#add-side-nav").load("sideNavAfterlogin.html");
-      });
+    $(function(){
+      $("#add-top-nav").load("navAfterlogin.html");
+      $("#add-side-nav").load("sideNavAfterlogin.html");
+    });
 
   // $(document).ready(function(){
   //
@@ -46,8 +46,8 @@
     
   
   .card-body {
-    background-color: #2e86de;
-    color: white;
+    background-color: var(--bg);
+    color: var(--color);
   }
   /* #myChart-bar1 {
     display: block;
@@ -76,28 +76,54 @@
             
             <div class="container-fluid">
               
-              <div class="row">
-                
-                <div class="list-group-item">
-                  <h4>Desktop Time:</h4>
-                  <h5 id="show-ttt-dashboard"></h5>
+              <div class="row" style="padding: 30px 10px; background-color: var(--bg);" >
+                <div class="col">
+                  <div class="card-body" style="background-color: #e91e63;color: white;">
+                    <h4>Desktop Time :</h4>
+                    <h5 id="show-ttt-dashboard"></h5>
+                  </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <div class="card-body">
-                    <h5 class="card-title" id="show-prod-percent"></h5>
-                    <p class="card-text">Productive</p>
+                <div class="col">
+                  <div class="card-body" style="background-color: #f57c00;color: white;">
+                      <h4>Productive Time :</h4>
+                      <h5 id="show-prod-percent"></h5>
                   </div>
-                  <div class="list-group-item">
-                    <h6>Website Time:</h6>
-                    <h6 id="show-twtt-dashboard" ></h6>
+                </div>
+                <div class="col">
+                  <div class="card-body" style="background-color: #c8b900;color: white;">
+                      <h4>Website Time :</h4>
+                      <h5 id="show-twtt-dashboard" ></h5>
                   </div>
-                  <div class="list-group-item">
-                    <h6>Software Time:</h6>
-                    <h6 id="show-tstt-dashboard" ></h6>
+                </div>
+                <div class="col">
+                  <div class="card-body" style="background-color: #00acc1;color: white;">
+                    <h4>Software Time :</h4>
+                    <h5 id="show-tstt-dashboard" ></h5>
                   </div>
-                </ul>
+                </div>
               </div>
 
+              <div class="row" style="padding: 10px; margin-top: 20px; background-color: #f1f2f6;" >
+                <div class="col-md-9 px-0">
+                  <h6><b>Show Report</b></h6>
+                </div>
+                <div class="col-md-1 px-0">
+                  <button type="button" name="button" id="show-bar-graph" ><b>Bar Graph</b></button>
+                </div>
+                <div class="col-md-1 px-0">
+                  <button type="button" name="button" id="show-pie-chart"><b>Pie Chart</b></button>
+                </div>
+                <div class="col-md-1 px-0">
+                  <button type="button" name="button" id="show-doughnut"><b>Doughnut</b></button>
+                </div>
+              </div>
+
+              <div class="row" style="margin: 20px">
+                  <div>
+                     <canvas id="myChartDashboard"  width="420" height="420" ></canvas>
+                  </div>
+              </div>
+            
             </div>
 
           </div>
@@ -111,60 +137,10 @@
 
 
 
-
-
-      </div>
-
-
   <div class="container">
-      <div class="row" style="padding: 10px; background-color: #f1f2f6;" >
-        <div class="col">
-          <div class="card-body" style="background-color: blue;">
-            <h5>Desktop Time:</h5>
-            <h4 id="show-ttt-dashboard"></h4>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-body" style="background-color: violet;">
-              <h5>Productive</h5>
-              <h4 id="show-prod-percent"></h4>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-body" style="background-color: orange;" >
-              <h5>Website Time:</h5>
-              <h4 id="show-twtt-dashboard" ></h4>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-body" style="background-color: grey;">
-            <h5>Software Time:</h5>
-            <h4 id="show-tstt-dashboard" ></h4>
-          </div>
+      
 
-        </div>
-      </div>
-
-      <div class="row" style="padding: 10px; margin-top: 20px; background-color: #f1f2f6;" >
-        <div class="col-md-9 px-0">
-          <h6><b>Show Report</b></h6>
-        </div>
-        <div class="col-md-1 px-0">
-          <button type="button" name="button" id="show-bar-graph" ><b>Bar Graph</b></button>
-        </div>
-        <div class="col-md-1 px-0">
-          <button type="button" name="button" id="show-pie-chart"><b>Pie Chart</b></button>
-        </div>
-        <div class="col-md-1 px-0">
-          <button type="button" name="button" id="show-doughnut"><b>Doughnut</b></button>
-        </div>
-      </div>
-
-      <div class="row" style="margin: 20px">
-          <div>
-             <canvas id="myChartDashboard"  width="420" height="420" ></canvas>
-          </div>
-  </div>
+      
 
   <script type="text/javascript">
 

@@ -27,8 +27,9 @@ $('#sT').click(function(){
     color: var(--color) !important;
   }
   #home-i {
-    font-size: 32px !important;
+    font-size: 38px !important;
   }
+  
   #sTrac {
     display: block;
   }
@@ -39,6 +40,7 @@ $('#sT').click(function(){
     background-color: var(--bg);
     width: 100%;
     padding-right: 9%;
+    padding-bottom: 0.3%;
   }
   .navbar .navbar-brand {
     color: var(--color);
@@ -46,10 +48,11 @@ $('#sT').click(function(){
   }
   .navbar .navbar-collapse .nav-item .nav-link {
     color: black;
+    padding: 0;
   }
   .navbar .nav-item {
-    /*border: 1px solid red;*/
     padding-left: 12%;
+    padding-right: 0;
     font-size: 18px;
   }
   hr {
@@ -113,12 +116,12 @@ $('#sT').click(function(){
     100% {width: 5%;}
   }
   
-  .nd-1 {background: red; width: 20%;}
-  .nd-2 {background: orange; width: 20%;}
-  .nd-3 {background: yellow; width: 20%;}
-  .nd-4 {background: green; width: 20%;}
+  .nd-1 {background: #e91e63; width: 25%;}
+  .nd-2 {background: #f57c00; width: 25%;}
+  .nd-3 {background: #c8b900; width: 25%;}
+  .nd-4 {background: #00acc1; width: 25%;}
   /*.nd-5 {background: blue; width: 15%;}*/
-  .nd-6 {background: #e91e63; width: 20%;}
+  /*.nd-6 {background: green; width: 20%;}*/
   /*.nd-7 {background: #9c27b0; width: 5%;}*/
 
   .toggle.border, .toggle-on.border, .toggle-off.border { border-radius: 20rem; }
@@ -138,12 +141,12 @@ $('#sT').click(function(){
         <ul class="navbar-nav ml-auto">
           
           <li class="nav-item active">
-            <a class="nav-link" href="homeAfterLogin.html"><i class="material-icons" id="home-i">home</i></a>
+            <a class="nav-link" href="homeAfterLogin.html"><i class="fa fa-home" id="home-i"></i></a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" style="padding-top: 1%;">
 
-            <input id="toggle-tracking-event" type="checkbox" data-toggle="toggle" data-on="<i class='material-icons'>stop</i> Stop Tracking" data-onstyle="warning" data-off="<i class='fa fa-play'></i> Start Tracking" data-offstyle="outline-light" data-width="160" data-style="border"><!-- data-height="42" -->
+            <input id="toggle-tracking-event" type="checkbox" data-toggle="toggle" data-on="<i class='fa fa-stop'></i> Stop Tracking" data-onstyle="warning" data-off="<i class='fa fa-play'></i> Start Tracking" data-offstyle="outline-light" data-width="160" data-style="border"><!-- data-height="42" -->
       
           </li>
 
@@ -171,7 +174,7 @@ $('#sT').click(function(){
   <div class="nd-3"></div>
   <div class="nd-4"></div>
   <!-- <div class="nd-5"></div> -->
-  <div class="nd-6"></div>
+  <!-- <div class="nd-6"></div> -->
   <!-- <div class="nd-7"></div> -->
 </div>
             
@@ -185,6 +188,11 @@ $('#sT').click(function(){
 
   $(document).ready(function() {
 
+
+    var l = document.getElementById("toggle-tracking-event");
+    console.log(l)
+    console.log("yeeee",l['data-offstyle'])
+    l['data-offstyle'] = "outline-success"
     function disableTrackingBtn(val){
       if(val){
         $("#toggle-tracking-event").bootstrapToggle('disable');

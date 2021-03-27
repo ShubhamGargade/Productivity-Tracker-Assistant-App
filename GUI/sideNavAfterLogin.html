@@ -184,8 +184,13 @@
       }
     });
 
-  
-    const settings = require('electron-settings');
+    
+    try {
+      const settings = require('electron-settings');
+    }
+    catch(e){
+      console.log(e.message);
+    }
 
     const userSignOut = document.getElementById("toSignOut");
       userSignOut.addEventListener("click", (e) => {

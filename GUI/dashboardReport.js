@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 //   });
 // }
 // writeUserData(123, "shubham", "gargade", "g@gmail.com");
-uid="123";
+
 var prodPerctVar = 0;
 var unprodPerctVar = 0;
 
@@ -92,6 +92,17 @@ class showDataToDashboard {
         var data = [prodPerctVar, unprodPerctVar]
         this.dChartP.setChart(this.graphType, data);
 
+    }
+
+    removeDashesFromTimeStr(time_str){
+      let t = time_str.split(" ");
+      let th = t[0].split('-')[0];
+      let tm = t[1].split('-')[0];
+      let ts = t[2].split('-')[0];
+
+      let res = th+"h "+tm+"m "+ts+"s";
+      console.log(res)
+      return res;
     }
 
     calTime(tempT){
@@ -197,7 +208,7 @@ class showDataToDashboard {
           if(datattt != null)
           {
             console.log("Datattt:",datattt.toString());
-            document.getElementById("show-ttt-dashboard").innerHTML = datattt;
+            document.getElementById("show-ttt-dashboard").innerHTML = this.removeDashesFromTimeStr(datattt);
             this.calProdPercent();
           }
 
@@ -212,7 +223,7 @@ class showDataToDashboard {
           if(datatwtt != null)
           {
             console.log(datatwtt.toString());
-            document.getElementById("show-twtt-dashboard").innerHTML = datatwtt;
+            document.getElementById("show-twtt-dashboard").innerHTML = this.removeDashesFromTimeStr(datatwtt);
 
           }
 
@@ -225,7 +236,7 @@ class showDataToDashboard {
           if(datatstt != null)
           {
             console.log(datatstt.toString());
-            document.getElementById("show-tstt-dashboard").innerHTML = datatstt;
+            document.getElementById("show-tstt-dashboard").innerHTML = this.removeDashesFromTimeStr(datatstt);
 
           }
 
