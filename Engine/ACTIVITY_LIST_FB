@@ -1,12 +1,12 @@
-5
-6
+11
+8
 Science
 False
 True
 True
 electron
 Productivity_Tracker
-0-h 0-m 5-s
+0-h 0-m 1-s
 None
 Computers
 False
@@ -22,7 +22,7 @@ True
 True
 explorer
 
-0-h 0-m 2-s
+0-h 0-m 1-s
 None
 Computers
 False
@@ -38,7 +38,55 @@ True
 True
 sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\navAfterlogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 11-s
+None
+Science
+False
+True
+True
+cmd
+npm
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\sideNavAfterLogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 3-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\homeAfterLogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 2-s
+None
+Science
+False
+True
+False
+electron
+Dashboard
 0-h 0-m 16-s
+None
+Games
+False
+False
+True
+ShellExperienceHost
+Jump List for Sublime Text 3
+0-h 0-m 2-s
+None
+Science
+False
+True
+False
+electron
+Settings
+0-h 0-m 10-s
 None
 Computers
 True
@@ -46,7 +94,7 @@ True
 True
 console-firebase-google
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 6-s
+0-h 0-m 1-s
 Sign in - Google Accounts
 Arts
 True
@@ -88,3 +136,19 @@ play-google
 https://play.google.com/store/apps/details?id=com.innersloth.spacemafia&hl=en&gl=US - Mozilla Firefox
 0-h 0-m 2-s
 Among Us - Apps on Google Play
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/41725725/access-css-variable-from-javascript - Google Chrome
+0-h 0-m 1-s
+Access CSS variable from javascript - Stack Overflow
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/36942565/change-toggle-dynamically-using-bootstraptoggle - Google Chrome
+0-h 0-m 1-s
+javascript - change toggle dynamically using bootstraptoggle - Stack Overflow

@@ -1,8 +1,9 @@
 :root {
+      /*--bg: #2c2c54;*/
       /*--bg: #005151;*/
       /*--color: white;*/
       --bg: white;
-      --color: #37474f;
+      --color: #343a40;
     }
 
     html,body {

@@ -2,42 +2,86 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'"> -->
+
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <title>Productivity_Tracker</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
+  <!-- <script src="node_modules/popper.js/dist/popper.js"></script> -->
+  <!-- <script src="node_modules/jquery-slim/dist/jquery.slim.min.js"></script> -->
+
   
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 
   <script>window.$ = window.jQuery = require('jquery')</script>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script defer src="node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
+  <!-- <script defer src="node_modules/@fortawesome/fontawesome-free/js/solid.js"></script> -->
+  <script defer src="node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
 
+  <script defer src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   
   <script type="text/javascript" src="linker/start.js">
   </script>
 
   <script src="signInOut.js" charset="utf-8"></script>
 
-  <script>
+  <script type="text/javascript" defer>
     $(function(){
       $("#add-top-nav").load("navAfterlogin.html");
       $("#add-side-nav").load("sideNavAfterlogin.html");
     });
+
+    $(document).ready(function(){
+      $('#nav-brand').ready(function(){
+        $("#nav-brand").html("Home");
+      });  
+    });
+
   </script>
 
+  <script src="constants.js" charset="utf-8"></script>
+  <script src="change_theme.js" charset="utf-8"></script>
+
   <link rel="stylesheet" type="text/css" href="common.css">
+
   <style media="screen">
 
-    .jumbotron {
+    .jumbotron-home {
       margin: 3px;
       height: 30%;
       background-color: var(--bg);
+      width: 100%;
     }
+
+    .jumbotron-home h1, .jumbotron-home h3 {
+      text-align: center;
+    }
+
+    .jumbotron-home .system-icon-div {
+      text-align: center;
+    }
+
+    .jumbotron-home .system-icon-div svg {
+      font-size: 80px;
+    }
+
+    .app-features .card-feature {
+      border-right: 1px solid lightgrey;
+    }
+
+    .app-features .card-feature .card-body {
+      text-align: center;
+    }
+
+    .app-features .card-feature .card-body .card-sm-text {
+      font-size: 1.5em;
+    }
+    
     .cards-for-details {
       width: 100%;
       height: 20%;
@@ -69,59 +113,53 @@
           <div class="main-content" id="home-middle-content">
             <div class="container-fluid">
               <div class="row">
-                <div class="jumbotron">
-                  <h1 class="display-5">Activity Tracking Software Enhancing User Performance</h1>
-                  <h3 class="lead" style="text-align: right;">- Dramatically improve your user’s performance by analyzing productivity by activity monitoring software.</h3>
+                <div class="jumbotron jumbotron-home">
+                  <h1 class="display-5"><label style="font-weight: lighter;">Liv</label>Trak Activity Tracking Software Enhancing User Performance</h1>
+                  <h3 class="lead">Dramatically improve your desktop performance by analyzing productivity using <b>Liv<b>Trak</b></b>.</h3>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-4" style="border-right: 1px solid lightgrey;">
-                  <div class="card feature" >
-                    <div class="card-body">
-                      <h2 style="text-align: center;">Productivity Tracking</h2>
-                      <h3 class="card-text" style="color: #e91e63; text-align: center; font-size: 1.5em;">Increase Productivity</h3>
-                    </div>
+              <div class="row app-features">
+                <div class="col-4 card-feature">
+                  <div class="card-body">
+                    <h2 class="card-lg-text">Productivity Tracking</h2>
+                    <h3 class="card-sm-text" style="color: #e91e63;">Increase Productivity</h3>
                   </div>
                 </div>
-                <div class="col-4" style="border-right: 1px solid lightgrey;">
-                  <div class="card feature">
-                    <div class="card-body">
-                      <h2 style="text-align: center;">Time Tracking</h2>
-                      <h3 class="card-text" style="color: #ff9800; text-align: center; font-size: 1.5em;">Pinpoint proof of work</h3>
-                    </div>
+                <div class="col-4 card-feature" style="border-right: 1px solid lightgrey;">
+                  <div class="card-body">
+                    <h2 class="card-lg-text">Time Tracking</h2>
+                    <h3 class="card-sm-text" style="color: #ff9800;">Pinpoint proof of work</h3>
                   </div>
                 </div>
-                <div class="col-4">
-                  <div class="card feature" style="">
-                    <div class="card-body">
-                      <h2 style="text-align: center;">Activity Monitoring</h2>
-                      <h3 class="card-text" style="color: #c8b900; text-align: center; font-size: 1.5em;">Observe every task</h3>
-                    </div>
+                <div class="col-4 card-feature">
+                  <div class="card-body">
+                    <h2 class="card-lg-text">Activity Monitoring</h2>
+                    <h3 class="card-sm-text" style="color: #c8b900;">Observe every task</h3>
                   </div>
                 </div>
               </div>
 
               <div class="row">
-                <div class="jumbotron" style="width: 100%;text-align: left;">
+                <div class="jumbotron jumbotron-home">
                   <h1 class="display-5">Easy to use on both Windows and Linux</h1>
                   <br>
-                  <div class="row" style="width: 100%;">
-                    <div class="col-1"></div>
-                    <div class="col-3">
-                      <i class='fab fa-windows' style="font-size:80px;">
+                  <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3 system-icon-div">
+                      <i class='fab fa-windows'>
                       </i>
                     </div>
-                    <div class="col-3">
-                        <i class='fab fa-linux' style="font-size:80px;"></i>
+                    <div class="col-3 system-icon-div">
+                        <i class='fab fa-linux'></i>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-1"></div>
+                    <div class="col-3"></div>
 
-                    <div class="col-3"><h3 class="">Windows</h3></div>
-                    <div class="col-3"><h3 class="">Linux</h3></div>
+                    <div class="col-3"><h3>Windows</h3></div>
+                    <div class="col-3"><h3>Linux</h3></div>
                   </div>
 
                 </div>

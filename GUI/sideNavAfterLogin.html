@@ -18,6 +18,7 @@
       text-align: justify-all;
       width: 100%;
       margin-bottom: 37%;
+      cursor: default;
     }
 
     .sidenav .navbar-brand i{
@@ -25,7 +26,7 @@
       float: left;
       margin: 4% 1% 4% 2%;
       color: #2196f3;
-      cursor: pointer;
+      cursor: default;
       padding: 0;
     }
 
@@ -34,7 +35,7 @@
       margin: 4% 2% 4% 1%;
       float: left;
       color: #b3e5fc;
-      cursor: pointer;
+      cursor: default;
       padding: 0;
     }
 
@@ -102,7 +103,7 @@
       cursor: default;
     }
 
-    .sidenav-label {
+    .sidenav-label:not(.nocursor) {
       cursor: pointer;
     }
 
@@ -116,7 +117,7 @@
     <a class="navbar-brand" href="#">
       
       <i class="material-icons">track_changes</i>
-      <label style="width: 100%;" class="sidenav-label">
+      <label style="width: 100%;" class="sidenav-label nocursor">
         <h1>Liv<strong style="font-weight: bold;">Trak</strong></h1>
       </label>
 
@@ -149,13 +150,13 @@
           <a class="nav-link dd-item" href="#">
             <label id="sn-st">Software Tracking</label>
           </a>
-          <a class="nav-link dd-item" href="#">
+          <a class="nav-link dd-item" href="productivityReport.html">
             <label id="sn-pty">Productivity</label>  
           </a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="settings.html">
           <i class="material-icons">settings</i>
           <label class="sidenav-label">Settings</label>
         </a>
@@ -169,6 +170,7 @@
     </ul>
   </div>
   <script type="text/javascript" defer>
+
     var dropdown_i_down = document.getElementById("angle-down");
     var dropdown_i_up = document.getElementById("angle-up");
     var report_btn = document.getElementById("report-btn");
@@ -184,33 +186,44 @@
       }
     });
 
-    
-    try {
-      const settings = require('electron-settings');
-    }
-    catch(e){
-      console.log(e.message);
+    function signOutUser(){
+      // console.log(firebase.auth().currentUser);
+      firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+
+        console.log(firebase.auth().currentUser);
+        settings.setSync('key', {
+          data: 'No'
+        });
+        console.log("HI SIGNOUT HERE INSIDE");
+        console.log("Signout successful");
+        window.location.replace("index.html");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
     }
 
     const userSignOut = document.getElementById("toSignOut");
       userSignOut.addEventListener("click", (e) => {
         console.log("HI SIGNOUT HERE");
 
-        // console.log(firebase.auth().currentUser);
-        firebase.auth().signOut().then(() => {
-          // Sign-out successful.
+        // first stop tracking by toggling tracking btn if tracking is on
+        ipcRenderer.send('async-stop-tracking-message', 'ping stop');
 
-          console.log(firebase.auth().currentUser);
-          settings.setSync('key', {
-            data: 'No'
-          });
-          console.log("HI SIGNOUT HERE INSIDE");
-          console.log("Signout successful");
-          window.location.replace("index.html");
-        })
-        .catch((error) => {
-          // An error happened.
+        sessionStorage.setItem("tracking", "stopping");
+
+        ipcRenderer.on('tracking', (event, message) => {
+          console.log(message) // will return false(that is stopped) as stop message is sent
+          if(message==false){
+            sessionStorage.setItem("tracking", "off");
+            signOutUser();
+          }
+          
+          // disableTrackingBtn(false);
         });
+
+        
     });
 
     $(document).ready(function(){

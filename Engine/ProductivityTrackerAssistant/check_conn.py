@@ -9,7 +9,7 @@ def checkInternetConn(url='http://www.google.com/', timeout=3):
         #r = requests.get(url, timeout=timeout)
         r = requests.head(url, timeout=timeout)
         return True
-    except requests.ConnectionError as ex:
+    except Exception as e:
         return False
 
 

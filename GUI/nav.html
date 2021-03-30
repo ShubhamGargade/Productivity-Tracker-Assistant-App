@@ -1,40 +1,139 @@
 
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+  <script src="node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+  
+<style media="screen">
+  :root {
+    --bg: white;
+    --color: #212121;
+  }
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Productivity Tracker Assistant</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  .navbar .navbar-brand i{
+    font-size: 40px;
+    float: left;
+    cursor: default;
+    padding: 0;
+  }
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="login.html">Sign in<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="register.html">Register <span class="sr-only">(current)</span></a>
-          </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li> -->
-        </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-      </div>
-    </nav>
+  .navbar .navbar-collapse .active .nav-link {
+    color: var(--color) !important;
+  }
+  
+  .navbar {
+    background-color: var(--bg);
+    width: 100%;
+    padding-right: 9%;
+    padding-bottom: 0.3%;
+  }
+  .navbar .navbar-brand {
+    color: var(--color);
+    font-size: 30px;
+  }
+
+  .navbar .navbar-brand:hover {
+    color: var(--color);
+  }
+  .navbar .navbar-collapse .nav-item .nav-link {
+    color: black;
+    padding: 0;
+  }
+  .navbar {
+    /*border: 1px solid red;*/
+    padding: 0 1%;
+  }
+  .navbar-nav {
+    /*border: 1px solid red;*/
+    width: 23%;
+  }
+  .navbar .nav-item {
+    /*border: 1px solid red;*/
+    padding-left: 12%;
+    padding-right: 0;
+    font-size: 19px;
+  }
+
+  hr {
+    padding: 0;
+    margin: 0;
+    background-color: #b3e5fc; 
+    opacity: 0.5;
+    text-shadow: 
+  }
+
+  .navbar-devider {
+    width: 100%;
+    height: 6px;
+    background: indigo; 
+  }
+
+  .navbar-devider div {
+    height: 100%;
+    float: left;
+  }
+  
+  .nd-1 {background: #e91e63; width: 25%;}
+  .nd-2 {background: #f57c00; width: 25%;}
+  .nd-3 {background: #c8b900; width: 25%;}
+  .nd-4 {background: #00acc1; width: 25%;}
+
+  .toggle.border, .toggle-on.border, .toggle-off.border { border-radius: 20rem; }
+  .toggle.border .toggle-handle { border-radius: 20rem; }
+ 
+</style>
+</head>
+
+<body>
+
+  <hr/>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+
+    <a class="navbar-brand" href="#">
+        
+      <i class="material-icons">track_changes</i>
+      <h2 style="font-weight: lighter;">Liv<strong style="font-weight: bold;">Trak</strong></h2>
+
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+
+      <li class="nav-item">
+
+        <a class="nav-link" href="login.html">Sign In</a>
+  
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="register.html">Register</a>
+      </li>
+    </ul>
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+
+    </div>
+  </nav>
+
+  <div class="navbar-devider">
+    <div class="nd-1"></div>
+    <div class="nd-2"></div>
+    <div class="nd-3"></div>
+    <div class="nd-4"></div>
+  </div>
+
+</body>
+
+</html>

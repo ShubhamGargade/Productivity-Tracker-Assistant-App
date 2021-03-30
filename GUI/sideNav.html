@@ -1,52 +1,53 @@
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>window.$ = window.jQuery = require('jquery')</script>
 
   <style media="screen">
     .sidenav {
-      width: 15%;
-      height: 100vh;
-      float: left;
-      font-size: 120%;
-      background-color: #6a1b9a;
-    }
-    .dropdown-btn {
-      padding: 6px 8px 0px 16px;
-      text-decoration: none;
-      /*font-size: 20px;*/
-       color: white;  
-      display: block;
-      border: none;
-      background: transparent;
       width: 100%;
-      text-align: left;
-      cursor: pointer;
-      outline: none;
-      margin: 0;
+      height: 100vh;
+      min-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      font-size: 120%;
+      background-color: #000051;
     }
 
-    .dropdown-btn:active, 
-    .dropdown-btn:focus 
-    {
-      outline: none;
-    }
-
-    .dropdown-container {
-      display: none;
-      background-color:#747d8c;
-      padding-left: 30px;
+    .sidenav .navbar-brand{
       text-align: justify-all;
+      width: 100%;
+      margin-bottom: 37%;
+      cursor: default;
+    }
+
+    .sidenav .navbar-brand i{
+      font-size: 50px;
+      float: left;
+      margin: 4% 1% 4% 2%;
+      color: #2196f3;
+      cursor: default;
+      padding: 0;
+    }
+
+    .sidenav .navbar-brand label h1{
+      font-weight: lighter;
+      margin: 4% 2% 4% 1%;
+      float: left;
+      color: #b3e5fc;
+      cursor: default;
+      padding: 0;
     }
 
     .dd-item {
       font-size: 15px;
+      padding-left: 21%;
     }
 
     /* Optional: Style the caret down icon */
     .fa-angle-down {
       float: right;
       padding: 6px;
-      /*background-color: red;*/
     }
     .fa-angle-up {
       float: right;
@@ -55,89 +56,156 @@
       /*background-color: red;*/
     }
 
-    .material-icons {
+    .sidenav .nav-item .material-icons {
       font-size: 28px;
       display: block;
       width: 18%;
       float: left;
     }
 
-    .nav-link {
-      color: white;
+    .sidenav .nav-link {
+      color: #b3e5fc;
       /*border: 1px solid red;*/
       /*padding: 5%;*/
     }
 
-    .sidenav .nav-item {
-      padding-top: 10%;
+    .sidenav .nav-link:hover {
+      color: white;
     }
+
+    .sidenav .nav-item {
+      padding-top: 8%;
+    }
+
+    #compact-sidebar-i, #enlarge-sidebar-i {
+      color: #4fb3bf;
+      font-size: 40px;
+      text-align: right;
+      top: 15%;
+      left: 92%;
+      position: absolute;
+      z-index: 1;
+      cursor: pointer;      
+    }
+
+    .remove-circle-i {
+      display: block;
+    }
+
+    #enlarge-sidebar-i {
+      display: none;
+      left: 40%;
+
+    }
+
+    #null-link{
+      display: none;
+      cursor: default;
+    }
+
+    .sidenav-label {
+      cursor: pointer;
+    }
+
 
   </style>
 </head>
 <body>
 
   <div class="sidenav">
+
+    <a class="navbar-brand" href="#">
+      
+      <i class="material-icons">track_changes</i>
+      <label style="width: 100%;" class="">
+        <h1>Liv<strong style="font-weight: bold;">Trak</strong></h1>
+      </label>
+
+    </a>
+
+    <i class="material-icons remove-circle-i" id="compact-sidebar-i">remove_circle</i>
+    <i class="material-icons add-circle-i" id="enlarge-sidebar-i">add_circle</i>
+
+
     <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link active" href="dashboard.html">
-          <i class="material-icons">dashboard</i>
-          Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="report-btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <i class="material-icons">assessment</i>
-          Live Reports
-          <i class="fa fa-angle-down" id="angle-down"></i>
-          <i class="fa fa-angle-up" id="angle-up"></i>
-        </a>
-        <div class="collapse" id="collapseExample">
-          <a class="nav-link dd-item" href="#">Website tracking</a>
-          <a class="nav-link dd-item" href="#">Software tracking</a>
-          <a class="nav-link dd-item" href="#">Productivity</a>
-        </div>
-      </li>
+      
+      
       <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="material-icons">settings</i>
-          Settings
+          <label class="sidenav-label">Settings</label>
         </a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li> -->
+      
     </ul>
   </div>
-  <script type="text/javascript">
-  var dropdown = document.getElementsByClassName("dropdown-btn");
-  var dropdown_i_down = document.getElementById("angle-down");
-  var dropdown_i_up = document.getElementById("angle-up");
-  var report_btn = document.getElementById("report-btn");
+  <script type="text/javascript" defer>
 
-  report_btn.addEventListener("click", function(){
-    if(dropdown_i_down.style.display == "none"){
-      dropdown_i_up.style.display = "none";
-      dropdown_i_down.style.display = "block";
-    }
-    else{
-      dropdown_i_up.style.display = "block";
-      dropdown_i_down.style.display = "none";
-    }
-  });
+    var dropdown_i_down = document.getElementById("angle-down");
+    var dropdown_i_up = document.getElementById("angle-up");
+    var report_btn = document.getElementById("report-btn");
 
-  var i;
-
-  for (i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var dropdownContent = this.nextElementSibling;
-      if (dropdownContent.style.display === "block") {
-        dropdownContent.style.display = "none";
-      } else {
-        dropdownContent.style.display = "block";
+    report_btn.addEventListener("click", function(){
+      if(dropdown_i_down.style.display == "none"){
+        dropdown_i_up.style.display = "none";
+        dropdown_i_down.style.display = "block";
+      }
+      else{
+        dropdown_i_up.style.display = "block";
+        dropdown_i_down.style.display = "none";
       }
     });
-  }
+
+    const settings = require('electron-settings');
+    
+    const userSignOut = document.getElementById("toSignOut");
+      userSignOut.addEventListener("click", (e) => {
+        console.log("HI SIGNOUT HERE");
+
+        // console.log(firebase.auth().currentUser);
+        firebase.auth().signOut().then(() => {
+          // Sign-out successful.
+
+          console.log(firebase.auth().currentUser);
+          settings.setSync('key', {
+            data: 'No'
+          });
+          console.log("HI SIGNOUT HERE INSIDE");
+          console.log("Signout successful");
+          window.location.replace("index.html");
+        })
+        .catch((error) => {
+          // An error happened.
+        });
+    });
+
+    $(document).ready(function(){
+      $("#compact-sidebar-i").click(function(){
+          $("#enlarge-sidebar-i").animate({left:"84%", width:"show"}, 400);
+          $("#compact-sidebar-i").animate({left:"84%", width:"hide"}, 400);
+          $("#sidenav").removeClass("col-2");
+          $("#sidenav").addClass("col-1");
+          $("#rest").removeClass("col-10");
+          $("#rest").addClass("col-11");
+          $(".sidenav-label").hide();
+          $("#null-link").show();
+          $(".sidenav .navbar-brand").css({"margin-bottom":"90%"});
+        });
+
+        $("#enlarge-sidebar-i").click(function(){
+          $("#compact-sidebar-i").animate({left:"92%", width: "show"}, 400);
+          $("#enlarge-sidebar-i").animate({left:"92%", width: "hide"}, 400);
+          $("#sidenav").removeClass("col-1");
+          $("#sidenav").addClass("col-2");
+          $("#rest").removeClass("col-11");
+          $("#rest").addClass("col-10");
+          $(".sidenav-label").show();
+          $("#null-link").hide();
+          $(".sidenav .navbar-brand").css({"margin-bottom":"37%"});
+
+        });
+
+    });
   </script>
 
 </body>

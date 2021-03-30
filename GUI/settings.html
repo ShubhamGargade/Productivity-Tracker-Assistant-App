@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'"> -->
+
+    <title>Settings</title>
+	
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+	<script defer src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script>window.$ = window.jQuery = require('jquery')</script>
+
+	<!-- Already included in nav for tracking btn
+	<link rel="stylesheet" href="node_modules/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+	<script src="node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+ -->
+	<script src="constants.js" charset="utf-8"></script>
+	<script src="signInOut.js" charset="utf-8"></script>
+	<script src="change_theme.js" charset="utf-8"></script>
+
+   
+	<script>
+
+		$(function(){
+		  $("#add-top-nav").load("navAfterlogin.html");
+		  $("#add-side-nav").load("sideNavAfterlogin.html");
+		});
+
+		$(document).ready(function(){
+			$('#nav-brand').ready(function(){
+			    $("#nav-brand").html("Settings");
+			});
+		});
+
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="common.css">
+
+	<style media="screen">
+    	.jumbotron-settings {
+			margin: 3% 1% 2% 1%;
+			padding-top: 1%;
+			padding-bottom: 3%;
+			background-color: var(--bg);
+			width: 100%;
+			border-bottom: 1px solid lightgrey;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2 p-0" id="sidenav">
+				<div id="add-side-nav"></div>
+			</div>
+
+			<div class="col-10 p-0" id="rest">
+        
+				<section class="middle-content">
+
+					<div id="add-top-nav"></div>
+
+					<div class="main-content" id="home-middle-content">
+	            
+						<div class="container-fluid">
+	              			
+	              			<div class="row">
+				                <div class="jumbotron jumbotron-settings">
+									<h3 style="padding-bottom: 2%;">Theme Settings </h3>
+									<label style="width: 18%;float: left;font-size: 22px;text-align: center;padding-top: 1%">Change Theme </label>
+									
+									<input id="toggle-theme" type="checkbox" data-toggle="toggle" data-on="<div style='display:block;padding-top:2%;'><i class='material-icons' style='display:block;width:30%;float:left'>light_mode</i> <h5 class='lead' style='width:70%;float:left;text-align:left;'>Light Mode</h5></div>" data-onstyle="outline-light" data-off="<div style='display:block;padding-top:2%;'><i class='material-icons' style='display:block;width:30%;float:left'>dark_mode</i> <h5 class='lead' style='width:70%;float:left;text-align:left;'>Dark Mode</h5></div>" data-offstyle="outline-dark" data-width="180" data-style="border" data-height="50">
+		                        
+				                </div>
+							</div>
+
+			            </div>
+
+					</div>
+
+				</section>
+
+			</div>
+
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" defer>
+	
+	$(document).ready(function(){
+
+		var current_theme = localStorage.getItem("current_theme");
+
+		function toggleThemeBtn(){
+			if(current_theme=="light" || current_theme==null){
+				$(function(){
+					$("#toggle-theme").bootstrapToggle('off');
+				});
+			}
+			else{
+				$(function(){
+					$("#toggle-theme").bootstrapToggle('on');	
+				});
+			}
+		}
+
+		toggleThemeBtn();
+
+		$('#toggle-theme').change(function() {
+
+			var toggleTheme = $(this).prop('checked');
+
+			if(toggleTheme==true){
+				// if true then dark theme
+				localStorage.setItem("current_theme", "dark");
+			}
+			else{
+				// if false then light theme
+				localStorage.setItem("current_theme", "light");
+			}
+
+			changeTheme();
+			changeBtnTheme();
+
+	    });
+		
+	});
+</script>
+</html>

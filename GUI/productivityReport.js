@@ -2,7 +2,6 @@
 var firebase = require("firebase/app");
 
 var Chart = require('chart.js');
-const settings = require('electron-settings');
 
 // Add the Firebase products that you want to use
 require("firebase/auth");

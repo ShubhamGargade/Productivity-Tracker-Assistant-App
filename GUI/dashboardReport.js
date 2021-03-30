@@ -2,7 +2,7 @@
 var firebase = require("firebase/app");
 
 var Chart = require('chart.js');
-const settings = require('electron-settings');
+// const settings = require('electron-settings');
 
 // Add the Firebase products that you want to use
 require("firebase/auth");
@@ -135,7 +135,7 @@ class showDataToDashboard {
               prodPerctVar = calPT;
               unprodPerctVar = (100 - prodPerctVar).toFixed(2);
               this.showReportDashboard();
-              return calPT.toString() + '%';
+              return calPT.toString() + ' %';
           }
           else {
             return "0%";

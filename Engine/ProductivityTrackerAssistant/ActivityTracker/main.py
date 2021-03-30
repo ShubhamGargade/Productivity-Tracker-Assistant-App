@@ -72,6 +72,7 @@ class Backend:
             ex_type, ex, tb = sys.exc_info()
             traceback.print_tb(tb)
             print("Exception:",e)
+            print("EXCEPTION") # to be received by pyshell
             # print("Python version:",sys.version)
 
         finally:
