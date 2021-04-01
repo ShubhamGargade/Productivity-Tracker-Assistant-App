@@ -36,10 +36,11 @@ class showDataProductivity {
 
   showReportProductivityPast(productivityDailyDates, productivityDailyPer){
     this.labelForProductivityPast = productivityDailyDates;
+    console.log(productivityDailyPer);
     var data = productivityDailyPer;
     this.graphType = "bar";
     console.log('datasetatxaxis', data);
-    this.productivityChartPast = new all_charts.AllCharts(this.ctx, 'Productivity', this.labelForProductivityPast, data)
+    this.productivityChartPast = new all_charts.AllCharts(this.ctx, 'Weekly Productivity', this.labelForProductivityPast,['#26de81', '#fc5c65', '#182C61', '#s35c65', '#f786d5', '#fc8yt5', '#fs5c98'], data)
   }
 
   calTime(tempT){
@@ -79,7 +80,7 @@ class showDataProductivity {
 
         for(dates in keysDatesOfWeek){
 
-          // console.log(dataUthId[keysDatesOfWeek[dates]]);
+          console.log(dataUthId[keysDatesOfWeek[dates]]);
           arrayOfDailyDatesPer[dates] = this.getEachDateTimePer(dataUthId[keysDatesOfWeek[dates]]);
         }
         this.showReportProductivityPast(keysDatesOfWeek, arrayOfDailyDatesPer);
