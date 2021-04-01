@@ -31,7 +31,7 @@ class AllCharts {
   setChart(graphType, data, options={}){
 
     this.destroyChart();
-
+    this.options = {};
     if (graphType == "bar")
     {
       this.options = {
@@ -50,6 +50,44 @@ class AllCharts {
 
       }
     }
+    var current_theme = localStorage.getItem("current_theme");
+    var gridColor = "#fafafa";
+    if(current_theme=="dark"){
+      gridColor = "#455a64"
+    }
+    else{
+      gridColor = "#eeeeee"
+    }
+
+    gridOptions = {
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            // display: false,
+            color: gridColor,
+          },
+          scaleLabel: {
+            // display: true,
+            // labelString: 'Month',
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            // display: false,
+            color: gridColor,
+          },
+          scaleLabel: {
+            // display: true,
+            // labelString: 'Value'
+          }
+        }]
+      }
+    }
+
+     this.options = $.extend(this.options, gridOptions)
+
     this.datasets[0].data = data;
     console.log(data)
     this.stackedLine = new Chart(this.ctx, {
@@ -58,7 +96,8 @@ class AllCharts {
         labels: this.datasetLabels,
         datasets: this.datasets,
       },
-      options: this.options
+      // options: options
+      options: $.extend(this.options, options)
     });
   }
 }
