@@ -1,5 +1,5 @@
-11
-8
+15
+10
 Science
 False
 True
@@ -46,7 +46,7 @@ True
 True
 cmd
 npm
-0-h 0-m 1-s
+0-h 0-m 9-s
 None
 Computers
 False
@@ -54,7 +54,7 @@ True
 True
 sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\sideNavAfterLogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 3-s
+0-h 0-m 14-s
 None
 Computers
 False
@@ -67,10 +67,10 @@ None
 Science
 False
 True
-False
+True
 electron
 Dashboard
-0-h 0-m 16-s
+0-h 4-m 39-s
 None
 Games
 False
@@ -86,7 +86,39 @@ True
 False
 electron
 Settings
-0-h 0-m 10-s
+0-h 0-m 4-s
+None
+Science
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\Engine\ProductivityTrackerAssistant\Database\FirebaseDatabase\__init__.py (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 2-m 1-s
+None
+Computers
+False
+True
+True
+LockApp
+Windows Default Lock Screen
+0-h 0-m 7-s
+None
+Science
+False
+True
+True
+explorer
+UnlockingWindow
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+explorer
+Task Switching
+0-h 0-m 1-s
 None
 Computers
 True
@@ -152,3 +184,19 @@ stackoverflow
 https://stackoverflow.com/questions/36942565/change-toggle-dynamically-using-bootstraptoggle - Google Chrome
 0-h 0-m 1-s
 javascript - change toggle dynamically using bootstraptoggle - Stack Overflow
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/58633300/how-to-create-a-dictionary-from-os-environment-variables - Mozilla Firefox
+0-h 0-m 3-s
+python - How to create a dictionary from OS environment variables? - Stack Overflow
+Arts
+True
+False
+True
+medium
+https://medium.com/analytics-vidhya/hiding-secret-keys-and-passwords-in-python-2950c6a4359 - Mozilla Firefox
+0-h 0-m 3-s
+Hiding Secret Keys and Passwords in Python | by theNightwing | Analytics Vidhya | Mar, 2021 | Medium
