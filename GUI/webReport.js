@@ -1,3 +1,3 @@
-const webSoftDetails = require("./webSoftDetails");
+const webSoftDetails = require("./insertwebSoft");
 const web = 'w';
-var webObj = new webSoftDetails.showDataToWebSoftReport(web);
+var webObj = new webSoftDetails.insertWebSoftReport(web);

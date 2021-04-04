@@ -1,4 +1,13 @@
 
+var current_theme = localStorage.getItem("current_theme");
+var gridColor = "#fafafa";
+if(current_theme=="dark"){
+  gridColor = "#455a64"
+}
+else{
+  gridColor = "#eeeeee"
+}
+
 class AllCharts {
 
   constructor(ctx, chartLabel, datasetLabels,bgColor, data, graphType="bar"){
@@ -36,11 +45,31 @@ class AllCharts {
     {
       this.options = {
         scales: {
+          xAxes: [{
+            display: true,
+            gridLines: {
+              // display: false,
+              color: gridColor,
+            },
+            scaleLabel: {
+              // display: true,
+              // labelString: 'Month',
+            }
+          }],
           yAxes: [{
-       ticks: {
-           beginAtZero: true
-       }
-     }]
+            display: true,
+            gridLines: {
+              // display: false,
+              color: gridColor,
+            },
+            scaleLabel: {
+              // display: true,
+              // labelString: 'Value'
+            },
+            ticks: {
+                beginAtZero: true
+            }
+          }]
         }
       }
       // console.log('inside to show from 0');
@@ -50,43 +79,7 @@ class AllCharts {
 
       }
     }
-    var current_theme = localStorage.getItem("current_theme");
-    var gridColor = "#fafafa";
-    if(current_theme=="dark"){
-      gridColor = "#455a64"
-    }
-    else{
-      gridColor = "#eeeeee"
-    }
 
-    gridOptions = {
-      scales: {
-        xAxes: [{
-          display: true,
-          gridLines: {
-            // display: false,
-            color: gridColor,
-          },
-          scaleLabel: {
-            // display: true,
-            // labelString: 'Month',
-          }
-        }],
-        yAxes: [{
-          display: true,
-          gridLines: {
-            // display: false,
-            color: gridColor,
-          },
-          scaleLabel: {
-            // display: true,
-            // labelString: 'Value'
-          }
-        }]
-      }
-    }
-
-     this.options = $.extend(this.options, gridOptions)
 
     this.datasets[0].data = data;
     console.log(data)

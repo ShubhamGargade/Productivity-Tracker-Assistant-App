@@ -62,6 +62,18 @@ function createWindow () {
     console.log(result);
   });
 
+  var ltd = settings.getSync('lastTrackingDate.dataLtd');
+  if(ltd == null){
+    settings.setSync('Dic',{
+      dataDic: {'w':{},
+      's':{},
+      'twpt':'',
+      'twtt':'',
+      'tspt':'',
+      'tstt':''}
+    })
+    console.log('LTD:', ltd);
+  }
 
   try {
         var value = settings.getSync('key.data');
@@ -104,7 +116,6 @@ ipcMain.on('async-start-tracking-message', (event, arg) => {
 
 ipcMain.on('async-stop-tracking-message', (event, arg) => {
   console.log('ipcmain:',arg);
-  mainWindow.webContents.send('asynchronous-message', 'save-webDic');
   const result = stopTracking();
   return result;
 });
@@ -114,6 +125,7 @@ ipcMain.handle('async-set-user-refresh-token', async (event, arg) => {
   setPyshellOptions();
   return "refreshed";
 });
+
 
 
 var python_process;
@@ -132,34 +144,28 @@ function setPyshellOptions(){
 
   function startTracking(){
 
-    var ltd = settings.getSync('lastTrackingDate.dataLtd');
-    if(ltd == null){
+    var cD = new Date().getDate().toString();
+    var cM = (parseInt(new Date().getMonth())+1).toString();
+    var cY = new Date().getFullYear().toString().substr(2,2);
+    console.log('current month', cM);
+    if(cM.length == 1){
+      cM = "0"+cM;
+    }
+    var currentTrackingDate = cD+'-'+cM+'-'+cY;
+
+    console.log('current date: ', currentTrackingDate);
+    if(currentTrackingDate != ltd){
       settings.setSync('Dic',{
         dataDic: {'w':{},
-                  's':{}}
+        's':{},
+        'twpt':'',
+        'twtt':'',
+        'tspt':'',
+        'tstt':''}
       })
-      console.log('LTD:', ltd);
-    }
-    else{
-        var cD = new Date().getDate().toString();
-        var cM = (parseInt(new Date().getMonth())+1).toString();
-        var cY = new Date().getFullYear().toString().substr(2,2);
-        console.log('current month', cM);
-        if(cM.length == 1){
-          cM = "0"+cM;
-        }
-        var currentTrackingDate = cD+'-'+cM+'-'+cY;
-
-        console.log('current date: ', currentTrackingDate);
-        if(currentTrackingDate != ltd){
-          settings.setSync('Dic',{
-            dataDic: {'w':{},
-                      's':{}}
-          })
-          settings.setSync('lastTrackingDate', {
-            dataLtd: currentTrackingDate
-          })
-        }
+      settings.setSync('lastTrackingDate', {
+        dataLtd: currentTrackingDate
+      })
     }
 
     if(userRefreshToken==null){
@@ -217,6 +223,17 @@ function setPyshellOptions(){
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+
+  //Website tracking Object
+  const { showDataToWebSoftReport } = require("./webSoftDetails");
+  // console.log("show", showDataToWebSoftReport("w"))
+  const web = 'w';
+  var webObj = new showDataToWebSoftReport(web);
+  //software tracking
+  const soft = 's';
+  var softObj = new showDataToWebSoftReport(soft);
+
 }
 
 // This method will be called when Electron has finished

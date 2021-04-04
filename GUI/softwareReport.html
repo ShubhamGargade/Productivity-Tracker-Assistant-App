@@ -28,37 +28,25 @@
 
     <script type="text/javascript">
       $(function(){
-        $("#add-nav").load("navAfterlogin.html");
+        $("#add-top-nav").load("navAfterlogin.html");
+        $("#add-side-nav").load("sideNavAfterlogin.html");
       });
-      $(function(){
-        $("#add-sidenav").load("sideNav.html");
+
+      $(document).ready(function(){
+        $('#nav-brand').ready(function(){
+          $("#nav-brand").html("Software Report");
+        });
       });
     </script>
 
+    <script src="constants.js" charset="utf-8"></script>
+    <script src="change_theme.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="common.css">
 
 
     <style media="screen">
-      body {
 
-          width: 100%;
-          height: 100%;
-          margin: 0;
-       }
-      .main-container-softreport {
-        /* margin: 10px; */
-        /* width: 80%; */
-        /* float: right; */
-        /* background-color: red; */
-        display: flex;
-        flex-direction: column;
-      }
-      .col{
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      /* .card-body{
-        flex-direction: column;
-      } */
       .show-table {
         padding: 10px;
       }
@@ -73,51 +61,65 @@
   </head>
 
   <body>
-    <div id="add-nav">
-    </div>
 
-    <div id="add-sidenav">
-
-    </div>
-
-    <div class="main-container-softreport">
-      <div class="row" style="padding: 15px;background-color: #f1f2f6;" >
-        <div class="col">
-          <div class="card-body" style="background-color: blue;">
-            <h5>Total Software Time:</h5>
-            <h4 id="show-tstt-sreport"></h4>
-          </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 p-0" id="sidenav">
+          <div id="add-side-nav"></div>
         </div>
-        <div class="col">
-          <div class="card-body" style="background-color: violet;">
-              <h5>Productive Software Time</h5>
-              <h4 id="show-tspt-sreport"></h4>
-          </div>
+        <div class="col-10 p-0" id="rest">
+          <section class="middle-content">
+
+            <div id="add-top-nav"></div>
+
+            <div class="main-content" id="home-middle-content">
+              <div class="container-fluid">
+                <div class="row" style="padding: 15px;background-color: #f1f2f6;" >
+                  <div class="col">
+                    <div class="card-body" style="background-color: blue;">
+                      <h5>Total Software Time:</h5>
+                      <h4 id="show-tstt-sreport"></h4>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card-body" style="background-color: violet;">
+                        <h5>Productive Software Time</h5>
+                        <h4 id="show-tspt-sreport"></h4>
+                    </div>
+                  </div>
+                  <!-- <div class="col">
+                    <div class="card-body" style="background-color: orange;" >
+                        <h5>Software Time:</h5>
+                        <h4 id="show-twtt-dashboard" ></h4>
+                    </div>
+                  </div> -->
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="show-table">
+                      <table class="table  table-hover">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Software</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Time Ratio</th>
+                          </tr>
+                        </thead>
+                        <tbody  id='tbs'>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <!-- <div class="col">
-          <div class="card-body" style="background-color: orange;" >
-              <h5>Software Time:</h5>
-              <h4 id="show-twtt-dashboard" ></h4>
-          </div>
-        </div> -->
       </div>
-      <div class="show-table">
-        <table class="table  table-hover">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Software</th>
-              <th scope="col">Class</th>
-              <th scope="col">Category</th>
-              <th scope="col">Time</th>
-              <th scope="col">Time Ratio</th>
-            </tr>
-          </thead>
-          <tbody  id='tb'>
-
-          </tbody>
-        </table>
-      </div>
-
     </div>
   </body>
   <!-- <script type="text/javascript">

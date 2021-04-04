@@ -9,17 +9,12 @@
         <script src="intializeDb.js" charset="utf-8" defer></script>
 
         <script src="webReport.js" charset="utf-8" defer></script>
-<!--
+
         <script type="text/javascript" defer>
-        dict = {'a':2,'b':9,'c':2,'d':4}
-        if(dict[4] != null){
-          console.log('dicttttttttt4');
-        }
-        for(d in dict){
-          console.log(d);
-          console.log(dict[d]);
-        }
-        </script> -->
+        dict = {}
+        dict.a = 'hello'
+        console.log(dict);
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -27,38 +22,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <script type="text/javascript">
-      $(function(){
-        $("#add-nav").load("navAfterlogin.html");
+    $(function(){
+      $("#add-top-nav").load("navAfterlogin.html");
+      $("#add-side-nav").load("sideNavAfterlogin.html");
+    });
+
+    $(document).ready(function(){
+      $('#nav-brand').ready(function(){
+        $("#nav-brand").html("Website Report");
       });
-      $(function(){
-        $("#add-sidenav").load("sideNav.html");
-      });
+    });
     </script>
 
+    <script src="constants.js" charset="utf-8"></script>
+    <script src="change_theme.js" charset="utf-8"></script>
 
+    <link rel="stylesheet" type="text/css" href="common.css">
 
     <style media="screen">
-      body {
 
-          width: 100%;
-          height: 100%;
-          margin: 0;
-       }
-      .main-container-webreport {
-        /* margin: 10px; */
-        /* width: 80%; */
-        /* float: right; */
-        /* background-color: red; */
-        display: flex;
-        flex-direction: column;
-      }
-      .col{
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      /* .card-body{
-        flex-direction: column;
-      } */
       .show-table {
         padding: 10px;
       }
@@ -73,51 +55,65 @@
   </head>
 
   <body>
-    <div id="add-nav">
-    </div>
 
-    <div id="add-sidenav">
-
-    </div>
-
-    <div class="main-container-webreport">
-      <div class="row" style="padding: 15px;background-color: #f1f2f6;" >
-        <div class="col">
-          <div class="card-body" style="background-color: blue;">
-            <h5>Total Website Time:</h5>
-            <h4 id="show-twtt-wreport"></h4>
-          </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 p-0" id="sidenav">
+          <div id="add-side-nav"></div>
         </div>
-        <div class="col">
-          <div class="card-body" style="background-color: violet;">
-              <h5>Productive Website Time</h5>
-              <h4 id="show-twpt-wreport"></h4>
-          </div>
+        <div class="col-10 p-0" id="rest">
+          <section class="middle-content">
+
+            <div id="add-top-nav"></div>
+
+            <div class="main-content" id="home-middle-content">
+              <div class="container-fluid">
+                <div class="row" style="padding: 15px;background-color: #f1f2f6;" >
+                  <div class="col">
+                    <div class="card-body" style="background-color: blue;">
+                      <h5>Total Website Time:</h5>
+                      <h4 id="show-twtt-wreport"></h4>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card-body" style="background-color: violet;">
+                        <h5>Productive Website Time</h5>
+                        <h4 id="show-twpt-wreport"></h4>
+                    </div>
+                  </div>
+                  <!-- <div class="col">
+                    <div class="card-body" style="background-color: orange;" >
+                        <h5>Website Time:</h5>
+                        <h4 id="show-twtt-dashboard" ></h4>
+                    </div>
+                  </div> -->
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="show-table">
+                      <table class="table  table-hover">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Website</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Time Ratio</th>
+                          </tr>
+                        </thead>
+                        <tbody  id='tbw'>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <!-- <div class="col">
-          <div class="card-body" style="background-color: orange;" >
-              <h5>Website Time:</h5>
-              <h4 id="show-twtt-dashboard" ></h4>
-          </div>
-        </div> -->
       </div>
-      <div class="show-table">
-        <table class="table  table-hover">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Website</th>
-              <th scope="col">Class</th>
-              <th scope="col">Category</th>
-              <th scope="col">Time</th>
-              <th scope="col">Time Ratio</th>
-            </tr>
-          </thead>
-          <tbody  id='tb'>
-
-          </tbody>
-        </table>
-      </div>
-
     </div>
   </body>
   <!-- <script type="text/javascript">
