@@ -4,6 +4,9 @@
       /*--color: white;*/
       --bg: white;
       --color: #343a40;
+      --card-bg: ;
+      --card-header-bg: ;
+      --card-body-bg: ;
     }
 
     html,body {

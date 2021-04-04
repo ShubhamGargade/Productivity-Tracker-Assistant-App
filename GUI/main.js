@@ -44,12 +44,16 @@ function createWindow () {
 
   mainWindow.webContents
   .executeJavaScript(
-    `localStorage.setItem('theme_bg_light', 'white');
-     localStorage.setItem('theme_bg_dark', '#2c2c54');
+    `localStorage.setItem('theme_bg_light1', 'white');
+     localStorage.setItem('theme_bg_dark1', '#2c2c54');
+     localStorage.setItem('theme_bg_dark2', '#004747');
      localStorage.setItem('theme_color_light', '#343a40');
      localStorage.setItem('theme_color_dark', 'white');
      localStorage.setItem('tracking_btn_light', 'outline-light');
      localStorage.setItem('tracking_btn_dark', 'outline-dark');
+     localStorage.setItem('card_body_bg_light1', '#f9f9f9');
+     localStorage.setItem('card_body_bg_dark1', '#575581');
+     localStorage.setItem('card_body_bg_dark2', '#387372');
     `
     , true)
   .then(result => {
@@ -80,6 +84,14 @@ function createWindow () {
     mainWindow.loadFile('index.html');
 
   }
+
+  // create hidden worker window
+  const workerWindow = new BrowserWindow({
+    show: false,
+    webPreferences: { nodeIntegration: true }
+  });
+  workerWindow.loadFile('worker.html');
+
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
