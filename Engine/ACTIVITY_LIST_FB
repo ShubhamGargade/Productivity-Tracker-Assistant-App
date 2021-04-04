@@ -1,20 +1,60 @@
-15
-10
+14
+8
 Science
 False
 True
 True
 electron
 Productivity_Tracker
-0-h 0-m 1-s
+0-h 0-m 43-s
 None
 Computers
 False
 True
 True
-sublime_text
-D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\common.css (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 4-s
+explorer
+Task Switching
+0-h 0-m 5-s
+None
+Science
+False
+True
+True
+cmd
+Select npm
+0-h 0-m 8-s
+None
+Computers
+False
+True
+True
+atom
+webSoftDetails.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 10-s
+None
+Science
+False
+True
+True
+explorer
+Snap Assist
+0-h 0-m 1-s
+None
+Science
+False
+True
+True
+cmd
+npm
+0-h 0-m 3-s
+None
+Computers
+False
+True
+True
+Docker Desktop Installer
+Docker Desktop Update
+0-h 0-m 14-s
 None
 Business
 False
@@ -24,179 +64,115 @@ explorer
 
 0-h 0-m 1-s
 None
-Computers
+Reference
+False
 False
 True
-True
-sublime_text
-D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\sideNav.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 10-s
+SearchUI
+Cortana
+0-h 0-m 1-s
 None
 Computers
 False
 True
 True
-sublime_text
-D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\navAfterlogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 11-s
+TeamViewer
+TeamViewer
+0-h 0-m 12-s
 None
-Science
-False
-True
-True
-cmd
-npm
-0-h 0-m 9-s
-None
-Computers
-False
-True
-True
-sublime_text
-D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\sideNavAfterLogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 14-s
-None
-Computers
-False
-True
-True
-sublime_text
-D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\homeAfterLogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 2-s
-None
-Science
-False
-True
-True
-electron
-Dashboard
-0-h 4-m 39-s
-None
-Games
+Society
 False
 False
 True
-ShellExperienceHost
-Jump List for Sublime Text 3
-0-h 0-m 2-s
-None
-Science
-False
-True
-False
-electron
-Settings
+TeamViewer
+TeamViewer Panel
 0-h 0-m 4-s
 None
-Science
-False
-True
-True
-sublime_text
-D:\BE-Project\Productivity-Tracker-Assistant-App\Engine\ProductivityTrackerAssistant\Database\FirebaseDatabase\__init__.py (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 2-m 1-s
-None
 Computers
 False
 True
 True
-LockApp
-Windows Default Lock Screen
-0-h 0-m 7-s
+atom
+insertWebSoft.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 2-m 35-s
 None
 Science
 False
 True
 True
-explorer
-UnlockingWindow
-0-h 0-m 1-s
+electron
+Settings
+0-h 1-m 17-s
 None
-Computers
+Arts
+False
 False
 True
-True
-explorer
-Task Switching
-0-h 0-m 1-s
+Docker Desktop
+Container list
+0-h 0-m 38-s
 None
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/7975005/format-a-javascript-string-using-placeholders-and-an-object-of-substitutions - Google Chrome
+0-h 0-m 1-s
+jquery - Format a JavaScript string using placeholders and an object of substitutions? - Stack Overflow
+Computers
+True
+True
+True
+github
+https://github.com/FortAwesome/Font-Awesome/issues/16094 - Google Chrome
+0-h 0-m 26-s
+Can't authenticate to npm.fontawesome.com · Issue #16094 · FortAwesome/Font-Awesome · GitHub
 Computers
 True
 True
 True
 console-firebase-google
-https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 1-s
+https://console.firebase.google.com/u/0/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Google Chrome
+0-h 0-m 7-s
 Sign in - Google Accounts
-Arts
+Computers
 True
-False
 True
-stackoverflow
-https://stackoverflow.com/questions/46022443/electron-how-to-add-external-files - Google Chrome
+True
+w3schools
+https://w3schools.com/jsref/met_element_remove.asp - Google Chrome
 0-h 0-m 1-s
-javascript - Electron - How to add external files? - Stack Overflow
+HTML DOM remove Method
+Computers
+True
+True
+True
+tutorial-techaltum
+https://tutorial.techaltum.com/sql-queries-for-practice.html - Google Chrome
+0-h 0-m 1-s
+sql queries for practice  | advanced sql queries
 Others
 True
 False
 True
-games
-https://games - Mozilla Firefox
-0-h 0-m 2-s
+need
+https://need  - Google Chrome
+0-h 0-m 3-s
 None
-Games
+Computers
 True
-False
 True
-activtrak
-https://activtrak.com - Google Chrome
-0-h 0-m 18-s
-403 Forbidden
-Games
 True
-False
-True
-play-google
-https://play.google.com/store/apps/category/GAME?hl=en&gl=US - Mozilla Firefox
+flatuicolors
+https://flatuicolors.com - Google Chrome
 0-h 0-m 7-s
-Games - Android Apps on Google Play
-Arts
+Flat UI Colors 2 - 14 Color Palettes, 280 colors 🎨
+Shopping
 True
 False
 True
-play-google
-https://play.google.com/store/apps/details?id=com.innersloth.spacemafia&hl=en&gl=US - Mozilla Firefox
-0-h 0-m 2-s
-Among Us - Apps on Google Play
-Computers
-True
-True
-True
-stackoverflow
-https://stackoverflow.com/questions/41725725/access-css-variable-from-javascript - Google Chrome
-0-h 0-m 1-s
-Access CSS variable from javascript - Stack Overflow
-Computers
-True
-True
-True
-stackoverflow
-https://stackoverflow.com/questions/36942565/change-toggle-dynamically-using-bootstraptoggle - Google Chrome
-0-h 0-m 1-s
-javascript - change toggle dynamically using bootstraptoggle - Stack Overflow
-Computers
-True
-True
-True
-stackoverflow
-https://stackoverflow.com/questions/58633300/how-to-create-a-dictionary-from-os-environment-variables - Mozilla Firefox
-0-h 0-m 3-s
-python - How to create a dictionary from OS environment variables? - Stack Overflow
-Arts
-True
-False
-True
-medium
-https://medium.com/analytics-vidhya/hiding-secret-keys-and-passwords-in-python-2950c6a4359 - Mozilla Firefox
-0-h 0-m 3-s
-Hiding Secret Keys and Passwords in Python | by theNightwing | Analytics Vidhya | Mar, 2021 | Medium
+in-event-mi
+https://in.event.mi.com/in/install-mi-store - Google Chrome
+0-h 0-m 6-s
+Install Mi Store

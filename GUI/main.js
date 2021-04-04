@@ -5,6 +5,7 @@ const settings = require('electron-settings');
 
 var firebase = require("firebase/app");
 var isSignInTrue;
+var currentTrackingDate;
 // Add the Firebase products that you want to use
 require("firebase/auth");
 // require("firebase/firestore");
@@ -25,6 +26,11 @@ firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 global.firebase = firebase; //to access the firebase instance from the renderer process
 
+//To save class timing
+settings.setSync('setClassTime', {
+  data1: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
+          "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+});
 
 function createWindow () {
   // Create the browser window.
@@ -37,7 +43,7 @@ function createWindow () {
       nodeIntegration: true,
       enableRemoteModule: true,
       nativeWindowOpen: true,
-      // worldSafeExecuteJavaScript: true, 
+      // worldSafeExecuteJavaScript: true,
       // contextIsolation: true
     }
   })
@@ -60,7 +66,19 @@ function createWindow () {
     console.log(result);
   });
 
-  
+  var ltd = settings.getSync('lastTrackingDate.dataLtd');
+  if(ltd == null){
+    settings.setSync('Dic',{
+      dataDic: {'w':{},
+      's':{},
+      'twpt':'',
+      'twtt':'',
+      'tspt':'',
+      'tstt':''}
+    })
+    console.log('LTD:', ltd);
+  }
+
   try {
         var value = settings.getSync('key.data');
         console.log('Persisted Value - ' + value);
@@ -97,53 +115,79 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 
   // In main process.
-  const { ipcMain } = require('electron');
-  var userRefreshToken = null;
+const { ipcMain } = require('electron');
+var userRefreshToken = null;
 
-  ipcMain.on('async-start-tracking-message', (event, arg) => {
-    console.log(arg);
-    const result = startTracking();
-    console.log(result);
-    return result;
-  });
+ipcMain.on('async-start-tracking-message', (event, arg) => {
+  console.log(arg);
+  const result = startTracking();
 
-  ipcMain.on('async-stop-tracking-message', (event, arg) => {
-    console.log(arg);
-    const result = stopTracking();
-    return result;
-  });
+  console.log(result);
+  return result;
+});
 
-  ipcMain.handle('async-set-user-refresh-token', async (event, arg) => {
-    userRefreshToken = arg;  // gets refreshToken if user signed in else get null for signed out
-    setPyshellOptions();
-    return "refreshed";
-  });
+ipcMain.on('async-stop-tracking-message', (event, arg) => {
+  console.log('ipcmain:',arg);
+  const result = stopTracking();
+  return result;
+});
+
+ipcMain.handle('async-set-user-refresh-token', async (event, arg) => {
+  userRefreshToken = arg;  // gets refreshToken if user signed in else get null for signed out
+  setPyshellOptions();
+  return "refreshed";
+});
 
 
-  var python_process;
-  var {PythonShell} = require('python-shell');
-  var pyshell = null;
-  var options = {
-      pythonOptions: ['-u'], // get print results in real-time
-      scriptPath: '../Engine/',
-      args: [userRefreshToken]
-    }
-  console.log(options);
-  function setPyshellOptions(){
-    options.args = [userRefreshToken];
-    console.log(options);
+
+var python_process;
+var {PythonShell} = require('python-shell');
+var pyshell = null;
+var options = {
+    pythonOptions: ['-u'], // get print results in real-time
+    scriptPath: '../Engine/',
+    args: [userRefreshToken]
   }
+console.log(options);
+function setPyshellOptions(){
+  options.args = [userRefreshToken];
+  console.log(options);
+}
 
   function startTracking(){
 
-      if(userRefreshToken==null){
-        console.log("RefreshToken is null");
-        return;
-      }
+    var cD = new Date().getDate().toString();
+    var cM = (parseInt(new Date().getMonth())+1).toString();
+    var cY = new Date().getFullYear().toString().substr(2,2);
+    console.log('current month', cM);
+    if(cM.length == 1){
+      cM = "0"+cM;
+    }
+    var currentTrackingDate = cD+'-'+cM+'-'+cY;
 
-      pyshell = new PythonShell('main.py',  options);
-      
-      python_process = pyshell;
+    console.log('current date: ', currentTrackingDate);
+    if(currentTrackingDate != ltd){
+      settings.setSync('Dic',{
+        dataDic: {'w':{},
+        's':{},
+        'twpt':'',
+        'twtt':'',
+        'tspt':'',
+        'tstt':''}
+      })
+      settings.setSync('lastTrackingDate', {
+        dataLtd: currentTrackingDate
+      })
+    }
+
+    if(userRefreshToken==null){
+      console.log("RefreshToken is null");
+      return;
+    }
+
+    pyshell = new PythonShell('main.py',  options);
+
+    python_process = pyshell;
 
       // sends a message to the Python script via stdin
       pyshell.send("RUN");
@@ -162,7 +206,7 @@ function createWindow () {
             console.log('The exit code was: ' + code);
             console.log('The exit signal was: ' + signal);
             console.log('finished');
-          
+
             mainWindow.webContents.send('tracking', false);
 
           });
@@ -191,6 +235,17 @@ function createWindow () {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+
+  //Website tracking Object
+  const { showDataToWebSoftReport } = require("./webSoftDetails");
+  // console.log("show", showDataToWebSoftReport("w"))
+  const web = 'w';
+  var webObj = new showDataToWebSoftReport(web);
+  //software tracking
+  const soft = 's';
+  var softObj = new showDataToWebSoftReport(soft);
+
 }
 
 // This method will be called when Electron has finished

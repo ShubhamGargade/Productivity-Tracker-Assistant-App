@@ -85,7 +85,7 @@
       left: 92%;
       position: absolute;
       z-index: 1;
-      cursor: pointer;      
+      cursor: pointer;
     }
 
     .remove-circle-i {
@@ -115,7 +115,7 @@
   <div class="sidenav">
 
     <a class="navbar-brand" href="#">
-      
+
       <i class="material-icons">track_changes</i>
       <label style="width: 100%;" class="sidenav-label nocursor">
         <h1>Liv<strong style="font-weight: bold;">Trak</strong></h1>
@@ -144,14 +144,14 @@
         <div class="collapse" id="liveReports">
           <a class="nav-link dd-item" id="null-link" href="#"><label></label>
           </a>
-          <a class="nav-link dd-item" href="#">
+          <a class="nav-link dd-item" href="webReport.html">
             <label class="sidenav-label" id="sn-wt">Website Tracking</label>
           </a>
-          <a class="nav-link dd-item" href="#">
+          <a class="nav-link dd-item" href="softwareReport.html">
             <label class="sidenav-label" id="sn-st">Software Tracking</label>
           </a>
           <a class="nav-link dd-item" href="productivityReport.html">
-            <label class="sidenav-label" id="sn-pty">Productivity</label>  
+            <label class="sidenav-label" id="sn-pty">Productivity</label>
           </a>
         </div>
       </li>
@@ -219,11 +219,11 @@
             sessionStorage.setItem("tracking", "off");
             signOutUser();
           }
-          
+
           // disableTrackingBtn(false);
         });
 
-        
+
     });
 
     $(document).ready(function(){

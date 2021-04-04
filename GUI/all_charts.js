@@ -1,14 +1,23 @@
 
+var current_theme = localStorage.getItem("current_theme");
+var gridColor = "#fafafa";
+if(current_theme=="dark"){
+  gridColor = "#455a64"
+}
+else{
+  gridColor = "#eeeeee"
+}
+
 class AllCharts {
 
-  constructor(ctx, chartLabel, datasetLabels, data, graphType="bar"){
+  constructor(ctx, chartLabel, datasetLabels,bgColor, data, graphType="bar"){
 
     this.ctx = ctx;
     this.chartLabel = chartLabel;
     this.datasetLabels = datasetLabels;
     this.datasets =  [{
         label: this.chartLabel,
-        backgroundColor: ['#26de81', '#fc5c65'],
+        backgroundColor: bgColor,
         borderColor: 'rgb(255, 99, 132)',
         // barPercentage: 0.5,
         // barThickness: 6,
@@ -16,7 +25,6 @@ class AllCharts {
         // minBarLength: 8,
         data: data
     }];
-
     this.setChart(graphType, data);
   }
 
@@ -32,42 +40,46 @@ class AllCharts {
   setChart(graphType, data, options={}){
 
     this.destroyChart();
-
-    var current_theme = localStorage.getItem("current_theme");
-    var gridColor = "#fafafa";
-    if(current_theme=="dark"){
-      gridColor = "#455a64"
+    this.options = {};
+    if (graphType == "bar")
+    {
+      this.options = {
+        scales: {
+          xAxes: [{
+            display: true,
+            gridLines: {
+              // display: false,
+              color: gridColor,
+            },
+            scaleLabel: {
+              // display: true,
+              // labelString: 'Month',
+            }
+          }],
+          yAxes: [{
+            display: true,
+            gridLines: {
+              // display: false,
+              color: gridColor,
+            },
+            scaleLabel: {
+              // display: true,
+              // labelString: 'Value'
+            },
+            ticks: {
+                beginAtZero: true
+            }
+          }]
+        }
+      }
+      // console.log('inside to show from 0');
     }
-    else{
-      gridColor = "#eeeeee"
-    }
+    else {
+      this.options = {
 
-    this.options = {
-      scales: {
-        xAxes: [{
-          display: true,
-          gridLines: {
-            // display: false,
-            color: gridColor,
-          },
-          scaleLabel: {
-            // display: true,
-            // labelString: 'Month',
-          }
-        }],
-        yAxes: [{
-          display: true,
-          gridLines: {
-            // display: false,
-            color: gridColor,
-          },
-          scaleLabel: {
-            // display: true,
-            // labelString: 'Value'
-          }
-        }]
       }
     }
+
 
     this.datasets[0].data = data;
     console.log(data)

@@ -49,7 +49,7 @@ class showDataToDashboard {
       this.graphType = "bar";
 
       var data = [prodPerctVar, unprodPerctVar];
-      this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, data)  // dChart1 => dashboard Chart for Productivity Unproductivity
+      this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard,['#26de81', '#fc5c65'], data)  // dChart1 => dashboard Chart for Productivity Unproductivity
 
 
       this.showDashboardBarGraph = document.getElementById('show-bar-graph');
