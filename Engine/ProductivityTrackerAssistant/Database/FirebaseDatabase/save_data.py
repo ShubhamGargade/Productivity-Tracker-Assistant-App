@@ -244,7 +244,8 @@ class SaveData:
 
 	def setNewDataInDB(self, p_up_str, web_sw_str):
 
-		db.child("newD").child(uid).child(web_sw_str).child(p_up_str).set(self.activity.key + separator_str + self.activity.category, user_info.getIdToken())
+		db.child("newD").child(uid).child(web_sw_str).child(p_up_str).child("key").set(self.activity.key + separator_str + self.activity.category, user_info.getIdToken())
+		db.child("newD").child(uid).child(web_sw_str).child(p_up_str).child("t"+web_sw_str+p_up_str+"t").set(self.t_ws_pup_t, user_info.getIdToken())
 
 
 	def store_data(self, p_up_str, web_sw_str):
@@ -317,6 +318,7 @@ class SaveData:
 
 		# get total web or sw p or up time
 		tot_app_p_up_time = db.child(wa_sa_str).child(uid).child(p_up_str).child(tot_app_p_up_time_str).get(user_info.getIdToken()).val()
+		self.t_ws_pup_t = add_time(self.activity.time_spent, tot_app_p_up_time)
 
 		# get total web or sw tracking time
 		tot_app_tracking_time = db.child(wa_sa_str).child(uid).child(tot_app_tracking_time_str).get(user_info.getIdToken()).val()
@@ -329,7 +331,7 @@ class SaveData:
 		}, user_info.getIdToken())
 
 		db.update({
-		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: add_time(self.activity.time_spent, tot_app_p_up_time)
+		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: self.t_ws_pup_t
 		}, user_info.getIdToken())
 
 		db.update({

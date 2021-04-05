@@ -40,18 +40,14 @@
 
 	<style media="screen">
     	.accordion-settings {
-			margin: 2.5% 1% 2% 1%;
-			padding-top: 1%;
-			padding-bottom: 3%;
 			background-color: var(--bg);
-			width: 98.5%;
-			border-bottom: 1px solid lightgrey;
+			/*border-bottom: 1px solid lightgrey;*/
 		}
 
 		.accordion {
 		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		}
-
+	
 		.card {
 			background-color: var(--bg);
 		}
@@ -60,7 +56,7 @@
 			background-color: var(--bg);
 		}
 
-		.setting-card-heading {
+		.card-heading {
 			color: var(--color);
 		}
 
@@ -87,8 +83,8 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="row">
+	<div class="container-fluid main-container">
+		<div class="row main-row">
 			<div class="col-2 p-0" id="sidenav">
 				<div id="add-side-nav"></div>
 			</div>
@@ -99,7 +95,7 @@
 
 					<div id="add-top-nav"></div>
 
-					<div class="main-content" id="home-middle-content">
+					<div class="main-content" id="settings-middle-content">
 	            
 						<div class="container-fluid">
 	              			
@@ -110,7 +106,7 @@
 									    <div class="card-header" id="headingOne">
 									      <h2 class="mb-0">
 									        <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="box-shadow: none;">
-									          <h4 class="setting-card-heading" style="padding-bottom: 2%;">Change Theme</h4>
+									          <h4 class="card-heading" style="padding-bottom: 2%;">Change Theme</h4>
 									        </button>
 									      </h2>
 									    </div>

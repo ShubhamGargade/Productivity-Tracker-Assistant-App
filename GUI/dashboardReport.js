@@ -8,6 +8,8 @@ var Chart = require('chart.js');
 require("firebase/auth");
 require("firebase/database");
 
+const time_arith = require("./time_arith");
+var timeArith = new time_arith.TimeArith();
 
 var currentUserId = settings.getSync('key1.data');
 
@@ -94,61 +96,37 @@ class showDataToDashboard {
 
     }
 
-    removeDashesFromTimeStr(time_str){
-      let t = time_str.split(" ");
-      let th = t[0].split('-')[0];
-      let tm = t[1].split('-')[0];
-      let ts = t[2].split('-')[0];
-
-      let res = th+"h "+tm+"m "+ts+"s";
-      console.log(res)
-      return res;
+    updateTime(tempT, count){
+      return {
+            tempT: timeArith.calTime(tempT),
+            count: count+1,
+        };
     }
 
-    calTime(tempT){
-          var sPTH=0, sPTM=0, sPTS=0;
-          tempT = tempT.split(" ");
-          sPTH = tempT[0].split("-");
-          sPTH = parseInt(sPTH[0])*3600;
-          sPTM = tempT[1].split("-");
-          sPTM = parseInt(sPTM[0])*60;
-          sPTS = tempT[2].split("-");
-          sPTS = parseInt(sPTS[0]);
-          tempT = sPTH + sPTM + sPTS;
-          return tempT;
-    }
-
-      updateTime(tempT, count){
-        return {
-              tempT: this.calTime(tempT),
-              count: count+1,
-          };
-      }
-
-      calPercentage(sPT, wPT, tTT, count){
-        if (count==3){
-          // console.log(((sPT+wPT)/tTT)*100);
-          var calPT = (((sPT+wPT)/tTT)*100).toFixed(2);
+    calPercentage(sPT, wPT, tTT, count){
+      if (count==3){
+        // console.log(((sPT+wPT)/tTT)*100);
+        var calPT = (((sPT+wPT)/tTT)*100).toFixed(2);
+        console.log(calPT);
+        if(calPT != 'NaN'){
           console.log(calPT);
-          if(calPT != 'NaN'){
-            console.log(calPT);
-              prodPerctVar = calPT;
-              unprodPerctVar = (100 - prodPerctVar).toFixed(2);
-              this.showReportDashboard();
-              return calPT.toString() + ' %';
-          }
-          else {
-            return "0%";
-          }
+            prodPerctVar = calPT;
+            unprodPerctVar = (100 - prodPerctVar).toFixed(2);
+            this.showReportDashboard();
+            return calPT.toString() + ' %';
         }
-        return null;
+        else {
+          return "0%";
+        }
       }
+      return null;
+    }
 
-      calProdPercent(){
-        var  sPT=0, wPT=0, tTT=0;
-        var count = 0;
-        var calUsersPT = firebase.database().ref('sa/'+ currentUserId + '/p/tspt');
-        calUsersPT.on('value', (snapshot) => {
+    calProdPercent(){
+      var  sPT=0, wPT=0, tTT=0;
+      var count = 0;
+      var calUsersPT = firebase.database().ref('sa/'+ currentUserId + '/p/tspt');
+      calUsersPT.on('value', (snapshot) => {
         if(snapshot.val() != null)
         {
           sPT = snapshot.val();
@@ -158,9 +136,9 @@ class showDataToDashboard {
           var prodPer = this.calPercentage(sPT, wPT, tTT, count);
           this.setProdPercentInHTML(prodPer);
         }
-        });
-        var calUserwPT = firebase.database().ref('wa/'+ currentUserId + '/p/twpt');
-        calUserwPT.on('value', (snapshot) => {
+      });
+      var calUserwPT = firebase.database().ref('wa/'+ currentUserId + '/p/twpt');
+      calUserwPT.on('value', (snapshot) => {
         if(snapshot.val() != null)
         {
 
@@ -172,9 +150,9 @@ class showDataToDashboard {
           var prodPer = this.calPercentage(sPT, wPT, tTT, count);
           this.setProdPercentInHTML(prodPer);
         }
-        });
-        var calUsertTT = firebase.database().ref('users/'+ currentUserId + '/ttt');
-        calUsertTT.on('value', (snapshot) => {
+      });
+      var calUsertTT = firebase.database().ref('users/'+ currentUserId + '/ttt');
+      calUsertTT.on('value', (snapshot) => {
         if(snapshot.val() != null)
         {
 
@@ -188,62 +166,59 @@ class showDataToDashboard {
         }
       });
 
-      }
+    }
 
-      setProdPercentInHTML(val){
-        console.log("Val",val);
-        if(val != null){
-          document.getElementById("show-prod-percent").innerHTML = val;
+    setProdPercentInHTML(val){
+      console.log("Val",val);
+      if(val != null){
+        document.getElementById("show-prod-percent").innerHTML = val;
+      }
+    }
+
+    initFromDB(){
+      //ttt
+      console.log("Inside initform db")
+      var calUserttt = firebase.database().ref('users/'+ currentUserId + '/ttt');
+      calUserttt.on('value', (snapshot) => {
+        const datattt = snapshot.val();
+        // console.log(data);
+        console.log("Datattt val:", datattt)
+        if(datattt != null)
+        {
+          console.log("Datattt:",datattt.toString());
+          document.getElementById("show-ttt-dashboard").innerHTML = timeArith.removeDashesFromTimeStr(datattt);
+          this.calProdPercent();
         }
-      }
 
-      initFromDB(){
-        //ttt
-        console.log("Inside initform db")
-        var calUserttt = firebase.database().ref('users/'+ currentUserId + '/ttt');
-        calUserttt.on('value', (snapshot) => {
-          const datattt = snapshot.val();
-          // console.log(data);
-          console.log("Datattt val:", datattt)
-          if(datattt != null)
-          {
-            console.log("Datattt:",datattt.toString());
-            document.getElementById("show-ttt-dashboard").innerHTML = this.removeDashesFromTimeStr(datattt);
-            this.calProdPercent();
-          }
+      });
 
-        });
+      var calUsertwtt = firebase.database().ref('wa/'+ currentUserId + '/twtt');
+      calUsertwtt.on('value', (snapshot) => {
+        const datatwtt = snapshot.val();
+        // console.log(data);
+        if(datatwtt != null)
+        {
+          console.log(datatwtt.toString());
+          document.getElementById("show-twtt-dashboard").innerHTML = timeArith.removeDashesFromTimeStr(datatwtt);
 
+        }
 
+      });
 
-        var calUsertwtt = firebase.database().ref('wa/'+ currentUserId + '/twtt');
-        calUsertwtt.on('value', (snapshot) => {
-          const datatwtt = snapshot.val();
-          // console.log(data);
-          if(datatwtt != null)
-          {
-            console.log(datatwtt.toString());
-            document.getElementById("show-twtt-dashboard").innerHTML = this.removeDashesFromTimeStr(datatwtt);
+      var calUsertstt = firebase.database().ref('sa/'+ currentUserId + '/tstt');
+      calUsertstt.on('value', (snapshot) => {
+        const datatstt = snapshot.val();
+        // console.log(data);
+        if(datatstt != null)
+        {
+          console.log(datatstt.toString());
+          document.getElementById("show-tstt-dashboard").innerHTML = timeArith.removeDashesFromTimeStr(datatstt);
 
-          }
+        }
 
-        });
+      });
 
-        var calUsertstt = firebase.database().ref('sa/'+ currentUserId + '/tstt');
-        calUsertstt.on('value', (snapshot) => {
-          const datatstt = snapshot.val();
-          // console.log(data);
-          if(datatstt != null)
-          {
-            console.log(datatstt.toString());
-            document.getElementById("show-tstt-dashboard").innerHTML = this.removeDashesFromTimeStr(datatstt);
-
-          }
-
-        });
-
-
-      }
+    }
 
 }
 

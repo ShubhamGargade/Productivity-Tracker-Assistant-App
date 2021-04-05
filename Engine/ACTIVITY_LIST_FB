@@ -1,12 +1,12 @@
-14
-8
+52
+46
 Science
 False
 True
 True
 electron
 Productivity_Tracker
-0-h 0-m 43-s
+0-h 0-m 11-s
 None
 Computers
 False
@@ -14,7 +14,7 @@ True
 True
 explorer
 Task Switching
-0-h 0-m 5-s
+0-h 0-m 1-s
 None
 Science
 False
@@ -46,7 +46,7 @@ True
 True
 cmd
 npm
-0-h 0-m 3-s
+0-h 0-m 6-s
 None
 Computers
 False
@@ -54,7 +54,7 @@ True
 True
 Docker Desktop Installer
 Docker Desktop Update
-0-h 0-m 14-s
+0-h 0-m 1-s
 None
 Business
 False
@@ -62,7 +62,7 @@ True
 True
 explorer
 
-0-h 0-m 1-s
+0-h 0-m 21-s
 None
 Reference
 False
@@ -102,7 +102,7 @@ True
 True
 electron
 Settings
-0-h 1-m 17-s
+0-h 0-m 31-s
 None
 Arts
 False
@@ -111,6 +111,310 @@ True
 Docker Desktop
 Container list
 0-h 0-m 38-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\settings.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 47-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\softwareReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 32-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 7-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webSoftDetails.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 19-s
+None
+Science
+False
+True
+True
+electron
+Hidden Worker
+0-h 0-m 6-s
+None
+Arts
+False
+False
+True
+Docker Desktop
+Images list
+0-h 2-m 47-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\dashboard.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 9-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\softwareReport.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 28-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webReport.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 3-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\insertWebSoft.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+News
+False
+True
+True
+perfmon
+Resource Monitor
+0-h 0-m 48-s
+None
+Computers
+False
+True
+True
+OneNote
+OneNote
+0-h 0-m 1-s
+None
+Health
+False
+True
+True
+Office
+Office
+0-h 0-m 1-s
+None
+Business
+False
+True
+True
+WINWORD
+Opening - Word (Unlicensed Product)
+0-h 0-m 2-s
+None
+Shopping
+False
+False
+True
+Microsoft Store
+Microsoft Store
+0-h 0-m 7-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\main.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 3-m 2-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\insertWebSoft.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 3-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 5-m 33-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\time_arith.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 4-m 42-s
+None
+Science
+False
+True
+True
+electron
+Productivity-Tracker-App
+0-h 0-m 14-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webSoftDetails.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Science
+False
+True
+True
+electron
+Dashboard
+0-h 1-m 30-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\dashboardReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Science
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\Engine\ProductivityTrackerAssistant\Database\FirebaseDatabase\save_data.py (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 20-s
+None
+Science
+False
+True
+True
+ShellExperienceHost
+Battery Information
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\softwareReport.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 15-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\softwareReport.html • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 1-m 10-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\time_arith.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 7-s
+None
+Computers
+False
+True
+True
+Settings
+Settings
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+python
+Python 3.9 (64-bit)
+0-h 0-m 16-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webReport.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 16-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.html • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\dashboard.html • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 4-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\common.css (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\homeAfterLogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 11-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\common.css • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webReport.html • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
 None
 Computers
 True
@@ -134,7 +438,7 @@ True
 True
 console-firebase-google
 https://console.firebase.google.com/u/0/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Google Chrome
-0-h 0-m 7-s
+0-h 0-m 20-s
 Sign in - Google Accounts
 Computers
 True
@@ -176,3 +480,307 @@ in-event-mi
 https://in.event.mi.com/in/install-mi-store - Google Chrome
 0-h 0-m 6-s
 Install Mi Store
+Computers
+True
+True
+True
+codechef
+https://www.codechef.com/contests/?itm_medium=navmenu&itm_campaign=allcontests_head - Mozilla Firefox
+0-h 0-m 2-s
+Competitive Programming and Coding Challenges | CodeChef
+Science
+True
+True
+True
+codechef
+https://www.codechef.com/contests/?itm_medium=navmenu&itm_campaign=allcontests_head - Mozilla Firefox
+0-h 0-m 1-s
+CodeChef | Loading
+Others
+True
+False
+True
+insert un
+https://insert un - Google Chrome
+0-h 0-m 11-s
+None
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/11628370/how-to-create-unique-html-table - Google Chrome
+0-h 0-m 18-s
+css - How to create unique html table? - Stack Overflow
+Reference
+True
+False
+True
+codepen-io
+https://codepen.io/sdthornton/pen/wBZdXq - Google Chrome
+0-h 0-m 1-s
+Attention Required! | Cloudflare
+Computers
+True
+True
+True
+w3schools
+https://w3schools.com/jsref/jsref_tofixed.asp - Google Chrome
+0-h 0-m 1-s
+JavaScript toFixed() Method
+Science
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary - Google Chrome
+0-h 1-m 3-s
+javascript - How to round to at most 2 decimal places, if necessary? - Stack Overflow
+Others
+True
+False
+True
+this-v-tofixed not w
+https://this.v.toFixed not w - Google Chrome
+0-h 0-m 6-s
+None
+Games
+True
+False
+True
+stackoverflow
+https://stackoverflow.com/questions/54731589/how-to-fix-javascript-tofixed-is-not-a-function-error - Google Chrome
+0-h 0-m 3-s
+c# - How to fix javascript .toFixed is not a Function error - Stack Overflow
+Computers
+True
+True
+True
+material-io
+https://material.io/resources/color/#!/?view.left=0&view.right=1&primary.color=ffe3ed&secondary.color=e8e8e8 - Google Chrome
+0-h 0-m 1-s
+Color Tool - Material Design
+Others
+True
+False
+True
+firebase lis
+https://firebase lis - Mozilla Firefox
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+firebase listener does not listens when
+https://firebase listener does not listens when  - Mozilla Firefox
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+firebase listener does not listens when same data
+https://firebase listener does not listens when same data - Mozilla Firefox
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+firebase listener does not listens when same data
+https://firebase listener does not listens when same data  - Mozilla Firefox
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+firebase listener does not listens when same data is passed
+https://firebase listener does not listens when same data is passed - Mozilla Firefox
+0-h 0-m 18-s
+None
+Games
+True
+False
+True
+stackoverflow
+https://stackoverflow.com/questions/56388252/how-does-the-value-event-work-on-updates-with-firebase-listeners - Mozilla Firefox
+0-h 0-m 46-s
+How does the value event work on updates with Firebase listeners? - Stack Overflow
+Society
+True
+False
+True
+firebase-googleblog
+https://firebase.googleblog.com/2016/11/what-happens-to-database-listeners-when-security-rules-reject-an-update.html - Mozilla Firefox
+0-h 0-m 12-s
+The Firebase Blog: What happens to database listeners when security rules reject an update?
+Health
+True
+True
+True
+hackerrank
+https://www.hackerrank.com/challenges/new-year-chaos/problem?h_l=interview&playlist_slugs[]=interview-preparation-kit&playlist_slugs[]=arrays&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen - Mozilla Firefox
+0-h 0-m 3-s
+Access Denied
+Computers
+True
+True
+True
+accounts-google
+https://accounts.google.com/signin/v2/challenge/pwd?passive=1209600&osid=1&continue=https%3A%2F%2Fconsole.firebase.google.com%2Fproject%2Fproductivitytrackerassistant%2Fdatabase%2Fproductivitytrackerassistant-default-rtdb%2Fdata&followup=https%3A%2F%2Fconsole.firebase.google.com%2Fproject%2Fproductivitytrackerassistant%2Fdatabase%2Fproductivitytrackerassistant-default-rtdb%2Fdata&flowName=GlifWebSignIn&flowEntry=ServiceLogin&cid=1&navigationDirection=forward&TL=AM3QAYbfdy-3yahwYQbwj_CEE4WpuTHjQUSiZ9zZDmRKnsA_7Pa5Hx5vOjZv3rhw - Google Chrome
+0-h 0-m 4-s
+Sign in - Google Accounts
+Games
+True
+False
+True
+stackoverflow
+https://stackoverflow.com/questions/54140701/firebase-ondatachange-value-event-listener-not-listening-for-changes - Mozilla Firefox
+0-h 0-m 15-s
+java - Firebase onDataChange - Value Event Listener not listening for changes - Stack Overflow
+Others
+True
+False
+True
+js a
+https://js a - Google Chrome
+0-h 0-m 6-s
+None
+Computers
+True
+True
+True
+w3schools
+https://w3schools.com/jsref/jsref_slice_array.asp - Google Chrome
+0-h 0-m 4-s
+JavaScript Array slice() Method
+Arts
+True
+False
+True
+stackoverflow
+https://stackoverflow.com/questions/37651721/why-am-i-getting-a-local-variable-referenced-before-assignment-error - Mozilla Firefox
+0-h 0-m 3-s
+python - Why am I getting a local variable referenced before assignment error? - Stack Overflow
+Others
+True
+False
+True
+joi
+https://joi - Google Chrome
+0-h 0-m 4-s
+None
+Computers
+True
+True
+True
+w3schools
+https://w3schools.com/jsref/tryit.asp?filename=tryjsref_join - Google Chrome
+0-h 0-m 1-s
+Tryit Editor v3.6
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/4467539/javascript-modulo-gives-a-negative-result-for-negative-numbers#:~:text=JavaScript%20%25%20(modulo)%20gives%20a%20negative%20result%20for%20negative%20numbers,-javascript%20math%20modulo&text=According%20to%20Google%20Calculator%20(-,JSBin)%20it%20is%20-13%20. - Google Chrome
+0-h 0-m 1-s
+math - JavaScript % (modulo) gives a negative result for negative numbers - Stack Overflow
+Games
+True
+False
+True
+getbootstrap
+https://getbootstrap.com/docs/4.4/components/card/ - Google Chrome
+0-h 0-m 22-s
+Cards · Bootstrap
+Computers
+True
+True
+True
+getbootstrap
+https://getbootstrap.com/docs/4.4/utilities/overflow/ - Google Chrome
+0-h 0-m 9-s
+Overflow · Bootstrap
+Science
+True
+True
+True
+w3schools
+https://w3schools.com/bootstrap4/bootstrap_scrollspy.asp - Google Chrome
+0-h 0-m 2-s
+Bootstrap 4 Scrollspy
+Computers
+True
+True
+True
+getbootstrap
+https://getbootstrap.com/docs/4.4/components/collapse/ - Google Chrome
+0-h 0-m 14-s
+Collapse · Bootstrap
+Games
+True
+False
+True
+mdbootstrap
+https://mdbootstrap.com/docs/b4/jquery/javascript/scroll/ - Google Chrome
+0-h 0-m 47-s
+403 Forbidden
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/40112618/bootstrap4-adding-scrollbar-to-div/53357364 - Google Chrome
+0-h 0-m 8-s
+bootstrap 4 - Bootstrap4 adding scrollbar to div - Stack Overflow
+Computers
+True
+True
+True
+bootstrapious
+https://bootstrapious.com/p/bootstrap-scrollbar - Google Chrome
+0-h 3-m 47-s
+Bootstrap 4 custom scrollbar  - HTML & CSS snippet template
+Others
+True
+False
+True
+vertical center css
+https://vertical center css - Google Chrome
+0-h 0-m 2-s
+None
+Others
+True
+False
+True
+vertical center
+https://vertical center  - Google Chrome
+0-h 0-m 17-s
+None
+Computers
+True
+True
+True
+stackoverflow
+https://stackoverflow.com/questions/8865458/how-do-i-vertically-center-text-with-css - Google Chrome
+0-h 0-m 1-s
+html - How do I vertically center text with CSS? - Stack Overflow
+Computers
+True
+True
+True
+getbootstrap
+https://getbootstrap.com/docs/4.1/content/tables/ - Google Chrome
+0-h 1-m 30-s
+Tables · Bootstrap
+Computers
+True
+True
+True
+getbootstrap
+https://getbootstrap.com/docs/4.4/content/tables/#hoverable-rows - Google Chrome
+0-h 0-m 1-s
+Unicorn! · GitHub

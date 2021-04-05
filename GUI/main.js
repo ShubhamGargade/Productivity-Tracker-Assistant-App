@@ -32,6 +32,8 @@ settings.setSync('setClassTime', {
           "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
 });
 
+var isMainWindowClosed = false;
+
 function createWindow () {
   // Create the browser window.
 
@@ -106,53 +108,57 @@ function createWindow () {
   // create hidden worker window
   const workerWindow = new BrowserWindow({
     show: false,
-    webPreferences: { nodeIntegration: true }
+    webPreferences: { 
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      nativeWindowOpen: true,
+      // worldSafeExecuteJavaScript: true,
+      // contextIsolation: true
+    }
   });
   workerWindow.loadFile('worker.html');
 
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-
   // In main process.
-const { ipcMain } = require('electron');
-var userRefreshToken = null;
+  const { ipcMain } = require('electron');
+  var userRefreshToken = null;
 
-ipcMain.on('async-start-tracking-message', (event, arg) => {
-  console.log(arg);
-  const result = startTracking();
+  ipcMain.on('async-start-tracking-message', (event, arg) => {
+    console.log(arg);
+    const result = startTracking();
 
-  console.log(result);
-  return result;
-});
+    console.log(result);
+    return result;
+  });
 
-ipcMain.on('async-stop-tracking-message', (event, arg) => {
-  console.log('ipcmain:',arg);
-  const result = stopTracking();
-  return result;
-});
+  ipcMain.on('async-stop-tracking-message', (event, arg) => {
+    console.log('ipcmain:',arg);
+    const result = stopTracking();
+    return result;
+  });
 
-ipcMain.handle('async-set-user-refresh-token', async (event, arg) => {
-  userRefreshToken = arg;  // gets refreshToken if user signed in else get null for signed out
-  setPyshellOptions();
-  return "refreshed";
-});
+  ipcMain.handle('async-set-user-refresh-token', async (event, arg) => {
+    userRefreshToken = arg;  // gets refreshToken if user signed in else get null for signed out
+    setPyshellOptions();
+    return "refreshed";
+  });
 
 
+  var python_process;
+  var {PythonShell} = require('python-shell');
+  var pyshell = null;
+  var options = {
+      pythonOptions: ['-u'], // get print results in real-time
+      scriptPath: '../Engine/',
+      args: [userRefreshToken]
+    }
 
-var python_process;
-var {PythonShell} = require('python-shell');
-var pyshell = null;
-var options = {
-    pythonOptions: ['-u'], // get print results in real-time
-    scriptPath: '../Engine/',
-    args: [userRefreshToken]
-  }
-console.log(options);
-function setPyshellOptions(){
-  options.args = [userRefreshToken];
   console.log(options);
-}
+
+  function setPyshellOptions(){
+    options.args = [userRefreshToken];
+    console.log(options);
+  }
 
   function startTracking(){
 
@@ -207,7 +213,20 @@ function setPyshellOptions(){
             console.log('The exit signal was: ' + signal);
             console.log('finished');
 
-            mainWindow.webContents.send('tracking', false);
+            try{
+              mainWindow.webContents.send('tracking', false);
+            }catch(e){
+              // console.log(e);
+            }
+
+            if(isMainWindowClosed){
+              try{
+                workerWindow.close();            
+              }
+              catch(e){
+                // console.log(e);
+              }           
+            }
 
           });
         }
@@ -224,27 +243,36 @@ function setPyshellOptions(){
 
 
   function stopTracking(){
+    console.log("Stopping")
     try {
         pyshell.send('KILL');
       }
       catch(e){
         console.log(e.message);
-        mainWindow.webContents.send('tracking', false);
+        try{
+          mainWindow.webContents.send('tracking', false);
+        }catch(e){
+          // console.log(e);
+        }
+
+        if(isMainWindowClosed){
+          try{
+            workerWindow.close();            
+          }
+          catch(e){
+            // console.log(e);
+          }
+        }
       }
   }
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-
-  //Website tracking Object
-  const { showDataToWebSoftReport } = require("./webSoftDetails");
-  // console.log("show", showDataToWebSoftReport("w"))
-  const web = 'w';
-  var webObj = new showDataToWebSoftReport(web);
-  //software tracking
-  const soft = 's';
-  var softObj = new showDataToWebSoftReport(soft);
+  mainWindow.on('closed', function () {
+    isMainWindowClosed = true;
+    stopTracking();
+  })
 
 }
 
@@ -263,10 +291,12 @@ app.whenReady().then(() => {
 }
 )
 
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', function () {
+
   if (process.platform !== 'darwin') app.quit()
 })
 
