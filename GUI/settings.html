@@ -39,13 +39,43 @@
 	<link rel="stylesheet" type="text/css" href="common.css">
 
 	<style media="screen">
-    	.jumbotron-settings {
-			margin: 3% 1% 2% 1%;
-			padding-top: 1%;
-			padding-bottom: 3%;
+    	.accordion-settings {
 			background-color: var(--bg);
-			width: 100%;
-			border-bottom: 1px solid lightgrey;
+			/*border-bottom: 1px solid lightgrey;*/
+		}
+
+		.accordion {
+		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+	
+		.card {
+			background-color: var(--bg);
+		}
+
+		.card-header {
+			background-color: var(--bg);
+		}
+
+		.card-heading {
+			color: var(--color);
+		}
+
+		.card-body {
+			background-color: var(--card-body-bg);
+			padding-right: 2%;
+			padding-left: 6%;
+		}
+
+		.theme-color {
+			display: none;
+		}
+
+		.chg-theme-btn.focus, .chg-theme-btn:focus{
+			box-shadow: none; /*0 0 0 0.2rem var(--bg);*/
+		}
+
+		.badge {
+			display: none;
 		}
 
 	</style>
@@ -53,8 +83,8 @@
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="row">
+	<div class="container-fluid main-container">
+		<div class="row main-row">
 			<div class="col-2 p-0" id="sidenav">
 				<div id="add-side-nav"></div>
 			</div>
@@ -65,28 +95,96 @@
 
 					<div id="add-top-nav"></div>
 
-					<div class="main-content" id="home-middle-content">
+					<div class="main-content" id="settings-middle-content">
 	            
 						<div class="container-fluid">
 	              			
-	              			<div class="row">
-				                <div class="jumbotron jumbotron-settings">
-									<h3 style="padding-bottom: 2%;">Theme Settings </h3>
-									<label style="width: 18%;float: left;font-size: 22px;text-align: center;padding-top: 1%">Change Theme </label>
-									
-									<input id="toggle-theme" type="checkbox" data-toggle="toggle" data-on="<div style='display:block;padding-top:2%;'><i class='material-icons' style='display:block;width:30%;float:left'>light_mode</i> <h5 class='lead' style='width:70%;float:left;text-align:left;'>Light Mode</h5></div>" data-onstyle="outline-light" data-off="<div style='display:block;padding-top:2%;'><i class='material-icons' style='display:block;width:30%;float:left'>dark_mode</i> <h5 class='lead' style='width:70%;float:left;text-align:left;'>Dark Mode</h5></div>" data-offstyle="outline-dark" data-width="180" data-style="border" data-height="50">
-		                        
-				                </div>
-							</div>
+	              			<div class="row accordion-settings">
+	              				<div class="col">
+		              				<div class="accordion" id="accordionExample">
+									  <div class="card">
+									    <div class="card-header" id="headingOne">
+									      <h2 class="mb-0">
+									        <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="box-shadow: none;">
+									          <h4 class="card-heading" style="padding-bottom: 2%;">Change Theme</h4>
+									        </button>
+									      </h2>
+									    </div>
 
+									    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+									      <div class="card-body">
+									      	<div class="row p-0">
+									      		<div class="col-2 p-2">
+									      			
+									      			<input id="toggle-theme" type="checkbox" data-toggle="toggle" data-on="<div style='display:block;padding-top:2%;'><i class='material-icons' style='display:block;width:30%;float:left'>light_mode</i> <h5 class='lead' style='width:70%;float:left;text-align:left;'>Light Mode</h5></div>" data-onstyle="outline-light" data-off="<div style='display:block;padding-top:2%;'><i class='material-icons' style='display:block;width:30%;float:left'>dark_mode</i> <h5 class='lead' style='width:70%;float:left;text-align:left;'>Dark Mode</h5></div>" data-offstyle="outline-dark" data-width="180" data-style="border" data-height="50">
+
+									      		</div>
+
+									      		<div class="col-1"></div>
+
+									      		<div class="col-2 p-2 theme-color light" id="l1" style="text-align: center;">
+									      			<button type="button" class="btn chg-theme-btn chg-light-theme-btn" style="width: 100%;background-color: white;">
+													   <span class="badge" id="badge-l1" style="float: left;">
+										      			<span class="material-icons">check_circle</span>
+														</span>
+														<h6 style="padding-top: 3%;">White</h6>
+													</button>
+												</div>
+									      		<div class="col-2 p-2 theme-color dark" id="d1" style="text-align: center;">
+									      			<button type="button" class="btn chg-theme-btn chg-dark-theme-btn" style="width: 100%;background-color: #2c2c54; color: white">
+													   <span class="badge" id="badge-d1" style="float: left;">
+										      			<span class="material-icons">check_circle</span>
+														</span>
+														<h6 style="padding-top: 3%">Martinique</h6>
+													</button>
+									      		</div>
+									      		<div class="col-2 p-2 theme-color dark" id="d2" style="text-align: center;">
+									      			<button type="button" class="btn chg-theme-btn chg-dark-theme-btn" style="width: 100%;background-color: #004747; color: white">
+													   <span class="badge" id="badge-d2" style="float: left;">
+										      			<span class="material-icons">check_circle</span>
+														</span>
+														<h6 style="padding-top: 3%">Cyprus</h6>
+													</button>
+									      		</div>									     
+									      	</div>
+									      </div>
+									    </div>
+									  </div>
+									  <div class="card">
+									    <div class="card-header" id="headingTwo">
+									      <h2 class="mb-0">
+									        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									          Collapsible Group Item #2
+									        </button>
+									      </h2>
+									    </div>
+									    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+									      <div class="card-body">
+									        HI
+									      </div>
+									    </div>
+									  </div>
+									  <div class="card">
+									    <div class="card-header" id="headingThree">
+									      <h2 class="mb-0">
+									        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									          Collapsible Group Item #3
+									        </button>
+									      </h2>
+									    </div>
+									    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+									      <div class="card-body">
+									        By
+									      </div>
+									    </div>
+									  </div>
+									</div>
+								</div>
+	              			</div>
 			            </div>
-
 					</div>
-
 				</section>
-
 			</div>
-
 		</div>
 	</div>
 
@@ -95,7 +193,37 @@
 	
 	$(document).ready(function(){
 
-		var current_theme = localStorage.getItem("current_theme");
+		function displaySelectedThemeBadge(){
+
+			let current_theme = settings.getSync("current_theme");
+
+			if(current_theme=="light" || current_theme==null){
+
+				var theme_id = settings.getSync("light_theme_id");
+
+				if(theme_id=="l1" || theme_id==null){
+					$(".badge").hide();
+					$("#badge-l1").show();
+				}
+			}
+			else{
+
+				var theme_id = settings.getSync("dark_theme_id");
+
+				if(theme_id=="d1" || theme_id==null){
+					$(".badge").hide();
+					$("#badge-d1").show();
+				}
+				else if(theme_id=="d2"){
+					$(".badge").hide();
+					$("#badge-d2").show();
+				}
+			}
+		}
+
+		displaySelectedThemeBadge();
+
+		var current_theme = settings.getSync("current_theme");
 
 		function toggleThemeBtn(){
 			if(current_theme=="light" || current_theme==null){
@@ -118,16 +246,44 @@
 
 			if(toggleTheme==true){
 				// if true then dark theme
-				localStorage.setItem("current_theme", "dark");
+				settings.setSync("current_theme", "dark");
+
+				// display only dark theme colors
+				$(".dark").show();
+				$(".light").hide();
 			}
 			else{
 				// if false then light theme
-				localStorage.setItem("current_theme", "light");
+				settings.setSync("current_theme", "light");
+
+				// display only light theme colors
+				$(".light").show();
+				$(".dark").hide();
 			}
 
+	    	displaySelectedThemeBadge();
 			changeTheme();
-			changeBtnTheme();
 
+	    });
+
+	    $(".chg-light-theme-btn").on("click", function(){
+
+	    	let theme_id = $(this).parent().attr("id");
+
+	    	settings.setSync("light_theme_id", theme_id);
+
+	    	displaySelectedThemeBadge();
+	    	changeTheme();
+	    });
+
+	    $(".chg-dark-theme-btn").on("click", function(){
+
+	    	let theme_id = $(this).parent().attr("id");
+
+	    	settings.setSync("dark_theme_id", theme_id);
+
+	    	displaySelectedThemeBadge();
+	    	changeTheme();
 	    });
 		
 	});

@@ -6,12 +6,6 @@
 <script src="node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
 
 <style media="screen">
-  :root {
-    /*--bg: #005151;*/
-    /*--color: white;*/
-    /*--bg: white;*/
-    /*--color: #212121;*/
-  }
 
   .navbar .navbar-collapse .active .nav-link {
     color: var(--color) !important;
@@ -25,6 +19,7 @@
     width: 100%;
     padding-right: 9%;
     padding-bottom: 0.3%;
+    border-top: 1px solid lightgrey;
   }
   .navbar .navbar-brand {
     color: var(--color);
@@ -114,9 +109,6 @@
 
 </style>
 </head>
-<body>
-
-<hr/>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
 
@@ -167,8 +159,6 @@
   <!-- <div class="nd-7"></div> -->
 </div>
 
-</body>
-
 <script defer>
   document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
 
@@ -177,7 +167,7 @@
 <script type="text/javascript" defer>
   // In renderer process (web page).
 
-  var current_theme = localStorage.getItem("current_theme");
+  var current_theme = settings.getSync("current_theme");
 
   if(current_theme=="light" || current_theme==null){
     $("#toggle-tracking-event").bootstrapToggle({
@@ -192,7 +182,9 @@
 
 
   function changeBtnTheme(){
-    var current_theme = localStorage.getItem("current_theme");
+
+    var current_theme = settings.getSync("current_theme");
+
     if(current_theme=="light" || current_theme==null){
       $('#tracking-btn .toggle.border').removeClass('btn-outline-light');
       $('#tracking-btn .toggle.border').removeClass('btn-light');

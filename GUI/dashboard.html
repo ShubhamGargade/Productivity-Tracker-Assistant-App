@@ -14,8 +14,8 @@
 
     <script defer src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script src="constants.js" charset="utf-8" defer></script>
-    <script src="intializeDb.js" charset="utf-8" defer></script>
+    <script src="constants.js" charset="utf-8"></script>
+    <script src="initializeDb.js" charset="utf-8"></script>
     <script src="dashboardReport.js" charset="utf-8" defer></script>
     <script src="change_theme.js" charset="utf-8"></script>
 
@@ -60,11 +60,6 @@
 
   <style media="screen">
 
-
-  .card-body {
-    background-color: var(--bg);
-    color: var(--color);
-  }
   /* #myChart-bar1 {
     display: block;
   }
@@ -77,8 +72,8 @@
   </style>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container-fluid main-container">
+    <div class="row main-row">
       <div class="col-2 p-0" id="sidenav">
         <div id="add-side-nav"></div>
       </div>
@@ -88,57 +83,65 @@
 
           <div id="add-top-nav"></div>
 
-          <div class="main-content" id="home-middle-content">
+          <div class="main-content" id="dashboard-middle-content">
 
             <div class="container-fluid">
 
-              <div class="row" style="padding: 30px 10px; background-color: var(--bg);" >
+              <div class="row">
                 <div class="col">
-                  <div class="card-body" style="background-color: #e91e63;color: white;">
-                    <h4>Desktop Time</h4>
-                    <h5 id="show-ttt-dashboard">0h 0m 0s</h5>
+                  <div class="card mb-3" style="max-width: 18rem;background-color: #e91e63;color: white;">
+                    <div class="card-body">
+                      <h5 class="card-title">Desktop Time</h5>
+                      <h6 class="card-text" id="show-ttt-dashboard">0h 0m 0s</h6>
+                    </div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card-body" style="background-color: #f57c00;color: white;">
-                      <h4>Productive %</h4>
-                      <h5 id="show-prod-percent">0 %</h5>
+                  <div class="card mb-3" style="max-width: 18rem;background-color: #f57c00;color: white;">
+                    <div class="card-body">
+                      <h5 class="card-title">Productive %</h5>
+                      <h6 class="card-text" id="show-prod-percent">0 %</h6>
+                    </div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card-body" style="background-color: #c8b900;color: white;">
-                      <h4>Website Time</h4>
-                      <h5 id="show-twtt-dashboard">0h 0m 0s</h5>
+                  <div class="card mb-3" style="max-width: 18rem;background-color: #c8b900;color: white;">
+                    <div class="card-body">
+                      <h5 class="card-title">Website Time</h5>
+                      <h6 class="card-text" id="show-twtt-dashboard">0h 0m 0s</h6>
+                    </div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card-body" style="background-color: #00acc1;color: white;">
-                    <h4>Software Time</h4>
-                    <h5 id="show-tstt-dashboard">0h 0m 0s</h5>
+                  <div class="card mb-3" style="max-width: 18rem;background-color: #00acc1;color: white;">
+                    <div class="card-body">
+                      <h5 class="card-title">Software Time</h5>
+                      <h6 class="card-text" id="show-tstt-dashboard">0h 0m 0s</h6>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row" style="padding: 20px 10px 0px 30px;margin-top: 20px; background-color: var(--bg);" >
-                <div class="col-md-6 px-0">
-                  <h5>Show Report</h5>
+              <div class="row" style="background-color: var(--card-body-bg);padding-top: 20px;padding-bottom: 20px">
+                <div class="col-6">
+                  <h5 style="line-height: normal;">Show Report</h5>
                 </div>
-                <div class="col-md-2 px-0">
+                <div class="col-2 px-0">
                   <button class="btn btn-outline-light" type="button" name="button" id="show-bar-graph" style="width: 93%"><b>Bar Graph</b></button>
                 </div>
-                <div class="col-md-2 px-0">
+                <div class="col-2 px-0">
                   <button class="btn btn-outline-light" type="button" name="button" id="show-pie-chart" style="width: 93%"><b>Pie Chart</b></button>
                 </div>
-                <div class="col-md-2 px-0">
+                <div class="col-2 px-0">
                   <button class="btn btn-outline-light" type="button" name="button" id="show-doughnut" style="width: 93%;"><b>Doughnut</b></button>
                 </div>
 
               </div>
 
-              <div class="row" style="margin: 20px">
-                  <div>
-                     <canvas id="myChartDashboard"  width="420" height="420" ></canvas>
-                  </div>
+              <div class="row">
+                <div>
+                   <canvas id="myChartDashboard"  width="420" height="420"></canvas>
+                </div>
               </div>
 
             </div>

@@ -7,6 +7,8 @@ var Chart = require('chart.js');
 require("firebase/auth");
 require("firebase/database");
 
+const time_arith = require("./time_arith");
+var timeArith = new time_arith.TimeArith();
 
 var currentUserId = settings.getSync('key1.data');
 
@@ -62,18 +64,6 @@ class showDataProductivity {
     this.productivityChartPast.setChart(this.graphType, this.data);
   }
 
-  calTime(tempT){
-        var sPTH=0, sPTM=0, sPTS=0;
-        tempT = tempT.split(" ");
-        sPTH = tempT[0].split("-");
-        sPTH = parseInt(sPTH[0])*3600;
-        sPTM = tempT[1].split("-");
-        sPTM = parseInt(sPTM[0])*60;
-        sPTS = tempT[2].split("-");
-        sPTS = parseInt(sPTS[0]);
-        tempT = sPTH + sPTM + sPTS;
-        return tempT;
-  }
 
   sortDates(keysDatesOfWeek, arrayOfDailyDatesPer){
     var i;
@@ -152,8 +142,8 @@ class showDataProductivity {
 
   }
   getEachDateTimePer(timeVal){
-    this.tptInSec = this.calTime(timeVal['tpt']).toFixed(2);
-    this.tttInSec = this.calTime(timeVal['ttt']).toFixed(2);
+    this.tptInSec = timeArith.calTime(timeVal['tpt']).toFixed(2);
+    this.tttInSec = timeArith.calTime(timeVal['ttt']).toFixed(2);
     // console.log(this.tptInSec);
     // console.log(this.tttInSec);
     return ((this.tptInSec / this.tttInSec)*100).toFixed(2);

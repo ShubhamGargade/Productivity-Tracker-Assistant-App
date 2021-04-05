@@ -1,12 +1,13 @@
-var firebase = require("firebase/app");
+// var firebase = require("firebase/app");
 
 var Chart = require('chart.js');
-const settings = require('electron-settings');
+// const settings = require('electron-settings');
 
 // Add the Firebase products that you want to use
-require("firebase/auth");
-require("firebase/database");
+// require("firebase/auth");
+// require("firebase/database");
 var database = firebase.database();
+
 // var tWebSoftProdtt;
 var totalTimeWS;
 var currentUserId = settings.getSync('key1.data');
@@ -47,27 +48,6 @@ class showDataToWebSoftReport{
     this.listenActivities();
   }
 
-
-   calTime(tempT){
-     try {
-     var sPTH=0, sPTM=0, sPTS=0;
-     tempT = tempT.split(" ");
-     sPTH = tempT[0].split("-");
-     sPTH = parseInt(sPTH[0])*3600;
-     sPTM = tempT[1].split("-");
-     sPTM = parseInt(sPTM[0])*60;
-     sPTS = tempT[2].split("-");
-     sPTS = parseInt(sPTS[0]);
-     tempT = sPTH + sPTM + sPTS;
-     return tempT;
-
-      } catch (e) {
-         console.log('calTime error',e);
-      } finally {
-
-      }
-   }
-
   listenActivities(){
     console.log("Inside Listen.....................");
     var calUsertwstt = firebase.database().ref(this.webOrSoft+'a/'+ currentUserId + '/t'+this.webOrSoft+'tt');
@@ -105,7 +85,7 @@ class showDataToWebSoftReport{
     if(snapshot1.val() != null)
     {
       var webSoftProd = snapshot1.val();
-      var webSoftProdNameClass = webSoftProd.split('-*-');
+      var webSoftProdNameClass = webSoftProd["key"].split('-*-');
       console.log('Yeee Founded-'+this.webOrSoft, this.webSoftDic);
       console.log("COMMON_DICT: ", this.getwebSoftDic);
       console.log("Update Productive Data--"+this.webOrSoft,settings.getSync('Dic.dataDic'));
@@ -129,26 +109,31 @@ class showDataToWebSoftReport{
               settings.setSync('Dic.dataDic.'+this.webOrSoft+'.'+webSoftProdNameClass, [snapshot2.val()['tmt'],'Productive']);
               console.log("Set ke after dict: ", this.getwebSoftDic);
               console.log('UPDATED WEB PROD TIME');
-          }
-          else {
+
+
+              // change the value in local storage which will be listened in other file
+              // by adding listener to changes in local storage
+              localStorage.setItem(this.webOrSoft+"newDataChanged", webSoftProd["key"]+"-*-"+webSoftProd["t"+this.webOrSoft+"pt"]);
+            }
+            else {
               console.log("No data available");
 
-          }
+            }
           }).catch(function(error) {
             console.log(error);
           });
-    }
+        }
     });
 
 
     //For adding Unproductive data in table
     var calNewUserDataUnProd = firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/up');
     calNewUserDataUnProd.on('value', (snapshot3) => {
-    // if(snapshot3.val() != null)
-    // {
+    if(snapshot3.val() != null)
+    {
       console.log("Update UnProductive Data",settings.getSync('Dic.dataDic'));
       var webSoftUnProd = snapshot3.val();
-      var webSoftUnProdNameClass = webSoftUnProd.split('-*-');
+      var webSoftUnProdNameClass = webSoftUnProd["key"].split('-*-');
       // if(this.webSoftDic[webSoftUnProdNameClass] != null){
           database.ref().child(this.webOrSoft+'a/').child(currentUserId).child('up').child(webSoftUnProdNameClass[1]).child(webSoftUnProdNameClass[0]).get().then((snapshot4) => {
             if (snapshot4.exists()) {
@@ -169,6 +154,11 @@ class showDataToWebSoftReport{
               console.log(this.webSoftDic);
               console.log("Set ke pehele dict: ", this.getwebSoftDic);                                                                                            //storing data in local
               settings.setSync('Dic.dataDic.'+this.webOrSoft+'.'+webSoftUnProdNameClass, [snapshot4.val()['tmt'],'UnProductive']);
+
+
+              // change the value in local storage which will be listened in other file
+              // by adding listener to changes in local storage
+              localStorage.setItem(this.webOrSoft+"newDataChanged", webSoftUnProd["key"]+"-*-"+webSoftUnProd["t"+this.webOrSoft+"pt"]);
           }
             else {
               console.log("No data available");
@@ -176,6 +166,7 @@ class showDataToWebSoftReport{
           }).catch(function(error) {
             console.error(error);
           });
+        }
     });
 
   }

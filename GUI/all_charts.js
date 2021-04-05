@@ -1,5 +1,5 @@
 
-var current_theme = localStorage.getItem("current_theme");
+var current_theme = settings.getSync("current_theme");
 var gridColor = "#fafafa";
 if(current_theme=="dark"){
   gridColor = "#455a64"
@@ -18,7 +18,7 @@ class AllCharts {
     this.datasets =  [{
         label: this.chartLabel,
         backgroundColor: ['#26de81', '#fc5c65', '#182C61', '#s35c65', '#f786d5', '#fc8yt5', '#fs5c98'],
-        borderColor: 'rgb(255, 99, 132)',
+        borderColor: 'transparent', //'rgb(255, 99, 132)',
         // barPercentage: 0.5,
         // barThickness: 6,
         // maxBarThickness: 8,
