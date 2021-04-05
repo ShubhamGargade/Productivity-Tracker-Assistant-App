@@ -36,9 +36,9 @@ class showDataToWebSoftReport{
     // console.log("old tw or stt", tWebSoftProdtt);
     console.log("old ttt", totalTimeWS);
     console.log(settings.getSync('Dic.dataDic'));
-    this.getClassDic = settings.getSync('setClassTime.data1');
-    this.classProdDic = this.getClassDic["Productive"];
-    this.classUnProdDic = this.getClassDic["UnProductive"];
+    // this.getClassDic = settings.getSync('setClassTime.data1');
+    // this.classProdDic = this.getClassDic["Productive"];
+    // this.classUnProdDic = this.getClassDic["UnProductive"];
     console.log(this.classProdDic);
     console.log(this.classUnProdDic);
 
@@ -115,7 +115,9 @@ class showDataToWebSoftReport{
             if (snapshot2.exists()) {
               database.ref().child(this.webOrSoft+'a/').child(currentUserId).child('p').child(webSoftProdNameClass[1]).child('tct').get().then((snap) => {            //Updating Class Dict
                 if (snap.exists()) {
-                  this.classProdDic[webSoftProdNameClass[1]] = snap.val();
+                  settings.setSync('setClassTime.dataClass.Productive.'+webSoftProdNameClass[1], snap.val());
+                  console.log('------------------------------------CLass Dict-----------------------------------------');
+                  console.log( settings.getSync('setClassTime.dataClass'));
                 }
                 else{
                   console.log("Classtime not found");
@@ -153,7 +155,10 @@ class showDataToWebSoftReport{
               // console.log('Found out data:',snapshot4.val()['tmt']);
               database.ref().child(this.webOrSoft+'a/').child(currentUserId).child('up').child(webSoftUnProdNameClass[1]).child('tct').get().then((snap) => {            //Updating Class Dict
                 if (snap.exists()) {
-                  this.classUnProdDic[webSoftUnProdNameClass[1]] = snap.val();
+                  settings.setSync('setClassTime.dataClass.UnProductive.'+webSoftUnProdNameClass[1], snap.val());
+
+                  console.log('------------------------------------CLass Dict-----------------------------------------');
+                  console.log( settings.getSync('setClassTime.dataClass'));
                 }
                 else{
                   console.log("Classtime not found");

@@ -66,8 +66,17 @@
 
                 <div class="row" style="padding: 30px 10px; background-color: var(--bg);">
                   <div class="main-container-productivity">
-                    <div class="show-productivity-histogram">
-                      <h6>Past Productivity</h6>
+                    <div class="row" style="padding: 20px;">
+                      <!-- <h6>Past Productivity</h6> -->
+                      <div class="col-md-8 px-0">
+                        <h5>Past Productivity</h5>
+                      </div>
+                      <div class="col-md-2 px-0">
+                        <button class="btn btn-outline-dark" type="button" name="button" id="show-bar-graph" style="width: 93%"><b>Bar Graph</b></button>
+                      </div>
+                      <div class="col-md-2 px-0">
+                        <button class="btn btn-outline-dark" type="button" name="button" id="show-line-graph" style="width: 93%"><b>Line Chart</b></button>
+                      </div>
                       <div class="row" style="margin: 20px">
                           <div>
                             <canvas id="myChartProductivityPast" width="1200" height="500"></canvas>

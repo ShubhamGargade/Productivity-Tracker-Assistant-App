@@ -1,12 +1,12 @@
-14
-8
+20
+30
 Science
 False
 True
 True
 electron
 Productivity_Tracker
-0-h 0-m 43-s
+0-h 0-m 42-s
 None
 Computers
 False
@@ -14,7 +14,7 @@ True
 True
 explorer
 Task Switching
-0-h 0-m 5-s
+0-h 0-m 1-s
 None
 Science
 False
@@ -70,7 +70,7 @@ False
 True
 SearchUI
 Cortana
-0-h 0-m 1-s
+0-h 0-m 3-s
 None
 Computers
 False
@@ -113,6 +113,54 @@ Container list
 0-h 0-m 38-s
 None
 Computers
+False
+True
+True
+atom
+dashboardReport.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 5-s
+None
+Computers
+False
+True
+True
+atom
+classReport.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 3-m 30-s
+None
+Science
+False
+True
+True
+electron
+Dashboard
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+atom
+productivityReport.html — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 11-s
+None
+Computers
+False
+True
+True
+atom
+productivityReport.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+TeamViewer
+
+0-h 0-m 57-s
+None
+Computers
 True
 True
 True
@@ -134,7 +182,7 @@ True
 True
 console-firebase-google
 https://console.firebase.google.com/u/0/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Google Chrome
-0-h 0-m 7-s
+0-h 0-m 21-s
 Sign in - Google Accounts
 Computers
 True
@@ -176,3 +224,179 @@ in-event-mi
 https://in.event.mi.com/in/install-mi-store - Google Chrome
 0-h 0-m 6-s
 Install Mi Store
+Games
+True
+False
+True
+activtrak
+https://activtrak.com - Google Chrome
+0-h 0-m 42-s
+403 Forbidden
+Others
+True
+False
+True
+01
+https://01/03  04/06  05/07 08/01 09/04 10/04 11/02 12/02 - Google Chrome
+0-h 0-m 5-s
+None
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/charts/bar.html - Google Chrome
+0-h 0-m 17-s
+Bar Chart | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/charts/line.html - Google Chrome
+0-h 0-m 28-s
+Line Chart | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org - Google Chrome
+0-h 0-m 38-s
+Chart.js | Open source HTML5 Charts for your website
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/ - Google Chrome
+0-h 0-m 3-s
+Chart.js | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/getting-started/ - Google Chrome
+0-h 2-m 15-s
+Getting Started | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/general/colors.html - Google Chrome
+0-h 0-m 8-s
+Colors | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/configuration/tooltip.html - Google Chrome
+0-h 0-m 15-s
+Tooltip | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/samples/bar/vertical.html - Google Chrome
+0-h 0-m 3-s
+Vertical Bar Chart | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/samples/line/multi-axis.html - Google Chrome
+0-h 0-m 3-s
+Multi Axis Line Chart | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/samples/line/interpolation.html - Google Chrome
+0-h 0-m 5-s
+Interpolation Modes | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/samples/line/styling.html - Google Chrome
+0-h 0-m 57-s
+Line Styling | Chart.js
+Others
+True
+False
+True
+how to add element between array of javascript
+https://how to add element between array of javascript - Google Chrome
+0-h 0-m 2-s
+None
+Others
+True
+False
+True
+how to fill line cha
+https://how to fill line cha - Google Chrome
+0-h 0-m 3-s
+None
+Others
+True
+False
+True
+how to fill line chart
+https://how to fill line chart - Google Chrome
+0-h 0-m 3-s
+None
+Others
+True
+False
+True
+how to fill line chart with
+https://how to fill line chart with - Google Chrome
+0-h 0-m 2-s
+None
+Others
+True
+False
+True
+how to fill line chart with co
+https://how to fill line chart with co - Google Chrome
+0-h 0-m 2-s
+None
+Others
+True
+False
+True
+how to fill line chart with color
+https://how to fill line chart with color  - Google Chrome
+0-h 0-m 2-s
+None
+Others
+True
+False
+True
+how to fill line chart with color in chart
+https://how to fill line chart with color in chart - Google Chrome
+0-h 0-m 16-s
+None
+Reference
+True
+False
+True
+codepen-io
+https://codepen.io/jordanwillis/pen/BWxErp - Google Chrome
+0-h 0-m 19-s
+Attention Required! | Cloudflare
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/getting-started/installation.html - Google Chrome
+0-h 0-m 3-s
+Installation | Chart.js

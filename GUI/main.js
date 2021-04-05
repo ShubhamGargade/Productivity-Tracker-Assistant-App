@@ -26,11 +26,6 @@ firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 global.firebase = firebase; //to access the firebase instance from the renderer process
 
-//To save class timing
-settings.setSync('setClassTime', {
-  data1: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-          "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-});
 
 function createWindow () {
   // Create the browser window.
@@ -72,6 +67,12 @@ function createWindow () {
       'tspt':'',
       'tstt':''}
     })
+    //To save class timing
+    settings.setSync('setClassTime', {
+      dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
+              "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+    });
+
     console.log('LTD:', ltd);
   }
 
@@ -166,6 +167,12 @@ function setPyshellOptions(){
       settings.setSync('lastTrackingDate', {
         dataLtd: currentTrackingDate
       })
+      //To save class timing
+      settings.setSync('setClassTime', {
+        dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
+                "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+      });
+
     }
 
     if(userRefreshToken==null){

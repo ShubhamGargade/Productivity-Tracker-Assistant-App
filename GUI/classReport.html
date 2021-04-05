@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+
+  <script>window.$ = window.jQuery = require('jquery')</script>
+
+  <script src="intializeDb.js" charset="utf-8" defer></script>
+  <script src="classReport.js" charset="utf-8" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <script defer src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+    $(function(){
+      $("#add-top-nav").load("navAfterlogin.html");
+      $("#add-side-nav").load("sideNavAfterlogin.html");
+    });
+
+    $(document).ready(function(){
+      $('#nav-brand').ready(function(){
+        $("#nav-brand").html("Classification Report");
+      });
+    });
+  </script>
+
+  <script src="constants.js" charset="utf-8"></script>
+  <script src="change_theme.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" type="text/css" href="common.css">
+
+  <style media="screen">
+
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 p-0" id="sidenav">
+        <div id="add-side-nav"></div>
+      </div>
+      <div class="col-10 p-0" id="rest">
+          <div id="add-top-nav"></div>
+      <!-- </div> -->
+      <div class="row" style="padding: 40px;" >
+        <div class="col-md-8 px-0">
+          <h5>Show Class Report</h5>
+        </div>
+        <div class="col-md-2 px-0">
+          <button class="btn btn-outline-dark" type="button" name="button" id="show-bar-graph" style="width: 93%"><b>Bar Graph</b></button>
+        </div>
+        <div class="col-md-2 px-0">
+          <button class="btn btn-outline-dark" type="button" name="button" id="show-pie-chart" style="width: 93%"><b>Pie Chart</b></button>
+        </div>
+        <div class="row">
+          <div class="">
+              <canvas id="canvasProd" width="1200" height="500"></canvas>
+          </div>
+        </div>
+        <br>
+        <br>
+          <div class="row">
+          <div class="">
+              <canvas id="canvasUnProd" width="1200" height="500"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</body>
+</html>
