@@ -76,6 +76,12 @@ function createWindow () {
       'tspt': null,
       'tstt': null}
     })
+    //To save class timing
+    settings.setSync('setClassTime', {
+      dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
+              "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+    });
+
     console.log('LTD:', ltd);
   }
 
@@ -106,7 +112,8 @@ function createWindow () {
   // create hidden worker window
   const workerWindow = new BrowserWindow({
     // show: false,
-    webPreferences: { 
+    
+    webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -182,6 +189,12 @@ function createWindow () {
       settings.setSync('lastTrackingDate', {
         dataLtd: currentTrackingDate
       })
+      //To save class timing
+      settings.setSync('setClassTime', {
+        dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
+                "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+      });
+
     }
 
     if(userRefreshToken==null){
@@ -219,11 +232,11 @@ function createWindow () {
 
             if(isMainWindowClosed){
               try{
-                workerWindow.close();            
+                workerWindow.close();
               }
               catch(e){
                 // console.log(e);
-              }           
+              }
             }
 
           });
@@ -255,7 +268,7 @@ function createWindow () {
 
         if(isMainWindowClosed){
           try{
-            workerWindow.close();            
+            workerWindow.close();
           }
           catch(e){
             // console.log(e);

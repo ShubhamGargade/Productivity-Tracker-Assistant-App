@@ -30,21 +30,117 @@ var all_charts = require("./all_charts");
 
 class showDataProductivity {
   constructor() {
-
     this.ctx = document.getElementById('myChartProductivityPast').getContext('2d');
+    this.data;
+
+    this.bg = document.getElementById("show-bar-graph");
+    this.lg = document.getElementById("show-line-graph");
+    this.graphType = "bar";
     this.listenProductivityData();
+    this.listenUserChoice();
   }
 
+  listenUserChoice(){
+    this.bg.addEventListener('click', (e) => {
+      this.graphType = "bar";
+      this.showReport();
+    });
+    this.lg.addEventListener('click', (e) => {
+      this.graphType = "line";
+      this.showReport();
+    });
+  }
 
   showReportProductivityPast(productivityDailyDates, productivityDailyPer){
     this.labelForProductivityPast = productivityDailyDates;
     console.log(productivityDailyPer);
-    var data = productivityDailyPer;
-    this.graphType = "bar";
-    console.log('datasetatxaxis', data);
-    this.productivityChartPast = new all_charts.AllCharts(this.ctx, 'Weekly Productivity', this.labelForProductivityPast,['#26de81', '#fc5c65', '#182C61', '#s35c65', '#f786d5', '#fc8yt5', '#fs5c98'], data)
+    this.data = productivityDailyPer;
+    console.log('datasetatxaxis', this.data);
+    this.productivityChartPast = new all_charts.AllCharts(this.ctx, 'Weekly Productivity', this.labelForProductivityPast, this.data)
+    this.showReport();
   }
 
+  showReport(){
+    this.productivityChartPast.setChart(this.graphType, this.data);
+  }
+
+
+  sortDates(keysDatesOfWeek, arrayOfDailyDatesPer){
+    var i;
+    var j;
+    var len = keysDatesOfWeek.length - 1;
+    var tempDate;
+    var tempDatePer;
+    var min;
+
+    //sort by year
+    for(i=0; i<=len; i++){
+      var wdi = keysDatesOfWeek[i].split('-');
+      min = parseInt(wdi[2]);
+      for(j=i+1;j<=len;j++){
+        var wdj = keysDatesOfWeek[j].split('-');
+        if(min > parseInt(wdj[2])){
+          tempDate = keysDatesOfWeek[j];
+          tempDatePer = arrayOfDailyDatesPer[j];
+          keysDatesOfWeek[j] = keysDatesOfWeek[i];
+          arrayOfDailyDatesPer[j] = arrayOfDailyDatesPer[i];
+          keysDatesOfWeek[i] = tempDate;
+          arrayOfDailyDatesPer[i] = tempDatePer;
+          var wdi = keysDatesOfWeek[i].split('-');
+          min = parseInt(wdi[2]);
+        }
+      }
+    }
+
+    //sort by month
+    for(i=0; i<=len; i++){
+      var wdi = keysDatesOfWeek[i].split('-');
+      min = parseInt(wdi[1]);
+      for(j=i+1;j<=len;j++){
+        var wdj = keysDatesOfWeek[j].split('-');
+        if(min > parseInt(wdj[1])){
+          tempDate = keysDatesOfWeek[j];
+          tempDatePer = arrayOfDailyDatesPer[j];
+          keysDatesOfWeek[j] = keysDatesOfWeek[i];
+          arrayOfDailyDatesPer[j] = arrayOfDailyDatesPer[i];
+          keysDatesOfWeek[i] = tempDate;
+          arrayOfDailyDatesPer[i] = tempDatePer;
+          var wdi = keysDatesOfWeek[i].split('-');
+          min = parseInt(wdi[1]);
+        }
+      }
+    }
+
+    //sort by dates with help of month
+    for(i=0; i<=len; i++){
+      var wdi = keysDatesOfWeek[i].split('-');
+      min = parseInt(wdi[0]);
+      for(j=i+1;j<=len;j++){
+        var wdj = keysDatesOfWeek[j].split('-');
+        if(min > parseInt(wdj[0]) && wdi[1] == wdj[1]){
+          tempDate = keysDatesOfWeek[j];
+          tempDatePer = arrayOfDailyDatesPer[j];
+          keysDatesOfWeek[j] = keysDatesOfWeek[i];
+          arrayOfDailyDatesPer[j] = arrayOfDailyDatesPer[i];
+          keysDatesOfWeek[i] = tempDate;
+          arrayOfDailyDatesPer[i] = tempDatePer;
+          console.log(keysDatesOfWeek);
+          var wdi = keysDatesOfWeek[i].split('-');
+          min = parseInt(wdi[0]);
+        }
+      }
+    }
+
+    //remove current date's productivity
+    keysDatesOfWeek.pop();
+    arrayOfDailyDatesPer.pop();
+
+    return {
+      keysDatesOfWeek: keysDatesOfWeek,
+      arrayOfDailyDatesPer: arrayOfDailyDatesPer
+    };
+
+  }
   getEachDateTimePer(timeVal){
     this.tptInSec = timeArith.calTime(timeVal['tpt']).toFixed(2);
     this.tttInSec = timeArith.calTime(timeVal['ttt']).toFixed(2);
@@ -71,7 +167,8 @@ class showDataProductivity {
           console.log(dataUthId[keysDatesOfWeek[dates]]);
           arrayOfDailyDatesPer[dates] = this.getEachDateTimePer(dataUthId[keysDatesOfWeek[dates]]);
         }
-        this.showReportProductivityPast(keysDatesOfWeek, arrayOfDailyDatesPer);
+        var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesPer);
+        this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, sortedArrayDates.arrayOfDailyDatesPer);
         // console.log(arrayOfDailyDatesPer);
       }
     });

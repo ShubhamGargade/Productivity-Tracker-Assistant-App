@@ -10,14 +10,14 @@ else{
 
 class AllCharts {
 
-  constructor(ctx, chartLabel, datasetLabels,bgColor, data, graphType="bar"){
+  constructor(ctx, chartLabel, datasetLabels, data, graphType="bar"){
 
     this.ctx = ctx;
     this.chartLabel = chartLabel;
     this.datasetLabels = datasetLabels;
     this.datasets =  [{
         label: this.chartLabel,
-        backgroundColor: bgColor,
+        backgroundColor: ['#26de81', '#fc5c65', '#182C61', '#s35c65', '#f786d5', '#fc8yt5', '#fs5c98'],
         borderColor: 'transparent', //'rgb(255, 99, 132)',
         // barPercentage: 0.5,
         // barThickness: 6,
@@ -74,9 +74,32 @@ class AllCharts {
       }
       // console.log('inside to show from 0');
     }
-    else {
+    else if(graphType == "line"){
       this.options = {
+        fill: true,
+        scales: {
+          yAxes: [{
+            display: true,
+            gridLines: {
+              // display: false,
+              color: gridColor,
+            },
+            scaleLabel: {
+              // display: true,
+              // labelString: 'Value'
+            },
+            ticks: {
+                beginAtZero: true
+            }
+          }]
+        }
+      }
 
+        console.log("Failed to scale");
+    }
+    else{
+      this.options = {
+        
       }
     }
 
