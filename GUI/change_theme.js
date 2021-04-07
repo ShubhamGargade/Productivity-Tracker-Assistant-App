@@ -4,9 +4,6 @@ var theme_bg_dark2 = localStorage.getItem("theme_bg_dark2");
 var theme_color_light = localStorage.getItem("theme_color_light");
 var theme_color_dark = localStorage.getItem("theme_color_dark");
 
-var tracking_btn_dark = localStorage.getItem("tracking_btn_light");
-var tracking_btn_light = localStorage.getItem("tracking_btn_dark");
-
 var card_body_bg_light1 = localStorage.getItem("card_body_bg_light1")
 var card_body_bg_dark1 = localStorage.getItem("card_body_bg_dark1")
 var card_body_bg_dark2 = localStorage.getItem("card_body_bg_dark2")

@@ -29,7 +29,7 @@ global.firebase = firebase; //to access the firebase instance from the renderer 
 //To save class timing
 settings.setSync('setClassTime', {
   data1: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-          "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+          "Unproductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
 });
 
 var isMainWindowClosed = false;
@@ -57,11 +57,9 @@ function createWindow () {
      localStorage.setItem('theme_bg_dark2', '#004747');
      localStorage.setItem('theme_color_light', '#343a40');
      localStorage.setItem('theme_color_dark', 'white');
-     localStorage.setItem('tracking_btn_light', 'outline-light');
-     localStorage.setItem('tracking_btn_dark', 'outline-dark');
-     localStorage.setItem('card_body_bg_light1', '#f9f9f9');
-     localStorage.setItem('card_body_bg_dark1', '#575581');
-     localStorage.setItem('card_body_bg_dark2', '#387372');
+     localStorage.setItem('card_body_bg_light1', '94, 94, 94, .4');
+     localStorage.setItem('card_body_bg_dark1', '87, 85, 129, .4');
+     localStorage.setItem('card_body_bg_dark2', '56, 115, 114, .4');
     `
     , true)
   .then(result => {
@@ -73,10 +71,10 @@ function createWindow () {
     settings.setSync('Dic',{
       dataDic: {'w':{},
       's':{},
-      'twpt':'',
-      'twtt':'',
-      'tspt':'',
-      'tstt':''}
+      'twpt': null,
+      'twtt': null,
+      'tspt': null,
+      'tstt': null}
     })
     console.log('LTD:', ltd);
   }
@@ -107,7 +105,7 @@ function createWindow () {
 
   // create hidden worker window
   const workerWindow = new BrowserWindow({
-    show: false,
+    // show: false,
     webPreferences: { 
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,

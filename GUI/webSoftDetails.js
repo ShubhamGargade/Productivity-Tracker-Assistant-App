@@ -1,11 +1,6 @@
-// var firebase = require("firebase/app");
 
 var Chart = require('chart.js');
-// const settings = require('electron-settings');
 
-// Add the Firebase products that you want to use
-// require("firebase/auth");
-// require("firebase/database");
 var database = firebase.database();
 
 // var tWebSoftProdtt;
@@ -16,7 +11,6 @@ console.log('Outside',currentUserId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Signed in");
-    // console.log(user.uid);
     settings.setSync('key1', {
       data: user.uid
     });
@@ -30,16 +24,17 @@ class showDataToWebSoftReport{
   constructor(webOrSoft){
     this.webOrSoft = webOrSoft;
     console.log("This Is-------", this.webOrSoft);
-    // this.getwebSoftDic = settings.getSync('Dic.dataDic');
+    this.getwebSoftDic = settings.getSync('Dic.dataDic');
+
     // console.log("Pura dic", this.getwebSoftDic);
     // tWebSoftProdtt = this.getwebSoftDic['t'+this.webOrSoft+'pt'];
     // totalTimeWS = this.getwebSoftDic['t'+this.webOrSoft+'tt'];
     // console.log("old tw or stt", tWebSoftProdtt);
     console.log("old ttt", totalTimeWS);
-    console.log(settings.getSync('Dic.dataDic'));
+
     this.getClassDic = settings.getSync('setClassTime.data1');
     this.classProdDic = this.getClassDic["Productive"];
-    this.classUnProdDic = this.getClassDic["UnProductive"];
+    this.classUnProdDic = this.getClassDic["Unproductive"];
     console.log(this.classProdDic);
     console.log(this.classUnProdDic);
 
@@ -148,7 +143,7 @@ class showDataToWebSoftReport{
               console.log('UPDATED WEB UNPROD TIME');
               console.log(this.webSoftDic);
               console.log("Set ke pehele dict: ", this.getwebSoftDic);                                                                                            //storing data in local
-              settings.setSync('Dic.dataDic.'+this.webOrSoft+'.'+webSoftUnProdNameClass, [snapshot4.val()['tmt'],'UnProductive']);
+              settings.setSync('Dic.dataDic.'+this.webOrSoft+'.'+webSoftUnProdNameClass, [snapshot4.val()['tmt'],'Unproductive']);
 
 
               // change the value in local storage which will be listened in other file

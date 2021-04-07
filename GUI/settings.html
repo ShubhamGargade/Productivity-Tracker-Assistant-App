@@ -21,7 +21,7 @@
 	<script src="change_theme.js" charset="utf-8"></script>
 
    
-	<script>
+	<script type="text/javascript">
 
 		$(function(){
 		  $("#add-top-nav").load("navAfterlogin.html");
@@ -37,6 +37,7 @@
 	</script>
 
 	<link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="scrollbar.css">
 
 	<style media="screen">
     	.accordion-settings {
@@ -61,7 +62,7 @@
 		}
 
 		.card-body {
-			background-color: var(--card-body-bg);
+			background-color: rgba(var(--card-body-bg));
 			padding-right: 2%;
 			padding-left: 6%;
 		}
@@ -70,6 +71,12 @@
 			display: none;
 		}
 
+		.chg-theme-btn{
+			border-radius: 100px 100px 100px 100px;
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+
+		}
 		.chg-theme-btn.focus, .chg-theme-btn:focus{
 			box-shadow: none; /*0 0 0 0.2rem var(--bg);*/
 		}
@@ -202,8 +209,9 @@
 				var theme_id = settings.getSync("light_theme_id");
 
 				if(theme_id=="l1" || theme_id==null){
-					$(".badge").hide();
 					$("#badge-l1").show();
+					$(".badge:not(#badge-l1)").hide();
+
 				}
 			}
 			else{
@@ -211,12 +219,14 @@
 				var theme_id = settings.getSync("dark_theme_id");
 
 				if(theme_id=="d1" || theme_id==null){
-					$(".badge").hide();
 					$("#badge-d1").show();
+					$(".badge:not(#badge-d1)").hide();
+
 				}
 				else if(theme_id=="d2"){
-					$(".badge").hide();
 					$("#badge-d2").show();
+					$(".badge:not(#badge-d2)").hide();
+
 				}
 			}
 		}

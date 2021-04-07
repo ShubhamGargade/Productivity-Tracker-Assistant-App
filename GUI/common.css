@@ -61,3 +61,26 @@ body {
   position: absolute;
   z-index: 1;
 }
+
+table {
+  /*padding: 10px;*/
+  border: 1px solid rgba(var(--card-body-bg));
+  border: 1px solid rgba(var(--card-body-bg));
+
+}
+th {
+  font-weight: bold;
+}
+
+.table td, .table th {
+  border-top: 1px solid rgba(var(--card-body-bg));
+}
+
+.table thead th {
+  border-bottom: 1px solid rgba(var(--card-body-bg));
+
+}
+
+.table thead {
+  background-color: rgba(var(--card-body-bg));
+}

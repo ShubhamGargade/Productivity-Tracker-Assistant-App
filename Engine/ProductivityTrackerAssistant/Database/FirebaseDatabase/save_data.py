@@ -614,6 +614,7 @@ class SaveData:
 			db.child("wa").child(uid).remove(user_info.getIdToken())
 			db.child("istt").child(uid).remove(user_info.getIdToken())
 			db.child("iwtt").child(uid).remove(user_info.getIdToken())
+			db.child("newD").child(uid).remove(user_info.getIdToken())
 
 			# change isDBCleared to "t"
 

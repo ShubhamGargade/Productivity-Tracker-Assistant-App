@@ -33,6 +33,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 class insertWebSoftReport{
   constructor(webOrSoft){
     this.webOrSoft = webOrSoft;
+
+    this.htmlWSReportTable = document.getElementById(this.webOrSoft+"-report-table");
+
     console.log("This Is-------", this.webOrSoft);
     this.getwebSoftDic = settings.getSync('Dic.dataDic');
     console.log("Pura dic", this.getwebSoftDic);
@@ -100,7 +103,7 @@ class insertWebSoftReport{
 
     }
     
-    this.incH = document.getElementById(webSoftProd).cells[4].innerHTML = `
+    this.incH = document.getElementById(webSoftProd).cells[5].innerHTML = `
       <div class='progress'>
         <div class='progress-bar progress-bar-striped progress-bar-animated bg-${progressBarColor}' role='progressbar' style='width: ${this.prodPerPB}%' aria-valuenow='${this.prodPerPB}' aria-valuemin='0' aria-valuemax='100'>${Number(this.prodPerPB).toFixed(2)}%</div>
       </div>`;
@@ -157,36 +160,39 @@ class insertWebSoftReport{
     // check if row alread exists or not 
     if(document.getElementById(webSoftProd) == null){
 
-      var row = table.insertRow(0);
+      var row = table.insertRow(this.htmlWSReportTable.rows.length-1);
       row.setAttribute('id', webSoftProd);
       var cell1 = row.insertCell(0);
       var cell2 = row.insertCell(1);
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
       var cell5 = row.insertCell(4);
-      cell1.innerHTML = webSoftNameClass[0];
-      cell2.innerHTML = webSoftNameClass[1];
-      cell3.innerHTML = categoryVal;
-      cell4.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
-      cell5.innerHTML = ' ';
+      var cell6 = row.insertCell(5);
+      cell1.innerHTML = row.rowIndex;
+      cell2.innerHTML = webSoftNameClass[0];
+      cell3.innerHTML = webSoftNameClass[1];
+      cell4.innerHTML = categoryVal;
+      cell5.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+      cell6.innerHTML = ' ';
 
       this.showPB(timeTrac, webSoftProd, categoryVal);
-      document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
+      // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
       if(categoryVal == 'Productive'){
-        console.log(document.getElementById(webSoftProd).cells[2]);
+        console.log(document.getElementById(webSoftProd).cells[3]);
       // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
-
-        document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#81c784';
+      cell4.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745'>check_circle</span>`
+        // document.getElementById(webSoftProd).cells[3].style.backgroundColor = '#28a745';
       }
       else{
-        console.log(document.getElementById(webSoftProd).cells[2]);
+        console.log(document.getElementById(webSoftProd).cells[3]);
       // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
-        
-        document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#e57373';
+      cell4.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
+
+        // document.getElementById(webSoftProd).cells[3].style.backgroundColor = '#dc3545';
       }
     }
     else {
-      document.getElementById(webSoftProd).cells[3].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+      document.getElementById(webSoftProd).cells[4].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
     }
   }
 

@@ -38,19 +38,7 @@
     </script>
 
     <link rel="stylesheet" type="text/css" href="common.css">
-
-    <style media="screen">
-
-      .show-table {
-        /*padding: 10px;*/
-      }
-      td, th {
-        font-weight: bold;
-        font-size: 18px;
-        /* height: 30px; */
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="scrollbar.css">
 
   </head>
 
@@ -106,22 +94,21 @@
 
                 <div class="row">
                   <div class="col">
-                    <!-- <div class="show-table"> -->
-                      <table class="table table-hover">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th scope="col">Website</th>
-                            <th scope="col">Class</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Time Ratio</th>
-                          </tr>
-                        </thead>
-                        <tbody  id='tbw'>
+                    <table class="table table-hover" id="w-report-table" style="background-color: transparent;">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Website</th>
+                          <th scope="col">Class</th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Time</th>
+                          <th scope="col">Time Ratio</th>
+                        </tr>
+                      </thead>
+                      <tbody id='tbw' style="background-color: rgba(var(--bg))">
 
-                        </tbody>
-                      </table>
-                    <!-- </div> -->
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
