@@ -1,4 +1,7 @@
-var all_charts = require("./all_charts");
+
+const time_arith = require("./time_arith");
+var timeArith = new time_arith.TimeArith();
+all_charts = require("./all_charts");
 var Chart = require('chart.js');
 // const settings = require('electron-settings');
 class showClassReport{
@@ -36,18 +39,18 @@ class showClassReport{
     });
   }
 
-  calTime(tempT){
-    var sPTH=0, sPTM=0, sPTS=0;
-    tempT = tempT.split(" ");
-    sPTH = tempT[0].split("-");
-    sPTH = parseInt(sPTH[0])*3600;
-    sPTM = tempT[1].split("-");
-    sPTM = parseInt(sPTM[0])*60;
-    sPTS = tempT[2].split("-");
-    sPTS = parseInt(sPTS[0]);
-    tempT = sPTH + sPTM + sPTS;
-    return tempT;
-  }
+  // calTime(tempT){
+  //   var sPTH=0, sPTM=0, sPTS=0;
+  //   tempT = tempT.split(" ");
+  //   sPTH = tempT[0].split("-");
+  //   sPTH = parseInt(sPTH[0])*3600;
+  //   sPTM = tempT[1].split("-");
+  //   sPTM = parseInt(sPTM[0])*60;
+  //   sPTS = tempT[2].split("-");
+  //   sPTS = parseInt(sPTS[0]);
+  //   tempT = sPTH + sPTM + sPTS;
+  //   return tempT;
+  // }
 
   showReport(){
     this.drawChartProd.setChart(this.graphType, this.dataProd);
@@ -61,8 +64,8 @@ class showClassReport{
     console.log("prodClass Dict: ", prodClass);
     for(c in prodClass){
       if(prodClass[c] != ""){
-        console.log((this.calTime(prodClass[c])/(this.calTime(this.totalWTT)+this.calTime(this.totalSTT)))*100);
-        this.dataProd.push(((this.calTime(prodClass[c])/(this.calTime(this.totalWTT)+this.calTime(this.totalSTT)))*100).toFixed(2));
+        console.log((timeArith.calTime(prodClass[c])/(timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT)))*100);
+        this.dataProd.push(((timeArith.calTime(prodClass[c])/(timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT)))*100).toFixed(2));
       }
       else{
         this.dataProd.push("");
@@ -73,7 +76,7 @@ class showClassReport{
     console.log("prodClass Dict: ", unprodClass);
     for(c in unprodClass){
       if(unprodClass[c] != ""){
-        this.dataUnProd.push(((this.calTime(unprodClass[c])/(this.calTime(this.totalWTT)+this.calTime(this.totalSTT)))*100).toFixed(2));
+        this.dataUnProd.push(((timeArith.calTime(unprodClass[c])/(timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT)))*100).toFixed(2));
       }
       else{
         this.dataUnProd.push("");

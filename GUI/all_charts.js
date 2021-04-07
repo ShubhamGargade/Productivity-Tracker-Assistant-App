@@ -74,11 +74,33 @@ class AllCharts {
       }
       // console.log('inside to show from 0');
     }
-    else {
+    else if(graphType == "line"){
       this.options = {
+        fill: true,
+        scales: {
+          yAxes: [{
+            display: true,
+            gridLines: {
+              // display: false,
+              color: gridColor,
+            },
+            scaleLabel: {
+              // display: true,
+              // labelString: 'Value'
+            },
+            ticks: {
+                beginAtZero: true
+            }
+          }]
+        }
       }
 
         console.log("Failed to scale");
+    }
+    else{
+      this.options = {
+        
+      }
     }
 
 

@@ -108,8 +108,8 @@ function createWindow () {
 
   // create hidden worker window
   const workerWindow = new BrowserWindow({
-    show: false,
-    webPreferences: { 
+    // show: false,
+    webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       enableRemoteModule: true,
@@ -228,11 +228,11 @@ function createWindow () {
 
             if(isMainWindowClosed){
               try{
-                workerWindow.close();            
+                workerWindow.close();
               }
               catch(e){
                 // console.log(e);
-              }           
+              }
             }
 
           });
@@ -264,7 +264,7 @@ function createWindow () {
 
         if(isMainWindowClosed){
           try{
-            workerWindow.close();            
+            workerWindow.close();
           }
           catch(e){
             // console.log(e);
