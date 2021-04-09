@@ -63,25 +63,6 @@ function createWindow () {
     console.log(result);
   });
 
-  var ltd = settings.getSync('lastTrackingDate.dataLtd');
-  if(ltd == null){
-    settings.setSync('Dic',{
-      dataDic: {'w':{},
-      's':{},
-      'twpt':'',
-      'twtt':'',
-      'tspt':'',
-      'tstt':''}
-    })
-    //To save class timing
-    settings.setSync('setClassTime', {
-      dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-              "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-    });
-
-    console.log('LTD:', ltd);
-  }
-
   try {
         var value = settings.getSync('key.data');
         console.log('Persisted Value - ' + value);
@@ -127,7 +108,6 @@ function createWindow () {
   ipcMain.on('async-start-tracking-message', (event, arg) => {
     console.log(arg);
     const result = startTracking();
-
     console.log(result);
     return result;
   });
@@ -163,36 +143,6 @@ function createWindow () {
 
   function startTracking(){
 
-    var cD = new Date().getDate().toString();
-    var cM = (parseInt(new Date().getMonth())+1).toString();
-    var cY = new Date().getFullYear().toString().substr(2,2);
-    console.log('current month', cM);
-    if(cM.length == 1){
-      cM = "0"+cM;
-    }
-    var currentTrackingDate = cD+'-'+cM+'-'+cY;
-
-    console.log('current date: ', currentTrackingDate);
-    if(currentTrackingDate != ltd){
-      settings.setSync('Dic',{
-        dataDic: {'w':{},
-        's':{},
-        'twpt':'',
-        'twtt':'',
-        'tspt':'',
-        'tstt':''}
-      })
-      settings.setSync('lastTrackingDate', {
-        dataLtd: currentTrackingDate
-      })
-      //To save class timing
-      settings.setSync('setClassTime', {
-        dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-                "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-      });
-
-    }
-
     if(userRefreshToken==null){
       console.log("RefreshToken is null");
       return;
@@ -210,6 +160,9 @@ function createWindow () {
 
         if(message == "STARTED"){
             mainWindow.webContents.send('tracking', true);
+            workerWindow.webContents.send('tracking', true);
+
+
         }
         console.log("FromBAckend: ",message);
         if(message=="KILL" || message=="EXCEPTION"){

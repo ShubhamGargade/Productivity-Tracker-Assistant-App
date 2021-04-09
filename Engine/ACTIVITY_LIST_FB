@@ -1,12 +1,12 @@
-13
-3
+19
+9
 Science
 False
 True
 True
 cmd
 npm
-0-h 0-m 2-s
+0-h 0-m 4-s
 None
 Science
 False
@@ -70,7 +70,7 @@ False
 True
 Docker Desktop
 Container list
-0-h 0-m 1-s
+0-h 0-m 9-s
 None
 Computers
 False
@@ -86,7 +86,7 @@ True
 True
 electron
 Hidden Worker
-0-h 0-m 9-s
+0-h 0-m 2-s
 None
 Science
 False
@@ -105,6 +105,54 @@ Cortana
 0-h 0-m 6-s
 None
 Computers
+False
+True
+True
+atom
+webSoftDetails.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 10-s
+None
+Computers
+False
+True
+True
+atom
+worker.html — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 20-s
+None
+Science
+False
+True
+True
+atom
+settings.json — C:\Users\garga\AppData\Roaming\Productivity-Tracker-App — Atom
+0-h 0-m 38-s
+None
+Computers
+False
+True
+True
+atom
+saveLocalData.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 25-s
+None
+Science
+False
+True
+True
+explorer
+Productivity-Tracker-App
+0-h 0-m 1-s
+None
+Shopping
+False
+False
+True
+Microsoft Store
+Microsoft Store
+0-h 0-m 1-s
+None
+Computers
 True
 True
 True
@@ -118,7 +166,7 @@ True
 True
 console-firebase-google
 https://console.firebase.google.com/u/0/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/rules - Google Chrome
-0-h 0-m 9-s
+0-h 0-m 8-s
 Sign in - Google Accounts
 Science
 True
@@ -126,5 +174,53 @@ True
 True
 myamcat
 https://myamcat.com - Google Chrome
-0-h 0-m 7-s
+0-h 0-m 4-s
 AMCAT Official : Employability Test | Job Search with AMCAT Score
+Others
+True
+False
+True
+mumbai news latest
+https://mumbai news latest - Google Chrome
+0-h 0-m 12-s
+None
+News
+True
+True
+True
+timesofindia-indiatimes
+https://timesofindia.indiatimes.com/city/mumbai/mumbai-news-live-coronavirus-covid19-vaccination-centres-shut-today-maharashtra-lockdown-ajit-pawar-sachin-vaze-anil-deshmukh-anil-parab/liveblog/81979611.cms - Google Chrome
+0-h 0-m 9-s
+Mumbai Lockdown News LIVE: State mulling imposing restrictions on local trains, says Maharashtra Minister Vijay Wadettiwar
+Arts
+True
+False
+True
+youtube
+https://youtube.com - Google Chrome
+0-h 0-m 16-s
+YouTube
+Computers
+True
+True
+True
+faceprep
+https://faceprep.in/capgemini/capgemini-recruitment-game-aptitude/ - Google Chrome
+0-h 0-m 18-s
+Capgemini Recruitment | Game Based Aptitude Questions
+Computers
+True
+True
+True
+geeksforgeeks
+https://geeksforgeeks.org/persisting-data-in-electronjs/ - Google Chrome
+0-h 0-m 6-s
+Persisting Data in ElectronJS - GeeksforGeeks
+Science
+True
+True
+True
+dev-to
+https://dev.to/ctxhou/local-data-storage-for-electron-2h4p - Google Chrome
+0-h 0-m 7-s
+Local Data storage for Electron - DEV Community

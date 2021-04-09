@@ -12,7 +12,12 @@
 
 	//Website Software tracking Object
 	const { showDataToWebSoftReport } = require("./webSoftDetails");
+	const saveLocalData = require("./saveLocalData");
+	// const { ipcRenderer } = require("electron");
 
+	var saveLocalDataObj = null;
+
+	console.log('settings path----------------',settings.file());
 	function startListeningToNewData(){
 		const web = 'w';
 		var webObj = new showDataToWebSoftReport(web);
@@ -20,12 +25,29 @@
 		const soft = 's';
 		var softObj = new showDataToWebSoftReport(soft);
 	}
-	
+
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
+
+			saveLocalDataObj = new saveLocalData.SaveLocalData(user.uid);
+
 	  	startListeningToNewData();
+			console.log('User found:',user.uid);
 	  }
 	});
+
+
+	ipcRenderer.on('tracking', (event, message) => {
+			if(saveLocalDataObj != null){
+				saveLocalDataObj.updateLtd();
+			}else {
+				console.log("saveLocalDataObj is null")
+			}
+
+  });
+
+
+
 
 </script>
 </html>
