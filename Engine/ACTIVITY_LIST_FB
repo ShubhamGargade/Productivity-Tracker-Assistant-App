@@ -1,12 +1,12 @@
-19
-9
+21
+25
 Science
 False
 True
 True
 cmd
 npm
-0-h 0-m 4-s
+0-h 0-m 25-s
 None
 Science
 False
@@ -14,7 +14,7 @@ True
 True
 electron
 Dashboard
-0-h 0-m 3-s
+0-h 0-m 17-s
 None
 Science
 False
@@ -86,7 +86,7 @@ True
 True
 electron
 Hidden Worker
-0-h 0-m 2-s
+0-h 0-m 39-s
 None
 Science
 False
@@ -94,7 +94,7 @@ True
 True
 electron
 Productivity_Tracker
-0-h 0-m 1-s
+0-h 0-m 29-s
 None
 Reference
 False
@@ -151,6 +151,22 @@ True
 Microsoft Store
 Microsoft Store
 0-h 0-m 1-s
+None
+Science
+False
+True
+True
+electron
+Settings
+0-h 0-m 35-s
+None
+Computers
+False
+True
+True
+atom
+all_charts.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 24-s
 None
 Computers
 True
@@ -224,3 +240,131 @@ dev-to
 https://dev.to/ctxhou/local-data-storage-for-electron-2h4p - Google Chrome
 0-h 0-m 7-s
 Local Data storage for Electron - DEV Community
+Computers
+True
+True
+True
+w3schools
+https://w3schools.com/java/java_constructors.asp - Google Chrome
+0-h 0-m 11-s
+Java Constructors
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/configuration/elements.html#point-styles - Google Chrome
+0-h 0-m 4-s
+Elements | Chart.js
+Others
+True
+False
+True
+faltui
+https://faltui - Google Chrome
+0-h 0-m 3-s
+None
+Computers
+True
+True
+True
+flatuicolors
+https://flatuicolors.com - Google Chrome
+0-h 0-m 1-s
+Flat UI Colors 2 - 14 Color Palettes, 280 colors 🎨
+Others
+True
+False
+True
+how to stop mucus leakage from anus
+https://how to stop mucus leakage from anus - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+how to show 2 bar
+https://how to show 2 bar - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+how to show 2 bar
+https://how to show 2 bar  - Google Chrome
+0-h 0-m 3-s
+None
+Others
+True
+False
+True
+how to show 2 bar for sa
+https://how to show 2 bar for sa - Google Chrome
+0-h 0-m 3-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same
+https://how to show 2 bar for same  - Google Chrome
+0-h 0-m 4-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same f
+https://how to show 2 bar for same f - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same
+https://how to show 2 bar for same  - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same fi
+https://how to show 2 bar for same fi - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same field
+https://how to show 2 bar for same field  - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same field cha
+https://how to show 2 bar for same field cha - Google Chrome
+0-h 0-m 3-s
+None
+Others
+True
+False
+True
+how to show 2 bar for same field chartj
+https://how to show 2 bar for same field chartj - Google Chrome
+0-h 0-m 6-s
+None
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/charts/bar.html - Google Chrome
+0-h 0-m 47-s
+Bar Chart | Chart.js

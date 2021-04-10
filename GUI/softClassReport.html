@@ -7,7 +7,7 @@
   <script>window.$ = window.jQuery = require('jquery')</script>
 
   <script src="initializeDb.js" charset="utf-8" defer></script>
-  <script src="classReport.js" charset="utf-8" defer></script>
+  <script src="softClassReport.js" charset="utf-8" defer></script>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
 
     $(document).ready(function(){
       $('#nav-brand').ready(function(){
-        $("#nav-brand").html("Classification Report");
+        $("#nav-brand").html("Software");
       });
     });
   </script>
@@ -56,21 +56,21 @@
           <h5>Show Class Report</h5>
         </div>
         <div class="col-md-2 px-0">
-          <button class="btn btn-outline-dark" type="button" name="button" id="show-bar-graph" style="width: 93%"><b>Bar Graph</b></button>
+          <button class="btn btn-outline-dark" type="button" name="button" id="show-s-bar-graph" style="width: 93%"><b>Bar Graph</b></button>
         </div>
         <div class="col-md-2 px-0">
-          <button class="btn btn-outline-dark" type="button" name="button" id="show-pie-chart" style="width: 93%"><b>Pie Chart</b></button>
+          <button class="btn btn-outline-dark" type="button" name="button" id="show-s-pie-chart" style="width: 93%"><b>Pie Chart</b></button>
         </div>
         <div class="row">
           <div class="">
-              <canvas id="canvasProd" width="1200" height="500"></canvas>
+              <canvas id="canvas-s-Prod" width="1200" height="500"></canvas>
           </div>
         </div>
         <br>
         <br>
           <div class="row">
           <div class="">
-              <canvas id="canvasUnProd" width="1200" height="500"></canvas>
+              <canvas id="canvas-s-UnProd" width="1200" height="500"></canvas>
           </div>
         </div>
       </div>
