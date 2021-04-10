@@ -75,6 +75,53 @@ class TimeArith {
 		return time_sub 
 
     }
+
+    addTime(t1_str, t2_str){
+
+    	try{
+
+    		var hr_min_sec = this.getHrMinSec(t1_str);
+
+			var t1h, t1m, t1s;
+			t1h = parseInt(hr_min_sec[0]);
+			t1m = parseInt(hr_min_sec[1]);
+			t1s = parseInt(hr_min_sec[2]);
+
+			hr_min_sec = this.getHrMinSec(t2_str);
+
+			var t2h, t2m, t2s;
+			t2h = parseInt(hr_min_sec[0]);
+			t2m = parseInt(hr_min_sec[1]);
+			t2s = parseInt(hr_min_sec[2]);
+
+			console.log("t1:", t1h, t1m, t1s)
+			console.log("t2:", t2h, t2m, t2s)
+
+			var hrs = parseInt(t1h)+parseInt(t2h);
+			var mins = parseInt(t1m)+parseInt(t2m);
+			var secs = parseInt(t1s)+parseInt(t2s);
+
+			if(secs >= 60){
+			  secs = secs % 60;
+			  mins += 1
+			}
+
+			if(mins >= 60){
+			  mins = mins % 60;
+			  hrs += 1
+			}
+
+			var time_add = String(hrs) + "-h " + String(mins) + "-m " + String(secs) + "-s"
+			
+			return time_add
+
+
+    	}
+    	catch(e){
+    		console.log("Error while adding time:",e);
+    	}
+		
+	}
 }
 
 module.exports = { TimeArith }

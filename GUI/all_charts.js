@@ -17,7 +17,9 @@ class AllCharts {
     this.datasetLabels = datasetLabels;
     this.datasets =  [{
         label: this.chartLabel,
-        backgroundColor: ['#26de81', '#fc5c65', '#182C61', '#s35c65', '#f786d5', '#fc8yt5', '#fs5c98'],
+        backgroundColor: ['#27ae60', '#27ae60', '#27ae60', '#27ae60', '#27ae60', '#27ae60', '#27ae60'],
+        pointBackgroundColor: 'purple',
+        pointRadius: 5,
         borderColor: 'transparent', //'rgb(255, 99, 132)',
         // barPercentage: 0.5,
         // barThickness: 6,
@@ -77,6 +79,8 @@ class AllCharts {
     else if(graphType == "line"){
       this.options = {
         fill: true,
+        showLine: true,
+        spanGaps: true,
         scales: {
           yAxes: [{
             display: true,
@@ -99,7 +103,7 @@ class AllCharts {
     }
     else{
       this.options = {
-        
+
       }
     }
 

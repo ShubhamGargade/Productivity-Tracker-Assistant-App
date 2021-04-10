@@ -42,7 +42,7 @@ class insertWebSoftReport{
     }
 
     console.log("This Is-------", this.webOrSoft);
-    this.getwebSoftDic = settings.getSync('Dic.dataDic');
+    this.getwebSoftDic = settings.getSync('Dic.dataDic.'+currentUserId);
     console.log("Pura dic", this.getwebSoftDic);
     // tWebSoftProdtt = this.getwebSoftDic['t'+this.webOrSoft+'pt'];
     totalTimeWS = this.getwebSoftDic['t'+this.webOrSoft+'tt'];
@@ -54,7 +54,7 @@ class insertWebSoftReport{
     //               's':{}}
     //   })
     // }
-    console.log(settings.getSync('Dic.dataDic'));
+    console.log(settings.getSync('Dic.dataDic.'+currentUserId));
 
     this.webSoftDic = this.getwebSoftDic[this.webOrSoft];
 
@@ -71,7 +71,7 @@ class insertWebSoftReport{
       this.animatePB = false;
     }
 
-    this.webSoftDic = settings.getSync('Dic.dataDic')[this.webOrSoft];
+    this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)[this.webOrSoft];
     var olddata;
 
     for(olddata in this.webSoftDic)
@@ -102,7 +102,7 @@ class insertWebSoftReport{
 
   showPB(timeTrac, webSoftProd, categoryVal){
 
-    totalTimeWS = settings.getSync('Dic.dataDic')['t'+this.webOrSoft+'tt'];
+    totalTimeWS = settings.getSync('Dic.dataDic.'+currentUserId)['t'+this.webOrSoft+'tt'];
 
     console.log("timeTrac:", timeTrac);
     console.log("websSoftProd:", webSoftProd);
@@ -142,8 +142,8 @@ class insertWebSoftReport{
 
   updateTotalTimes() {
 
-    var t_ws_tt = settings.getSync('Dic.dataDic.t'+this.webOrSoft+'tt');
-    var t_ws_pt = settings.getSync('Dic.dataDic.t'+this.webOrSoft+'pt');
+    var t_ws_tt = settings.getSync('Dic.dataDic.'+currentUserId+'.t'+this.webOrSoft+'tt');
+    var t_ws_pt = settings.getSync('Dic.dataDic.'+currentUserId+'.t'+this.webOrSoft+'pt');
     var t_ws_upt = timeArith.subTime(t_ws_tt, t_ws_pt);
 
     var t_ws_tt_in_sec = timeArith.calTime(t_ws_tt);
@@ -164,7 +164,7 @@ class insertWebSoftReport{
       this.updateTotalTimes();
 
       var olddata;
-      this.webSoftDic = settings.getSync('Dic.dataDic')[this.webOrSoft];
+      this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)[this.webOrSoft];
       for(olddata in this.webSoftDic)
       {
         this.updateData(olddata);
@@ -173,7 +173,7 @@ class insertWebSoftReport{
 
   updateData(olddata){
 
-    this.webSoftDic = settings.getSync('Dic.dataDic')[this.webOrSoft];
+    this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)[this.webOrSoft];
 
     // console.log("Testing oldata: ", olddata);
     var nC = olddata.split(',');
@@ -191,7 +191,7 @@ class insertWebSoftReport{
     console.log(webSoftProd);
     var table = document.getElementById('tb'+this.webOrSoft);
 
-    // check if row alread exists or not 
+    // check if row alread exists or not
     if(document.getElementById(webSoftProd) == null){
 
       var row = table.insertRow(this.htmlWSReportTable.rows.length-1);
@@ -213,16 +213,18 @@ class insertWebSoftReport{
       // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
       if(categoryVal == 'Productive'){
         console.log(document.getElementById(webSoftProd).cells[2]);
-      // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
-      cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
+          // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
+        cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
         // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
       }
       else{
         console.log(document.getElementById(webSoftProd).cells[2]);
-      // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
-      cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
+        // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
+
+        cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
 
         // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#dc3545';
+
       }
     }
     else {

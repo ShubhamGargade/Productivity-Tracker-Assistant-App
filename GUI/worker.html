@@ -11,8 +11,13 @@
 
 	//Website Software tracking Object
 	const { showDataToWebSoftReport } = require("./webSoftDetails");
+	const saveLocalData = require("./saveLocalData");
 
 	var webObj=null, softObj=null;
+
+	var saveLocalDataObj = null;
+
+	console.log('settings path----------------',settings.file());
 
 	function startListeningToNewData(){
 
@@ -27,6 +32,9 @@
 			// attach listeners to firebase nodes
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
+
+					saveLocalDataObj = new saveLocalData.SaveLocalData(user.uid);
+
 					startListeningToNewData();
 				}
 			});
@@ -47,6 +55,13 @@
 			localStorage.setItem("togglePbAnimation", false);
 		}
 		else {
+
+			if(saveLocalDataObj != null){
+				saveLocalDataObj.updateLtd();
+			}else {
+				console.log("saveLocalDataObj is null")
+			}
+
 			localStorage.setItem("togglePbAnimation", true);
 		}
     });

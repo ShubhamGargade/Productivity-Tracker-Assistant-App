@@ -75,24 +75,6 @@ function createWindow () {
     console.log(result);
   });
 
-  var ltd = settings.getSync('lastTrackingDate.dataLtd');
-  if(ltd == null){
-    settings.setSync('Dic',{
-      dataDic: {'w':{},
-      's':{},
-      'twpt': initial_time,
-      'twtt': initial_time,
-      'tspt': initial_time,
-      'tstt': initial_time}
-    })
-    //To save class timing
-    settings.setSync('setClassTime', {
-      dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-              "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-    });
-
-    console.log('LTD:', ltd);
-  }
 
   try {
         var value = settings.getSync('key.data');
@@ -176,31 +158,6 @@ function createWindow () {
   function startTracking(){
 
     stopTrackingMsgSent = false;
-
-    var currentTrackingDate = dates.getCurrentTrackingDate();
-
-    ltd = settings.getSync('lastTrackingDate.dataLtd');
-
-    console.log('current date: ', currentTrackingDate);
-    if(currentTrackingDate != ltd){
-      settings.setSync('Dic',{
-        dataDic: {'w':{},
-        's':{},
-        'twpt':initial_time,
-        'twtt':initial_time,
-        'tspt':initial_time,
-        'tstt':initial_time}
-      })
-      settings.setSync('lastTrackingDate', {
-        dataLtd: currentTrackingDate
-      })
-      //To save class timing
-      settings.setSync('setClassTime', {
-        dataClass: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-                "UnProductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-      });
-
-    }
 
     if(userRefreshToken==null){
       console.log("RefreshToken is null");
