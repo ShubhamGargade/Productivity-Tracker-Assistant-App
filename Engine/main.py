@@ -30,6 +30,9 @@ def main():
 			pass
 		else:
 			print("Not connected to internet")
+
+			print("EXCEPTION")  # to be received by pyshell to stop tracking
+
 			return
 
 	if prediction_mode == "2":
@@ -38,6 +41,9 @@ def main():
 			pass
 		else:
 			print("Docker not running")
+
+			print("EXCEPTION")  # to be received by pyshell to stop tracking
+			
 			return
 
 	os.environ["db_choice"] = db_choice

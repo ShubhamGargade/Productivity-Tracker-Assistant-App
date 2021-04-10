@@ -9,4 +9,8 @@ window.addEventListener('storage', function(e) {
 		webObj.updateData(e.newValue.split("-*-").slice(0,2).join(","));	
 		webObj.updateProgressBars();
 	}
+
+	if(e.key=="togglePbAnimation"){
+		webObj.togglePBAnimation();
+	}
 });

@@ -377,6 +377,7 @@ class AutoTimer(Windows):
                     pass
 
                 self.set_new_window()
+                # print("New window:",self.new_window_name)
 
 
                 #  for printing purpose only

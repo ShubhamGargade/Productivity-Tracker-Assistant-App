@@ -61,5 +61,8 @@ class CloudPrediction:
             # Algorithm error if, for example, the input is not correctly formatted
             # prin(error)
             pass
+            print("Inside Cloud:",error)
+
+            print("EXCEPTION")  # to be received by pyshell
 
         return result

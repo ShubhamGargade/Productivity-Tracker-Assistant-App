@@ -8,24 +8,48 @@
 <body>
 </body>
 <script type="text/javascript" defer>
-	// const { ipcRenderer } = require('electron');
 
 	//Website Software tracking Object
 	const { showDataToWebSoftReport } = require("./webSoftDetails");
 
+	var webObj=null, softObj=null;
+
 	function startListeningToNewData(){
-		const web = 'w';
-		var webObj = new showDataToWebSoftReport(web);
-		//software tracking
-		const soft = 's';
-		var softObj = new showDataToWebSoftReport(soft);
+
+		const web='w', soft='s';
+
+		webObj = new showDataToWebSoftReport(web);
+		softObj = new showDataToWebSoftReport(soft);
 	}
-	
-	firebase.auth().onAuthStateChanged(function(user) {
-	  if (user) {
-	  	startListeningToNewData();
-	  }
-	});
+
+	ipcRenderer.on('DB-INITS', (event, message) => {
+		if(message==true){
+			// attach listeners to firebase nodes
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					startListeningToNewData();
+				}
+			});
+		}
+    });
+
+	ipcRenderer.on('tracking', (event, message) => {
+		console.log("tracking",message)
+		if(message==false){
+			// detach listeners from firebase nodes
+			if (webObj != null) {
+				webObj.detachListeners();
+			}
+
+			if (softObj != null) {
+				softObj.detachListeners();
+			}
+			localStorage.setItem("togglePbAnimation", false);
+		}
+		else {
+			localStorage.setItem("togglePbAnimation", true);
+		}
+    });
 
 </script>
 </html>

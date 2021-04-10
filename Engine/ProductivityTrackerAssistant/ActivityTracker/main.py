@@ -2,7 +2,7 @@
 
 
 # Standard library imports
-from __future__ import print_function
+from datetime import date
 import os
 import sys, traceback
 import time
@@ -18,6 +18,7 @@ from .Firebase import winActivity as fwa
 from .Firebase import winAutoTimer as fwat
 
 
+date_format = "%d-%m-%y"
 
 # sys.setrecursionlimit(10000)
 
@@ -39,15 +40,19 @@ class Backend:
         try:
 
             retrieve_user_data = FbRetrieveUserData.getInstance()
-            isDBCleared = retrieve_user_data.get_isDBCleared_val()
 
             # Initialize firebase db - START #
             save_data = FbSaveData.getInstance()
             op_text = save_data.initDB()  # initializes db in firebase if not already initialized and returns corresponding text.
 
+            print("DB-INITS")  # to be received by pyshell to start listening to Firebase
+            
             # Initialize firebase db - END #
 
-            if isDBCleared == 'f':
+            current_date = date.today().strftime(date_format)
+            last_tracking_date = retrieve_user_data.get_last_tracking_date()
+
+            if last_tracking_date != None and current_date == last_tracking_date:
 
                 # load the activityList object from local file
                 isLoadedSuccessfully = self.activityList.load_activity_list_from_file()

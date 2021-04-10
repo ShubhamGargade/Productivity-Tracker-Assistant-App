@@ -35,6 +35,11 @@ class insertWebSoftReport{
     this.webOrSoft = webOrSoft;
 
     this.htmlWSReportTable = document.getElementById(this.webOrSoft+"-report-table");
+    this.animatePB = false;
+
+    if(sessionStorage.tracking=="on" || sessionStorage.tracking=="starting"){
+      this.animatePB = true;
+    }
 
     console.log("This Is-------", this.webOrSoft);
     this.getwebSoftDic = settings.getSync('Dic.dataDic');
@@ -59,6 +64,12 @@ class insertWebSoftReport{
   }
 
   updateProgressBars(){
+    if(sessionStorage.tracking=="on" || sessionStorage.tracking=="starting"){
+      this.animatePB = true;
+    }
+    else{
+      this.animatePB = false;
+    }
 
     this.webSoftDic = settings.getSync('Dic.dataDic')[this.webOrSoft];
     var olddata;
@@ -73,6 +84,19 @@ class insertWebSoftReport{
       // document.getElementById(idForRow).cells[3].remove();
       console.log(this.webSoftDic[olddata][0], idForRow, this.webSoftDic[olddata][1])
       this.showPB(this.webSoftDic[olddata][0], idForRow, this.webSoftDic[olddata][1]);
+    }
+  }
+
+  togglePBAnimation(){
+
+    var pbAnimated = document.getElementsByClassName("progress-bar-animated")[0]
+    if(pbAnimated==null){
+      $(".progress-bar").addClass("progress-bar-animated");
+      $(".progress-bar").addClass("progress-bar-striped");
+    }
+    else{
+      $(".progress-bar").removeClass("progress-bar-animated");
+      $(".progress-bar").removeClass("progress-bar-striped"); 
     }
   }
 
@@ -96,16 +120,21 @@ class insertWebSoftReport{
     // this.pBar.setAttribute("max", "100");
 
     var progressBarColor = "success";
+    var pbStripedAnimation = "";
 
     if(categoryVal!="Productive"){
 
       progressBarColor = "danger";
 
     }
+
+    if(this.animatePB){
+      pbStripedAnimation = "progress-bar-striped progress-bar-animated";
+    }
     
     this.incH = document.getElementById(webSoftProd).cells[5].innerHTML = `
       <div class='progress'>
-        <div class='progress-bar progress-bar-striped progress-bar-animated bg-${progressBarColor}' role='progressbar' style='width: ${this.prodPerPB}%' aria-valuenow='${this.prodPerPB}' aria-valuemin='0' aria-valuemax='100'>${Number(this.prodPerPB).toFixed(2)}%</div>
+        <div class='progress-bar ${pbStripedAnimation} bg-${progressBarColor}' role='progressbar' style='width: ${this.prodPerPB}%' aria-valuenow='${this.prodPerPB}' aria-valuemin='0' aria-valuemax='100'>${Number(this.prodPerPB).toFixed(2)}%</div>
       </div>`;
 
     // this.incH.style.height = '30px';
@@ -116,7 +145,12 @@ class insertWebSoftReport{
     var t_ws_tt = settings.getSync('Dic.dataDic.t'+this.webOrSoft+'tt');
     var t_ws_pt = settings.getSync('Dic.dataDic.t'+this.webOrSoft+'pt');
     var t_ws_upt = timeArith.subTime(t_ws_tt, t_ws_pt);
-    var prodPercent = ((timeArith.calTime(t_ws_pt)/timeArith.calTime(t_ws_tt))*100).toFixed(2 ).toString();
+
+    var t_ws_tt_in_sec = timeArith.calTime(t_ws_tt);
+    if(t_ws_tt_in_sec==0){
+      t_ws_tt_in_sec = 1;
+    }
+    var prodPercent = ((timeArith.calTime(t_ws_pt)/t_ws_tt_in_sec)*100).toFixed(2).toString();
 
     document.getElementById('show-t'+this.webOrSoft+'tt-'+this.webOrSoft+'report').innerHTML = timeArith.removeDashesFromTimeStr(t_ws_tt);
     document.getElementById('show-t'+this.webOrSoft+'pt-'+this.webOrSoft+'report').innerHTML = timeArith.removeDashesFromTimeStr(t_ws_pt);
@@ -170,25 +204,25 @@ class insertWebSoftReport{
       var cell6 = row.insertCell(5);
       cell1.innerHTML = row.rowIndex;
       cell2.innerHTML = webSoftNameClass[0];
-      cell3.innerHTML = webSoftNameClass[1];
-      cell4.innerHTML = categoryVal;
+      cell3.innerHTML = categoryVal;
+      cell4.innerHTML = webSoftNameClass[1];
       cell5.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
       cell6.innerHTML = ' ';
 
       this.showPB(timeTrac, webSoftProd, categoryVal);
       // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
       if(categoryVal == 'Productive'){
-        console.log(document.getElementById(webSoftProd).cells[3]);
+        console.log(document.getElementById(webSoftProd).cells[2]);
       // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
-      cell4.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745'>check_circle</span>`
-        // document.getElementById(webSoftProd).cells[3].style.backgroundColor = '#28a745';
+      cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
+        // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
       }
       else{
-        console.log(document.getElementById(webSoftProd).cells[3]);
+        console.log(document.getElementById(webSoftProd).cells[2]);
       // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
-      cell4.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
+      cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
 
-        // document.getElementById(webSoftProd).cells[3].style.backgroundColor = '#dc3545';
+        // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#dc3545';
       }
     }
     else {

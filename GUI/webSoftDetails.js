@@ -7,6 +7,7 @@ var database = firebase.database();
 var totalTimeWS;
 var currentUserId = settings.getSync('key1.data');
 
+
 console.log('Outside',currentUserId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -24,20 +25,12 @@ class showDataToWebSoftReport{
   constructor(webOrSoft){
     this.webOrSoft = webOrSoft;
     console.log("This Is-------", this.webOrSoft);
-    this.getwebSoftDic = settings.getSync('Dic.dataDic');
+    // this.getwebSoftDic = settings.getSync('Dic.dataDic');
 
     // console.log("Pura dic", this.getwebSoftDic);
     // tWebSoftProdtt = this.getwebSoftDic['t'+this.webOrSoft+'pt'];
     // totalTimeWS = this.getwebSoftDic['t'+this.webOrSoft+'tt'];
     // console.log("old tw or stt", tWebSoftProdtt);
-    console.log("old ttt", totalTimeWS);
-
-    this.getClassDic = settings.getSync('setClassTime.data1');
-    this.classProdDic = this.getClassDic["Productive"];
-    this.classUnProdDic = this.getClassDic["Unproductive"];
-
-    console.log(this.classProdDic);
-    console.log(this.classUnProdDic);
 
     console.log('successful saved webSoftDic', this.webSoftDic);
     // this.updateRecentSessionData();
@@ -91,7 +84,7 @@ class showDataToWebSoftReport{
             if (snapshot2.exists()) {
               database.ref().child(this.webOrSoft+'a/').child(currentUserId).child('p').child(webSoftProdNameClass[1]).child('tct').get().then((snap) => {            //Updating Class Dict
                 if (snap.exists()) {
-                  settings.setSync('setClassTime.dataClass.Productive.'+webSoftProdNameClass[1], snap.val());
+                  // settings.setSync('setClassTime.dataClass.Productive.'+webSoftProdNameClass[1], snap.val());
                   console.log('------------------------------------CLass Dict-----------------------------------------');
                   console.log( settings.getSync('setClassTime.dataClass'));
                 }
@@ -127,7 +120,7 @@ class showDataToWebSoftReport{
     calNewUserDataUnProd.on('value', (snapshot3) => {
     if(snapshot3.val() != null)
     {
-      console.log("Update UnProductive Data",settings.getSync('Dic.dataDic'));
+      console.log("Update Unproductive Data",settings.getSync('Dic.dataDic'));
       var webSoftUnProd = snapshot3.val();
       var webSoftUnProdNameClass = webSoftUnProd["key"].split('-*-');
       // if(this.webSoftDic[webSoftUnProdNameClass] != null){
@@ -136,7 +129,7 @@ class showDataToWebSoftReport{
               // console.log('Found out data:',snapshot4.val()['tmt']);
               database.ref().child(this.webOrSoft+'a/').child(currentUserId).child('up').child(webSoftUnProdNameClass[1]).child('tct').get().then((snap) => {            //Updating Class Dict
                 if (snap.exists()) {
-                  settings.setSync('setClassTime.dataClass.UnProductive.'+webSoftUnProdNameClass[1], snap.val());
+                  settings.setSync('setClassTime.dataClass.Unproductive.'+webSoftUnProdNameClass[1], snap.val());
 
                   console.log('------------------------------------CLass Dict-----------------------------------------');
                   console.log( settings.getSync('setClassTime.dataClass'));
@@ -164,6 +157,15 @@ class showDataToWebSoftReport{
           });
         }
     });
+
+  }
+
+  detachListeners(){
+
+    firebase.database().ref(this.webOrSoft+'a/'+ currentUserId + '/t'+this.webOrSoft+'tt').off();
+    firebase.database().ref(this.webOrSoft+'a/'+ currentUserId + '/p/t'+this.webOrSoft+'pt').off();
+    firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/p').off();
+    firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/up').off();
 
   }
 

@@ -276,6 +276,9 @@
         ipcRenderer.send('async-stop-tracking-message', 'ping stop');
 
         sessionStorage.setItem("tracking", "stopping");
+
+        localStorage.setItem("toggglePbAnimation", false);  // progress bar animation
+
       }
     });
 
@@ -284,6 +287,13 @@
       console.log(message) // Prints true(if tracking started) or false(if tracking stopped)
       if(message==false){
         sessionStorage.setItem("tracking", "off");
+    
+        if($("#toggle-tracking-event").parent().hasClass("off") == false){
+          $("#toggle-tracking-event").parent().addClass("off");
+          changeBtnTheme();
+
+        }
+
       }
       else{
         sessionStorage.setItem("tracking", "on");

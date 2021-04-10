@@ -5,6 +5,7 @@ DOCSTRINGS
 
 # Standard library imports
 import json
+import sys
 
 # Third party imports
 import requests
@@ -54,7 +55,9 @@ class DockerPrediction:
           json_response = requests.post(SERVER_URL, data=data, headers=headers)
         except requests.ConnectionError as e:
           # print("ConnectionError: Please run you model image in docker")
-          return OTHERS_STR
+          print("EXCEPTION")  # to be received by PYSHELL
+          sys.exit()
+          # return OTHERS_STR
 
         # Extract text from JSON
         response_text = json.loads(json_response.text)

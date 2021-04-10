@@ -5,11 +5,17 @@ const settings = require('electron-settings');
 
 var firebase = require("firebase/app");
 var isSignInTrue;
-var currentTrackingDate;
 // Add the Firebase products that you want to use
 require("firebase/auth");
-// require("firebase/firestore");
 
+datesModule = require("./dates");
+dates = new datesModule.Dates();
+
+var currentTrackingDate;
+
+var initial_time = "0-h 0-m 0-s"
+
+var stopTrackingMsgSent = false;
 
 const firebaseConfig = {
   apiKey: "AIzaSyACGUDZccPyev4MarszVJdx34FXf702_Ls",
@@ -60,6 +66,9 @@ function createWindow () {
      localStorage.setItem('card_body_bg_light1', '94, 94, 94, .4');
      localStorage.setItem('card_body_bg_dark1', '87, 85, 129, .4');
      localStorage.setItem('card_body_bg_dark2', '56, 115, 114, .4');
+     localStorage.setItem('p_bar_bg_light1', '#e9ecef');
+     localStorage.setItem('p_bar_bg_dark1', '#575581');
+     localStorage.setItem('p_bar_bg_dark2', '#387372');
     `
     , true)
   .then(result => {
@@ -71,10 +80,10 @@ function createWindow () {
     settings.setSync('Dic',{
       dataDic: {'w':{},
       's':{},
-      'twpt': null,
-      'twtt': null,
-      'tspt': null,
-      'tstt': null}
+      'twpt': initial_time,
+      'twtt': initial_time,
+      'tspt': initial_time,
+      'tstt': initial_time}
     })
     //To save class timing
     settings.setSync('setClassTime', {
@@ -112,7 +121,7 @@ function createWindow () {
   // create hidden worker window
   const workerWindow = new BrowserWindow({
     // show: false,
-    
+
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -132,7 +141,6 @@ function createWindow () {
     console.log(arg);
     const result = startTracking();
 
-    console.log(result);
     return result;
   });
 
@@ -167,24 +175,21 @@ function createWindow () {
 
   function startTracking(){
 
-    var cD = new Date().getDate().toString();
-    var cM = (parseInt(new Date().getMonth())+1).toString();
-    var cY = new Date().getFullYear().toString().substr(2,2);
-    console.log('current month', cM);
-    if(cM.length == 1){
-      cM = "0"+cM;
-    }
-    var currentTrackingDate = cD+'-'+cM+'-'+cY;
+    stopTrackingMsgSent = false;
+
+    var currentTrackingDate = dates.getCurrentTrackingDate();
+
+    ltd = settings.getSync('lastTrackingDate.dataLtd');
 
     console.log('current date: ', currentTrackingDate);
     if(currentTrackingDate != ltd){
       settings.setSync('Dic',{
         dataDic: {'w':{},
         's':{},
-        'twpt':'',
-        'twtt':'',
-        'tspt':'',
-        'tstt':''}
+        'twpt':initial_time,
+        'twtt':initial_time,
+        'tspt':initial_time,
+        'tstt':initial_time}
       })
       settings.setSync('lastTrackingDate', {
         dataLtd: currentTrackingDate
@@ -206,18 +211,39 @@ function createWindow () {
 
     python_process = pyshell;
 
-      // sends a message to the Python script via stdin
-      pyshell.send("RUN");
+    // sends a message to the Python script via stdin
+    pyshell.send("RUN");
 
-      pyshell.on('message', function(message) {
-        // received a message sent from the Python script (a simple "print" statement)
+    pyshell.on('message', function(message) {
+      // received a message sent from the Python script (a simple "print" statement)
+      console.log("FROM BACKEND:",message)
+      if(message == "RUN"){
+        
+        //
 
-        if(message == "STARTED"){
-            mainWindow.webContents.send('tracking', true);
+      }
+      else if(message == "STARTED"){
+        try{
+          mainWindow.webContents.send('tracking', true);
+          workerWindow.webContents.send('tracking', true);
+        }catch(e){
+          console.log(e);
+          message = "KILL";
         }
-        console.log("FromBAckend: ",message);
-        if(message=="KILL" || message=="EXCEPTION"){
-          // end the input stream and allow the process to exit
+      }
+      else if(message == "DB-INITS"){
+        try {
+          workerWindow.webContents.send(message, true)
+        }catch(e){
+          console.log(e);
+          message = "KILL";
+        }
+      }
+        
+      if(message=="KILL" || message=="EXCEPTION"){
+        // end the input stream and allow the process to exit
+
+        try{
           pyshell.end(function (err,code,signal) {
             if (err) throw err;
             console.log('The exit code was: ' + code);
@@ -226,8 +252,9 @@ function createWindow () {
 
             try{
               mainWindow.webContents.send('tracking', false);
+              workerWindow.webContents.send('tracking', false);
             }catch(e){
-              // console.log(e);
+              console.log(e);
             }
 
             if(isMainWindowClosed){
@@ -235,33 +262,41 @@ function createWindow () {
                 workerWindow.close();
               }
               catch(e){
-                // console.log(e);
+                console.log(e);
               }
             }
 
           });
+        }catch(e){
+          console.log(e);
         }
-        else{
-          try{
-            pyshell.send('RUN');
-          }
-          catch(e){
-            console.log(e.message);
+      }
+      else{
+        try{
+          if(stopTrackingMsgSent==false){
+            pyshell.send('RUN');            
           }
         }
-      });
+        catch(e){
+          console.log(e.message);
+          message = "KILL";
+        }
+      }
+    });
   }
 
 
   function stopTracking(){
     console.log("Stopping")
     try {
+        stopTrackingMsgSent = true;
         pyshell.send('KILL');
       }
       catch(e){
         console.log(e.message);
         try{
           mainWindow.webContents.send('tracking', false);
+          workerWindow.webContents.send('tracking', false);
         }catch(e){
           // console.log(e);
         }

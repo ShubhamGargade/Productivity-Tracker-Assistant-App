@@ -39,7 +39,7 @@ body {
 .main-content {
   width: 100%;
   height: 100%;
-  margin-top: 5%
+  margin-top: 5%;
 }
 
 .main-content .container-fluid .row {
@@ -83,4 +83,13 @@ th {
 
 .table thead {
   background-color: rgba(var(--card-body-bg));
+}
+
+.progress {
+  background-color: var(--p-bar-bg);
+}
+
+.progress-bar {
+  color: var(--color);
+  /*font-weight: bold;*/
 }

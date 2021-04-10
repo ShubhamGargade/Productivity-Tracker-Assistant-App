@@ -21,7 +21,7 @@ class showClassReport{
     console.log(this.totalWTT);
     console.log(this.totalWTT);
     this.drawChartProd = new all_charts.AllCharts(this.ctxP, 'Productive Class', this.labelForDashboardProd, this.dataProd);
-    this.drawChartUnProd = new all_charts.AllCharts(this.ctxUnP, 'UnProductive Class', this.labelForDashboardUnProd, this.dataUnProd);
+    this.drawChartUnProd = new all_charts.AllCharts(this.ctxUnP, 'Unproductive Class', this.labelForDashboardUnProd, this.dataUnProd);
     this.getClassData();
     this.listenUserChoice();
     console.log("dataProd:", this.dataProd);
@@ -72,7 +72,7 @@ class showClassReport{
       }
     }
 
-    var unprodClass = settings.getSync('setClassTime.dataClass.UnProductive');
+    var unprodClass = settings.getSync('setClassTime.dataClass.Unproductive');
     console.log("prodClass Dict: ", unprodClass);
     for(c in unprodClass){
       if(unprodClass[c] != ""){

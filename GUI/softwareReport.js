@@ -8,4 +8,8 @@ window.addEventListener('storage', function(e) {
 		softObj.updateData(e.newValue.split("-*-").slice(0,2).join(","));	
 		softObj.updateProgressBars();
 	}
+
+	if(e.key=="togglePbAnimation"){
+		webObj.togglePBAnimation();
+	}
 });
