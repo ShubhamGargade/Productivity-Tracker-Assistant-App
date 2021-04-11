@@ -56,7 +56,7 @@ body {
   height: 100%;
 }
 
-#add-top-nav {
+#add-top-nav/*, .timing-cards*/ {
   width: 100%;
   position: absolute;
   z-index: 1;
@@ -66,7 +66,6 @@ table {
   /*padding: 10px;*/
   border: 1px solid rgba(var(--card-body-bg));
   border: 1px solid rgba(var(--card-body-bg));
-
 }
 th {
   font-weight: bold;

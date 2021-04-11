@@ -33,10 +33,10 @@ firebase.initializeApp(firebaseConfig);
 global.firebase = firebase; //to access the firebase instance from the renderer process
 
 //To save class timing
-settings.setSync('setClassTime', {
-  data1: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-          "Unproductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-});
+// settings.setSync('setClassTime', {
+//   data1: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
+//           "Unproductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
+// });
 
 var isMainWindowClosed = false;
 
@@ -182,7 +182,7 @@ function createWindow () {
       else if(message == "STARTED"){
         try{
           mainWindow.webContents.send('tracking', true);
-          workerWindow.webContents.send('tracking', true);
+          workerWindow.webContents.send('tracking', true);  // Sent 2nd
         }catch(e){
           console.log(e);
           message = "KILL";
@@ -190,7 +190,7 @@ function createWindow () {
       }
       else if(message == "DB-INITS"){
         try {
-          workerWindow.webContents.send(message, true)
+          workerWindow.webContents.send(message, true)  // Sent 1st
         }catch(e){
           console.log(e);
           message = "KILL";

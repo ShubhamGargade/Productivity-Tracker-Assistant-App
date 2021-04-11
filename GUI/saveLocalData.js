@@ -26,11 +26,11 @@ class SaveLocalData {
     //To save class timing
     settings.setSync('setClassTime.dataClass.'+this.uid, {
       w:{Productive:{Business: initial_time, Computers:initial_time, Health:initial_time, News:initial_time, Recreation:initial_time, Science:initial_time, Sports:initial_time},
-      UnProductive:{Arts:initial_time, Games:initial_time, Home:initial_time, Reference:initial_time, Shopping:initial_time, Society:initial_time}},
+      Unproductive:{Arts:initial_time, Games:initial_time, Home:initial_time, Reference:initial_time, Shopping:initial_time, Society:initial_time}},
       s:{Productive:{Business:initial_time, Computers:initial_time, Health:initial_time, News:initial_time, Recreation:initial_time, Science:initial_time, Sports:initial_time},
-      UnProductive:{Arts:initial_time, Games:initial_time, Home:initial_time, Reference:initial_time, Shopping:initial_time, Society:initial_time}},
+      Unproductive:{Arts:initial_time, Games:initial_time, Home:initial_time, Reference:initial_time, Shopping:initial_time, Society:initial_time}},
       t:{Productive:{Business:initial_time, Computers:initial_time, Health:initial_time, News:initial_time, Recreation:initial_time, Science:initial_time, Sports:initial_time},
-      UnProductive:{Arts:initial_time, Games:initial_time, Home:initial_time, Reference:initial_time, Shopping:initial_time, Society:initial_time}}
+      Unproductive:{Arts:initial_time, Games:initial_time, Home:initial_time, Reference:initial_time, Shopping:initial_time, Society:initial_time}}
      });
   }
 

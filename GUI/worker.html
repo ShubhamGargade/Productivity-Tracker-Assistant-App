@@ -27,6 +27,7 @@
 		softObj = new showDataToWebSoftReport(soft);
 	}
 
+	// received 1st from main.js
 	ipcRenderer.on('DB-INITS', (event, message) => {
 		if(message==true){
 			// attach listeners to firebase nodes
@@ -41,6 +42,8 @@
 		}
     });
 
+
+	// received 2nd from main.js
 	ipcRenderer.on('tracking', (event, message) => {
 		console.log("tracking",message)
 		if(message==false){

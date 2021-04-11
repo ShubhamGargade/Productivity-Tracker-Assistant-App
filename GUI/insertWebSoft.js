@@ -45,7 +45,7 @@ class insertWebSoftReport{
     this.getwebSoftDic = settings.getSync('Dic.dataDic.'+currentUserId);
     console.log("Pura dic", this.getwebSoftDic);
     // tWebSoftProdtt = this.getwebSoftDic['t'+this.webOrSoft+'pt'];
-    totalTimeWS = this.getwebSoftDic['t'+this.webOrSoft+'tt'];
+    // totalTimeWS = this.getwebSoftDic['t'+this.webOrSoft+'tt'];
     // console.log("old tw or stt", tWebSoftProdtt);
     console.log("old ttt", totalTimeWS);
     // if(this.getwebSoftDic == null){
@@ -56,7 +56,7 @@ class insertWebSoftReport{
     // }
     console.log(settings.getSync('Dic.dataDic.'+currentUserId));
 
-    this.webSoftDic = this.getwebSoftDic[this.webOrSoft];
+    // this.webSoftDic = this.getwebSoftDic[this.webOrSoft];
 
     console.log('successful saved webSoftDic', this.webSoftDic);
 
@@ -87,10 +87,19 @@ class insertWebSoftReport{
     }
   }
 
-  togglePBAnimation(){
+  togglePBAnimation(toggleValue){
 
-    var pbAnimated = document.getElementsByClassName("progress-bar-animated")[0]
-    if(pbAnimated==null){
+    // var pbAnimated = document.getElementsByClassName("progress-bar-animated")[0]
+    // if(pbAnimated==null){
+    //   $(".progress-bar").addClass("progress-bar-animated");
+    //   $(".progress-bar").addClass("progress-bar-striped");
+    // }
+    // else{
+    //   $(".progress-bar").removeClass("progress-bar-animated");
+    //   $(".progress-bar").removeClass("progress-bar-striped"); 
+    // }
+
+    if(toggleValue=='true'){
       $(".progress-bar").addClass("progress-bar-animated");
       $(".progress-bar").addClass("progress-bar-striped");
     }

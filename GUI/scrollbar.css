@@ -11,13 +11,13 @@
 ::-webkit-scrollbar-thumb {
   border: 6px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
-  background-color: transparent;
+  background-color: rgba(var(--card-body-bg));
   border-radius: 10px;
 }
 
 
-.on-scrollbar::-webkit-scrollbar-track {
-  background-color: transparent;
+/*.on-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .on-scrollbar::-webkit-scrollbar {
@@ -30,4 +30,4 @@
   background-color: rgba(var(--card-body-bg));
   border-radius: 10px;
   transition-duration: 6000ms;
-}
+}*/

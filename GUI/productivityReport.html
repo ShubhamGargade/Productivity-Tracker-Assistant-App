@@ -6,47 +6,34 @@
 
     <title></title>
 
-        <script>window.$ = window.jQuery = require('jquery')</script>
+    <script>window.$ = window.jQuery = require('jquery')</script>
 
-        <script defer src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script defer src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
-        <script src="constants.js" charset="utf-8"></script>
-        <script src="initializeDb.js" charset="utf-8"></script>
-        <script src="productivityReport.js" charset="utf-8" defer></script>
-        <script src="change_theme.js" charset="utf-8"></script>
+    <script src="constants.js" charset="utf-8"></script>
+    <script src="initializeDb.js" charset="utf-8"></script>
+    <script src="productivityReport.js" charset="utf-8" defer></script>
+    <script src="change_theme.js" charset="utf-8"></script>
 
-        <script type="text/javascript">
-          $(function(){
-            $("#add-top-nav").load("navAfterlogin.html");
-            $("#add-side-nav").load("sideNavAfterlogin.html");
-          });
+    <script type="text/javascript">
+      $(function(){
+        $("#add-top-nav").load("navAfterlogin.html");
+        $("#add-side-nav").load("sideNavAfterlogin.html");
+      });
 
-          $(document).ready(function(){
-            $('#nav-brand').ready(function(){
-              $("#nav-brand").html("Productivity Report");
-            });
-          });
-        </script>
+      $(document).ready(function(){
+        $('#nav-brand').ready(function(){
+          $("#nav-brand").html("Productivity Report");
+        });
+      });
+    </script>
 
-        <link rel="stylesheet" type="text/css" href="common.css">
-        <link rel="stylesheet" type="text/css" href="scrollbar.css">
-
-
-        <!-- <style media="screen">
-
-         .main-container-productivity {
-           display: flex;
-           flex-direction: column;
-         }
-         .show-productivity-histogram{
-           /*background-color: lightyellow;*/
-           margin: 10px;
-         }
-        </style> -->
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="scrollbar.css">
 
   </head>
   <body>
@@ -65,7 +52,7 @@
 
               <div class="container-fluid">
 
-                <div class="row" style="background-color: rgba(var(--card-body-bg));padding-top: 20px;padding-bottom: 20px">
+                <div class="row">
                   <div class="col-8">
                     <h5>Past Productivity</h5>
                   </div>

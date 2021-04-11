@@ -5,29 +5,40 @@ all_charts = require("./all_charts");
 var Chart = require('chart.js');
 // const settings = require('electron-settings');
 var currentUserId = settings.getSync('key1.data');
+
 class showClassReport{
   constructor(webOrSoft){
     this.webOrSoft = webOrSoft;
     console.log("inside classreport");
     this.ctxP = document.getElementById('canvas-'+this.webOrSoft+'-Prod').getContext('2d');
-    this.ctxUnP = document.getElementById('canvas-'+this.webOrSoft+'-UnProd').getContext('2d');
+    this.ctxUnP = document.getElementById('canvas-'+this.webOrSoft+'-Unprod').getContext('2d');
     this.labelForDashboardProd = ["Business", "Computers", "Health", "News", "Recreation", "Science", "Sports"];
-    this.labelForDashboardUnProd = ["Arts", "Games", "Home", "Reference", "Shopping", "Society"];
-    this.dataProd = [];
-    this.dataUnProd = [];
+    this.labelForDashboardUnprod = ["Arts", "Games", "Home", "Reference", "Shopping", "Society"];
     this.graphType = "bar";
     this.showClassBar = document.getElementById('show-'+this.webOrSoft+'-bar-graph');
     this.showClassPie = document.getElementById('show-'+this.webOrSoft+'-pie-chart');
+    this.drawChartProd = new all_charts.AllCharts(this.ctxP, 'Productive Class', this.labelForDashboardProd, this.dataProd);
+    this.drawChartUnprod = new all_charts.AllCharts(this.ctxUnP, 'Unproductive Class', this.labelForDashboardUnprod, this.dataUnprod);
+    
+    this.listenUserChoice();
+
+    this.updateData();
+  }
+
+  updateData(){
+
     this.totalWTT = settings.getSync('Dic.dataDic.'+currentUserId+'.twtt');
     this.totalSTT = settings.getSync('Dic.dataDic.'+currentUserId+'.tstt');
     console.log(this.totalWTT);
-    console.log(this.totalWTT);
-    this.drawChartProd = new all_charts.AllCharts(this.ctxP, 'Productive Class', this.labelForDashboardProd, this.dataProd);
-    this.drawChartUnProd = new all_charts.AllCharts(this.ctxUnP, 'Unproductive Class', this.labelForDashboardUnProd, this.dataUnProd);
+    console.log(this.totalSTT);
+
     this.getClassData();
-    this.listenUserChoice();
+
     console.log("dataProd:", this.dataProd);
-    console.log("dataUnProd:", this.dataUnProd);
+    console.log("dataUnprod:", this.dataUnprod);
+
+    this.showReport();
+
   }
 
   listenUserChoice(){
@@ -42,39 +53,53 @@ class showClassReport{
   }
 
 
-
   showReport(){
     this.drawChartProd.setChart(this.graphType, this.dataProd);
-    this.drawChartUnProd.setChart(this.graphType, this.dataUnProd);
+    this.drawChartUnprod.setChart(this.graphType, this.dataUnprod);
   }
 
 
   getClassData(){
+
+    this.dataProd = [];
+    this.dataUnprod = [];
+
     var c;
     var prodClass = settings.getSync('setClassTime.dataClass.'+currentUserId+'.'+this.webOrSoft+'.Productive');
     console.log("prodClass Dict: ", prodClass);
+
+    var totalTime = '0-h 0-m 1-s';
+
+    if(this.webOrSoft=='w'){
+      totalTime = timeArith.calTime(this.totalWTT);
+    }
+    else if(this.webOrSoft=='s'){
+      totalTime = timeArith.calTime(this.totalSTT);
+    }
+    else{
+      totalTime = timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT);
+    }
+
     for(c in prodClass){
       if(prodClass[c] != ""){
-        console.log((timeArith.calTime(prodClass[c])/(timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT)))*100);
-        this.dataProd.push(((timeArith.calTime(prodClass[c])/(timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT)))*100).toFixed(2));
+        console.log((timeArith.calTime(prodClass[c])/totalTime)*100);
+        this.dataProd.push(((timeArith.calTime(prodClass[c])/totalTime)*100).toFixed(2));
       }
       else{
         this.dataProd.push("");
       }
     }
 
-    var unprodClass = settings.getSync('setClassTime.dataClass.'+currentUserId+'.'+this.webOrSoft+'.UnProductive');
-    console.log("prodClass Dict: ", unprodClass);
-    for(c in unprodClass){
-      if(unprodClass[c] != ""){
-        this.dataUnProd.push(((timeArith.calTime(unprodClass[c])/(timeArith.calTime(this.totalWTT)+timeArith.calTime(this.totalSTT)))*100).toFixed(2));
+    var UnprodClass = settings.getSync('setClassTime.dataClass.'+currentUserId+'.'+this.webOrSoft+'.Unproductive');
+    console.log("UnprodClass Dict: ", UnprodClass);
+    for(c in UnprodClass){
+      if(UnprodClass[c] != ""){
+        this.dataUnprod.push(((timeArith.calTime(UnprodClass[c])/totalTime)*100).toFixed(2));
       }
       else{
-        this.dataUnProd.push("");
+        this.dataUnprod.push("");
       }
     }
-
-    this.showReport();
   }
 }
 // var objReport = new showClassReport();
