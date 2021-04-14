@@ -2,7 +2,7 @@ const webSoftDetails = require("./insertwebSoft");
 const web = 'w';
 var webObj = new webSoftDetails.insertWebSoftReport(web);
 
-const currentUserId = settings.getSync('key1.data');
+const currentUserId = settings.getSync('user.uid');
 
 window.addEventListener('storage', function(e) { 
 

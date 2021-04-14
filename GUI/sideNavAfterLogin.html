@@ -9,13 +9,17 @@
       height: 100%;
       font-size: 120%;
       background-color: #000051;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .sidenav .navbar-brand{
       text-align: justify-all;
       width: 100%;
-      margin-bottom: 37%;
       cursor: default;
+      position: absolute;
+      z-index: 1;
+      background-color: #000051;
     }
 
     .sidenav .navbar-brand i{
@@ -34,44 +38,6 @@
       color: #b3e5fc;
       cursor: default;
       padding: 0;
-    }
-
-    .dd-item {
-      font-size: 15px;
-      padding-left: 21%;
-    }
-
-    /* Optional: Style the caret down icon */
-    .fa-angle-down {
-      float: right;
-      padding: 6px;
-    }
-    .fa-angle-up {
-      float: right;
-      padding: 6px;
-      display: none;
-      /*background-color: red;*/
-    }
-
-    .sidenav .nav-item .material-icons {
-      font-size: 28px;
-      display: block;
-      width: 18%;
-      float: left;
-    }
-
-    .sidenav .nav-link {
-      color: #b3e5fc;
-      /*border: 1px solid red;*/
-      /*padding: 5%;*/
-    }
-
-    .sidenav .nav-link:hover {
-      color: white;
-    }
-
-    .sidenav .nav-item {
-      padding-top: 8%;
     }
 
     #compact-sidebar-i, #enlarge-sidebar-i {
@@ -95,12 +61,62 @@
 
     }
 
+    .sidenav-items-list {
+      margin-top: 70%;
+      margin-bottom: 50%;
+    }
+
+    #live-reports-link{
+      padding-bottom: 6%;
+    }
+
+    .dd-link {
+      font-size: 15px;
+      padding-left: 26%;
+      margin-top: 6%;
+      margin-bottom: 6%;
+    }
+
+    /* Optional: Style the caret down icon */
+    .fa-angle-down {
+      float: right;
+      padding: 6px;
+    }
+
+    .fa-angle-up {
+      float: right;
+      padding: 6px;
+      display: none;
+      /*background-color: red;*/
+    }
+
+    .sidenav .nav-item .material-icons {
+      font-size: 28px;
+      display: block;
+      width: 18%;
+      float: left;
+    }
+
+    .sidenav .nav-link {
+      color: #82b3c9;
+      /*border: 1px solid red;*/
+      /*padding: 5%;*/
+    }
+
+    .sidenav .nav-link:hover {
+      color: #e6ffff;
+    }
+
+    .sidenav .nav-item {
+      padding-top: 8%;
+    }
+
     #null-link{
       display: none;
       cursor: default;
     }
 
-    .sidenav-label:not(.nocursor) {
+    .sidenav-label:not(.nocursor), .sidenav-dd-label:not(.nocursor) {
       cursor: pointer;
     }
 
@@ -114,7 +130,7 @@
 
     <i class="material-icons">track_changes</i>
     <label style="width: 100%;" class="sidenav-label nocursor">
-      <h1>Liv<strong style="font-weight: bold;">Trak</strong></h1>
+      <h1 style="color: #82b3c9;">Liv<strong style="font-weight: bold;color: #b3e5fc;">Trak</strong></h1>
     </label>
 
   </a>
@@ -122,58 +138,58 @@
   <i class="material-icons remove-circle-i" id="compact-sidebar-i">remove_circle</i>
   <i class="material-icons add-circle-i" id="enlarge-sidebar-i">add_circle</i>
 
-
-  <ul class="nav flex-column">
+  <ul class="nav flex-column sidenav-items-list">
     <li class="nav-item">
-      <a class="nav-link active" href="dashboard.html">
+      <a class="nav-link" id="dashboard-link" href="dashboard.html">
         <i class="material-icons">dashboard</i>
         <label class="sidenav-label">Dashboard</label>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="report-btn" data-toggle="collapse" href="#liveReports" role="button" aria-expanded="false" aria-controls="liveReports">
-        <i class="material-icons">assessment</i>
+      <a class="nav-link dd-header" id="live-reports-link" data-toggle="collapse" href="#liveReports" role="button" aria-expanded="false" aria-controls="liveReports">
+        <i class="material-icons">view_day</i>
         <label class="sidenav-label">Live Reports</label>
         <i class="fa fa-angle-down" id="angle-down"></i>
         <i class="fa fa-angle-up" id="angle-up"></i>
       </a>
-      <div class="collapse" id="liveReports">
-        <a class="nav-link dd-item" id="null-link" href="#"><label></label>
+      <div class="collapse" id="liveReports" aria-labelledby="live-reports-link">
+        <a class="nav-link dd-link" id="null-link" href="#"><label></label>
         </a>
-        <a class="nav-link dd-item" href="webReport.html">
-          <label class="sidenav-label" id="sn-wt">Website Tracking</label>
+        <a class="nav-link dd-link" id="sn-wt-link" href="webReport.html">
+          <label class="sidenav-dd-label" id="sn-wt">Website Tracking</label>
         </a>
 
-          <a class="nav-link dd-item" href="softwareReport.html">
-            <label class="sidenav-label" id="sn-st">Software Tracking</label>
-          </a>
+        <a class="nav-link dd-link" id="sn-st-link" href="softwareReport.html">
+          <label class="sidenav-dd-label" id="sn-st">Software Tracking</label>
+        </a>
 
-          <a class="nav-link dd-item" href="totalClassReport.html">
-            <label class="sidenav-label" id="sn-st">Total Classification Report</label>
-          </a>
+        <a class="nav-link dd-link" id="sn-tc-link" href="totalClassReport.html">
+          <label class="sidenav-dd-label" id="sn-tc">Total Classification</label>
+        </a>
 
-          <a class="nav-link dd-item" href="webClassReport.html">
-            <label class="sidenav-label" id="sn-st">Web Classification Report</label>
-          </a>
+        <a class="nav-link dd-link" id="sn-wc-link" href="webClassReport.html">
+          <label class="sidenav-dd-label" id="sn-wc">Web Classification</label>
+        </a>
 
-          <a class="nav-link dd-item" href="softClassReport.html">
-            <label class="sidenav-label" id="sn-st">Soft Classification Report</label>
-          </a>
-
-          <a class="nav-link dd-item" href="productivityReport.html">
-            <label class="sidenav-label" id="sn-pty">Productivity</label>
-          </a>
-        </div>
-      </li>
-
+        <a class="nav-link dd-link" id="sn-sc-link" href="softClassReport.html">
+          <label class="sidenav-dd-label" id="sn-sc">Soft Classification</label>
+        </a>
+      </div>
+    </li>
     <li class="nav-item">
-      <a class="nav-link" href="settings.html">
+      <a class="nav-link" id="past-prod-link" href="productivityReport.html">
+        <i class="material-icons">assessment</i>
+        <label class="sidenav-label">Past Reports</label>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="settings-link" href="settings.html">
         <i class="material-icons">settings</i>
         <label class="sidenav-label">Settings</label>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" id="toSignOut">
+      <a class="nav-link" id="logout-link" href="#">
         <i class="material-icons">logout</i>
         <label class="sidenav-label">Log Out</label>
       </a>
@@ -184,7 +200,7 @@
 
   var dropdown_i_down = document.getElementById("angle-down");
   var dropdown_i_up = document.getElementById("angle-up");
-  var report_btn = document.getElementById("report-btn");
+  var report_btn = document.getElementById("live-reports-link");
 
   report_btn.addEventListener("click", function(){
     if(dropdown_i_down.style.display == "none"){
@@ -206,6 +222,10 @@
       settings.setSync('key', {
         data: 'No'
       });
+
+      // unset user data from settings
+      settings.unsetSync('user');
+
       console.log("HI SIGNOUT HERE INSIDE");
       console.log("Signout successful");
       window.location.replace("index.html");
@@ -215,7 +235,7 @@
     });
   }
 
-  const userSignOut = document.getElementById("toSignOut");
+  const userSignOut = document.getElementById("logout-link");
     userSignOut.addEventListener("click", (e) => {
       console.log("HI SIGNOUT HERE");
 
@@ -261,6 +281,25 @@
         $("#null-link").hide();
         $(".sidenav .navbar-brand").css({"margin-bottom":"37%"});
 
+      });
+
+      var active_tab_id = localStorage.getItem("active_tab");
+      $("#"+active_tab_id).css({"color": "#e6ffff"});
+      if($("#"+active_tab_id).hasClass("dd-link")){
+        var dd_id = $("#"+active_tab_id).parent().attr("aria-labelledby");
+        $("#"+dd_id).css({"color": "#e6ffff"});
+      }
+
+      $(".nav-link").on("click",function(){
+
+        if($(this).hasClass("dd-header")==false){
+          // $(".nav-link").css("color", "#82b3c9");
+          // $(this).css("color", "#b3e5fc");
+          console.log("Get clicked id: ",$(this).attr("id"))
+          active_tab_id = $(this).attr("id");
+          localStorage.setItem("active_tab", active_tab_id);
+        }
+          
       });
 
   });

@@ -1,8 +1,6 @@
 
 var firebase = require("firebase/app");
 
-var Chart = require('chart.js');
-
 // Add the Firebase products that you want to use
 require("firebase/auth");
 require("firebase/database");
@@ -10,16 +8,14 @@ require("firebase/database");
 const time_arith = require("./time_arith");
 var timeArith = new time_arith.TimeArith();
 
-var currentUserId = settings.getSync('key1.data');
+var currentUserId = settings.getSync('user.uid');
 
 console.log('Outside',currentUserId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Signed in");
     // console.log(user.uid);
-    settings.setSync('key1', {
-      data: user.uid
-    });
+    settings.setSync('user.uid', user.uid);
 
     var currentUserId = user.uid;
     console.log('Inside auth',currentUserId);
@@ -31,7 +27,7 @@ var all_charts = require("./all_charts");
 class showDataProductivity {
   constructor() {
     this.ctx = document.getElementById('myChartProductivityPast').getContext('2d');
-    this.data;
+    this.datasets;
 
     this.bg = document.getElementById("show-bar-graph");
     this.lg = document.getElementById("show-line-graph");
@@ -51,21 +47,21 @@ class showDataProductivity {
     });
   }
 
-  showReportProductivityPast(productivityDailyDates, productivityDailyPer){
+  showReportProductivityPast(productivityDailyDates, datasets){
     this.labelForProductivityPast = productivityDailyDates;
-    console.log(productivityDailyPer);
-    this.data = productivityDailyPer;
-    console.log('datasetatxaxis', this.data);
-    this.productivityChartPast = new all_charts.AllCharts(this.ctx, 'Weekly Productivity', this.labelForProductivityPast, this.data)
+    console.log(datasets);
+    this.datasets = datasets;
+    console.log('datasetatxaxis', this.datasets);
+    this.productivityChartPast = new all_charts.AllCharts(this.ctx, 'Weekly Productivity', this.labelForProductivityPast, this.datasets, this.graphType)
     this.showReport();
   }
 
   showReport(){
-    this.productivityChartPast.setChart(this.graphType, this.data);
+    this.productivityChartPast.setChart({graphType: this.graphType, datasets: this.datasets});
   }
 
 
-  sortDates(keysDatesOfWeek, arrayOfDailyDatesPer){
+  sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer){
     var i;
     var j;
     var len = keysDatesOfWeek.length - 1;
@@ -81,11 +77,17 @@ class showDataProductivity {
         var wdj = keysDatesOfWeek[j].split('-');
         if(min > parseInt(wdj[2])){
           tempDate = keysDatesOfWeek[j];
-          tempDatePer = arrayOfDailyDatesPer[j];
           keysDatesOfWeek[j] = keysDatesOfWeek[i];
-          arrayOfDailyDatesPer[j] = arrayOfDailyDatesPer[i];
           keysDatesOfWeek[i] = tempDate;
-          arrayOfDailyDatesPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesProdPer[j];
+          arrayOfDailyDatesProdPer[j] = arrayOfDailyDatesProdPer[i];
+          arrayOfDailyDatesProdPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesUnprodPer[j];
+          arrayOfDailyDatesUnprodPer[j] = arrayOfDailyDatesUnprodPer[i];
+          arrayOfDailyDatesUnprodPer[i] = tempDatePer;
+
           var wdi = keysDatesOfWeek[i].split('-');
           min = parseInt(wdi[2]);
         }
@@ -99,12 +101,19 @@ class showDataProductivity {
       for(j=i+1;j<=len;j++){
         var wdj = keysDatesOfWeek[j].split('-');
         if(min > parseInt(wdj[1])){
+
           tempDate = keysDatesOfWeek[j];
-          tempDatePer = arrayOfDailyDatesPer[j];
           keysDatesOfWeek[j] = keysDatesOfWeek[i];
-          arrayOfDailyDatesPer[j] = arrayOfDailyDatesPer[i];
           keysDatesOfWeek[i] = tempDate;
-          arrayOfDailyDatesPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesProdPer[j];
+          arrayOfDailyDatesProdPer[j] = arrayOfDailyDatesProdPer[i];
+          arrayOfDailyDatesProdPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesUnprodPer[j];
+          arrayOfDailyDatesUnprodPer[j] = arrayOfDailyDatesUnprodPer[i];
+          arrayOfDailyDatesUnprodPer[i] = tempDatePer;
+
           var wdi = keysDatesOfWeek[i].split('-');
           min = parseInt(wdi[1]);
         }
@@ -118,12 +127,19 @@ class showDataProductivity {
       for(j=i+1;j<=len;j++){
         var wdj = keysDatesOfWeek[j].split('-');
         if(min > parseInt(wdj[0]) && wdi[1] == wdj[1]){
+
           tempDate = keysDatesOfWeek[j];
-          tempDatePer = arrayOfDailyDatesPer[j];
           keysDatesOfWeek[j] = keysDatesOfWeek[i];
-          arrayOfDailyDatesPer[j] = arrayOfDailyDatesPer[i];
           keysDatesOfWeek[i] = tempDate;
-          arrayOfDailyDatesPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesProdPer[j];
+          arrayOfDailyDatesProdPer[j] = arrayOfDailyDatesProdPer[i];
+          arrayOfDailyDatesProdPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesUnprodPer[j];
+          arrayOfDailyDatesUnprodPer[j] = arrayOfDailyDatesUnprodPer[i];
+          arrayOfDailyDatesUnprodPer[i] = tempDatePer;
+
           console.log(keysDatesOfWeek);
           var wdi = keysDatesOfWeek[i].split('-');
           min = parseInt(wdi[0]);
@@ -132,21 +148,74 @@ class showDataProductivity {
     }
 
     //remove current date's productivity
-    keysDatesOfWeek.pop();
-    arrayOfDailyDatesPer.pop();
-
+    
+    var currentDate = this.getCurrentDate();
+    if(currentDate == keysDatesOfWeek[keysDatesOfWeek.length - 1]){
+      keysDatesOfWeek.pop();
+      arrayOfDailyDatesProdPer.pop();
+      arrayOfDailyDatesUnprodPer.pop();
+    }
+    
     return {
-      keysDatesOfWeek: keysDatesOfWeek,
-      arrayOfDailyDatesPer: arrayOfDailyDatesPer
+      keysDatesOfWeek: this.joinWithSlash(keysDatesOfWeek),
+      arrayOfDailyDatesProdPer: arrayOfDailyDatesProdPer,
+      arrayOfDailyDatesUnprodPer: arrayOfDailyDatesUnprodPer,
     };
 
   }
+
+  getCurrentDate(){
+    var cD = new Date().getDate().toString();
+    var cM = (parseInt(new Date().getMonth())+1).toString();
+    var cY = new Date().getFullYear().toString().substr(2,2);
+    console.log('current month', cM);
+    if(cM.length == 1){
+      cM = "0"+cM;
+    }
+    var currentDate = cD+'-'+cM+'-'+cY;
+
+    return currentDate;
+  }
+
+  joinWithSlash(arr){
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].split('-').join('-');
+    }
+    return arr;
+  }
+
   getEachDateTimePer(timeVal){
     this.tptInSec = timeArith.calTime(timeVal['tpt']).toFixed(2);
     this.tttInSec = timeArith.calTime(timeVal['ttt']).toFixed(2);
     // console.log(this.tptInSec);
     // console.log(this.tttInSec);
     return ((this.tptInSec / this.tttInSec)*100).toFixed(2);
+  }
+
+  getDatasets(sortedArrayDates){
+
+    var datasets = [];
+
+    datasets = [
+      {
+        label: 'Productive %',
+        fill: '+1',
+        data: sortedArrayDates.arrayOfDailyDatesProdPer,
+        backgroundColor: "rgba(75, 192, 192, 0.5)", 
+        borderColor: "rgb(75, 192, 192)", 
+        borderWidth: 1
+      },
+      {
+        label: 'Unproductive %',
+        fill: 'start',
+        data: sortedArrayDates.arrayOfDailyDatesUnprodPer,
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(255, 99, 132)", 
+        borderWidth: 1
+      },
+    ]
+    return datasets;
+
   }
 
   listenProductivityData() {
@@ -160,16 +229,20 @@ class showDataProductivity {
         console.log(keysDatesOfWeek);
         // console.log(dataUthId[keysDatesOfWeek[0]]);
         var dates;
-        var arrayOfDailyDatesPer = [];
+        var arrayOfDailyDatesProdPer = [];
+        var arrayOfDailyDatesUnprodPer = [];
 
         for(dates in keysDatesOfWeek){
 
           console.log(dataUthId[keysDatesOfWeek[dates]]);
-          arrayOfDailyDatesPer[dates] = this.getEachDateTimePer(dataUthId[keysDatesOfWeek[dates]]);
+          arrayOfDailyDatesProdPer[dates] = this.getEachDateTimePer(dataUthId[keysDatesOfWeek[dates]]);
+          arrayOfDailyDatesUnprodPer[dates] = (100 - arrayOfDailyDatesProdPer[dates]).toFixed(2);
         }
-        var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesPer);
-        this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, sortedArrayDates.arrayOfDailyDatesPer);
-        // console.log(arrayOfDailyDatesPer);
+
+        var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer);
+        console.log("arrayOfDailyDatesProdPer: ",sortedArrayDates.arrayOfDailyDatesProdPer);
+        this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, this.getDatasets(sortedArrayDates));
+        // console.log(arrayOfDailyDatesProdPer);
       }
     });
   }

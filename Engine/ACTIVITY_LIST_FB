@@ -1,5 +1,5 @@
-25
-1
+41
+9
 Science
 False
 True
@@ -14,7 +14,7 @@ True
 True
 electron
 Hidden Worker
-0-h 0-m 13-s
+0-h 0-m 16-s
 None
 Science
 False
@@ -22,7 +22,7 @@ True
 True
 electron
 Dashboard
-0-h 1-m 44-s
+0-h 0-m 3-s
 None
 Computers
 False
@@ -30,7 +30,7 @@ True
 True
 Docker Desktop
 Container instance
-0-h 0-m 27-s
+0-h 0-m 2-s
 None
 Computers
 False
@@ -54,7 +54,7 @@ False
 True
 Microsoft Store
 Microsoft Store
-0-h 0-m 8-s
+0-h 0-m 11-s
 None
 Computers
 False
@@ -78,7 +78,7 @@ True
 True
 sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\classReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 3-s
+0-h 0-m 1-s
 None
 Computers
 False
@@ -86,7 +86,7 @@ True
 True
 sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\classReport.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 6-s
+0-h 1-m 13-s
 None
 Business
 False
@@ -118,7 +118,7 @@ True
 True
 sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webSoftDetails.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 3-m 44-s
+0-h 0-m 1-s
 None
 Health
 False
@@ -142,7 +142,7 @@ True
 True
 electron
 Settings
-0-h 0-m 11-s
+0-h 0-m 27-s
 None
 Science
 False
@@ -200,11 +200,203 @@ NortonSecurity
 Norton Security Ultra
 0-h 0-m 1-s
 None
+Arts
+False
+False
+True
+Docker Desktop
+Container list
+0-h 1-m 37-s
+None
+Science
+False
+True
+True
+electron
+Productivity_Tracker
+0-h 0-m 4-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\all_charts.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 47-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 1-m 16-s
+None
+Society
+False
+False
+True
+sublime_text
+Save As
+0-h 2-m 11-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\navAfterlogin.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 4-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 12-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 47-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\totalClassReport.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 33-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\all_charts.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 25-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\softClassReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 5-m 54-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webSoftDetails.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 1-m 8-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\softClassReport.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 54-s
+None
+Games
+False
+False
+True
+explorer
+File Explorer
+0-h 0-m 1-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\main.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 31-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\navAfterlogin.html • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 7-m 40-s
+None
 Computers
 True
 True
 True
 console-firebase-google
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 10-s
+0-h 0-m 12-s
 Sign in - Google Accounts
+Business
+True
+True
+True
+licindia
+https://licindia.in - Mozilla Firefox
+0-h 0-m 11-s
+Life Insurance Corporation of India - Home
+Reference
+True
+False
+True
+passportindia-gov
+https://www.passportindia.gov.in/AppOnlineProject/welcomeLink# - Mozilla Firefox
+0-h 0-m 29-s
+Passport Seva Home | Indian Passport | Passport | Passport Seva Project
+Computers
+True
+True
+True
+github
+https://github.com/Rohan-RPJ/Productivity-Tracker-Assistant-App/blob/main/GUI/all_charts.js - Mozilla Firefox
+0-h 0-m 1-s
+Page not found · GitHub · GitHub
+Arts
+True
+False
+True
+blog-bitsrc-io
+https://blog.bitsrc.io/javascript-why-named-arguments-are-better-than-positional-arguments-9b15ab3155ef - Mozilla Firefox
+0-h 0-m 2-s
+JavaScript: Why Named Arguments are Better than Positional Arguments | by Aditya Agarwal | Bits and Pieces
+Computers
+True
+True
+True
+chartjs
+https://www.chartjs.org/docs/latest/samples/bar/horizontal.html - Mozilla Firefox
+0-h 0-m 9-s
+Horizontal Bar Chart | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://www.chartjs.org/docs/latest/samples/legend/position.html - Mozilla Firefox
+0-h 0-m 1-s
+Position | Chart.js
+Reference
+True
+False
+True
+stackoverflow
+https://stackoverflow.com/questions/34913675/how-to-iterate-keys-values-in-javascript - Mozilla Firefox
+0-h 0-m 3-s
+dictionary - How to iterate (keys, values) in JavaScript? - Stack Overflow
+Computers
+True
+True
+True
+w3schools
+https://www.w3schools.com/jsref/met_loc_reload.asp - Mozilla Firefox
+0-h 0-m 1-s
+Location reload() Method

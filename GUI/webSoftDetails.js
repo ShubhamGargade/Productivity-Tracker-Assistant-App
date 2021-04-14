@@ -11,14 +11,14 @@ var appSettings = new app_settings.AppSettings();
 
 // var tWebSoftProdtt;
 var totalTimeWS;
-var currentUserId = settings.getSync('key1.data');
+var currentUserId = settings.getSync('user.uid');
 
 
 console.log('Outside',currentUserId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Signed in");
-    appSettings.setSyncSettings('key1.data', user.uid);
+    appSettings.setSyncSettings('user.uid', user.uid);
 
     var currentUserId = user.uid;
     console.log('Inside auth',currentUserId);
@@ -128,7 +128,7 @@ class showDataToWebSoftReport{
 
                 // change the value in local storage which will be listened in other file
                 // by adding listener to changes in local storage
-                localStorage.setItem(currentUserId+this.webOrSoft+"newDataChanged", webSoftProd["key"]+"-*-"+webSoftProd["t"+this.webOrSoft+"pt"]);
+                localStorage.setItem(currentUserId+this.webOrSoft+"newDataChanged", webSoftProd["key"]+"-*-p-*-"+webSoftProd["t"+this.webOrSoft+"pt"]);
               });
               console.log('Inside if prod',snapshot2.val()['tmt']);
             }
@@ -187,7 +187,7 @@ class showDataToWebSoftReport{
 
                 // change the value in local storage which will be listened in other file
                 // by adding listener to changes in local storage
-                localStorage.setItem(currentUserId+this.webOrSoft+"newDataChanged", webSoftUnProd["key"]+"-*-"+webSoftUnProd["t"+this.webOrSoft+"pt"]);
+                localStorage.setItem(currentUserId+this.webOrSoft+"newDataChanged", webSoftUnProd["key"]+"-*-up-*-"+webSoftUnProd["t"+this.webOrSoft+"pt"]);
             });
               // document.getElementById(webSoftUnProd).cells[3].innerHTML = snapshot4.val()['tmt'];
                                                                                      //storing data in local

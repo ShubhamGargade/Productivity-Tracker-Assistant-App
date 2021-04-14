@@ -20,13 +20,13 @@
 
     $(document).ready(function(){
       $('#nav-brand').ready(function(){
-        $("#nav-brand").html("Website Report");
+        $("#nav-brand").html("Live Reports > Website Report");
       });
     });
     </script>
 
     <script src="constants.js" charset="utf-8"></script>
-    <script src="change_theme.js" charset="utf-8"></script>
+    <script src="change_theme.js" charset="utf-8" defer></script>
     <script src="initializeDb.js" charset="utf-8" defer></script>
 
     <script src="webReport.js" charset="utf-8" defer></script>
@@ -57,7 +57,7 @@
             <div class="main-content" id="web-report-middle-content">
               <div class="container-fluid">
 
-                <div class="row">
+                <div class="row main-content-top-row">
                   <div class="col">
                     <div class="card mb-3" style="max-width: 18rem;background-color: #e91e63;color: white;">
                       <div class="card-body">
@@ -111,6 +111,7 @@
                     </table>
                   </div>
                 </div>
+
               </div>
             </div>
           </section>

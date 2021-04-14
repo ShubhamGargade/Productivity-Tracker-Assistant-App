@@ -38,7 +38,25 @@ global.firebase = firebase; //to access the firebase instance from the renderer 
 //           "Unproductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
 // });
 
-var isMainWindowClosed = false;
+
+function createHiddenWindow(){
+  // create hidden worker window
+  const workerWindow = new BrowserWindow({
+    // show: false,
+
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      nativeWindowOpen: true,
+      // worldSafeExecuteJavaScript: true,
+      // contextIsolation: true
+    }
+  });
+
+  return workerWindow;
+}
+
 
 function createWindow () {
   // Create the browser window.
@@ -69,6 +87,7 @@ function createWindow () {
      localStorage.setItem('p_bar_bg_light1', '#e9ecef');
      localStorage.setItem('p_bar_bg_dark1', '#575581');
      localStorage.setItem('p_bar_bg_dark2', '#387372');
+     localStorage.setItem('active_tab', 'home-link');
     `
     , true)
   .then(result => {
@@ -101,26 +120,19 @@ function createWindow () {
   }
 
   // create hidden worker window
-  const workerWindow = new BrowserWindow({
-    // show: false,
-
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
-      enableRemoteModule: true,
-      nativeWindowOpen: true,
-      // worldSafeExecuteJavaScript: true,
-      // contextIsolation: true
-    }
-  });
-  workerWindow.loadFile('worker.html');
-
-  // In main process.
+  var workerWindow;
+  
+  //
   const { ipcMain } = require('electron');
   var userRefreshToken = null;
 
   ipcMain.on('async-start-tracking-message', (event, arg) => {
     console.log(arg);
+
+    // start hidden worker window in background
+    workerWindow = createHiddenWindow();
+    workerWindow.loadFile('worker.html');
+
     const result = startTracking();
 
     return result;
@@ -190,7 +202,7 @@ function createWindow () {
       }
       else if(message == "DB-INITS"){
         try {
-          workerWindow.webContents.send(message, true)  // Sent 1st
+          workerWindow.webContents.send('DB-INITS', true)  // Sent 1st
         }catch(e){
           console.log(e);
           message = "KILL";
@@ -214,13 +226,11 @@ function createWindow () {
               console.log(e);
             }
 
-            if(isMainWindowClosed){
-              try{
-                workerWindow.close();
-              }
-              catch(e){
-                console.log(e);
-              }
+            try{
+              workerWindow.close();
+            }
+            catch(e){
+              console.log(e);
             }
 
           });
@@ -258,13 +268,11 @@ function createWindow () {
           // console.log(e);
         }
 
-        if(isMainWindowClosed){
-          try{
-            workerWindow.close();
-          }
-          catch(e){
-            // console.log(e);
-          }
+        try{
+          workerWindow.close();
+        }
+        catch(e){
+          // console.log(e);
         }
       }
   }
@@ -273,7 +281,6 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
-    isMainWindowClosed = true;
     stopTracking();
   })
 

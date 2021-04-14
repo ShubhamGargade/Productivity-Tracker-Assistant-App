@@ -178,10 +178,19 @@ span.psw {
 
         var user = userCredential.user;
 
-        // store email in local storage
-        localStorage.setItem('email-name', email);
+        settings.setSync('user.uid', user.uid);
+        settings.setSync('user.email', user.email);
 
-        document.getElementById("login-form").submit();
+        firebase.database().ref().child('users').child(user.uid).get().then((snapshot) => {
+
+          userData = snapshot.val();
+          settings.setSync('user.fname', userData.fn);
+          settings.setSync('user.lname', user.ln);
+
+          document.getElementById("login-form").submit();
+
+        });
+
       })
       .catch((error) => {
         var errorCode = error.code;

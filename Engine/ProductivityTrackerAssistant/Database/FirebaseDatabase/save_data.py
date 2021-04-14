@@ -36,6 +36,8 @@ initial_time = time_arith.initial_time
 date_format = "%d-%m-%y"
 separator_str = "-*-"
 
+total_days_history = 30
+
 # A list of class into which websites are categorized
 productive=[c for i,c in PRODUCTIVE_STR.items()]
 unproductive=[c for i,c in UNPRODUCTIVE_STR.items()]
@@ -424,7 +426,7 @@ class SaveData:
 
 		else:
 
-			if len(ind_day) > 7:
+			if len(ind_day) > total_days_history:
 
 				#1 update all_days tracking times
 
@@ -536,7 +538,7 @@ class SaveData:
 
 	def remove_older_tracking_times_from_uth(self):
 		"""
-			Get all ind_day dates and remove all nodes which are older than last 7 days from current.
+			Get all ind_day dates and remove all nodes which are older than last total_days_history days from current.
 			While removing nodes, simultaneously subtract times value from att and update att.
 		"""
 
@@ -560,7 +562,7 @@ class SaveData:
 
 			o_date = datetime.strptime(old_date, date_format)
 
-			if (c_date - o_date).days >= 7:
+			if (c_date - o_date).days >= total_days_history:
 				# store tracking times in variables before deleteing
 
 				old_tracking_times = retrieve_tracking_history.get_ind_day_tracking_times(old_date)

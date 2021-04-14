@@ -11,16 +11,14 @@ require("firebase/database");
 const time_arith = require("./time_arith");
 var timeArith = new time_arith.TimeArith();
 
-var currentUserId = settings.getSync('key1.data');
+var currentUserId = settings.getSync('user.uid');
 
 console.log('Outside',currentUserId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Signed in");
     // console.log(user.uid);
-    settings.setSync('key1', {
-      data: user.uid
-    });
+    settings.setSync('user.uid', user.uid);
 
     var currentUserId = user.uid;
     console.log('Inside auth',currentUserId);
@@ -47,11 +45,12 @@ var all_charts = require("./all_charts");
 class showDataToDashboard {
     constructor(){
       this.ctx = document.getElementById('myChartDashboard').getContext('2d');
-      this.labelForDashboard = ['Productive', 'Unproductive'];
+      this.labelForDashboard = [settings.getSync('lastTrackingDate.dataLtd.'+currentUserId)];
       this.graphType = "bar";
 
-      var data = [prodPerctVar, unprodPerctVar];
-      this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, data)  // dChart1 => dashboard Chart for Productivity Unproductivity
+      var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
+
+      this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChart1 => dashboard Chart for Productivity Unproductivity
 
 
       this.showDashboardBarGraph = document.getElementById('show-bar-graph');
@@ -89,10 +88,38 @@ class showDataToDashboard {
       this.initFromDB();
     }
 
+    getDatasets(data){
+
+      var datasets = [];
+
+      datasets = [
+        {
+          label: 'Productive %',
+          fill: '+1',
+          data: [data.prodPercent],
+          backgroundColor: "rgba(75, 192, 192, 0.5)", 
+          borderColor: "rgb(75, 192, 192)", 
+          borderWidth: 1
+        },
+        {
+          label: 'Unproductive %',
+          fill: 'start',
+          data: [data.unprodPercent],
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          borderColor: "rgb(255, 99, 132)", 
+          borderWidth: 1
+        },
+      ]
+
+      return datasets;
+
+    }
+
     showReportDashboard(){
 
-        var data = [prodPerctVar, unprodPerctVar]
-        this.dChartP.setChart(this.graphType, data);
+        var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
+
+        this.dChartP.setChart({graphType: this.graphType, datasets: this.getDatasets(data)});
 
     }
 

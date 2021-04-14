@@ -23,11 +23,20 @@
     padding-bottom: 0.3%;
     border-top: 1px solid lightgrey;
   }
+
   .navbar .navbar-brand {
     color: var(--color);
     font-size: 23px;
     font-weight: bold;
+    text-transform: uppercase;
+    cursor: default;
   }
+
+  .navbar .navbar-brand:hover,
+  .navbar .navbar-brand:focus {
+    color: var(--color);
+  }
+
   .navbar .navbar-collapse .nav-item .nav-link {
     color: black;
     padding: 0;
@@ -124,7 +133,7 @@
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item active">
-            <a class="nav-link" href="homeAfterLogin.html"><i class="fa fa-home" id="home-i"></i></a>
+            <a class="nav-link" id="home-link" href="homeAfterLogin.html"><i class="fa fa-home" id="home-i"></i></a>
           </li>
 
           <li class="nav-item" id="tracking-btn" style="padding-top: 1%;">
@@ -160,10 +169,31 @@
   <!-- <div class="nd-6"></div> -->
   <!-- <div class="nd-7"></div> -->
 </div>
+<div class="alert alert-success" id="show-ltd" role="alert" style="border-radius: 0; padding: 0rem 1.25rem;text-align: center; display: none;">
+  <strong><span id="tracking-date-text"></span></strong> - <a href="#" class="alert-link" id="ltd"></a>
+</div>
 
 <script defer>
-  document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
+  document.getElementById("showUser").innerHTML = settings.getSync("user.email");
 
+  function setLtdInHtml(){
+    var ltd = settings.getSync('lastTrackingDate.dataLtd.'+settings.getSync('user.uid'));
+    if(ltd != null){
+      document.getElementById("ltd").innerHTML = ltd;
+      $("#show-ltd").show();
+      $(".main-content-top-row").css("padding-top","60px");
+
+      if(sessionStorage.tracking=="on" || sessionStorage.tracking=="starting"){
+        document.getElementById("tracking-date-text").innerHTML = "Current Tracking Date";
+      }
+      else{
+        document.getElementById("tracking-date-text").innerHTML = "Last Tracking Date";
+      }
+    }
+  }
+
+  setLtdInHtml();
+  
 </script>
 
 <script type="text/javascript" defer>
@@ -215,9 +245,13 @@
     function disableTrackingBtn(val){
       if(val){
         $("#toggle-tracking-event").bootstrapToggle('disable');
+        $("#tracking-btn .toggle-on").css('cursor', 'progress');
+        $("#tracking-btn .toggle-off").css('cursor', 'progress');
       }
       else{
         $("#toggle-tracking-event").bootstrapToggle('enable');
+        $("#tracking-btn .toggle-on").css('cursor', 'pointer');
+        $("#tracking-btn .toggle-off").css('cursor', 'pointer');
       }
     }
 
@@ -238,11 +272,12 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log("Signed in");
+        // const currentUserId = settings.getSync('user.uid');
 
-        if(localStorage.getItem("email-name")==null){
-          // store email in local storage
-          localStorage.setItem('email-name', user.email);
-          document.getElementById("showUser").innerHTML = localStorage.getItem("email-name");
+        if(settings.getSync("user.email")==null){
+          // store email in settings
+          settings.setSync('user.email', user.email);
+          document.getElementById("showUser").innerHTML = settings.getSync("user.email");
         }
         ipcRenderer.invoke('async-set-user-refresh-token', user.refreshToken)
           .then((result) => {
@@ -290,13 +325,30 @@
     
         if($("#toggle-tracking-event").parent().hasClass("off") == false){
           $("#toggle-tracking-event").parent().addClass("off");
+          $("#toggle-tracking-event").parent().removeClass("btn-warning");
+          
           changeBtnTheme();
-
         }
+
+        setLtdInHtml();
 
       }
       else{
         sessionStorage.setItem("tracking", "on");
+
+        // reload if current date(stored in settings is equal to ltd(stored in innerHtml of ltd))
+        var ltd = settings.getSync('lastTrackingDate.dataLtd.'+settings.getSync('user.uid'));
+        var ltdInHtml = null;
+        try{
+          var ltdInHtml = document.getElementById("ltd").innerHTML;
+        }catch(e){}
+
+        if (ltd != null && ltd != ltdInHtml) {
+          location.reload();
+        }
+
+        setLtdInHtml();
+
       }
       disableTrackingBtn(false);
     });

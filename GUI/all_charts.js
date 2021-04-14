@@ -1,21 +1,14 @@
 
-var current_theme = settings.getSync("current_theme");
-var gridColor = "#fafafa";
-if(current_theme=="dark"){
-  gridColor = "#455a64"
-}
-else{
-  gridColor = "#eeeeee"
-}
+const Chart = require('chart.js')
 
 class AllCharts {
 
-  constructor(ctx, chartLabel, datasetLabels, data, graphType="bar"){
+  constructor(ctx, chartLabel, datasetLabels, datasets, graphType){
 
     this.ctx = ctx;
     this.chartLabel = chartLabel;
     this.datasetLabels = datasetLabels;
-    this.datasets =  [{
+    this.data =  [{
         label: this.chartLabel,
         backgroundColor: ['#27ae60', '#27ae60', '#27ae60', '#27ae60', '#27ae60', '#27ae60', '#27ae60'],
         pointBackgroundColor: 'purple',
@@ -25,102 +18,157 @@ class AllCharts {
         // barThickness: 6,
         // maxBarThickness: 8,
         // minBarLength: 8,
-        data: data
+        datasets: datasets
     }];
-    this.setChart(graphType, data);
+
+    const config = {};
+
+    this.setChart(graphType, datasets);
   }
 
   destroyChart(){
     try {
-      this.stackedLine.destroy();
+      this.chart.destroy();
       console.log("Destryoed")
     } catch (e) {
       console.log(e);
     }
   }
 
-  setChart(graphType, data, options={}){
+  setOptions(graphType){
 
-    this.destroyChart();
-    this.options = {};
+    this.options = {
+      scales: {
+        x: {
+            min: 0,
+            max: 100,
+            display: true,
+            grid: {
+            // display: false,
+            color: gridColor,
+          },
+          scaleLabel: {
+            // display: true,
+            // labelString: 'Month',
+          },
+          ticks: {
+            minRotation: 45,
+            color: textColor,
+            font: {
+              size: textSize
+            }
+          }
+        },
+        y: {
+          min: 0,
+          max: 100,
+          display: true,
+          grid: {
+            // display: false,
+            color: gridColor,
+          },
+          scaleLabel: {
+            // display: true,
+            // labelString: 'Value'
+          },
+          ticks: {
+            beginAtZero: true,
+            color: textColor,
+            font: {
+              size: textSize
+            }
+          }
+        },
+      },
+
+      interaction: {
+        mode: 'nearest',
+        intersect: false
+      },
+
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: textColor,
+            font: {
+              size: textSize
+            }
+          }
+        },
+        
+        title: {
+          display: false,
+          text: 'Custom Chart Title'
+        }
+      },
+    }
+
     if (graphType == "bar")
     {
-      this.options = {
-        scales: {
-          xAxes: [{
-            display: true,
-            gridLines: {
-              // display: false,
-              color: gridColor,
-            },
-            scaleLabel: {
-              // display: true,
-              // labelString: 'Month',
-            }
-          }],
-          yAxes: [{
-            display: true,
-            gridLines: {
-              // display: false,
-              color: gridColor,
-            },
-            scaleLabel: {
-              // display: true,
-              // labelString: 'Value'
-            },
-            ticks: {
-                beginAtZero: true
-            }
-          }]
-        }
-      }
+      
       // console.log('inside to show from 0');
     }
     else if(graphType == "line"){
-      this.options = {
-        fill: true,
-        showLine: true,
-        spanGaps: true,
-        scales: {
-          yAxes: [{
-            display: true,
-            gridLines: {
-              // display: false,
-              color: gridColor,
-            },
-            scaleLabel: {
-              // display: true,
-              // labelString: 'Value'
-            },
-            ticks: {
-                beginAtZero: true
-            }
-          }]
-        }
-      }
-
-        console.log("Failed to scale");
+      this.options.showLine = true;
+      // this.options.scales.x.grid.display = false;
+      // this.options.scales.y.grid.display = false;
     }
-    else{
-      this.options = {
+    else if(graphType == "pie"){
+      this.options.scales.x.display = false;
+      this.options.scales.y.display = false;
+    }
+  }
 
-      }
+  setConfig(chartInfoObj){
+
+    var options = chartInfoObj.options;
+    if (options==null) {
+      options = {};
     }
 
-
-    this.datasets[0].data = data;
-    console.log(data)
-    this.stackedLine = new Chart(this.ctx, {
-      type: graphType,
+    this.config = {
+      type: chartInfoObj.graphType,
       data: {
         labels: this.datasetLabels,
-        datasets: this.datasets,
+        datasets: chartInfoObj.datasets,
       },
-      // options: options
       options: $.extend(this.options, options)
-    });
+    }
+  }
+
+  setChart(chartInfoObj){
+
+    this.destroyChart();
+
+    try{
+      this.setOptions(chartInfoObj.graphType);
+      this.setConfig(chartInfoObj);
+
+      this.chart = new Chart(this.ctx, this.config);
+
+    }catch(e){
+      console.log(e);
+    }    
   }
 }
 
 
 module.exports = { AllCharts };
+
+// const config = {
+    //   type: 'bar',
+    //   data: data,
+    //   options: {
+    //     responsive: true,
+    //     plugins: {
+    //       legend: {
+    //         position: 'top',
+    //       },
+    //       title: {
+    //         display: true,
+    //         text: 'Chart.js Bar Chart'
+    //       }
+    //     }
+    //   },
+    // };

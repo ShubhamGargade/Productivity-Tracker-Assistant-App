@@ -13,16 +13,14 @@ var timeArith = new time_arith.TimeArith();
 
 // var tWebSoftProdtt;
 var totalTimeWS;
-var currentUserId = settings.getSync('key1.data');
+var currentUserId = settings.getSync('user.uid');
 
 console.log('Outside',currentUserId);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Signed in");
     // console.log(user.uid);
-    settings.setSync('key1', {
-      data: user.uid
-    });
+    settings.setSync('user.uid', user.uid);
 
     var currentUserId = user.uid;
     console.log('Inside auth',currentUserId);
@@ -220,9 +218,11 @@ class insertWebSoftReport{
 
       this.showPB(timeTrac, webSoftProd, categoryVal);
       // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
+      cell1.style.fontWeight = 'bold';
+      
       if(categoryVal == 'Productive'){
         console.log(document.getElementById(webSoftProd).cells[2]);
-          // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
+        // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
         cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
         // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
       }
