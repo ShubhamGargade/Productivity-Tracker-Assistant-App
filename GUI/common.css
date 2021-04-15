@@ -94,6 +94,10 @@ th {
   color: var(--color);
 }
 
+.table tbody tr:hover {
+  color: var(--color);
+}
+
 .progress {
   background-color: var(--p-bar-bg);
 }

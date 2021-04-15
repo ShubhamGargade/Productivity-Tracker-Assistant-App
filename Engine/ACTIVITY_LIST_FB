@@ -1,5 +1,5 @@
-41
-9
+43
+19
 Science
 False
 True
@@ -14,7 +14,7 @@ True
 True
 electron
 Hidden Worker
-0-h 0-m 16-s
+0-h 0-m 3-s
 None
 Science
 False
@@ -22,7 +22,7 @@ True
 True
 electron
 Dashboard
-0-h 0-m 3-s
+0-h 8-m 34-s
 None
 Computers
 False
@@ -30,7 +30,7 @@ True
 True
 Docker Desktop
 Container instance
-0-h 0-m 2-s
+0-h 1-m 47-s
 None
 Computers
 False
@@ -166,7 +166,7 @@ True
 True
 sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\common.css (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
-0-h 0-m 12-s
+0-h 0-m 33-s
 None
 Computers
 False
@@ -214,7 +214,7 @@ True
 True
 electron
 Productivity_Tracker
-0-h 0-m 4-s
+0-h 0-m 2-s
 None
 Computers
 False
@@ -328,13 +328,29 @@ sublime_text
 D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\navAfterlogin.html • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
 0-h 7-m 40-s
 None
+Reference
+False
+False
+True
+Exit and close tabs?
+npm
+0-h 0-m 1-s
+None
+Science
+False
+True
+True
+explorer
+Snap Assist
+0-h 0-m 1-s
+None
 Computers
 True
 True
 True
 console-firebase-google
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 12-s
+0-h 0-m 6-s
 Sign in - Google Accounts
 Business
 True
@@ -400,3 +416,83 @@ w3schools
 https://www.w3schools.com/jsref/met_loc_reload.asp - Mozilla Firefox
 0-h 0-m 1-s
 Location reload() Method
+Computers
+True
+True
+True
+docs-google
+https://docs.google.com/document/d/1p0dK88RoJMgYrH4uo51TmSGa4SSLiL_u/edit - Mozilla Firefox
+0-h 0-m 4-s
+Google Docs – create and edit documents online, for free.
+Others
+True
+False
+True
+gane
+https://gane - Mozilla Firefox
+0-h 0-m 24-s
+None
+Others
+True
+False
+True
+c
+https://C:/Users/rohan/OneDrive/Desktop/BE-LAB/HMI-Lab/Exp7/html/home.html# - Google Chrome
+0-h 0-m 2-s
+None
+Arts
+True
+False
+True
+vcet-edu
+https://vcet.edu.in - Google Chrome
+0-h 0-m 1-s
+Not Acceptable!
+Others
+True
+False
+True
+ludo king
+https://ludo king  - Google Chrome
+0-h 0-m 5-s
+None
+Society
+True
+False
+True
+apps-apple
+https://apps.apple.com/us/app/ludo-king/id993090598 - Google Chrome
+0-h 0-m 11-s
+‎Ludo King on the App Store
+Shopping
+True
+False
+True
+amazon
+https://www.amazon.in/ref=as_li_ss_tl?ie=UTF8&linkCode=ll2&tag=enin-edge-topsites-curate-ana-21&linkId=fbedcb44d04a4bae8eae32722a2f41c2&language=en_IN - Microsoft Edge
+0-h 0-m 9-s
+Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in
+Others
+True
+False
+True
+n
+https://n - Microsoft Edge
+0-h 0-m 12-s
+None
+Games
+True
+False
+True
+need-for-speed-en-softonic
+https://need-for-speed.en.softonic.com - Microsoft Edge
+0-h 0-m 34-s
+Need for Speed - Download
+Computers
+True
+True
+True
+chartjs
+https://www.chartjs.org/docs/latest/ - Mozilla Firefox
+0-h 0-m 9-s
+Chart.js | Chart.js

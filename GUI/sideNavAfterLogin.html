@@ -226,6 +226,8 @@
       // unset user data from settings
       settings.unsetSync('user');
 
+      localStorage.setItem('active_tab', 'home-link');
+
       console.log("HI SIGNOUT HERE INSIDE");
       console.log("Signout successful");
       window.location.replace("index.html");
