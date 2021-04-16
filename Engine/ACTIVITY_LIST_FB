@@ -1,5 +1,5 @@
-25
-1
+31
+11
 Science
 False
 True
@@ -22,7 +22,7 @@ True
 True
 electron
 Dashboard
-0-h 1-m 44-s
+0-h 2-m 48-s
 None
 Computers
 False
@@ -200,11 +200,139 @@ NortonSecurity
 Norton Security Ultra
 0-h 0-m 1-s
 None
+Science
+False
+True
+True
+electron
+Productivity_Tracker
+0-h 3-m 32-s
+None
+Arts
+False
+False
+True
+Docker Desktop
+Container list
+0-h 0-m 3-s
+None
+Reference
+False
+False
+True
+SearchUI
+Cortana
+0-h 0-m 1-s
+None
+Science
+False
+True
+True
+atom
+
+0-h 6-m 20-s
+None
+Computers
+False
+True
+True
+atom
+webClassReport.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 32-s
+None
+Computers
+False
+True
+True
+atom
+softClassReport.js — E:\BEproject\Productivity-Tracker-Assistant-App\GUI — Atom
+0-h 0-m 20-s
+None
 Computers
 True
 True
 True
 console-firebase-google
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 10-s
+0-h 5-m 0-s
 Sign in - Google Accounts
+Science
+True
+True
+True
+myamcat
+https://myamcat.com/dashboard - Google Chrome
+0-h 0-m 19-s
+AMCAT Official : Employability Test | Job Search with AMCAT Score
+Others
+True
+False
+True
+pacman-io
+https://pacman.io - Google Chrome
+0-h 0-m 3-s
+None
+Computers
+True
+True
+True
+web-whatsapp
+https://web.whatsapp.com - Google Chrome
+0-h 0-m 46-s
+WhatsApp Web
+Others
+True
+False
+True
+bar
+https://bar  - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+bar graph labe
+https://bar graph labe  - Google Chrome
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+bar graph label
+https://bar graph label  - Google Chrome
+0-h 0-m 22-s
+None
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/charts/bar.html - Google Chrome
+0-h 2-m 24-s
+Bar Chart | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/ - Google Chrome
+0-h 0-m 21-s
+Chart.js | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/configuration/tooltip.html - Google Chrome
+0-h 0-m 30-s
+Tooltip | Chart.js
+Computers
+True
+True
+True
+chartjs
+https://chartjs.org/docs/latest/configuration/canvas-background.html - Google Chrome
+0-h 0-m 1-s
+Canvas background | Chart.js
