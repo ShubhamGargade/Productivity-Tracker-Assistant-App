@@ -6,7 +6,7 @@ const currentUserId = settings.getSync('user.uid');
 
 window.addEventListener('storage', (e) => {
 
-	if(e.key==(currentUserId+"wnewDataChanged")) {
+	if(e.key==(currentUserId+"wnewDataChanged")) { 
 
     var t = e.newValue.split('-*-');
         console.log('-------------------------------------------------------------DYNAMIC', t[0]);

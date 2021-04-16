@@ -111,7 +111,7 @@ class insertIndividualWebSoftReport{
     this.twebsoftttPB = timeArith.calTime(totalTimeWS);
     console.log("currwebsoftttPB", this.currwebsoftttPB);
     console.log("twebsoftttPB", this.twebsoftttPB);
-    this.prodPerPB = ((this.currwebsoftttPB/this.twebsoftttPB)*100).toString();
+    this.prodPerPB = ((this.currwebsoftttPB/this.twebsoftttPB)*100).toString(); 
 
     console.log('website: ',webSoftProd);
     console.log("Individual Website Progress:",this.prodPerPB);
