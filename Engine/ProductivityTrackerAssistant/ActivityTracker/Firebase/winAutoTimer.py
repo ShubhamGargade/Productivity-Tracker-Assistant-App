@@ -83,6 +83,8 @@ class WebWindow:
 
                 if browser_name == "chrome":
                     edit = browserControl.EditControl(Name="Address and search bar")
+                elif browser_name == "firefox":
+                    edit = browserControl.EditControl(Name="Search with Google or enter address")
                 else:
                     edit = browserControl.EditControl()
 

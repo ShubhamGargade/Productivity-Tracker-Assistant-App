@@ -20,7 +20,7 @@
 
     $(document).ready(function(){
       $('#nav-brand').ready(function(){
-        $("#nav-brand").html("Live Reports > Website Report");
+        $("#nav-brand").html("Live Reports > Software Individual Report");
       });
     });
     </script>
@@ -29,12 +29,10 @@
     <script src="change_theme.js" charset="utf-8" defer></script>
     <script src="initializeDb.js" charset="utf-8" defer></script>
 
-    <script src="webReport.js" charset="utf-8" defer></script>
+    <script src="individualSoft.js" charset="utf-8" defer></script>
 
     <script type="text/javascript" defer>
-    dict = {}
-    dict.a = 'hello'
-    console.log(dict);
+
     </script>
 
     <link rel="stylesheet" type="text/css" href="common.css">
@@ -54,15 +52,15 @@
 
             <div id="add-top-nav"></div>
 
-            <div class="main-content" id="web-report-middle-content">
+            <div class="main-content" id="software-report-middle-content">
               <div class="container-fluid">
 
                 <div class="row main-content-top-row">
                   <div class="col">
                     <div class="card mb-3" style="max-width: 18rem;background-color: #e91e63;color: white;">
                       <div class="card-body">
-                        <h5 class="card-title">Website Time</h5>
-                        <h6 class="card-text" id="show-twtt-wreport">0h 0m 0s</h6>
+                        <h5 class="card-title">Software Time</h5>
+                        <h6 class="card-text" id="show-tstt-sreport">0h 0m 0s</h6>
                       </div>
                     </div>
                   </div>
@@ -78,7 +76,7 @@
                     <div class="card mb-3" style="max-width: 18rem;background-color: #c8b900;color: white;">
                       <div class="card-body">
                         <h5 class="card-title">Productive Time</h5>
-                        <h6 class="card-text" id="show-twpt-wreport">0h 0m 0s</h6>
+                        <h6 class="card-text" id="show-tspt-sreport">0h 0m 0s</h6>
                       </div>
                     </div>
                   </div>
@@ -86,7 +84,7 @@
                     <div class="card mb-3" style="max-width: 18rem;background-color: #00acc1;color: white;">
                       <div class="card-body">
                         <h5 class="card-title">Unproductive Time</h5>
-                        <h6 class="card-text" id="show-twupt-wreport">0h 0m 0s</h6>
+                        <h6 class="card-text" id="show-tsupt-sreport">0h 0m 0s</h6>
                       </div>
                     </div>
                   </div>
@@ -94,19 +92,17 @@
 
                 <div class="row">
                   <div class="col">
-                    <table class="table table-hover" id="w-report-table" style="background-color: transparent;">
+                    <table class="table table-hover" id="s-report-table" style="background-color: transparent;">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Website</th>
-                          <th scope="col">Category</th>
-                          <th scope="col">Sub Category</th>
                           <th scope="col">Time Spent</th>
                           <th scope="col">Productivity Ratio</th>
                         </tr>
                       </thead>
-                      <tbody id='tbw' style="background-color: rgba(var(--bg))">
-                        
+                      <tbody id='tbs' style="background-color: rgba(var(--bg))">
+
                       </tbody>
                     </table>
                   </div>

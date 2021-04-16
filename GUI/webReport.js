@@ -2,13 +2,13 @@ const webSoftDetails = require("./insertwebSoft");
 const web = 'w';
 var webObj = new webSoftDetails.insertWebSoftReport(web);
 
-const currentUserId = settings.getSync('key1.data');
+const currentUserId = settings.getSync('user.uid');
 
-window.addEventListener('storage', function(e) { 
+window.addEventListener('storage', function(e) {
 
 	if(e.key==(currentUserId+"wnewDataChanged")) {
 		webObj.updateTotalTimes();
-		webObj.updateData(e.newValue.split("-*-").slice(0,2).join(","));	
+		webObj.updateData(e.newValue.split("-*-").slice(0,2).join(","));
 		webObj.updateProgressBars();
 	}
 

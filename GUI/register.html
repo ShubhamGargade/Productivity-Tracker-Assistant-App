@@ -173,8 +173,10 @@ a {
         // Signed in
         var user = userCredential.user;
 
-        // store email in local storage
-        localStorage.setItem('email-name', email);
+        settings.setSync('user.uid', user.uid);
+        settings.setSync('user.email', user.email);
+        settings.setSync('user.fname', firstName);
+        settings.setSync('user.lname', LastName);
 
         var count = 0;  // if user data and uth ads is saved then count=2
         var initial_time = "0-h 0-m 0-s";

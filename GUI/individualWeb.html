@@ -20,7 +20,7 @@
 
     $(document).ready(function(){
       $('#nav-brand').ready(function(){
-        $("#nav-brand").html("Live Reports > Website Report");
+        $("#nav-brand").html("Live Reports > Website Individual Report");
       });
     });
     </script>
@@ -29,7 +29,7 @@
     <script src="change_theme.js" charset="utf-8" defer></script>
     <script src="initializeDb.js" charset="utf-8" defer></script>
 
-    <script src="webReport.js" charset="utf-8" defer></script>
+    <script src="individualWeb.js" charset="utf-8" defer></script>
 
     <script type="text/javascript" defer>
     dict = {}
@@ -99,14 +99,12 @@
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Website</th>
-                          <th scope="col">Category</th>
-                          <th scope="col">Sub Category</th>
                           <th scope="col">Time Spent</th>
                           <th scope="col">Productivity Ratio</th>
                         </tr>
                       </thead>
                       <tbody id='tbw' style="background-color: rgba(var(--bg))">
-                        
+
                       </tbody>
                     </table>
                   </div>

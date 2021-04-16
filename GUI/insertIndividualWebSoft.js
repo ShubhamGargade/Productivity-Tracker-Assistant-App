@@ -28,7 +28,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 
-class insertWebSoftReport{
+class insertIndividualWebSoftReport{
   constructor(webOrSoft){
     this.webOrSoft = webOrSoft;
 
@@ -69,19 +69,13 @@ class insertWebSoftReport{
       this.animatePB = false;
     }
 
-    this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)[this.webOrSoft];
+    this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)['i'+this.webOrSoft];
     var olddata;
 
     for(olddata in this.webSoftDic)
     {
-      var nC = olddata.split(',');
-      var idForRow = nC[0]+'-*-'+nC[1];
-      // console.log(idForRow);
-      // console.log(webSoftDic[this.olddata][0]);
-      // console.log(webSoftDic[this.olddata][1]);
-      // document.getElementById(idForRow).cells[3].remove();
-      console.log(this.webSoftDic[olddata][0], idForRow, this.webSoftDic[olddata][1])
-      this.showPB(this.webSoftDic[olddata][0], idForRow, this.webSoftDic[olddata][1]);
+
+      this.showPB(this.webSoftDic[olddata], olddata);
     }
   }
 
@@ -94,7 +88,7 @@ class insertWebSoftReport{
     // }
     // else{
     //   $(".progress-bar").removeClass("progress-bar-animated");
-    //   $(".progress-bar").removeClass("progress-bar-striped"); 
+    //   $(".progress-bar").removeClass("progress-bar-striped");
     // }
 
     if(toggleValue=='true'){
@@ -103,11 +97,11 @@ class insertWebSoftReport{
     }
     else{
       $(".progress-bar").removeClass("progress-bar-animated");
-      $(".progress-bar").removeClass("progress-bar-striped"); 
+      $(".progress-bar").removeClass("progress-bar-striped");
     }
   }
 
-  showPB(timeTrac, webSoftProd, categoryVal){
+  showPB(timeTrac, webSoftProd){
 
     totalTimeWS = settings.getSync('Dic.dataDic.'+currentUserId)['t'+this.webOrSoft+'tt'];
 
@@ -117,7 +111,6 @@ class insertWebSoftReport{
     this.twebsoftttPB = timeArith.calTime(totalTimeWS);
     console.log("currwebsoftttPB", this.currwebsoftttPB);
     console.log("twebsoftttPB", this.twebsoftttPB);
-    console.log("categoryVal", categoryVal);
     this.prodPerPB = ((this.currwebsoftttPB/this.twebsoftttPB)*100).toString();
 
     console.log('website: ',webSoftProd);
@@ -126,22 +119,16 @@ class insertWebSoftReport{
     // this.pBar.setAttribute("value", this.prodPerPB);
     // this.pBar.setAttribute("max", "100");
 
-    var progressBarColor = "success";
+    var progressBarColor = "info";
     var pbStripedAnimation = "";
-
-    if(categoryVal!="Productive"){
-
-      progressBarColor = "danger";
-
-    }
 
     if(this.animatePB){
       pbStripedAnimation = "progress-bar-striped progress-bar-animated";
     }
-    
-    this.incH = document.getElementById(webSoftProd).cells[5].innerHTML = `
+
+    this.incH = document.getElementById(webSoftProd).cells[3].innerHTML = `
       <div class='progress'>
-        <div class='progress-bar ${pbStripedAnimation} bg-${progressBarColor}' role='progressbar' style='width: ${this.prodPerPB}%' aria-valuenow='${this.prodPerPB}' aria-valuemin='0' aria-valuemax='100'>${Number(this.prodPerPB).toFixed(2)}%</div>
+        <div class='progress-bar ${pbStripedAnimation} bg-${progressBarColor}' role='progressbar' style='width: ${this.prodPerPB}%; background-color: #ff6f00 !important' aria-valuenow='${this.prodPerPB}' aria-valuemin='0' aria-valuemax='100'>${Number(this.prodPerPB).toFixed(2)}%</div>
       </div>`;
 
     // this.incH.style.height = '30px';
@@ -171,7 +158,7 @@ class insertWebSoftReport{
       this.updateTotalTimes();
 
       var olddata;
-      this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)[this.webOrSoft];
+      this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)['i'+this.webOrSoft];
       for(olddata in this.webSoftDic)
       {
         this.updateData(olddata);
@@ -180,20 +167,18 @@ class insertWebSoftReport{
 
   updateData(olddata){
 
-    this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)[this.webOrSoft];
+    this.webSoftDic = settings.getSync('Dic.dataDic.'+currentUserId)['i'+this.webOrSoft];
 
     // console.log("Testing oldata: ", olddata);
-    var nC = olddata.split(',');
-    console.log(this.nC);
-    var idForRow = nC[0]+'-*-'+nC[1];
+    var idForRow = olddata;
     // console.log(idForRow);
     // console.log(this.webSoftDic[this.olddata][0]);
     // console.log(this.webSoftDic[this.olddata][1]);
-    this.insertDataInTable(idForRow, nC, this.webSoftDic[olddata][0], this.webSoftDic[olddata][1]);
+    this.insertDataInTable(idForRow, olddata, this.webSoftDic[olddata]);
 
   }
 
-  insertDataInTable(webSoftProd, webSoftNameClass, timeTrac, categoryVal){
+  insertDataInTable(webSoftProd, webSoftNameClass, timeTrac){
     console.log('creating Table');
     console.log(webSoftProd);
     var table = document.getElementById('tb'+this.webOrSoft);
@@ -207,42 +192,41 @@ class insertWebSoftReport{
       var cell2 = row.insertCell(1);
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
-      var cell6 = row.insertCell(5);
       cell1.innerHTML = row.rowIndex;
-      cell2.innerHTML = webSoftNameClass[0];
-      cell3.innerHTML = categoryVal;
-      cell4.innerHTML = webSoftNameClass[1];
-      cell5.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
-      cell6.innerHTML = ' ';
-
-      this.showPB(timeTrac, webSoftProd, categoryVal);
-      // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
-      cell1.style.fontWeight = 'bold';
-      
-      if(categoryVal == 'Productive'){
-        console.log(document.getElementById(webSoftProd).cells[2]);
-        // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
-        cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
-        // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
-      }
-      else{
-        console.log(document.getElementById(webSoftProd).cells[2]);
-        // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
-
-        cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
-
-        // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#dc3545';
-
-      }
-    }
-    else {
-      document.getElementById(webSoftProd).cells[4].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
-    }
-  }
+      cell2.innerHTML = webSoftNameClass;
+      cell3.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+      cell4.innerHTML = '';
+      this.showPB(timeTrac, webSoftProd);
+  //     // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
+  //     cell1.style.fontWeight = 'bold';
+  //
+  //     if(categoryVal == 'Productive'){
+  //       console.log(document.getElementById(webSoftProd).cells[2]);
+  //       // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
+  //       cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
+  //       // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
+  //     }
+  //     else{
+  //       console.log(document.getElementById(webSoftProd).cells[2]);
+  //       // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
+  //
+  //       cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
+  //
+  //       // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#dc3545';
+  //
+  //     }
+  //   }
+  //   else {
+  //     document.getElementById(webSoftProd).cells[4].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+  //   }
+  // }
 
 }
-
+  else {
+    document.getElementById(webSoftProd).cells[2].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+  }
+}
+}
 
 // var obj = new showDataToWebSoftReport();
-module.exports = { insertWebSoftReport }
+module.exports = { insertIndividualWebSoftReport }

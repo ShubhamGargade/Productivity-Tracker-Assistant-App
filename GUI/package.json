@@ -23,7 +23,7 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "bootstrap": "^4.6.0",
     "bootstrap4-toggle": "^3.6.1",
-    "chart.js": "^2.9.4",
+    "chart.js": "^3.1.0",
     "electron-settings": "^4.0.2",
     "firebase": "^8.2.10",
     "i": "^0.3.6",

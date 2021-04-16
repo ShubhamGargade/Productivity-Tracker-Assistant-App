@@ -12,6 +12,7 @@
 html, body {
   min-height: 100% !important;
   height: 100%;
+  user-select: none;
 }
 
 body {
@@ -67,8 +68,14 @@ table {
   border: 1px solid rgba(var(--card-body-bg));
   border: 1px solid rgba(var(--card-body-bg));
 }
+
 th {
   font-weight: bold;
+  color: var(--color);
+}
+
+.table caption {
+  color: var(--color);
 }
 
 .table td, .table th {
@@ -77,11 +84,18 @@ th {
 
 .table thead th {
   border-bottom: 1px solid rgba(var(--card-body-bg));
-
 }
 
 .table thead {
   background-color: rgba(var(--card-body-bg));
+}
+
+.table tbody {
+  color: var(--color);
+}
+
+.table tbody tr:hover {
+  color: var(--color);
 }
 
 .progress {

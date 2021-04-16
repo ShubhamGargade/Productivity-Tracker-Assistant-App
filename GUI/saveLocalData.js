@@ -17,6 +17,8 @@ class SaveLocalData {
     settings.setSync('Dic.dataDic.'+this.uid,{
       w:{},
       s:{},
+      iw:{},
+      is:{},
       twpt:initial_time,
       twtt:initial_time,
       tspt:initial_time,

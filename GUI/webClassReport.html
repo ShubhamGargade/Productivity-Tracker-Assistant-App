@@ -6,10 +6,6 @@
 
   <script>window.$ = window.jQuery = require('jquery')</script>
 
-  <script src="initializeDb.js" charset="utf-8" defer></script>
-  <script src="webClassReport.js" charset="utf-8" defer></script>
-
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -27,13 +23,16 @@
 
     $(document).ready(function(){
       $('#nav-brand').ready(function(){
-        $("#nav-brand").html("Website");
+        $("#nav-brand").html("Live Reports > Website");
       });
     });
   </script>
 
   <script src="constants.js" charset="utf-8"></script>
-  <script src="change_theme.js" charset="utf-8"></script>
+  <script src="change_theme.js" charset="utf-8" defer></script>
+  <script src="initializeDb.js" charset="utf-8" defer></script>
+  <script src="chartUtils.js" charset="utf-8"></script>
+  <script src="webClassReport.js" charset="utf-8" defer></script>
 
   <link rel="stylesheet" type="text/css" href="common.css">
   <link rel="stylesheet" type="text/css" href="scrollbar.css">
@@ -60,7 +59,7 @@
 
             <div class="container-fluid">
 
-              <div class="row">
+              <div class="row main-content-top-row">
                 <div class="col-8">
                   <h5>Website Class Report</h5>
                 </div>
@@ -72,16 +71,57 @@
                 </div>
               </div>
 
-              <div class="row">
-                   <canvas id="canvas-w-Prod"  width="100%" height="40%"></canvas>
+              <div class="row" style="width: 100%">
+
+                <div class="col-6">
+                 <canvas id="canvas-w-Prod"  width="100%" height="60%"></canvas>
+                </div>
+
+                <div class="col-6">
+                 <canvas id="canvas-w-Unprod"  width="100%" height="60%"></canvas>
+                </div>
+
               </div>
 
               <div class="row">
-                   <canvas id="canvas-w-Unprod"  width="100%" height="40%"></canvas>
+                <div class="col-6">
+                  <table class="table table-hover" id="w-class-p-table" style="background-color: transparent;">
+                    <caption style="caption-side: top; text-align: center;">
+                      Productive
+                      <span class='material-icons' style='vertical-align: middle;font-size:20px;width:5%;color:#28a745'>check_circle</span>
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sub Category</th>
+                        <th scope="col">Time Spent</th>
+                      </tr>
+                    </thead>
+                    <tbody id='tb-w-p' style="background-color: rgba(var(--bg))">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-6">
+                  <table class="table table-hover" id="w-class-up-table" style="background-color: transparent;">
+                    <caption style="caption-side: top; text-align: center;">
+                      Unproductive
+                      <span class='material-icons' style='vertical-align: middle;font-size:20px;width:5%;color:#dc3545'>remove_circle</span>
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sub Category</th>
+                        <th scope="col">Time Spent</th>
+                      </tr>
+                    </thead>
+                    <tbody id='tb-w-up' style="background-color: rgba(var(--bg))">
+                      
+                    </tbody>
+                  </table>
+                </div>
               </div>
-
             </div>
-
           </div>
         </section>
       </div>

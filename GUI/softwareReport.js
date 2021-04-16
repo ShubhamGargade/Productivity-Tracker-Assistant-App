@@ -2,7 +2,7 @@ const webSoftDetails = require("./insertwebSoft");
 const soft = 's';
 var softObj = new webSoftDetails.insertWebSoftReport(soft);
 
-const currentUserId = settings.getSync('key1.data');
+const currentUserId = settings.getSync('user.uid');
 
 window.addEventListener('storage', function(e) { 
 	if(e.key==(currentUserId+"snewDataChanged")) {
