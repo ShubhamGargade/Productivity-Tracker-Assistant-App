@@ -439,7 +439,7 @@ class AutoTimer(Windows):
                     self.active_window_name = self.new_window_name
                     self.active_activity = self.new_activity
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 print("RUN")  # "RUN" msg to be received by pyshell
 
