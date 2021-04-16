@@ -155,7 +155,16 @@ class showDataProductivity {
       arrayOfDailyDatesProdPer.pop();
       arrayOfDailyDatesUnprodPer.pop();
     }
-    
+
+
+    // comment out this for loop only to see more number of days in graph, then comment it again
+    // for (var i = 0; i < 6; i++) {
+    //   keysDatesOfWeek = keysDatesOfWeek.concat(keysDatesOfWeek);
+    //   arrayOfDailyDatesProdPer = arrayOfDailyDatesProdPer.concat(arrayOfDailyDatesProdPer);
+    //   arrayOfDailyDatesUnprodPer = arrayOfDailyDatesUnprodPer.concat(arrayOfDailyDatesUnprodPer);
+    // }
+
+
     return {
       keysDatesOfWeek: this.joinWithSlash(keysDatesOfWeek),
       arrayOfDailyDatesProdPer: arrayOfDailyDatesProdPer,
