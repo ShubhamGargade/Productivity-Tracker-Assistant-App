@@ -57,7 +57,9 @@ class showDataProductivity {
   }
 
   showReport(){
-    this.productivityChartPast.setChart({graphType: this.graphType, datasets: this.datasets});
+    if (this.productivityChartPast != null) {
+      this.productivityChartPast.setChart({graphType: this.graphType, datasets: this.datasets});
+    }
   }
 
 

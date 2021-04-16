@@ -139,7 +139,9 @@ class AllCharts {
 
   setChart(chartInfoObj){
 
-    this.destroyChart();
+    try{
+      this.destroyChart();
+    }catch(e){}
 
     try{
       this.setOptions(chartInfoObj.graphType);
