@@ -21,7 +21,7 @@ class AllCharts {
         datasets: datasets
     }];
 
-    const config = {};
+    this.config = {};
 
     this.setChart(graphType, datasets);
   }
@@ -35,7 +35,7 @@ class AllCharts {
     }
   }
 
-  setOptions(graphType){
+  initOptions(){
 
     this.options = {
       scales: {
@@ -88,7 +88,7 @@ class AllCharts {
 
       plugins: {
         legend: {
-          display: true,
+          // display: true,
           labels: {
             color: textColor,
             font: {
@@ -98,25 +98,43 @@ class AllCharts {
         },
         
         title: {
-          display: false,
-          text: 'Custom Chart Title'
+          // display: false,
+          // text: 'Custom Chart Title'
         },
       },
     }
 
+  }
+
+  setChartOptions(graphType){
+
     if (graphType == "bar")
     {
       
-      // console.log('inside to show from 0');
+      this.options.scales.x.display = true;
+      this.options.scales.y.display = true;
+
     }
     else if(graphType == "line"){
       this.options.showLine = true;
       // this.options.scales.x.grid.display = false;
       // this.options.scales.y.grid.display = false;
     }
-    else if(graphType == "pie"){
+    else if(graphType == "pie" || graphType== "doughnut"){
       this.options.scales.x.display = false;
       this.options.scales.y.display = false;
+    }
+  }
+
+  setCustomOptions(customOpt){
+
+    if(customOpt['displayLegend'] != null){
+      this.options.plugins.legend.display = customOpt['displayLegend'];
+    }
+
+    if(customOpt['title'] != null){
+      this.options.plugins.title.text = customOpt['title'];
+      this.options.plugins.title.display = true;
     }
   }
 
@@ -144,7 +162,9 @@ class AllCharts {
     }catch(e){}
 
     try{
-      this.setOptions(chartInfoObj.graphType);
+      this.initOptions();
+      this.setChartOptions(chartInfoObj.graphType);
+      this.setCustomOptions(chartInfoObj.customOpt)
       this.setConfig(chartInfoObj);
 
       this.chart = new Chart(this.ctx, this.config);
@@ -157,20 +177,3 @@ class AllCharts {
 
 
 module.exports = { AllCharts };
-
-// const config = {
-    //   type: 'bar',
-    //   data: data,
-    //   options: {
-    //     responsive: true,
-    //     plugins: {
-    //       legend: {
-    //         position: 'top',
-    //       },
-    //       title: {
-    //         display: true,
-    //         text: 'Chart.js Bar Chart'
-    //       }
-    //     }
-    //   },
-    // };

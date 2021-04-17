@@ -45,13 +45,12 @@ var all_charts = require("./all_charts");
 class showDataToDashboard {
     constructor(){
       this.ctx = document.getElementById('myChartDashboard').getContext('2d');
-      this.labelForDashboard = [settings.getSync('lastTrackingDate.dataLtd.'+currentUserId)];
+      this.labelForDashboard = ["Productive %", "Unproductive %"];
       this.graphType = "bar";
 
       var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
 
-      this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChart1 => dashboard Chart for Productivity Unproductivity
-
+      this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChartP => dashboard Chart for Productivity Unproductivity
 
       this.showDashboardBarGraph = document.getElementById('show-bar-graph');
       this.showDashboardPieChart = document.getElementById('show-pie-chart');
@@ -92,21 +91,32 @@ class showDataToDashboard {
 
       var datasets = [];
 
+      // datasets = [
+      //   {
+      //     label: 'Productive %',
+      //     fill: '+1',
+      //     data: [data.prodPercent],
+      //     backgroundColor: "rgba(75, 192, 192, 0.5)", 
+      //     borderColor: "rgb(75, 192, 192)", 
+      //     borderWidth: 1
+      //   },
+      //   {
+      //     label: 'Unproductive %',
+      //     fill: 'start',
+      //     data: [data.unprodPercent],
+      //     backgroundColor: "rgba(255, 99, 132, 0.5)",
+      //     borderColor: "rgb(255, 99, 132)", 
+      //     borderWidth: 1
+      //   },
+      // ]
+
       datasets = [
         {
-          label: 'Productive %',
+          label: settings.getSync('lastTrackingDate.dataLtd.'+currentUserId),
           fill: '+1',
-          data: [data.prodPercent],
-          backgroundColor: "rgba(75, 192, 192, 0.5)", 
-          borderColor: "rgb(75, 192, 192)", 
-          borderWidth: 1
-        },
-        {
-          label: 'Unproductive %',
-          fill: 'start',
-          data: [data.unprodPercent],
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          borderColor: "rgb(255, 99, 132)", 
+          data: [data.prodPercent, data.unprodPercent],
+          backgroundColor: ["rgba(75, 192, 192, 0.5)", "rgba(255, 99, 132, 0.5)"],
+          borderColor: ["rgb(75, 192, 192)", "rgb(255, 99, 132)"],
           borderWidth: 1
         },
       ]
@@ -119,7 +129,9 @@ class showDataToDashboard {
 
         var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
 
-        this.dChartP.setChart({graphType: this.graphType, datasets: this.getDatasets(data)});
+        var customOpt = {displayLegend: false, title: "Productivity Chart"};
+
+        this.dChartP.setChart({graphType: this.graphType, datasets: this.getDatasets(data), customOpt: customOpt});
 
     }
 
