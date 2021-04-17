@@ -100,7 +100,7 @@ class AllCharts {
         title: {
           display: false,
           text: 'Custom Chart Title'
-        }
+        },
       },
     }
 

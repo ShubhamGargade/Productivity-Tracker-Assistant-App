@@ -230,6 +230,7 @@ class showDataProductivity {
   }
 
   listenProductivityData() {
+    // individual day
     var calUserUthId = firebase.database().ref('uth/'+ currentUserId + '/id');
     calUserUthId.on('value', (snapshot) => {
       const dataUthId = snapshot.val();
@@ -254,6 +255,21 @@ class showDataProductivity {
         console.log("arrayOfDailyDatesProdPer: ",sortedArrayDates.arrayOfDailyDatesProdPer);
         this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, this.getDatasets(sortedArrayDates));
         // console.log(arrayOfDailyDatesProdPer);
+      }
+    });
+
+    // all days
+    var calUserUthAds = firebase.database().ref('uth/'+ currentUserId + '/ads');
+    calUserUthAds.on('value', (snapshot) => {
+      const dataUthAds = snapshot.val();
+
+      if(dataUthAds != null)
+      {
+
+        document.getElementById("show-ads-ttt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['ttt']);
+        document.getElementById("show-ads-tpt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tpt']);
+        document.getElementById("show-ads-tupt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tupt']);
+        document.getElementById("show-ads-prod-percent-prodReport").innerHTML = this.getEachDateTimePer(dataUthAds) + ' %';
       }
     });
   }
