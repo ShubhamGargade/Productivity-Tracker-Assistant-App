@@ -1,12 +1,12 @@
-4
-1
+8
+9
 Computers
 False
 True
 True
 electron
 Software Report
-0-h 2-m 29-s
+0-h 1-m 20-s
 None
 Shopping
 False
@@ -22,7 +22,7 @@ True
 True
 cmd
 npm
-0-h 0-m 4-s
+0-h 0-m 3-s
 None
 Science
 False
@@ -32,6 +32,38 @@ electron
 Dashboard
 0-h 0-m 2-s
 None
+Business
+False
+True
+True
+explorer
+
+0-h 0-m 0-s
+None
+Science
+False
+True
+True
+electron
+Website Report
+0-h 2-m 14-s
+None
+Science
+False
+True
+True
+electron
+Hidden Worker
+0-h 0-m 3-s
+None
+Computers
+False
+True
+True
+Docker Desktop
+Container instance
+0-h 7-m 4-s
+None
 Reference
 True
 False
@@ -40,3 +72,67 @@ fonts-google
 https://fonts.google.com/icons - Mozilla Firefox
 0-h 0-m 4-s
 Google Fonts
+Computers
+True
+True
+True
+console-firebase-google-com
+https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
+0-h 0-m 1-s
+Sign in - Google Accounts
+Computers
+True
+True
+True
+w3schools-com
+https://www.w3schools.com/jsref/jsref_replace.asp - Mozilla Firefox
+0-h 0-m 1-s
+JavaScript String replace() Method
+Science
+True
+True
+True
+getbootstrap-com
+https://getbootstrap.com/docs/4.0/layout/grid/ - Mozilla Firefox
+0-h 0-m 0-s
+Grid system · Bootstrap
+Computers
+True
+True
+True
+w3schools-com
+https://www.w3schools.com/jsref/jsref_match.asp - Mozilla Firefox
+0-h 0-m 1-s
+JavaScript String match() Method
+Computers
+True
+True
+True
+w3schools-com
+https://www.w3schools.com/jsref/jsref_reference.asp - Mozilla Firefox
+0-h 0-m 2-s
+JavaScript Reference
+Arts
+True
+False
+True
+youtube-com
+https://www.youtube.com - Mozilla Firefox
+0-h 0-m 1-s
+YouTube
+Arts
+True
+False
+True
+youtube-com
+https://www.youtube.com/watch?v=vMbdqfDiXMM - Mozilla Firefox
+0-h 0-m 2-s
+In conversation with AR Rahman | Yashraj Mukhate | 99 Songs | @A. R. Rahman - YouTube
+Society
+True
+False
+True
+youtube-com
+https://www.youtube.com/watch?v=0Kl1ucZuSZ8 - Mozilla Firefox
+0-h 0-m 7-s
+TVF's Aspirants | Web Series | Episode 1 | UPSC - Optional Me Kya Hai? - YouTube

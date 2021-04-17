@@ -125,8 +125,8 @@ class WebWindow:
         hl = hostname.split('.')
         if "www" in hl[0]:
             del hl[0]
-        if hl[-1] in ["com", "net", "org", "in", "co", "us", "int", "edu", "gov", "mil", "arpa"]: 
-            del hl[-1]
+        # if hl[-1] in ["com", "net", "org", "in", "co", "us", "int", "edu", "gov", "mil", "arpa"]: 
+        #     del hl[-1]
         return '.'.join(hl)
 
 

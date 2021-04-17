@@ -193,6 +193,14 @@ class insertWebSoftReport{
 
   }
 
+  webDashToDot(name){
+    if(name!=null && this.webOrSoft=='w'){
+      return name.replaceAll('-', '.')
+    }
+
+    return name;
+  }
+
   insertDataInTable(webSoftProd, webSoftNameClass, timeTrac, categoryVal){
     console.log('creating Table');
     console.log(webSoftProd);
@@ -210,30 +218,22 @@ class insertWebSoftReport{
       var cell5 = row.insertCell(4);
       var cell6 = row.insertCell(5);
       cell1.innerHTML = row.rowIndex;
-      cell2.innerHTML = webSoftNameClass[0];
+      cell2.innerHTML = this.webDashToDot(webSoftNameClass[0]);
       cell3.innerHTML = categoryVal;
       cell4.innerHTML = webSoftNameClass[1];
       cell5.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
-      cell6.innerHTML = ' ';
+      cell6.innerHTML = '';
 
       this.showPB(timeTrac, webSoftProd, categoryVal);
-      // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
+
       cell1.style.fontWeight = 'bold';
+      cell6.style.verticalAlign = 'middle';
       
       if(categoryVal == 'Productive'){
-        console.log(document.getElementById(webSoftProd).cells[2]);
-        // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
-        cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
-        // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
+        cell3.innerHTML = `<span class='material-icons' style='font-size:21px;width:12%;color:#28a745;vertical-align: middle;'>check_circle</span> ${categoryVal}`
       }
       else{
-        console.log(document.getElementById(webSoftProd).cells[2]);
-        // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
-
-        cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
-
-        // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#dc3545';
-
+        cell3.innerHTML = `<span class='material-icons' style='font-size:20px;width:12%;color:#dc3545;vertical-align: middle;'>remove_circle</span> ${categoryVal}`
       }
     }
     else {
@@ -243,6 +243,4 @@ class insertWebSoftReport{
 
 }
 
-
-// var obj = new showDataToWebSoftReport();
 module.exports = { insertWebSoftReport }

@@ -32,12 +32,6 @@ firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 global.firebase = firebase; //to access the firebase instance from the renderer process
 
-//To save class timing
-// settings.setSync('setClassTime', {
-//   data1: {"Productive":{"Business":"", "Computers":"", "Health":"", "News":"", "Recreation":"", "Science":"", "Sports":""},
-//           "Unproductive":{"Arts":"", "Games":"", "Home":"", "Reference":"", "Shopping":"", "Society":""}}
-// });
-
 
 function createHiddenWindow(){
   // create hidden worker window

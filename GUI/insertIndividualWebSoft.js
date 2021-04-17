@@ -178,6 +178,14 @@ class insertIndividualWebSoftReport{
 
   }
 
+  webDashToDot(name){
+    if(name!=null && this.webOrSoft=='w'){
+      return name.replaceAll('-', '.')
+    }
+
+    return name;
+  }
+
   insertDataInTable(webSoftProd, webSoftNameClass, timeTrac){
     console.log('creating Table');
     console.log(webSoftProd);
@@ -193,40 +201,19 @@ class insertIndividualWebSoftReport{
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
       cell1.innerHTML = row.rowIndex;
-      cell2.innerHTML = webSoftNameClass;
+      cell2.innerHTML = this.webDashToDot(webSoftNameClass);
       cell3.innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
       cell4.innerHTML = '';
-      this.showPB(timeTrac, webSoftProd);
-  //     // document.getElementById(webSoftProd).style.backgroundColor = '#f5f6fa';
-  //     cell1.style.fontWeight = 'bold';
-  //
-  //     if(categoryVal == 'Productive'){
-  //       console.log(document.getElementById(webSoftProd).cells[2]);
-  //       // document.getElementById(webSoftProd).style.backgroundColor = '#c8e6c9';
-  //       cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#28a745;'>check_circle</span>`
-  //       // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#28a745';
-  //     }
-  //     else{
-  //       console.log(document.getElementById(webSoftProd).cells[2]);
-  //       // document.getElementById(webSoftProd).style.backgroundColor = '#ffcdd2';
-  //
-  //       cell3.innerHTML = `${categoryVal}<span class='material-icons' style='display:block;float:left;font-size:20px;width:12%;color:#dc3545'>remove_circle</span>`
-  //
-  //       // document.getElementById(webSoftProd).cells[2].style.backgroundColor = '#dc3545';
-  //
-  //     }
-  //   }
-  //   else {
-  //     document.getElementById(webSoftProd).cells[4].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
-  //   }
-  // }
 
-}
-  else {
-    document.getElementById(webSoftProd).cells[2].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+      cell1.style.fontWeight = 'bold';
+      cell4.style.verticalAlign = 'middle';
+
+      this.showPB(timeTrac, webSoftProd);
+    }
+    else {
+      document.getElementById(webSoftProd).cells[2].innerHTML = timeArith.removeDashesFromTimeStr(timeTrac);
+    }
   }
 }
-}
 
-// var obj = new showDataToWebSoftReport();
 module.exports = { insertIndividualWebSoftReport }
