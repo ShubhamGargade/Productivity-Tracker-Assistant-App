@@ -45,12 +45,14 @@ var all_charts = require("./all_charts");
 class showDataToDashboard {
     constructor(){
       this.ctx = document.getElementById('myChartDashboard').getContext('2d');
+      // this.ctx1 = document.getElementById('myChartDashboar').getContext('2d');
       this.labelForDashboard = ["Productive %", "Unproductive %"];
       this.graphType = "bar";
 
       var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
 
       this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChartP => dashboard Chart for Productivity Unproductivity
+      // this.dChartP1 = new all_charts.AllCharts(this.ctx1, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChartP => dashboard Chart for Productivity Unproductivity
 
       this.showDashboardBarGraph = document.getElementById('show-bar-graph');
       this.showDashboardPieChart = document.getElementById('show-pie-chart');
@@ -112,8 +114,8 @@ class showDataToDashboard {
 
       datasets = [
         {
-          label: settings.getSync('lastTrackingDate.dataLtd.'+currentUserId),
-          fill: '+1',
+          // label: settings.getSync('lastTrackingDate.dataLtd.'+currentUserId),
+          // fill: '+1',
           data: [data.prodPercent, data.unprodPercent],
           backgroundColor: ["rgba(75, 192, 192, 0.5)", "rgba(255, 99, 132, 0.5)"],
           borderColor: ["rgb(75, 192, 192)", "rgb(255, 99, 132)"],
@@ -129,9 +131,10 @@ class showDataToDashboard {
 
         var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
 
-        var customOpt = {displayLegend: false, title: "Productivity Chart"};
+        var customOpt = {displayLegend: false, title: "Your Productivity"};
 
         this.dChartP.setChart({graphType: this.graphType, datasets: this.getDatasets(data), customOpt: customOpt});
+        // this.dChartP1.setChart({graphType: this.graphType, datasets: this.getDatasets(data), customOpt: customOpt});
 
     }
 

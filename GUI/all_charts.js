@@ -99,7 +99,11 @@ class AllCharts {
         
         title: {
           // display: false,
-          // text: 'Custom Chart Title'
+          // text: 'Custom Chart Title',
+          color: textColor,
+          font: {
+            size: textSize
+          }
         },
       },
     }
@@ -127,6 +131,10 @@ class AllCharts {
   }
 
   setCustomOptions(customOpt){
+
+    if(customOpt == null){
+      return;
+    }
 
     if(customOpt['displayLegend'] != null){
       this.options.plugins.legend.display = customOpt['displayLegend'];
