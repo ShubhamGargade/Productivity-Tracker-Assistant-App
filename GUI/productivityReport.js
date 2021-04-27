@@ -32,8 +32,16 @@ class showDataProductivity {
     this.bg = document.getElementById("show-bar-graph");
     this.lg = document.getElementById("show-line-graph");
     this.graphType = "bar";
+    this.updateLocalData();
     this.listenProductivityData();
     this.listenUserChoice();
+  }
+
+  updateLocalData(){
+    var datesIdLocal = settings.getSync('Dic.dataDic.'+currentUserId+'.uth.id');
+    var timeAdsLocal = settings.getSync('Dic.dataDic.'+currentUserId+'.uth.ads');
+    this.calIdDateData(datesIdLocal);
+    this.calAdsTimeData(timeAdsLocal);
   }
 
   listenUserChoice(){
@@ -162,7 +170,7 @@ class showDataProductivity {
     }
 
     //remove current date's productivity
-    
+
     var currentDate = this.getCurrentDate();
     if(currentDate == keysDatesOfWeek[keysDatesOfWeek.length - 1]){
       keysDatesOfWeek.pop();
@@ -235,8 +243,8 @@ class showDataProductivity {
         label: 'Productive %',
         fill: '+1',
         data: sortedArrayDates.arrayOfDailyDatesProdPer,
-        backgroundColor: "rgba(75, 192, 192, 0.5)", 
-        borderColor: "rgb(75, 192, 192)", 
+        backgroundColor: "rgba(75, 192, 192, 0.5)",
+        borderColor: "rgb(75, 192, 192)",
         borderWidth: 1
       },
       {
@@ -244,7 +252,7 @@ class showDataProductivity {
         fill: '+1',
         data: sortedArrayDates.arrayOfDailyDatesUnprodPer,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
-        borderColor: "rgb(255, 99, 132)", 
+        borderColor: "rgb(255, 99, 132)",
         borderWidth: 1
       },
       {
@@ -260,33 +268,47 @@ class showDataProductivity {
 
   }
 
+  calIdDateData(dataUthId){
+    var keysDatesOfWeek = Object.keys(dataUthId);//dates of week
+    console.log(keysDatesOfWeek);
+    // console.log(dataUthId[keysDatesOfWeek[0]]);
+    var dates;
+    var arrayOfDailyDatesProdPer = [];
+    var arrayOfDailyDatesUnprodPer = [];
+    var arrayOfDailyDatesOthersPer = [];
+
+    for(dates in keysDatesOfWeek){
+
+      console.log(dataUthId[keysDatesOfWeek[dates]]);
+      arrayOfDailyDatesProdPer[dates] = this.getEachDateTimeProdPer(dataUthId[keysDatesOfWeek[dates]]);
+      arrayOfDailyDatesUnprodPer[dates] = this.getEachDateTimeUnprodPer(dataUthId[keysDatesOfWeek[dates]]);
+      arrayOfDailyDatesOthersPer[dates] = (100 - arrayOfDailyDatesProdPer[dates] - arrayOfDailyDatesUnprodPer[dates]).toFixed(2);
+    }
+
+    var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer, arrayOfDailyDatesOthersPer);
+    console.log("arrayOfDailyDatesProdPer: ",sortedArrayDates.arrayOfDailyDatesProdPer);
+    this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, this.getDatasets(sortedArrayDates));
+  }
+
+  calAdsTimeData(dataUthAds){
+    document.getElementById("show-ads-ttt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['ttt']);
+    document.getElementById("show-ads-tpt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tpt']);
+    document.getElementById("show-ads-tupt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tupt']);
+    document.getElementById("show-ads-prod-percent-prodReport").innerHTML = this.getEachDateTimePer(dataUthAds) + ' %';
+  }
+
   listenProductivityData() {
     // individual day
     var calUserUthId = firebase.database().ref('uth/'+ currentUserId + '/id');
     calUserUthId.on('value', (snapshot) => {
       const dataUthId = snapshot.val();
+      settings.setSync('Dic.dataDic.'+currentUserId+'.uth.id', dataUthId);
       // console.log(data);
       if(dataUthId != null)
       {
-        var keysDatesOfWeek = Object.keys(dataUthId);//dates of week
-        console.log(keysDatesOfWeek);
-        // console.log(dataUthId[keysDatesOfWeek[0]]);
-        var dates;
-        var arrayOfDailyDatesProdPer = [];
-        var arrayOfDailyDatesUnprodPer = [];
-        var arrayOfDailyDatesOthersPer = [];
 
-        for(dates in keysDatesOfWeek){
+        this.calIdDateData(dataUthId);
 
-          console.log(dataUthId[keysDatesOfWeek[dates]]);
-          arrayOfDailyDatesProdPer[dates] = this.getEachDateTimeProdPer(dataUthId[keysDatesOfWeek[dates]]);
-          arrayOfDailyDatesUnprodPer[dates] = this.getEachDateTimeUnprodPer(dataUthId[keysDatesOfWeek[dates]]);
-          arrayOfDailyDatesOthersPer[dates] = (100 - arrayOfDailyDatesProdPer[dates] - arrayOfDailyDatesUnprodPer[dates]).toFixed(2);
-        }
-
-        var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer, arrayOfDailyDatesOthersPer);
-        console.log("arrayOfDailyDatesProdPer: ",sortedArrayDates.arrayOfDailyDatesProdPer);
-        this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, this.getDatasets(sortedArrayDates));
       }
     });
 
@@ -294,14 +316,13 @@ class showDataProductivity {
     var calUserUthAds = firebase.database().ref('uth/'+ currentUserId + '/ads');
     calUserUthAds.on('value', (snapshot) => {
       const dataUthAds = snapshot.val();
+          settings.setSync('Dic.dataDic.'+currentUserId+'.uth.ads', dataUthAds);
 
       if(dataUthAds != null)
       {
 
-        document.getElementById("show-ads-ttt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['ttt']);
-        document.getElementById("show-ads-tpt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tpt']);
-        document.getElementById("show-ads-tupt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tupt']);
-        document.getElementById("show-ads-prod-percent-prodReport").innerHTML = this.getEachDateTimeProdPer(dataUthAds) + ' %';
+        this.calAdsTimeData(dataUthAds);
+        
       }
     });
   }
