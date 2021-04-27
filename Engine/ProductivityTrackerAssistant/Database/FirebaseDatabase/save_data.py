@@ -173,6 +173,7 @@ class SaveData:
 		db.child("uth").child(uid).child("id").child(current_date).child("ttt").set(initial_time, user_info.getIdToken())
 		db.child("uth").child(uid).child("id").child(current_date).child("tpt").set(initial_time, user_info.getIdToken())
 		db.child("uth").child(uid).child("id").child(current_date).child("tupt").set(initial_time, user_info.getIdToken())
+		db.child("uth").child(uid).child("id").child(current_date).child("tot").set(initial_time, user_info.getIdToken())
 
 
 	def __init_all_days_tt_in_uth(self):
@@ -181,9 +182,10 @@ class SaveData:
 
 		if isAdsSaved is None or isAdsSaved == "0":
 
+			db.child("uth").child(uid).child("ads").child("ttt").set(initial_time, user_info.getIdToken())
 			db.child("uth").child(uid).child("ads").child("tpt").set(initial_time, user_info.getIdToken())
 			db.child("uth").child(uid).child("ads").child("tupt").set(initial_time, user_info.getIdToken())
-			db.child("uth").child(uid).child("ads").child("ttt").set(initial_time, user_info.getIdToken())
+			db.child("uth").child(uid).child("ads").child("tot").set(initial_time, user_info.getIdToken())
 			db.child("users").child(uid).child("uths").set("1", user_info.getIdToken())
 
 
@@ -313,9 +315,6 @@ class SaveData:
 		# total app tracking time. Here app can be website or a software
 		tot_app_tracking_time_str = "t{}tt".format(web_sw_str)
 
-		# total tracking time
-		tot_tracking_time_str = "ttt"
-
 		# raise Exception
 
 		# get total web or sw p or up time
@@ -325,9 +324,6 @@ class SaveData:
 		# get total web or sw tracking time
 		tot_app_tracking_time = db.child(wa_sa_str).child(uid).child(tot_app_tracking_time_str).get(user_info.getIdToken()).val()
 
-		# get total tracking time
-		tot_tracking_time = db.child("users").child(uid).child(tot_tracking_time_str).get(user_info.getIdToken()).val()
-
 		db.update({
 		    wa_sa_str+'/'+str(uid)+'/'+tot_app_tracking_time_str: add_time(self.activity.time_spent, tot_app_tracking_time)
 		}, user_info.getIdToken())
@@ -336,11 +332,23 @@ class SaveData:
 		    wa_sa_str+'/'+str(uid)+'/'+p_up_str+'/'+tot_app_p_up_time_str: self.t_ws_pup_t
 		}, user_info.getIdToken())
 
+		
+		self.update_ttt()
+
+		self.update_individual_app_tracking_time(web_sw_str)
+
+
+	def update_ttt(self):
+
+		# total tracking time
+		tot_tracking_time_str = "ttt"
+
+		# get total tracking time
+		tot_tracking_time = db.child("users").child(uid).child(tot_tracking_time_str).get(user_info.getIdToken()).val()
+
 		db.update({
 		    "users/"+str(uid)+'/'+tot_tracking_time_str: add_time(self.activity.time_spent, tot_tracking_time)
 		}, user_info.getIdToken())
-
-		self.update_individual_app_tracking_time(web_sw_str)
 
 
 	def update_individual_app_tracking_time(self, web_sw_str):
@@ -406,8 +414,11 @@ class SaveData:
 					"ttt" : add_time(sub_time(cdtt["ttt"], cidtt["ttt"]), adtt["ttt"]), 
 					"tpt" : add_time(sub_time(cdtt["tpt"], cidtt["tpt"]), adtt["tpt"]), 
 					"tupt" : add_time(sub_time(cdtt["tupt"], cidtt["tupt"]), adtt["tupt"]), 
+					"tot" : add_time(sub_time(cdtt["tot"], cidtt["tot"]), adtt["tot"]), 
 				}
 			}
+
+			print("data:", data)
 
 			db.update(data, user_info.getIdToken())
 
@@ -419,6 +430,7 @@ class SaveData:
 					"ttt" : cdtt["ttt"], 
 					"tpt" : cdtt["tpt"], 
 					"tupt" : cdtt["tupt"], 
+					"tot" : cdtt["tot"], 
 				}
 			}
 
@@ -442,6 +454,7 @@ class SaveData:
 						"ttt" : add_time(sub_time(adtt["ttt"], odtt["ttt"]), cdtt["ttt"]), 
 						"tpt" : add_time(sub_time(adtt["tpt"], odtt["tpt"]), cdtt["tpt"]), 
 						"tupt" : add_time(sub_time(adtt["tupt"], odtt["tupt"]), cdtt["tupt"]), 
+						"tot" : add_time(sub_time(adtt["tot"], odtt["tot"]), cdtt["tot"]), 
 					}
 				}
 
@@ -457,6 +470,7 @@ class SaveData:
 						"ttt" : cdtt["ttt"], 
 						"tpt" : cdtt["tpt"], 
 						"tupt" : cdtt["tupt"], 
+						"tot" : cdtt["tot"], 
 					}
 				}
 
@@ -478,6 +492,7 @@ class SaveData:
 							"ttt" : add_time(adtt["ttt"], cdtt["ttt"]), 
 							"tpt" : add_time(adtt["tpt"], cdtt["tpt"]), 
 							"tupt" : add_time(adtt["tupt"], cdtt["tupt"]), 
+							"tot" : add_time(adtt["tot"], cdtt["tot"]), 
 						}
 					}
 
@@ -491,6 +506,7 @@ class SaveData:
 							"ttt" : cdtt["ttt"], 
 							"tpt" : cdtt["tpt"], 
 							"tupt" : cdtt["tupt"], 
+							"tot" : cdtt["tot"], 
 						}
 					}
 
@@ -502,6 +518,7 @@ class SaveData:
 		cdtt["ttt"] = retrieve_user_data.get_total_tracking_time()
 		cdtt["tpt"] = retrieve_user_data.get_total_productive_time()
 		cdtt["tupt"] = retrieve_user_data.get_total_unproductive_time()
+		cdtt["tot"] = retrieve_user_data.get_total_others_time()
 
 		return cdtt
 
@@ -546,7 +563,7 @@ class SaveData:
 		c_date = datetime.strptime(date.today().strftime(date_format), date_format)
 
 		# total tracking times to be deleted
-		dttt, dtpt, dtupt = initial_time, initial_time, initial_time
+		dttt, dtpt, dtupt, dtot = initial_time, initial_time, initial_time, initial_time
 
 
 		#1 First get older tracking dates from user tracking history
@@ -570,6 +587,7 @@ class SaveData:
 				dttt = add_time(dttt, old_tracking_times["ttt"])
 				dtpt = add_time(dtpt, old_tracking_times["tpt"])
 				dtupt = add_time(dtupt, old_tracking_times["tupt"])
+				dtot = add_time(dtot, old_tracking_times["tot"])
 
 				db.child("uth").child(uid).child("id").child(old_date).remove(user_info.getIdToken())
 
@@ -585,7 +603,8 @@ class SaveData:
 				"uth/"+str(uid)+"/ads/" : {
 					"ttt" : sub_time(all_days_times["ttt"], dttt), 
 					"tpt" : sub_time(all_days_times["tpt"], dtpt),
-					"tupt" : sub_time(all_days_times["tupt"], dtupt)
+					"tupt" : sub_time(all_days_times["tupt"], dtupt),
+					"tot" : sub_time(all_days_times["tot"], dtot)
 				}
 			}
 

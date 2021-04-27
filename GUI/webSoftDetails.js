@@ -223,6 +223,28 @@ class showDataToWebSoftReport{
     });
     console.log('-----------------------------------------------------------DICT AFTER UPDATION-----------------------------------------------------------------');
     console.log("Update Productive Data--"+this.webOrSoft,settings.getSync('Dic.dataDic'));
+
+
+    //For adding Others data in table
+    var calNewUserDataUnProd = firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/o');
+    calNewUserDataUnProd.on('value', (snapshot4) => {
+      if(snapshot4.val() != null)
+      {
+
+        var others = snapshot4.val();
+
+        //Referencing individual
+        database.ref().child('i'+this.webOrSoft+'tt').child(currentUserId).child('Others').get().then((snapshot) => {
+          if(snapshot.exists()){
+            settings.setSync('Dic.dataDic.'+currentUserId+'.i'+this.webOrSoft+'.Others', snapshot.val());
+          }
+        });
+
+        localStorage.setItem(currentUserId+this.webOrSoft+"newDataChanged", "Others-*-o-*-"+others["t"+this.webOrSoft+"ot"]);
+            
+      }
+    });
+
   }
 
   detachListeners(){
@@ -231,6 +253,7 @@ class showDataToWebSoftReport{
     firebase.database().ref(this.webOrSoft+'a/'+ currentUserId + '/p/t'+this.webOrSoft+'pt').off();
     firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/p').off();
     firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/up').off();
+    firebase.database().ref('newD/'+ currentUserId + '/'+this.webOrSoft+'/o').off();
 
   }
 

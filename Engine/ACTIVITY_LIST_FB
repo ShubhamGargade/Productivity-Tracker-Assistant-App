@@ -1,12 +1,12 @@
-8
-9
+22
+58
 Computers
 False
 True
 True
 electron
 Software Report
-0-h 1-m 20-s
+0-h 1-m 42-s
 None
 Shopping
 False
@@ -22,7 +22,7 @@ True
 True
 cmd
 npm
-0-h 0-m 3-s
+0-h 0-m 10-s
 None
 Science
 False
@@ -38,7 +38,7 @@ True
 True
 explorer
 
-0-h 0-m 0-s
+0-h 0-m 1-s
 None
 Science
 False
@@ -46,7 +46,7 @@ True
 True
 electron
 Website Report
-0-h 2-m 14-s
+0-h 0-m 28-s
 None
 Science
 False
@@ -54,7 +54,7 @@ True
 True
 electron
 Hidden Worker
-0-h 0-m 3-s
+0-h 0-m 4-s
 None
 Computers
 False
@@ -62,7 +62,119 @@ True
 True
 Docker Desktop
 Container instance
-0-h 7-m 4-s
+0-h 0-m 14-s
+None
+Science
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\Engine\ACTIVITY_LIST_FB (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 4-s
+None
+Arts
+False
+False
+False
+sublime_text
+untitled (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Science
+False
+True
+True
+electron
+Productivity_Tracker
+0-h 0-m 0-s
+None
+Science
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\Engine\ProductivityTrackerAssistant\ActivityTracker\Firebase\winAutoTimer.py (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 9-m 5-s
+None
+Science
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\Engine\ProductivityTrackerAssistant\Database\FirebaseDatabase\save_data.py (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 26-m 41-s
+None
+Computers
+False
+True
+True
+explorer
+Task Switching
+0-h 0-m 0-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\webSoftDetails.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 16-m 58-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.js • (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 0-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 0-s
+None
+Science
+False
+True
+True
+electron
+Past Productivity Report
+0-h 0-m 13-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\productivityReport.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 35-s
+None
+Computers
+False
+True
+True
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\dashboardReport.js (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 7-m 28-s
+None
+Computers
+False
+True
+False
+sublime_text
+D:\BE-Project\Productivity-Tracker-Assistant-App\GUI\dashboard.html (Productivity-Tracker-Assistant-App) - Sublime Text (UNREGISTERED)
+0-h 0-m 1-s
+None
+Arts
+False
+False
+True
+Docker Desktop
+Container list
+0-h 0-m 26-s
 None
 Reference
 True
@@ -78,7 +190,7 @@ True
 True
 console-firebase-google-com
 https://console.firebase.google.com/project/productivitytrackerassistant/database/productivitytrackerassistant-default-rtdb/data - Mozilla Firefox
-0-h 0-m 1-s
+0-h 0-m 0-s
 Sign in - Google Accounts
 Computers
 True
@@ -118,7 +230,7 @@ False
 True
 youtube-com
 https://www.youtube.com - Mozilla Firefox
-0-h 0-m 1-s
+0-h 0-m 0-s
 YouTube
 Arts
 True
@@ -134,5 +246,397 @@ False
 True
 youtube-com
 https://www.youtube.com/watch?v=0Kl1ucZuSZ8 - Mozilla Firefox
-0-h 0-m 7-s
+0-h 0-m 0-s
 TVF's Aspirants | Web Series | Episode 1 | UPSC - Optional Me Kya Hai? - YouTube
+Society
+True
+False
+True
+youtube-com
+https://www.youtube.com/watch?v=lTHnKCm58xQ - Mozilla Firefox
+0-h 0-m 3-s
+Talk with an Ethical Hacker || Complete RoadMap to CyberSecurity - YouTube
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 3-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 5-s
+None
+Others
+True
+False
+True
+k
+https://k - Mozilla Firefox
+0-h 0-m 2-s
+None
+Others
+True
+False
+True
+ko
+https://ko - Mozilla Firefox
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+youtub
+https://youtub  - Mozilla Firefox
+0-h 0-m 3-s
+None
+Others
+True
+False
+True
+you
+https://you - Mozilla Firefox
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 3-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 1-s
+None
+Others
+True
+False
+True
+chart js githu
+https://chart js githu - Mozilla Firefox
+0-h 0-m 0-s
+None
+Others
+True
+False
+True
+chart js github
+https://chart js github - Mozilla Firefox
+0-h 0-m 1-s
+None
+Computers
+True
+True
+True
+github-com
+https://github.com/chartjs/Chart.js/tree/master/docs/samples - Mozilla Firefox
+0-h 0-m 7-s
+Chart.js/docs/samples at master · chartjs/Chart.js · GitHub
+Computers
+True
+True
+True
+github-com
+https://github.com/chartjs/Chart.js/tree/master/docs - Mozilla Firefox
+0-h 0-m 1-s
+Chart.js/docs at master · chartjs/Chart.js · GitHub
+Computers
+True
+True
+True
+github-com
+https://github.com/chartjs/Chart.js/blob/master/docs/scripts/utils.js - Mozilla Firefox
+0-h 0-m 18-s
+Chart.js/utils.js at master · chartjs/Chart.js · GitHub
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 4-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 22-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 3-s
+None
+Computers
+True
+True
+True
+google-com
+https://www.google.com/intl/en-GB/docs/about/ - Mozilla Firefox
+0-h 0-m 0-s
+Google Docs â create and edit documents online, for free.
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 19-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 7-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 37-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 1-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 13-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 8-s
+None
+Reference
+True
+False
+True
+nextstep-tcs-com
+https://nextstep.tcs.com/campus/?geo=SEtH - Mozilla Firefox
+0-h 0-m 1-s
+NextStep- Tata Consultancy Services
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+False
+True
+se
+https://se - Mozilla Firefox
+0-h 0-m 2-s
+None
+Computers
+True
+True
+True
+programmablesearchengine-google-com
+https://programmablesearchengine.google.com/about/ - Mozilla Firefox
+0-h 0-m 3-s
+Programmable Search Engine by Google
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 16-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 6-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 0-s
+None
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 2-s
+None
+Computers
+True
+True
+True
+google-com
+https://google.com/ - Mozilla Firefox
+0-h 0-m 0-s
+Google
+Others
+True
+True
+True
+Others
+Others
+0-h 0-m 17-s
+None
+Computers
+True
+True
+True
+drive-google-com
+https://drive.google.com/drive/folders/1KgXyeQlu4ku6MsB3k5XMjXhP8Na4_XMi - Mozilla Firefox
+0-h 0-m 9-s
+Meet Google Drive – One place for all your files

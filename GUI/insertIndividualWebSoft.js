@@ -111,6 +111,10 @@ class insertIndividualWebSoftReport{
     this.twebsoftttPB = timeArith.calTime(totalTimeWS);
     console.log("currwebsoftttPB", this.currwebsoftttPB);
     console.log("twebsoftttPB", this.twebsoftttPB);
+
+    if (this.twebsoftttPB==0) {
+      this.twebsoftttPB = 1;
+    }
     this.prodPerPB = ((this.currwebsoftttPB/this.twebsoftttPB)*100).toString(); 
 
     console.log('website: ',webSoftProd);
@@ -187,6 +191,11 @@ class insertIndividualWebSoftReport{
   }
 
   insertDataInTable(webSoftProd, webSoftNameClass, timeTrac){
+
+    if (webSoftNameClass == "Others") {
+      return;
+    }
+
     console.log('creating Table');
     console.log(webSoftProd);
     var table = document.getElementById('tb'+this.webOrSoft);

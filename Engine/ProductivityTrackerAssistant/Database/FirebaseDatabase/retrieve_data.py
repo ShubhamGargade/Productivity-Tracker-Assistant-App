@@ -141,6 +141,19 @@ class RetrieveUserData:
 		return tupt
 
 
+	def get_total_others_time(self):
+		tsot = retrieve_sw_data.get_individual_app_tracking_time(OTHERS_STR)
+		if tsot is None:
+			tsot = initial_time
+		twot = retrieve_web_data.get_individual_app_tracking_time(OTHERS_STR)
+		if twot is None:
+			twot = initial_time
+
+		tot = time_arith.add_time(tsot, twot)
+
+		return tot
+
+
 
 class RetrieveSoftwareData:
 	"""Singleton RetrieveSoftwareData class"""

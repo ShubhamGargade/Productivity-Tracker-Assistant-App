@@ -39,6 +39,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 var prodPerctVar = 0;
 var unprodPerctVar = 0;
+var othersPerctVar = 0;
 
 var all_charts = require("./all_charts");
 
@@ -46,10 +47,10 @@ class showDataToDashboard {
     constructor(){
       this.ctx = document.getElementById('myChartDashboard').getContext('2d');
       // this.ctx1 = document.getElementById('myChartDashboar').getContext('2d');
-      this.labelForDashboard = ["Productive %", "Unproductive %"];
+      this.labelForDashboard = ["Productive %", "Unproductive %", "Others %"];
       this.graphType = "bar";
 
-      var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
+      var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar, othersPercent: othersPerctVar}
 
       this.dChartP = new all_charts.AllCharts(this.ctx, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChartP => dashboard Chart for Productivity Unproductivity
       // this.dChartP1 = new all_charts.AllCharts(this.ctx1, this.labelForDashboard, this.labelForDashboard, this.getDatasets(data), this.graphType)  // dChartP => dashboard Chart for Productivity Unproductivity
@@ -72,7 +73,6 @@ class showDataToDashboard {
           console.log('P');
 
           this.showReportDashboard();
-
 
         });
       }
@@ -116,9 +116,9 @@ class showDataToDashboard {
         {
           // label: settings.getSync('lastTrackingDate.dataLtd.'+currentUserId),
           // fill: '+1',
-          data: [data.prodPercent, data.unprodPercent],
-          backgroundColor: ["rgba(75, 192, 192, 0.5)", "rgba(255, 99, 132, 0.5)"],
-          borderColor: ["rgb(75, 192, 192)", "rgb(255, 99, 132)"],
+          data: [data.prodPercent, data.unprodPercent, data.othersPercent],
+          backgroundColor: ["rgba(75, 192, 192, 0.5)", "rgba(255, 99, 132, 0.5)", "rgba(201, 203, 207, 0.5)"],
+          borderColor: ["rgb(75, 192, 192)", "rgb(255, 99, 132)", "rgb(201, 203, 207)"],
           borderWidth: 1
         },
       ]
@@ -129,7 +129,7 @@ class showDataToDashboard {
 
     showReportDashboard(){
 
-        var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar}
+        var data = {prodPercent: prodPerctVar, unprodPercent: unprodPerctVar, othersPercent: othersPerctVar}
 
         var customOpt = {displayLegend: false, title: "Your Productivity"};
 
@@ -145,27 +145,29 @@ class showDataToDashboard {
         };
     }
 
-    calPercentage(sPT, wPT, tTT, count){
-      if (count==3){
+    calPercentage(sPT, wPT, sUPT, wUPT, tTT, count){
+      if (count==5){
         // console.log(((sPT+wPT)/tTT)*100);
         var calPT = (((sPT+wPT)/tTT)*100).toFixed(2);
+        var calUPT = (((sUPT+wUPT)/tTT)*100).toFixed(2);
         console.log(calPT);
         if(calPT != 'NaN'){
           console.log(calPT);
             prodPerctVar = calPT;
-            unprodPerctVar = (100 - prodPerctVar).toFixed(2);
+            unprodPerctVar = calUPT;
+            othersPerctVar = (100 - prodPerctVar - unprodPerctVar).toFixed(2);
             this.showReportDashboard();
             return calPT.toString() + ' %';
         }
         else {
-          return "0%";
+          return "0.00 %";
         }
       }
       return null;
     }
 
-    calProdPercent(){
-      var  sPT=0, wPT=0, tTT=0;
+    calProdUnprodPercent(){
+      var  sPT=0, wPT=0, sUPT=0, wUPT=0, tTT=0;
       var count = 0;
       var calUsersPT = firebase.database().ref('sa/'+ currentUserId + '/p/tspt');
       calUsersPT.on('value', (snapshot) => {
@@ -175,7 +177,7 @@ class showDataToDashboard {
           var values = this.updateTime(sPT, count);
           sPT = values.tempT;
           count = values.count;
-          var prodPer = this.calPercentage(sPT, wPT, tTT, count);
+          var prodPer = this.calPercentage(sPT, wPT, sUPT, wUPT, tTT, count);
           this.setProdPercentInHTML(prodPer);
         }
       });
@@ -189,10 +191,38 @@ class showDataToDashboard {
           wPT = values.tempT;
           count = values.count;
 
-          var prodPer = this.calPercentage(sPT, wPT, tTT, count);
+          var prodPer = this.calPercentage(sPT, wPT, sUPT, wUPT, tTT, count);
           this.setProdPercentInHTML(prodPer);
         }
       });
+
+      var calUsersUPT = firebase.database().ref('sa/'+ currentUserId + '/up/tsupt');
+      calUsersUPT.on('value', (snapshot) => {
+        if(snapshot.val() != null)
+        {
+          sUPT = snapshot.val();
+          var values = this.updateTime(sUPT, count);
+          sUPT = values.tempT;
+          count = values.count;
+          var prodPer = this.calPercentage(sPT, wPT, sUPT, wUPT, tTT, count);
+          this.setProdPercentInHTML(prodPer);
+        }
+      });
+      var calUserwUPT = firebase.database().ref('wa/'+ currentUserId + '/up/twupt');
+      calUserwUPT.on('value', (snapshot) => {
+        if(snapshot.val() != null)
+        {
+
+          wUPT = snapshot.val();
+          var values = this.updateTime(wUPT, count);
+          wUPT = values.tempT;
+          count = values.count;
+
+          var prodPer = this.calPercentage(sPT, wPT, sUPT, wUPT, tTT, count);
+          this.setProdPercentInHTML(prodPer);
+        }
+      });
+
       var calUsertTT = firebase.database().ref('users/'+ currentUserId + '/ttt');
       calUsertTT.on('value', (snapshot) => {
         if(snapshot.val() != null)
@@ -203,7 +233,7 @@ class showDataToDashboard {
           tTT = values.tempT;
           count = values.count;
 
-          var prodPer = this.calPercentage(sPT, wPT, tTT, count);
+          var prodPer = this.calPercentage(sPT, wPT, sUPT, wUPT, tTT, count);
           this.setProdPercentInHTML(prodPer);
         }
       });
@@ -229,7 +259,7 @@ class showDataToDashboard {
         {
           console.log("Datattt:",datattt.toString());
           document.getElementById("show-ttt-dashboard").innerHTML = timeArith.removeDashesFromTimeStr(datattt);
-          this.calProdPercent();
+          this.calProdUnprodPercent();
         }
 
       });

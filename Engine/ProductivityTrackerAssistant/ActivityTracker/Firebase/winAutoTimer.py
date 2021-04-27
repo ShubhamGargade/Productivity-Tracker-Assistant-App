@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 
 # Local application import
 from ...Constants.os_platforms import OS_PF as PF  # imported here since PF is needed first 
+from ...Constants.keys import OTHERS_STR
 
 
 # Third party imports
@@ -275,10 +276,10 @@ class AutoTimer(Windows):
         if self.isBrowser:
           
             if self.hostname == None:
-                return (None, -1)
+                self.hostname = OTHERS_STR
 
             if self.title == None:
-                x=''
+                x='None'
             else:
                 x=self.title.strip()
 
@@ -290,10 +291,10 @@ class AutoTimer(Windows):
             win_name = self.new_window_name
 
             if win_name == None:
-                return (None, -1)
+                win_name = OTHERS_STR
 
             if self.software_app_detail == None:
-                x=''
+                x='None'
             else:
                 x=self.software_app_detail
 
@@ -307,14 +308,27 @@ class AutoTimer(Windows):
 
 
     def set_prediction_results(self):
-        if self.isBrowser:
-            self.webPrediction = WebsitePrediction(self.url)
-            self.prediction_results["category"] = self.webPrediction.get_website_prediction(self.webInfo)
-            self.prediction_results["isProductive"] = self.webPrediction.is_productive(self.prediction_results["category"])
+
+        if self.is_window():
+
+            if self.isBrowser:
+                self.webPrediction = WebsitePrediction(self.url)
+                self.prediction_results["category"] = self.webPrediction.get_website_prediction(self.webInfo)
+                self.prediction_results["isProductive"] = self.webPrediction.is_productive(self.prediction_results["category"])
+            else:
+                self.softwarePrediction = SoftwarePrediction(self.new_window_name + " " + self.software_app_detail)
+                self.prediction_results["category"] = self.softwarePrediction.get_software_prediction()
+                self.prediction_results["isProductive"] = self.softwarePrediction.is_productive(self.prediction_results["category"])
+
         else:
-            self.softwarePrediction = SoftwarePrediction(self.new_window_name + " " + self.software_app_detail)
-            self.prediction_results["category"] = self.softwarePrediction.get_software_prediction()
-            self.prediction_results["isProductive"] = self.softwarePrediction.is_productive(self.prediction_results["category"])
+
+            if self.isBrowser:
+                self.prediction_results["category"] = OTHERS_STR
+                self.prediction_results["isProductive"] = None
+            else:
+                self.prediction_results["category"] = OTHERS_STR
+                self.prediction_results["isProductive"] = None
+
 
 
     def set_time_entry(self, start_time, end_time):
@@ -391,7 +405,7 @@ class AutoTimer(Windows):
                     count = 0
 
 
-                if self.active_window_name != self.new_window_name  and self.is_window():
+                if self.active_window_name != self.new_window_name:
 
                     self.activityExists = True
                     self.activity, exitcode = self.get_activity()
@@ -409,14 +423,24 @@ class AutoTimer(Windows):
                         self.set_prediction_results()
 
                         # append this non-existing activity in browser or software activity list resp.
-                        if self.isBrowser:
-                            self.new_activity = WinActivity(self.hostname, self.time_entry.serialize(), self.prediction_results)
-                            self.new_activity.initWebsite(self.new_window_name, self.title)
-                            self.activityList.web_activities += (self.new_activity,)
+                        if self.is_window():
+                            if self.isBrowser:
+                                self.new_activity = WinActivity(self.hostname, self.time_entry.serialize(), self.prediction_results)
+                                self.new_activity.initWebsite(self.new_window_name, self.title)
+                                self.activityList.web_activities += (self.new_activity,)
+                            else:
+                                self.new_activity = WinActivity(self.new_window_name, self.time_entry.serialize(), self.prediction_results)
+                                self.new_activity.initSoftware(self.software_app_detail)
+                                self.activityList.sw_activities += (self.new_activity,)
                         else:
-                            self.new_activity = WinActivity(self.new_window_name, self.time_entry.serialize(), self.prediction_results)
-                            self.new_activity.initSoftware(self.software_app_detail)
-                            self.activityList.sw_activities += (self.new_activity,)
+                            self.new_activity = WinActivity(OTHERS_STR, self.time_entry.serialize(), self.prediction_results)
+                            if self.isBrowser:
+                                self.new_activity.initWebsite(OTHERS_STR, None)
+                                self.activityList.web_activities += (self.new_activity,)
+                            else:
+                                self.new_activity.initSoftware(None)
+                                self.activityList.sw_activities += (self.new_activity,)
+
                     else:
                         self.new_activity = self.activity
 
@@ -426,8 +450,20 @@ class AutoTimer(Windows):
                        
                         self.active_activity.set_time_spent(self.time_entry)
                         
+                        
                         saveToDb.set_activity(self.active_activity)
-                        saveToDb.save()
+
+                        if self.active_activity.key != OTHERS_STR:
+                            saveToDb.save()
+                        else:
+                            if self.active_activity.isBrowser:
+                                saveToDb.update_individual_app_tracking_time('w')
+                                saveToDb.setNewDataInDB('o', 'w')
+                            else:
+                                saveToDb.update_individual_app_tracking_time('s')
+                                saveToDb.setNewDataInDB('o', 's')
+                            saveToDb.update_ttt()
+
 
                         if self.active_activity.isBrowser == True:
                             self.active_activity.is_website_stored = True
@@ -435,6 +471,7 @@ class AutoTimer(Windows):
                             self.active_activity.is_software_stored = True
 
                         self.start_time = datetime.datetime.now()
+                        
                     self.first_time = False
                     self.active_window_name = self.new_window_name
                     self.active_activity = self.new_activity

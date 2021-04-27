@@ -63,7 +63,7 @@ class showDataProductivity {
   }
 
 
-  sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer){
+  sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer, arrayOfDailyDatesOthersPer){
     var i;
     var j;
     var len = keysDatesOfWeek.length - 1;
@@ -89,6 +89,10 @@ class showDataProductivity {
           tempDatePer = arrayOfDailyDatesUnprodPer[j];
           arrayOfDailyDatesUnprodPer[j] = arrayOfDailyDatesUnprodPer[i];
           arrayOfDailyDatesUnprodPer[i] = tempDatePer;
+
+          tempDatePer = arrayOfDailyDatesOthersPer[j];
+          arrayOfDailyDatesOthersPer[j] = arrayOfDailyDatesOthersPer[i];
+          arrayOfDailyDatesOthersPer[i] = tempDatePer;
 
           var wdi = keysDatesOfWeek[i].split('-');
           min = parseInt(wdi[2]);
@@ -116,6 +120,10 @@ class showDataProductivity {
           arrayOfDailyDatesUnprodPer[j] = arrayOfDailyDatesUnprodPer[i];
           arrayOfDailyDatesUnprodPer[i] = tempDatePer;
 
+          tempDatePer = arrayOfDailyDatesOthersPer[j];
+          arrayOfDailyDatesOthersPer[j] = arrayOfDailyDatesOthersPer[i];
+          arrayOfDailyDatesOthersPer[i] = tempDatePer;
+
           var wdi = keysDatesOfWeek[i].split('-');
           min = parseInt(wdi[1]);
         }
@@ -142,6 +150,10 @@ class showDataProductivity {
           arrayOfDailyDatesUnprodPer[j] = arrayOfDailyDatesUnprodPer[i];
           arrayOfDailyDatesUnprodPer[i] = tempDatePer;
 
+          tempDatePer = arrayOfDailyDatesOthersPer[j];
+          arrayOfDailyDatesOthersPer[j] = arrayOfDailyDatesOthersPer[i];
+          arrayOfDailyDatesOthersPer[i] = tempDatePer;
+
           console.log(keysDatesOfWeek);
           var wdi = keysDatesOfWeek[i].split('-');
           min = parseInt(wdi[0]);
@@ -156,6 +168,7 @@ class showDataProductivity {
       keysDatesOfWeek.pop();
       arrayOfDailyDatesProdPer.pop();
       arrayOfDailyDatesUnprodPer.pop();
+      arrayOfDailyDatesOthersPer.pop();
     }
 
 
@@ -164,6 +177,7 @@ class showDataProductivity {
     //   keysDatesOfWeek = keysDatesOfWeek.concat(keysDatesOfWeek);
     //   arrayOfDailyDatesProdPer = arrayOfDailyDatesProdPer.concat(arrayOfDailyDatesProdPer);
     //   arrayOfDailyDatesUnprodPer = arrayOfDailyDatesUnprodPer.concat(arrayOfDailyDatesUnprodPer);
+    //   arrayOfDailyDatesOthersPer = arrayOfDailyDatesOthersPer.concat(arrayOfDailyDatesOthersPer);
     // }
 
 
@@ -171,6 +185,7 @@ class showDataProductivity {
       keysDatesOfWeek: this.joinWithSlash(keysDatesOfWeek),
       arrayOfDailyDatesProdPer: arrayOfDailyDatesProdPer,
       arrayOfDailyDatesUnprodPer: arrayOfDailyDatesUnprodPer,
+      arrayOfDailyDatesOthersPer: arrayOfDailyDatesOthersPer
     };
 
   }
@@ -195,12 +210,20 @@ class showDataProductivity {
     return arr;
   }
 
-  getEachDateTimePer(timeVal){
+  getEachDateTimeProdPer(timeVal){
     this.tptInSec = timeArith.calTime(timeVal['tpt']).toFixed(2);
     this.tttInSec = timeArith.calTime(timeVal['ttt']).toFixed(2);
     // console.log(this.tptInSec);
     // console.log(this.tttInSec);
     return ((this.tptInSec / this.tttInSec)*100).toFixed(2);
+  }
+
+  getEachDateTimeUnprodPer(timeVal){
+    this.tuptInSec = timeArith.calTime(timeVal['tupt']).toFixed(2);
+    this.tttInSec = timeArith.calTime(timeVal['ttt']).toFixed(2);
+    // console.log(this.tptInSec);
+    // console.log(this.tttInSec);
+    return ((this.tuptInSec / this.tttInSec)*100).toFixed(2);
   }
 
   getDatasets(sortedArrayDates){
@@ -218,10 +241,18 @@ class showDataProductivity {
       },
       {
         label: 'Unproductive %',
-        fill: 'start',
+        fill: '+1',
         data: sortedArrayDates.arrayOfDailyDatesUnprodPer,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         borderColor: "rgb(255, 99, 132)", 
+        borderWidth: 1
+      },
+      {
+        label: 'Others %',
+        fill: 'start',
+        data: sortedArrayDates.arrayOfDailyDatesOthersPer,
+        backgroundColor: "rgba(201, 203, 207, 0.5)",
+        borderColor: "rgb(201, 203, 207)", 
         borderWidth: 1
       },
     ]
@@ -243,18 +274,19 @@ class showDataProductivity {
         var dates;
         var arrayOfDailyDatesProdPer = [];
         var arrayOfDailyDatesUnprodPer = [];
+        var arrayOfDailyDatesOthersPer = [];
 
         for(dates in keysDatesOfWeek){
 
           console.log(dataUthId[keysDatesOfWeek[dates]]);
-          arrayOfDailyDatesProdPer[dates] = this.getEachDateTimePer(dataUthId[keysDatesOfWeek[dates]]);
-          arrayOfDailyDatesUnprodPer[dates] = (100 - arrayOfDailyDatesProdPer[dates]).toFixed(2);
+          arrayOfDailyDatesProdPer[dates] = this.getEachDateTimeProdPer(dataUthId[keysDatesOfWeek[dates]]);
+          arrayOfDailyDatesUnprodPer[dates] = this.getEachDateTimeUnprodPer(dataUthId[keysDatesOfWeek[dates]]);
+          arrayOfDailyDatesOthersPer[dates] = (100 - arrayOfDailyDatesProdPer[dates] - arrayOfDailyDatesUnprodPer[dates]).toFixed(2);
         }
 
-        var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer);
+        var sortedArrayDates = this.sortDates(keysDatesOfWeek, arrayOfDailyDatesProdPer, arrayOfDailyDatesUnprodPer, arrayOfDailyDatesOthersPer);
         console.log("arrayOfDailyDatesProdPer: ",sortedArrayDates.arrayOfDailyDatesProdPer);
         this.showReportProductivityPast(sortedArrayDates.keysDatesOfWeek, this.getDatasets(sortedArrayDates));
-        // console.log(arrayOfDailyDatesProdPer);
       }
     });
 
@@ -269,7 +301,7 @@ class showDataProductivity {
         document.getElementById("show-ads-ttt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['ttt']);
         document.getElementById("show-ads-tpt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tpt']);
         document.getElementById("show-ads-tupt-prodReport").innerHTML = timeArith.removeDashesFromTimeStr(dataUthAds['tupt']);
-        document.getElementById("show-ads-prod-percent-prodReport").innerHTML = this.getEachDateTimePer(dataUthAds) + ' %';
+        document.getElementById("show-ads-prod-percent-prodReport").innerHTML = this.getEachDateTimeProdPer(dataUthAds) + ' %';
       }
     });
   }

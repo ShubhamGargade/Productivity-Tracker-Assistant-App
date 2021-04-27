@@ -118,6 +118,10 @@ class insertWebSoftReport{
     console.log("currwebsoftttPB", this.currwebsoftttPB);
     console.log("twebsoftttPB", this.twebsoftttPB);
     console.log("categoryVal", categoryVal);
+
+    if (this.twebsoftttPB==0) {
+      this.twebsoftttPB = 1;
+    }
     this.prodPerPB = ((this.currwebsoftttPB/this.twebsoftttPB)*100).toString();
 
     console.log('website: ',webSoftProd);
