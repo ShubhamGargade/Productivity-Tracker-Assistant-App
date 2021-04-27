@@ -19,6 +19,10 @@ class SaveLocalData {
       s:{},
       iw:{},
       is:{},
+      uth:{
+        id:{},
+        ads:{}
+      },
       twpt:initial_time,
       twtt:initial_time,
       tspt:initial_time,

@@ -39,7 +39,15 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 var prodPerctVar = 0;
 var unprodPerctVar = 0;
-
+var datatwtt = settings.getSync('Dic.dataDic.'+ currentUserId + '.twtt');
+var datatstt = settings.getSync('Dic.dataDic.'+ currentUserId + '.tstt');
+var datattt = timeArith.addTime(datatwtt, datatstt);
+var calUserwPT = settings.getSync('Dic.dataDic.'+ currentUserId + '.twpt');
+var calUsersPT = settings.getSync('Dic.dataDic.'+ currentUserId + '.tspt');
+var calUsertTT = datattt;
+console.log('calUsersPT', calUsersPT);
+console.log('calUserwPT', calUserwPT);
+console.log('calUsertTT', calUsertTT);
 var all_charts = require("./all_charts");
 
 class showDataToDashboard {
@@ -86,7 +94,19 @@ class showDataToDashboard {
 
         });
       }
+      this.updateLocalData();
       this.initFromDB();
+    }
+
+    updateLocalData(){
+      document.getElementById('show-ttt-dashboard').innerHTML = timeArith.removeDashesFromTimeStr(datattt);
+      document.getElementById('show-twtt-dashboard').innerHTML = timeArith.removeDashesFromTimeStr(datatwtt);
+      document.getElementById('show-tstt-dashboard').innerHTML = timeArith.removeDashesFromTimeStr(datatstt);
+      prodPerctVar = (timeArith.calTime(calUserwPT) + timeArith.calTime(calUsersPT))/timeArith.calTime(calUsertTT)*100;
+      console.log('per', prodPerctVar);
+      unprodPerctVar = 100 - prodPerctVar;
+      document.getElementById("show-prod-percent").innerHTML = prodPerctVar.toFixed(2);
+      this.showReportDashboard();
     }
 
     getDatasets(data){
@@ -98,8 +118,8 @@ class showDataToDashboard {
       //     label: 'Productive %',
       //     fill: '+1',
       //     data: [data.prodPercent],
-      //     backgroundColor: "rgba(75, 192, 192, 0.5)", 
-      //     borderColor: "rgb(75, 192, 192)", 
+      //     backgroundColor: "rgba(75, 192, 192, 0.5)",
+      //     borderColor: "rgb(75, 192, 192)",
       //     borderWidth: 1
       //   },
       //   {
@@ -107,7 +127,7 @@ class showDataToDashboard {
       //     fill: 'start',
       //     data: [data.unprodPercent],
       //     backgroundColor: "rgba(255, 99, 132, 0.5)",
-      //     borderColor: "rgb(255, 99, 132)", 
+      //     borderColor: "rgb(255, 99, 132)",
       //     borderWidth: 1
       //   },
       // ]
@@ -167,7 +187,7 @@ class showDataToDashboard {
     calProdPercent(){
       var  sPT=0, wPT=0, tTT=0;
       var count = 0;
-      var calUsersPT = firebase.database().ref('sa/'+ currentUserId + '/p/tspt');
+      calUsersPT = firebase.database().ref('sa/'+ currentUserId + '/p/tspt');
       calUsersPT.on('value', (snapshot) => {
         if(snapshot.val() != null)
         {
@@ -179,7 +199,7 @@ class showDataToDashboard {
           this.setProdPercentInHTML(prodPer);
         }
       });
-      var calUserwPT = firebase.database().ref('wa/'+ currentUserId + '/p/twpt');
+      calUserwPT = firebase.database().ref('wa/'+ currentUserId + '/p/twpt');
       calUserwPT.on('value', (snapshot) => {
         if(snapshot.val() != null)
         {
@@ -193,7 +213,7 @@ class showDataToDashboard {
           this.setProdPercentInHTML(prodPer);
         }
       });
-      var calUsertTT = firebase.database().ref('users/'+ currentUserId + '/ttt');
+      calUsertTT = firebase.database().ref('users/'+ currentUserId + '/ttt');
       calUsertTT.on('value', (snapshot) => {
         if(snapshot.val() != null)
         {
@@ -222,7 +242,7 @@ class showDataToDashboard {
       console.log("Inside initform db")
       var calUserttt = firebase.database().ref('users/'+ currentUserId + '/ttt');
       calUserttt.on('value', (snapshot) => {
-        const datattt = snapshot.val();
+        datattt = snapshot.val();
         // console.log(data);
         console.log("Datattt val:", datattt)
         if(datattt != null)
@@ -236,7 +256,7 @@ class showDataToDashboard {
 
       var calUsertwtt = firebase.database().ref('wa/'+ currentUserId + '/twtt');
       calUsertwtt.on('value', (snapshot) => {
-        const datatwtt = snapshot.val();
+        datatwtt = snapshot.val();
         // console.log(data);
         if(datatwtt != null)
         {
@@ -249,7 +269,7 @@ class showDataToDashboard {
 
       var calUsertstt = firebase.database().ref('sa/'+ currentUserId + '/tstt');
       calUsertstt.on('value', (snapshot) => {
-        const datatstt = snapshot.val();
+        datatstt = snapshot.val();
         // console.log(data);
         if(datatstt != null)
         {
